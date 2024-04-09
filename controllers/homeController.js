@@ -1,14 +1,20 @@
-const homeModel = require("../models/homeModel");
-class homeController {
+
+class HomeController {
+
+    //método responsável por devolver o html
     homeView(req, res) {
-        let usuario = 'visitante';
-        res.render('home', { user: usuario });
+        res.render('home', { carros: ["corolla", "fusca", "uno com escada", "del rey"] });
     }
-    loginView(req, res) {
-        res.render('login', { layout: 'login' });
+
+    QuemSomosView(req, res) { // OKOKOKOKOKOKOKOKOK
+        res.render('QuemSomos');
     }
-    login(req, res) {
-        let 
+
+    NoticiaView(req, res) {
+        res.render('noticias');
     }
+
 }
-module.exports = homeController;
+
+//permite que a classe homeController seja importado
+module.exports = HomeController;
