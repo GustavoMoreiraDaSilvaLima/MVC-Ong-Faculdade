@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+var mysql = require('mysql2');
 
 class Database {
 
@@ -10,13 +10,13 @@ class Database {
 
         this.#conexao = mysql.createPool({
             host: '132.226.245.178', //endereço do nosso banco de dados na nuvem
-            database: 'PFS1_10442313207', //a database de cada um de vocês possui a nomenclatura DB_(RA)
-            user: '10442313207', // usuario e senha de cada um de vocês é o RA
-            password: '10442313207',
+            database: 'PFS1_10442313682', //a database de cada um de vocês possui a nomenclatura DB_(RA)
+            user: '10442313682', // usuario e senha de cada um de vocês é o RA
+            password: '10442313682',
         });
     }
 
-    ExecutaComando(sql, valores) {//Select
+    ExecutaComando(sql, valores) {
         var cnn = this.#conexao;
         return new Promise(function(res, rej) {
             cnn.query(sql, valores, function (error, results, fields) {
@@ -28,7 +28,7 @@ class Database {
         })
     }
     
-    ExecutaComandoNonQuery(sql, valores) {//Insert, Delete, Update
+    ExecutaComandoNonQuery(sql, valores) {
         var cnn = this.#conexao;
         return new Promise(function(res, rej) {
             cnn.query(sql, valores, function (error, results, fields) {
@@ -40,7 +40,7 @@ class Database {
         })
     }
 
-    ExecutaComandoLastInserted(sql, valores) {//inserts em tabela chave primaria auto incremental
+    ExecutaComandoLastInserted(sql, valores) {
         var cnn = this.#conexao;
         return new Promise(function(res, rej) {
             cnn.query(sql, valores, function (error, results, fields) {

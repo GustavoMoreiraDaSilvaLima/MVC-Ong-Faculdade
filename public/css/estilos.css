@@ -1,0 +1,145 @@
+.titulo{
+    text-align: center;
+    margin-top: 100px;
+    font-family: Helvetica, sans-serif;
+    font-size: 75px;
+}
+
+.fundo{
+    height: 500px;
+    width: 100%;
+    background-color: black;
+}
+body {
+    background-color: #f0f0f0; /* Cor de fundo suave */
+}
+
+.navbar {
+    background-color: #343a40 !important; /* Cor de fundo da barra de navegação */
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.btn-outline-primary {
+    border-color: #fff;
+    color: #fff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fff;
+    color: #343a40;
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 3%;
+    font-size: 28px;
+    font-weight: bold;
+    color: #343a40; /* Cor do título */
+}
+
+.card {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 16px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+body {
+    background-color: #f0f0f0; /* Cor de fundo suave */
+}
+
+.navbar {
+    background-color: #343a40 !important; /* Cor de fundo da barra de navegação */
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.btn-outline-primary {
+    border-color: #fff;
+    color: #fff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fff;
+    color: #343a40;
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 3%;
+    font-size: 32px; /* Tamanho da fonte aumentado */
+    font-weight: bold;
+    color: #343a40; /* Cor do título */
+}
+
+.card {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 16px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+.titulo {
+    margin-top: 5%;
+    font-size: 55px;
+}
+
+#ultimas{
+
+    font-size: 50px;
+}
+
+#iso{
+    width: 40em;
+    height: 40em;
+}
+
+#coll{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+}
