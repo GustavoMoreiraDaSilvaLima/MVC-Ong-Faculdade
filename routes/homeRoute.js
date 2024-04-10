@@ -10,5 +10,7 @@ router.get("/doacao",ctrl.DoacaoView);
 router.get("/doacao/cartao",ctrl.DoaCartaoView);
 router.get("/doacao/pix",ctrl.DoaPixView);
 router.get("/doacao/boleto",ctrl.DoaBoletoView);
+router.get("/seja_um_voluntario", ctrl.sejaView);
+router.post("/seja_um_voluntario", ctrl.sejaViewPost);
 
 module.exports = router;
