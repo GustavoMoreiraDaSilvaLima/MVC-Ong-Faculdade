@@ -1,0 +1,1 @@
+const DoacaoModel = require(`../models/doacaoModel`)
