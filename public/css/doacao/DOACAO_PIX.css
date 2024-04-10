@@ -1,0 +1,24 @@
+/* styles.css */
+
+/* Estilizar o container principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Estilizar os elementos do formulário */
+.form-label {
+    font-weight: bold;
+
+}
+
+/* Estilizar os campos de entrada de texto */
+.form-control {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 15px;
+}
