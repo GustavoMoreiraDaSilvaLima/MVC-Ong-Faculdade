@@ -60,61 +60,63 @@
 
     <div style="background-color: white;" class="container-fluid">
         <div style="background-color: white;display: flex;justify-content: space-between;" class="">
-            <div class="container-fluid position-relative">
-                <div>
-                    <h2 class="text-center" style="color: black;">Doar de Outra Maneira:</h2>
-                    <h4 class="text-center">Um produto, rações entre outros.</h4>
-                    <div class="centro">
-                        <img style="max-width: 100%; height: auto;padding-bottom: 5px;" class="imagem"
-                            src="/img/doacao/seta.png" width="150px" class="" alt="">
-                    </div>
-                </div>
-
-                <!--Inicio Forms-->
-                <div class="container position-relative border border-dark rounded "
-                    style="color:white; background-color: gray;background-image: url('assets/images/orsrc53752_edited.jpg');background-size: cover;background-repeat: no-repeat;padding-top: 25px;">
-                    <h4 style="color:white; text-align: center;font-weight: bolder;">Preencha esse formulário
-                        corretamente e selecionando as opções corretas para sua doação:</h2>
-                        <div class="container position-relative">
-                            <form name="cadastro" action="" method="">
-
-                                <label for="tnome" style="font-weight: bolder;">Nome:</label><br>
-                                <input type="text" name="txtnome" size="40" maxlength="30" required="required"
-                                    placeholder="Insira seu Nome"><br>
-
-                                <label for="temail" style="font-weight: bolder;">Digite seu e-mail:</label></br>
-                                <input type="text" name="txte-mail" size="40" maxlength="30" required="required"
-                                    placeholder="Insira seu e-mail"></br>
-
-                                <label for="ttelefone" style="font-weight: bolder;">Digite seu telefone:</label></br>
-                                <input type="tel" id="tcelular" title="(99) 99999-9999" placeholder="(99) 99999-9999"
-                                    pattern="\(\d{2}\)\s\d{5}-\d{4}" required="required" /></br>
-
-                                <label for="tnome" style="font-weight: bolder;">CPF:</label><br>
-                                <input type="text" name="txtnome" size="40" maxlength="30" required="required"
-                                    placeholder="000.000.000-00" pattern="\d{3}.\d{3}.\d{3}-\d{2}"><br>
-
-                                <label for="tdoacao" style="font-weight: bolder;">Meio de Doação:</label></br>
-                                <input type="radio" name="opcao1" value="1" required="required" />Presencial
-                                <input type="radio" name="opcao1" value="1" required="required" />Correios <br>
-
-                                <label for="arquivo" style="font-weight: bolder;">Caso seja Correios por favor,<br>
-                                </label> <br>
-                                <input type="file" text="Procurar" name="bfile" /><br>
-
-
-                                <br />
-                                <input class="btn btn-danger" type="reset" name="Cancelar" value="Limpar" />
-                                <input class="btn btn-primary" type="submit" name="Enviar" value="Enviar">
-                            </form>
-                        </div>
-                        <br>
-                </div>
+          <div class="container-fluid position-relative">
+            <div>
+              <h2 class="text-center" style="color: black;">Outras Formas de Doação:</h2>
+              <h4 class="text-center">Um produto, rações entre outros.</h4>
+              <div class="centro">
+                <img style="max-width: 100%; height: auto;padding-bottom: 5px;" class="imagem"
+                  src="assets/images/seta.png" width="150px" class="" alt="">
+              </div>
             </div>
-        </div>
-
-    </div>
-
-    </div>
-
-</section>
+  
+            
+            <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+              <div class="border border-dark rounded p-4" style="color: white; background-color: green; background-image: url('assets/images/orsrc53752_edited.jpg'); background-size: cover; background-repeat: no-repeat;">
+                <h4 class="text-center font-weight-bolder">Preencha esse formulário corretamente e selecionando as opções corretas para sua doação:</h4>
+                <div class="container">
+                  <form name="cadastro" action="" method="POST">
+                    <div style="background-color: rgb(186, 188, 182); border-radius: 5px; padding: 5% 0; margin: 0 auto; max-width: 500px;" class="border border-dark rounded p-4">
+                      <div class="form-group text-center">
+                        <label for="txtnome" style="font-weight: bold; font-size: 1.1em;">Nome:</label><br>
+                        <input type="text" id="txtnome" name="txtnome" size="40" maxlength="30" placeholder="Insira seu Nome" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                      </div>
+            
+                      <div class="form-group text-center">
+                        <label for="temail" style="font-weight: bold;">Digite seu e-mail:</label><br>
+                        <input type="email" id="temail" name="txtemail" size="40" maxlength="30" placeholder="Insira seu e-mail" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                      </div>
+            
+                      <div class="form-group text-center">
+                        <label for="ttelefone" style="font-weight: bold;">Digite seu telefone:</label><br>
+                        <input type="tel" id="ttelefone" size="40" maxlength="30" title="(99) 99999-9999" placeholder="(99) 99999-9999" pattern="\(\d{2}\)\s\d{5}-\d{4}"  style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                      </div>
+            
+                      <div class="form-group text-center">
+                        <label for="tcpf" style="font-weight: bold;">CPF:</label><br>
+                        <input type="text" id="tcpf" name="txtcpf" size="40" maxlength="30" placeholder="000.000.000-00" pattern="\d{3}.\d{3}.\d{3}-\d{2}" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                      </div>
+            
+                      <div class="form-group text-center">
+                        <label for="tdoacao" style="font-weight: bolder;">Meio de Doação:</label><br>
+                        <input type="radio" name="opcao1" value="1" />Presencial
+                        <input type="radio" name="opcao1" value="1" />Correios <br>
+                      </div>
+            
+                      <div class="form-group text-center">
+                        <label for="arquivo" style="font-weight: bolder;">Caso seja Correios por favor,<br></label>
+                        <br><br><input type="file" text="Procurar" name="bfile" /><br><br>
+                      </div>
+            
+                      <div class="form-group text-center">
+                        <input class="btn btn-danger" type="reset" name="Cancelar" value="Limpar" />
+                        <input class="btn btn-primary" type="submit" name="Enviar" value="Enviar">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <br>
+              </div>
+            </div>
+      </div>
+    </section>
