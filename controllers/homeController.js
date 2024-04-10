@@ -15,6 +15,7 @@ class HomeController {
         res.render('noticias');
     }
 
+
     sejaView(req, res) {
         res.render('form');
     }
@@ -50,7 +51,6 @@ class HomeController {
             });
         }
     }
-
 }
 
 //permite que a classe homeController seja importado
