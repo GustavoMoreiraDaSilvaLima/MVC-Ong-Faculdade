@@ -43,7 +43,7 @@
             <form action="" method="POST">
                 <div class="form-group">
                     <label for="nome">Nome:</label><br>
-                    <input type="text" name="nome" size="40" class="form-control" required>
+                    <input type="text" name="nome" size="40" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -51,7 +51,7 @@
                     <input type="text" name="CPF/CNPJ" placeholder="000.000.000-00" size="13" maxlength="14" required
                         class="form-control" pattern="\d{3}.\d{3}.\d{3}-\d{2}"><br>
                     <label for="Data">Data de Nascimento:</label><br>
-                    <input type="date" name="Data" size="13" maxlength="14" required class="form-control">
+                    <input type="date" name="identificacao" size="13" maxlength="14" required class="form-control">
                 </div>
 
                 <div class="form-check">
@@ -59,7 +59,7 @@
                     <br>
                     <input class="form-check-input" type="radio" name="opcao1" value="1" id="inlineRadio1" /> <label
                         class="form-check-label" for="opcao1">Crédito</label><br>
-                    <input class="form-check-input" type="radio" name="opcao1" value="2" id="inlineRadio2" /><label
+                    <input class="form-check-input" type="radio" name="opcao2" value="2" id="inlineRadio2" /><label
                         class="form-check-label" for="opcao1">Débito</label>
                     <br>
                 </div>
@@ -80,7 +80,7 @@
                         <option value=“10”>VISA Electron</option>
                     </select>
                     <label for="valor">Valor:</label>
-                    <input type="text" name="valor" size="13" class="form-control" required>
+                    <input type="text" name="valor" size="13" class="form-control" name="valor">
                 </div>
 
                 <div class="form-group">
