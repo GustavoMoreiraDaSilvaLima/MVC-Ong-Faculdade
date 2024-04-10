@@ -1,0 +1,29 @@
+*
+{
+    font-family:Arial;
+}
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 10px double black;
+}
+.mid{
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        border-radius: 50px;
+    
+}
+.voltar
+{
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+}
