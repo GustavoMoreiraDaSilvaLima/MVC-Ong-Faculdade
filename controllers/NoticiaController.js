@@ -1,0 +1,13 @@
+const noticiaModel = require(`../models/noticiaModel`)
+
+class LoginController {
+
+    async listarNoticias(req, res){
+        let noticia = new noticiaModel();
+        let lista = await noticia.noticia_exibir()
+
+        res.render('Noticias', {lista : lista});
+    }
+}
+
+module.exports = LoginController;
