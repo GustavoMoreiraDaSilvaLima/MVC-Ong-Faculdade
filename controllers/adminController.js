@@ -8,6 +8,22 @@ class adminController{
 
         res.render('admin/listagemdoacao', { layout: 'admin/listagemdoacao', listagemDoacao: listadoacao});
     }
+
+    async excluir(req, res) {
+        if(req.body.id != null) {
+            let doacao = new DoacaoModel();
+            let ok = await doacao.excluir(req.body.id);
+            if(ok) {
+                res.send({ok: true});
+            }
+            else{
+                res.send({ok: false, msg: "Erro ao excluir doação"})
+            }
+        }
+        else{
+            res.send({ok: false, msg: "O id para exclusão não foi enviado"})
+        }
+    }
 }
 
 module.exports = adminController;
