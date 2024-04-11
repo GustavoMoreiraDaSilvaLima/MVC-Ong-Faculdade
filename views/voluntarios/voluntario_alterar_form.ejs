@@ -1,3 +1,5 @@
+
+
 <head>
     <style>
         
@@ -61,34 +63,27 @@
     </style>
 </head>
 
+<script src="js/cadastrar.js"></script>
 <div id="j" class="p-3">
-    <br><br><br>
-    <div class=" pb-md-4 mx-auto text-center mb-0">
-        <h1 class="display-4 fw-normal text-body-emphasis text-black">Cadastro para voluntariado</h1>
-        <p class="fs-5 text-black"> 
-        </p>
-    </div>
+    <br><br>    
 
     <div class="container mt-5" id="asdf">
         
         <div class="row justify-content-center opacity-100" >
             <div>
                 <div class="custom-form-box">
-                    <h1 class="text-center">Formulário de Contato</h1>
-                    <div class="form-group">
+                    <h1 class="text-center">Formulário de Alteracao CPF: <%= cj %></h1>
+                    <div class="form-group hide">
                         <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" >
+                        <input type="text" class="form-control" id="nome" name="nome">
                     </div>
 
                     <div class="form-group">
-                        <label for="numero">CPF</label>
-              
-                        <input type="text" class="form-control" id="cpf" name="cpf" >
-                      
+                        <input type="text" class="form-control" id="cpf" name="cpf" value="<%= cj %>" hidden>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="esc" name="esc" value="false" hidden>
+                        <input type="text" class="form-control" id="esc" name="esc" value="true" hidden>
                     </div>
 
                     <div class="form-group">
@@ -115,4 +110,3 @@
         </div>
     </div>
 </div>
-<script src="./js/cadastrar.js"></script>
