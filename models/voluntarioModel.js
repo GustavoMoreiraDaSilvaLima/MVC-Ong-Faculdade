@@ -63,14 +63,15 @@ class Voluntario {
     //implementar as funções para manipulação das informações no banco
     async listar() {
 
-        let sql = "select * from tb_usuario";
+        let sql = "select * from ONG_VOLUNTARIO";
 
         let rows = await banco.ExecutaComando(sql);
         let lista = [];
 
         for(let i = 0; i < rows.length; i++) {
-            lista.push(new UsuarioModel(rows[i]["usu_id"], rows[i]["usu_nome"], rows[i]["usu_email"], rows[i]["usu_senha"], rows[i]["usu_ativo"], rows[i]["per_id"]));
-        }
+            lista.push(new Voluntario(rows[i]["ONG_VOLUNTARIO_CPF2"], rows[i]["ONG_VOLUNTARIO_NOME"], rows[i]["ONG_VOLUNTARIO_EMAIL"], rows[i]["ONG_VOLUNTARIO_TELEFONE"]));
+        } console.log(lista);
+        
         return lista;
     }
 

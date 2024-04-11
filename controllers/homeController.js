@@ -20,6 +20,19 @@ class HomeController {
         res.render('form');
     }
 
+    async voluntariosView(req,res){
+
+            const voluntario = new Voluntario();
+
+            
+            const listaVoluntarios = await voluntario.listar();
+
+            
+            res.render('voluntarios', {listaVoluntarios: listaVoluntarios});
+        
+    }
+
+
     sejaViewPost(req,res){
         if(req.body.nome != '' &&
          req.body.email != '' 
