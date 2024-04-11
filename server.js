@@ -2,6 +2,7 @@ const express = require('express')
 const expressEjsLayout = require('express-ejs-layouts');
 let homeRoute = require("./routes/homeRoute");
 let doacaoRoute = require("./routes/doacaoRoute");
+let adminRoute = require("./routes/adminRoute");
 let noticiaRoute = require("./routes/noticiaRoute");
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(expressEjsLayout);
 app.use("/",  homeRoute);
 app.use("/noticias", noticiaRoute);
 app.use("/doacao",doacaoRoute);
+app.use("/admin", adminRoute);
 
 
 

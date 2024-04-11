@@ -59,7 +59,7 @@ class doacaoModel {
     }
     async doacao_inserir_atualizar() {
         if (this.#doa_id == 0) {
-            let sql = "insert into tb_doacao (doa_id,doa_tipo,num_cartao,doa_data,doa_nome,doa_valor,doa_status) values (?,?,?,?,?,?)";
+            let sql = "insert into tb_doacao (doa_id,doa_tipo,doa_data,doa_nome,doa_valor,doa_status) values (?,?,?,?,?,?)";
 
             let valores = [this.#doa_id, this.#doa_tipo, this.#doa_data, this.#doa_nome, this.#doa_valor, this.#doa_status];
 
@@ -102,5 +102,16 @@ class doacaoModel {
         }
         return lista;
     }
+
+    async excluir(id) {
+        let sql = "delete from tb_doacao where doa_id = ?";
+
+        let valores = [id];
+        
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
 }
 module.exports = doacaoModel;
