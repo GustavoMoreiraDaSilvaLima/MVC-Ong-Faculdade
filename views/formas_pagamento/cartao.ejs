@@ -40,18 +40,18 @@
     <div class="container-fluid border border-info rounded mid ">
         <div>
             <h1>Dados</h1>
-            <form action="" method="POST">
+            
                 <div class="form-group">
                     <label for="nome">Nome:</label><br>
-                    <input type="text" name="nome" size="40" class="form-control">
+                    <input id="nome" type="text" name="nome" size="40" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="CPF/CNPJ">CPF/CNPJ:</label><br>
-                    <input type="text" name="cpf_cnpj" placeholder="000.000.000-00" size="13" maxlength="14" required
+                    <input id="ident" type="text" name="cpf_cnpj" placeholder="000.000.000-00" size="13" maxlength="14" 
                         class="form-control" pattern="\d{3}.\d{3}.\d{3}-\d{2}"><br>
                     <label for="Data">Data de Nascimento:</label><br>
-                    <input type="date" name="data" size="13" maxlength="14" required class="form-control">
+                    <input type="date" id="data" name="data" size="13" maxlength="14" class="form-control">
                 </div>
 
                 <div class="form-check">
@@ -66,7 +66,7 @@
 
                 <div>
                     <label for="cartão">Selecione a bandeira do cartão:</label>
-                    <select name=“selOpcao” class="form-control">
+                    <select id = "op" name=“selOpcao” class="form-control">
                         <option value=“0”></option>
                         <option value=“1”>MasterCard</option>
                         <option value=“2”>VISA</option>
@@ -80,27 +80,27 @@
                         <option value=“10”>VISA Electron</option>
                     </select>
                     <label for="valor">Valor:</label>
-                    <input type="text" name="valor" size="13" class="form-control" name="valor">
+                    <input type="text" name="valor" size="13" class="form-control" id="valor">
                 </div>
 
                 <div class="form-group">
                     <label for="numcartao">Numero do cartão:</label><br>
-                    <input type="text" name="numcartao" required class="form-control">
+                    <input type="text" name="numcartao" id="cartao" class="form-control">
                     <p><strong>somente numeros, sem pontos</strong></p>
                     <label for="numcartao">Código CVV:</label><br>
 
-                    <input type="text" name="numcvv" size="2" maxlength="3" required class="form-control">
+                    <input type="text" name="numcvv" size="2" maxlength="3" id="cod_cvv" class="form-control">
                     <p class="peq2"><strong>localizado atrás do cartão</strong></p>
                 </div>
 
                 <div class="form-group">
                     <button class="btn btn-outline-danger" style="margin-left: 100px;" type="button"
                         onclick="location.reload()">Apagar</button>
-                    <input class="btn btn-outline-success" type="submit" value="Enviar" return false;>
+                    <input class="btn btn-outline-success" type="submit" id="enviar" value="Enviar" return false;>
                 </div>
 
                 <a href="/doacao" class="voltar">Voltar para a página inicial</a>
-            </form>
+            
             <script>
                 document.querySelector('form').addEventListener('submit', function (event) {
                     event.preventDefault(); // Impede o envio padrão do formulário
