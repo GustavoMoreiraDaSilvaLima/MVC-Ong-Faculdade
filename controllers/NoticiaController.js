@@ -6,7 +6,7 @@ class LoginController {
         let noticia = new noticiaModel();
         let lista = await noticia.noticia_exibir()
 
-        res.render('Noticias', {lista : lista});
+        res.render('noticias', {lista : lista});
     }
 }
 

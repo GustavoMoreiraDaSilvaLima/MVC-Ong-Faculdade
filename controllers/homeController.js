@@ -11,11 +11,6 @@ class HomeController {
         res.render('QuemSomos');
     }
 
-    NoticiaView(req, res) {
-        res.render('noticias');
-    }
-
-
     sejaView(req, res) {
         res.render('form');
     }
