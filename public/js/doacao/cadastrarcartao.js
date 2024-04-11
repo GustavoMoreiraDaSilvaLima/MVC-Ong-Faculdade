@@ -3,10 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("enviar").addEventListener("click", cadastrar);
 
     function limparValidacao() {
-        document.getElementById("txtnome").style["border-color"] = "#ced4da";
-        document.getElementById("txtemail").style["border-color"] = "#ced4da";
-        document.getElementById("ttefone").style["border-color"] = "#ced4da";
-        document.getElementById("tcpf").style["border-color"] = "#ced4da";
+        document.getElementById("nome").style["border-color"] = "#ced4da";
+        document.getElementById("data").style["border-color"] = "#ced4da";
+        document.getElementById("op").style["border-color"] = "#ced4da";
+        document.getElementById("cartao").style["border-color"] = "#ced4da";
+        document.getElementById("cod_cvv").style["border-color"] = "#ced4da";
+        document.getElementById("ident").style["border-color"] = "#ced4da";
+        document.getElementById("valor").style["border-color"] = "#ced4da";
     }
 
     function cadastrar() {
@@ -32,13 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cartao == "") {
             listaErros.push("cartao");
         }
-        if (cod== "") {
+        if (cod == "") {
             listaErros.push("cod");
         }
         if (cpf == "") {
             listaErros.push("cpf");
         }
-        if(valor < 0){
+        if (valor < 0) {
             listaErros.push("valor");
         }
         if (listaErros.length == 0) {

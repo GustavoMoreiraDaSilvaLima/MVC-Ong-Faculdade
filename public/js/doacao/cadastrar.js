@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function cadastrar() {
         limparValidacao();
         let nome = document.querySelector("#txtnome").value;
-        let email = document.querySelector("#txtemail").value;
+        let email = document.querySelector("#temail").value;
         let telefone = document.querySelector("#ttelefone").value;
         let cpf = document.querySelector("#tcpf").value;
         let op = document.querySelector("#op").value;

@@ -16,7 +16,7 @@ class doacaoController {
     async RecebaDoaCartao(req, res) {
         let cont = req.body;
         if (cont.nome != '' && cont.cpf_cnpj != '' && cont.data != '' && cont.selOpcao != 0 && cont.valor > 0 && cont.numcartao != '' && cont.numcvv != '') {
-            let tipocartao = "Cartão" + cont.opcao1;
+            let tipocartao = "Cartão";
             let data = new Date();
             let status = "APROVADO"
             let cartao = new DoacaoModel(0, tipocartao, data, cont.nome, cont.valor, status);
