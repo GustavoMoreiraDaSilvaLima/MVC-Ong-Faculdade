@@ -9,9 +9,9 @@ class Database {
     constructor() {
 
         this.#conexao = mysql.createPool({
-            host: '132.226.245.178', //endereço do nosso banco de dados na nuvem
-            database: 'PFS1_10442313682', //a database de cada um de vocês possui a nomenclatura DB_(RA)
-            user: '10442313682', // usuario e senha de cada um de vocês é o RA
+            host: '132.226.245.178',
+            database: 'PFS1_10442313682',
+            user: '10442313682',
             password: '10442313682',
         });
     }
