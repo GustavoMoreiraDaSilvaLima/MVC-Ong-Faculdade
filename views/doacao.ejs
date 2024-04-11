@@ -1,122 +1,132 @@
+<script src="/js/doacao/cadastrar.js"></script>
 <link rel="stylesheet" href="css/doacao/DOACAO_MAIN.css">
 <section id="hero" class="hero">
-    <div style="background-image: url('img/doacao/orsrc16192.jpg');">
-        <div class="container position-relative">
-            <div class="row gy-5" data-aos="fade-in">
-                <div
-                    class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-                    <h2>Bem Vindo a <span>Doações</span></h2>
-                    <p>Ao fazer uma doação para a ONG Save Pets, você estará contribuindo para abrigar animais de rua,
-                        fornecer
-                        vacinas,
-                        cuidados médicos e muito mais. Sua generosidade faz a diferença na vida desses animais.</p>
-                    <div class="d-flex justify-content-center justify-content-lg-start">
-                    </div>
-                </div>
-                <div class="col-lg-6 order-1 order-lg-2">
-                    <img src="/img/doacao/Dinheiro.png" class="img-fluid mt-5" alt="" data-aos="zoom-out"
-                        data-aos-delay="100" width="75%">
-                </div>
-            </div>
+  <div style="background-image: url('img/doacao/orsrc16192.jpg');">
+    <div class="container position-relative">
+      <div class="row gy-5" data-aos="fade-in">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+          <h2>Bem Vindo a <span>Doações</span></h2>
+          <p>Ao fazer uma doação para a ONG Save Pets, você estará contribuindo para abrigar animais de rua,
+            fornecer
+            vacinas,
+            cuidados médicos e muito mais. Sua generosidade faz a diferença na vida desses animais.</p>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+          </div>
         </div>
-
-        <div class="icon-boxes position-relative">
-            <div class="container position-relative">
-                <div class="row gy-4 mt-5">
-                    <h2 class="title">Meios de Doação:</h2>
-
-
-                    <div class="col-xl-3 col-md-6 div_center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="icon-box">
-                            <div class="icon"><i class="bi bi-gem"></i></div>
-                            <a href="doacao/pix" class="stretched-link"></a><!--Link Pix-->
-                            <img src="/img/doacao/pix232.png" class="img-fluid" alt="" data-aos="zoom-out"
-                                data-aos-delay="120" style="margin-top: 20px;">
-                        </div>
-                    </div><!--End Icon Box -->
-
-                    <div class="col-xl-3 col-md-6 div_center" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon-box icon-box1">
-                            <div class="icon"><i class="bi bi-easel"></i></div>
-                            <a href="/doacao/boleto" class="stretched-link"></a><!--Link Boleto-->
-                            <img src="/img/doacao/Boleto.png" class="img-fluid" alt="" data-aos="zoom-out"
-                                data-aos-delay="120" style="margin-top: 20px;">
-                        </div>
-                    </div><!--End Icon Box -->
-
-                    <div class="col-xl-3 col-md-6 div_center" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box">
-                            <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                            <a href="/doacao/cartao" class="stretched-link"></a><!--Link Cartão-->
-                            <img src="/img/doacao/cartaoacess.png" class="img-fluid" alt="" data-aos="zoom-out"
-                                data-aos-delay="120" style="margin-top: 20px;">
-                        </div>
-                    </div><!--End Icon Box -->
-                </div>
-            </div>
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="/img/doacao/Dinheiro.png" class="img-fluid mt-5" alt="" data-aos="zoom-out" data-aos-delay="100"
+            width="75%">
         </div>
-    </div>
-    <hr>
-
-    <div style="background-color: white;" class="container-fluid">
-        <div style="background-color: white;display: flex;justify-content: space-between;" class="">
-          <div class="container-fluid position-relative">
-            <div>
-              <h2 class="text-center" style="color: black;">Outras Formas de Doação:</h2>
-              <h4 class="text-center">Um produto, rações entre outros.</h4>
-              <div class="centro">
-                <img style="max-width: 100%; height: auto;padding-bottom: 5px;" class="imagem"
-                  src="assets/images/seta.png" width="150px" class="" alt="">
-              </div>
-            </div>
-  
-            
-            <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-              <div class="border border-dark rounded p-4" style="color: white; background-color: green; background-image: url('assets/images/orsrc53752_edited.jpg'); background-size: cover; background-repeat: no-repeat;">
-                <h4 class="text-center font-weight-bolder">Preencha esse formulário corretamente e selecionando as opções corretas para sua doação:</h4>
-                <div class="container">
-                  <form name="cadastro" action="" method="POST">
-                    <div style="background-color: rgb(186, 188, 182); border-radius: 5px; padding: 5% 0; margin: 0 auto; max-width: 500px;" class="border border-dark rounded p-4">
-                      <div class="form-group text-center">
-                        <label for="txtnome" style="font-weight: bold; font-size: 1.1em;">Nome:</label><br>
-                        <input type="text" id="txtnome" name="txtnome" size="40" maxlength="30" placeholder="Insira seu Nome" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
-                      </div>
-            
-                      <div class="form-group text-center">
-                        <label for="temail" style="font-weight: bold;">Digite seu e-mail:</label><br>
-                        <input type="email" id="temail" name="txtemail" size="40" maxlength="30" placeholder="Insira seu e-mail" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
-                      </div>
-            
-                      <div class="form-group text-center">
-                        <label for="ttelefone" style="font-weight: bold;">Digite seu telefone:</label><br>
-                        <input type="tel" id="ttelefone" size="40" maxlength="30" title="(99) 99999-9999" placeholder="(99) 99999-9999" pattern="\(\d{2}\)\s\d{5}-\d{4}"  style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
-                      </div>
-            
-                      <div class="form-group text-center">
-                        <label for="tcpf" style="font-weight: bold;">CPF:</label><br>
-                        <input type="text" id="tcpf" name="txtcpf" size="40" maxlength="30" placeholder="000.000.000-00" pattern="\d{3}.\d{3}.\d{3}-\d{2}" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
-                      </div>
-            
-                      <div class="form-group text-center">
-                        <label for="tdoacao" style="font-weight: bolder;">Meio de Doação:</label><br>
-                        <input type="radio" name="opcao1" value="1" />Presencial
-                        <input type="radio" name="opcao1" value="1" />Correios <br>
-                      </div>
-            
-                      <div class="form-group text-center">
-                        <label for="arquivo" style="font-weight: bolder;">Caso seja Correios por favor,<br></label>
-                        <br><br><input type="file" text="Procurar" name="bfile" /><br><br>
-                      </div>
-            
-                      <div class="form-group text-center">
-                        <input class="btn btn-danger" type="reset" name="Cancelar" value="Limpar" />
-                        <input class="btn btn-primary" type="submit" name="Enviar" value="Enviar">
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <br>
-              </div>
-            </div>
       </div>
-    </section>
+    </div>
+
+    <div class="icon-boxes position-relative">
+      <div class="container position-relative">
+        <div class="row gy-4 mt-5">
+          <h2 class="title">Meios de Doação:</h2>
+
+
+          <div class="col-xl-3 col-md-6 div_center" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-gem"></i></div>
+              <a href="doacao/pix" class="stretched-link"></a><!--Link Pix-->
+              <img src="/img/doacao/pix232.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="120"
+                style="margin-top: 20px;">
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6 div_center" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box icon-box1">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <a href="/doacao/boleto" class="stretched-link"></a><!--Link Boleto-->
+              <img src="/img/doacao/Boleto.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="120"
+                style="margin-top: 20px;">
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6 div_center" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-geo-alt"></i></div>
+              <a href="/doacao/cartao" class="stretched-link"></a><!--Link Cartão-->
+              <img src="/img/doacao/cartaoacess.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="120"
+                style="margin-top: 20px;">
+            </div>
+          </div><!--End Icon Box -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div style="background-color: white;" class="container-fluid">
+    <div style="background-color: white;display: flex;justify-content: space-between;" class="">
+      <div class="container-fluid position-relative">
+        <div>
+          <h2 class="text-center" style="color: black;">Outras Formas de Doação:</h2>
+          <h4 class="text-center">Um produto, rações entre outros.</h4>
+          <div class="centro">
+            <img style="max-width: 100%; height: auto;padding-bottom: 5px;" class="imagem" src="img/doacao/seta.png"
+              width="150px" class="" alt="">
+          </div>
+        </div>
+
+        <!--Inicio do form-->
+        <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+          <div class="border border-dark rounded p-4"
+            style="color: white; background-color: green; background-image: url('assets/images/orsrc53752_edited.jpg'); background-size: cover; background-repeat: no-repeat;">
+            <h4 class="text-center font-weight-bolder">Preencha esse formulário corretamente e selecionando as opções
+              corretas para sua doação:</h4>
+            <div class="container">
+
+              <div
+                style="background-color: rgb(186, 188, 182); border-radius: 5px; padding: 5% 0; margin: 0 auto; max-width: 500px;"
+                class="border border-dark rounded p-4">
+                <div class="form-group text-center">
+                  <label for="txtnome" style="font-weight: bold; font-size: 1.1em;">Nome:</label><br>
+                  <input type="text" id="txtnome" name="txtnome" size="40" maxlength="30" placeholder="Insira seu Nome"
+                    style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                </div>
+
+                <div class="form-group text-center">
+                  <label for="temail" style="font-weight: bold;">Digite seu e-mail:</label><br>
+                  <input type="email" id="temail" name="txtemail" size="40" maxlength="30"
+                    placeholder="Insira seu e-mail"
+                    style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                </div>
+
+                <div class="form-group text-center">
+                  <label for="ttelefone" style="font-weight: bold;">Digite seu telefone:</label><br>
+                  <input type="tel" id="ttelefone" name="ttelefone" size="40" maxlength="30" title="(99) 99999-9999"
+                    placeholder="(99) 99999-9999" pattern="\(\d{2}\)\s\d{5}-\d{4}"
+                    style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                </div>
+
+                <div class="form-group text-center">
+                  <label for="tcpf" style="font-weight: bold;">CPF:</label><br>
+                  <input type="text" id="tcpf" name="txtcpf" size="40" maxlength="30" placeholder="000.000.000-00"
+                    style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+                </div>
+
+                <div class="form-group text-center">
+                  <label for="tdoacao" style="font-weight: bolder;">Meio de Doação:</label><br>
+                  <input type="radio" name="opcao1" id="op" value="1" />Presencial
+                  <input type="radio" name="opcao1" id="op" value="1" />Correios <br>
+                </div>
+
+                <div class="form-group text-center">
+                  <label for="arquivo" style="font-weight: bolder;">Caso seja Correios por favor,<br></label>
+                  <br><br><input type="file" text="Procurar" name="bfile" /><br><br>
+                </div>
+
+                <div class="form-group text-center">
+                  <a href="/"><input class="btn btn-danger" type="button" id="cancelar" name="Cancelar" value="Página Principal" /></a>
+                  <button class="btn btn-primary" id="btnCadastrar" name="btnCadastrar">Enviar</button>
+                </div>
+              </div>
+
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+</section>

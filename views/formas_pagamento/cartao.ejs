@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/doacao/DOACAO_CARTAO.css">
-   <link rel="icon" href="/img/doacao/cartaoicon.png">
+    <link rel="icon" href="/img/doacao/cartaoicon.png">
     <style>
         .container1 {
             display: flex;
@@ -24,15 +24,15 @@
 <body>
     <header class="container1">
         <div class="container1">
-        <div >
-            <img src="/img/doacao/todas_as_bandeiras.png">
-        </div>
-        <div class="container-fluid">
             <div>
-                <h1 style="font-weight: bold;"><u>Doação Via Cartão</u></h1>
+                <img src="/img/doacao/todas_as_bandeiras.png">
+            </div>
+            <div class="container-fluid">
+                <div>
+                    <h1 style="font-weight: bold;"><u>Doação Via Cartão</u></h1>
+                </div>
             </div>
         </div>
-    </div>
     </header>
 
 
@@ -40,76 +40,68 @@
     <div class="container-fluid border border-info rounded mid ">
         <div>
             <h1>Dados</h1>
-            <form action="" method="POST">
-                <div class="form-group">
-                    <label for="nome">Nome:</label><br>
-                    <input type="text" name="nome" size="40" class="form-control">
-                </div>
 
-                <div class="form-group">
-                    <label for="CPF/CNPJ">CPF/CNPJ:</label><br>
-                    <input type="text" name="CPF/CNPJ" placeholder="000.000.000-00" size="13" maxlength="14" required
-                        class="form-control" pattern="\d{3}.\d{3}.\d{3}-\d{2}"><br>
-                    <label for="Data">Data de Nascimento:</label><br>
-                    <input type="date" name="identificacao" size="13" maxlength="14" required class="form-control">
-                </div>
+            <div class="form-group">
+                <label for="nome">Nome:</label><br>
+                <input id="nome" type="text" name="nome" size="40" class="form-control">
+            </div>
 
-                <div class="form-check">
-                    <label for="opção de cartao">Selecione a opção de cartão:</label>
-                    <br>
-                    <input class="form-check-input" type="radio" name="opcao1" value="1" id="inlineRadio1" /> <label
-                        class="form-check-label" for="opcao1">Crédito</label><br>
-                    <input class="form-check-input" type="radio" name="opcao2" value="2" id="inlineRadio2" /><label
-                        class="form-check-label" for="opcao1">Débito</label>
-                    <br>
-                </div>
+            <div class="form-group">
+                <label for="CPF/CNPJ">CPF/CNPJ:</label><br>
+                <input id="ident" type="text" name="cpf_cnpj" placeholder="000.000.000-00" size="13" maxlength="14"
+                    class="form-control"><br>
+                <label for="Data">Data de Nascimento:</label><br>
+                <input type="date" id="data" name="data" size="13" maxlength="14" class="form-control">
+            </div>
 
-                <div>
-                    <label for="cartão">Selecione a bandeira do cartão:</label>
-                    <select name=“selOpcao” class="form-control">
-                        <option value=“0”></option>
-                        <option value=“1”>MasterCard</option>
-                        <option value=“2”>VISA</option>
-                        <option value=“3”>Maestro</option>
-                        <option value=“4”>Elo</option>
-                        <option value=“5”>Alelo</option>
-                        <option value=“6”>Hipercard</option>
-                        <option value=“7”>Banco do Brasil</option>
-                        <option value=“8”>Diners Club International</option>
-                        <option value=“9”>American Express</option>
-                        <option value=“10”>VISA Electron</option>
-                    </select>
-                    <label for="valor">Valor:</label>
-                    <input type="text" name="valor" size="13" class="form-control" name="valor">
-                </div>
+            <div class="form-check">
+                <label for="opção de cartao">Selecione a opção de cartão:</label>
+                <br>
+                <input class="form-check-input" type="radio" name="opcao1" value="1" id="inlineRadio1" /> <label
+                    class="form-check-label" for="opcao1">Crédito</label><br>
+                <input class="form-check-input" type="radio" name="opcao2" value="2" id="inlineRadio2" /><label
+                    class="form-check-label" for="opcao1">Débito</label>
+                <br>
+            </div>
 
-                <div class="form-group">
-                    <label for="numcartao">Numero do cartão:</label><br>
-                    <input type="text" name="numcartao" required class="form-control">
-                    <p><strong>somente numeros, sem pontos</strong></p>
-                    <label for="numcartao">Código CVV:</label><br>
+            <div>
+                <label for="cartão">Selecione a bandeira do cartão:</label>
+                <select id="op" name=“selOpcao” class="form-control">
+                    <option value=“0”></option>
+                    <option value=“1”>MasterCard</option>
+                    <option value=“2”>VISA</option>
+                    <option value=“3”>Maestro</option>
+                    <option value=“4”>Elo</option>
+                    <option value=“5”>Alelo</option>
+                    <option value=“6”>Hipercard</option>
+                    <option value=“7”>Banco do Brasil</option>
+                    <option value=“8”>Diners Club International</option>
+                    <option value=“9”>American Express</option>
+                    <option value=“10”>VISA Electron</option>
+                </select>
+                <label for="valor">Valor:</label>
+                <input type="text" name="valor" size="13" class="form-control" id="valor">
+            </div>
 
-                    <input type="text" name="numcartao" size="2" maxlength="3" required class="form-control">
-                    <p class="peq2"><strong>localizado atrás do cartão</strong></p>
-                </div>
+            <div class="form-group">
+                <label for="numcartao">Numero do cartão:</label><br>
+                <input type="text" name="numcartao" id="cartao" class="form-control">
+                <p><strong>somente numeros, sem pontos</strong></p>
+                <label for="numcartao">Código CVV:</label><br>
 
-                <div class="form-group">
-                    <button class="btn btn-outline-danger" style="margin-left: 100px;" type="button"
-                        onclick="location.reload()">Apagar</button>
-                    <input class="btn btn-outline-success" type="submit" value="Enviar" return false;>
-                </div>
+                <input type="text" name="numcvv" size="2" maxlength="3" id="cod_cvv" class="form-control">
+                <p class="peq2"><strong>localizado atrás do cartão</strong></p>
+            </div>
 
-                <a href="/doacao" class="voltar">Voltar para a página inicial</a>
-            </form>
-            <script>
-                document.querySelector('form').addEventListener('submit', function (event) {
-                    event.preventDefault(); // Impede o envio padrão do formulário
+            <div class="form-group">
+                <button class="btn btn-outline-danger" style="margin-left: 100px;" type="button">Apagar</button>
+                <input class="btn btn-outline-success" type="button" id="enviar" value="Enviar">
+            </div>
 
-                    // Redireciona o usuário para a página inicial após abrir o PDF
-                });
-            </script>
+            <a href="/doacao" class="voltar">Voltar para a página inicial</a>
         </div>
     </div>
 </body>
+<script src="/js/doacao/cadastrarcartao.js"></script>
 
 </html>
