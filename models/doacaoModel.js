@@ -102,5 +102,16 @@ class doacaoModel {
         }
         return lista;
     }
+
+    async excluir(id) {
+        let sql = "delete from tb_doacao where doa_id = ?";
+
+        let valores = [id];
+        
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
 }
 module.exports = doacaoModel;

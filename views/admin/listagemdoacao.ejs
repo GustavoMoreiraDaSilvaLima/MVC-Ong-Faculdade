@@ -118,6 +118,7 @@
                     <td><%= listagemDoacao[i].doa_valor %></td>
                     <td><%= listagemDoacao[i].doa_status %></td>
                     <td><%= listagemDoacao[i].doa_data %></td>
+                    <button data-codigoexclusao="<%= listagemDoacao[i].doa_id %>" class="btn btn-danger btnExclusao" id="btnExcluir"><i class="fas fa-trash"></i></button>
                 </tr>
             <% } %>
         </tbody>
