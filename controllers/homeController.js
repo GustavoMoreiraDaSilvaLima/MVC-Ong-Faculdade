@@ -27,6 +27,17 @@ class HomeController {
         
     }
 
+    async voluntariosDel(req,res){
+        let cj = req.body.cpf
+        console.log(cj)
+        const voluntario = new Voluntario();
+        
+        const listaVoluntarios = await voluntario.deletar_no_model(cj);
+
+        
+        res.render('voluntarios/voluntarios');
+    
+    }
     async voluntariosAlterarView(req,res){
         let voluntario = new Voluntario();
         let lista_Vol = await voluntario.listar();

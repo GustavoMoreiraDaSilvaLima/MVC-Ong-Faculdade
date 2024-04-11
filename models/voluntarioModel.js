@@ -109,9 +109,9 @@ class Voluntario {
 
         let valores = [this.CPF];
 
-        let result = await banco.ExecutaComandoNonQuery(sql, valores)
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
-        return result
+        return result;
     }
 }
 

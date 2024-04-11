@@ -13,9 +13,9 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 app.set("layout", "./layout");
 
+app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(express.static("public"))
 app.use(expressEjsLayout);
 
 
