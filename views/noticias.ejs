@@ -1,86 +1,21 @@
-<head>
-    <link rel="stylesheet" href="./css/estilos.css">
-</head>
-<div class="bg-black bg-opacity-75 p-5 my-5">
-    <div class="container px-4 text-center">
-      <div class="row gx-5">
-        <div class="col">
-         <div class="p-3"><img src="./img/cachorro-emocionado.jpg"  class="rounded-circle" width="300px" height="300px"></div>
-        </div>
-        <div class="col">
-          <div class="p-5 text-white" ><h2 id="ultimas">ULTIMAS NOTICIAS</h2><br>
-            <p>A ONG Save Pets personifica o amor pelos animais, resgatando, cuidando e encontrando lares para eles. <br>
-              <br> Sua dedicação demonstra compaixão genuína e promove a conscientização sobre adoção responsável e direitos dos animais, transformando vidas peludas com esperança e cuidado.
-            </p><a href="QuemSomos" class="link-light">Descubra mais sobre Nos:</a></div>
-        </div>
-      </div>
+<div class="container p-5">
+    <h1 class="p-5">Últimas Notícias</h1>
+    <div class="list-group">
+        <% for (let i = 0; i < lista.length; i++)  { %>
+        <a href="/espec/<%= lista[i].ONG_NOTICIA_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
+            <div class="row">
+                <div class="col-md-1 my-auto">
+                    <img src="./img/logo3.png" alt="Ícone Notícia 1" class="img-fluid"> <!-- Ajuste o caminho da imagem -->
+                </div>
+                <div class="col-md-11">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><%= lista[i].ONG_NOTICIA_TITULO %></h5>
+                    </div>
+                    <p class="mb-1"><%= lista[i].ONG_NOTICIA_DESCRICAO%></p>
+                </div>
+            </div>
+        </a>
+        <% } %>
     </div>
-  </div>
- <!--CONTEUDO DAS N OTICIAS-->
- <div class="container" id="coll">
-    <div>
-      <div class=" d-inline-block" style="margin-top: 2%; margin-right: 11px;">
-        <div class="card bg-dark" id="iso" style="color: white;">
-            <img class="card-img-top" src="./img/cao6.jpg" alt="Imagem de capa do card">
-            <div class="card-body">
-                <h5 class="card-title">Cachorros Resgatados</h5>
-                <p class="card-text">SP: prefeitura resgata 51 cães entre animais mortos em canil ilegal... </p>
-                <a href="https://noticias.uol.com.br/cotidiano/ultimas-noticias/2023/03/29/resgate-cachorros-ribeirao-pires.htm" target="_blank" class="btn btn-success">Ler mais</a>
-            </div>
-        </div>
-    </div>
-        <div class=" d-inline-block">
-            <div class="card bg-dark" id="iso" style=" color: white;">
-                <img class="card-img-top" src="./img/cao5.jpg" alt="Imagem de capa do card">
-                <div class="card-body">
-                    <h5 class="card-title">Vacinação</h5>
-                    <p class="card-text">A ong SavePets promove uma campanha de vacinação...</p>
-                    <a href="https://g1.globo.com/rj/rio-de-janeiro/noticia/2023/08/18/campanha-de-vacinacao-antirrabica-no-rio-comeca-no-proximo-sabado.ghtml" target="_blank" class="btn btn-success">Ler mais</a>
-                </div>
-            </div>
-        </div>
-        <div class=" d-inline-block">
-            <div class="card bg-dark" id="iso" style=" color: white; margin-right: 11px;">
-                <img class="card-img-top" src="./img/cao4.jpg" alt="Imagem de capa do card">
-                <div class="card-body">
-                    <h5 class="card-title">Maltratos </h5>
-                    <p class="card-text">A ong SavePets acionou as autoridades apos identificar...</p>
-                    <a href="https://g1.globo.com/fantastico/noticia/2021/02/14/veja-como-denunciar-maus-tratos-ou-crueldade-contra-animais.ghtml" target="_blank" class="btn btn-success">Ler mais</a>
-                </div>
-            </div>
-        </div>
-        <div class=" d-inline-block" style="margin-top: 9%;">
-            <div class="card bg-dark" id="iso" style=" color: white;">
-                <img class="card-img-top" src="./img/cao3.jpg" alt="Imagem de capa do card">
-                <div class="card-body">
-                    <h5 class="card-title">Doaçoes</h5>
-                    <p class="card-text">A ong SavePets realizou algumas doaçoes para a ONG petlove</p>
-                    <a href="https://www.petlove.com.br/doacoes" target="_blank" class="btn btn-success">Ler mais</a>
-                </div>
-            </div>
-        </div>
-        <div class=" d-inline-block" style="margin-top: 9%;">
-            <div class="card bg-dark" id="iso" style=" color: white; margin-right: 11px;">
-                <img class="card-img-top" src="./img/cao5.jpg" alt="Imagem de capa do card">
-                <div class="card-body">
-                    <h5 class="card-title">Adoção</h5>
-                    <p class="card-text">A ong SavePets realizou uma campanha de adoção de....</p>
-                    <a href="https://www.osindefesos.com.br/adote" target="_blank" class="btn btn-success">Ler mais</a>
-                </div>
-            </div>
-        </div>
-        <div class=" d-inline-block" style="margin-top: 9%;">
-            <div class="card bg-dark" id="iso" style="color: white;">
-                <img class="card-img-top" src="./img/cao6.jpg" alt="Imagem de capa do card">
-                <div class="card-body">
-                    <h5 class="card-title">Cuide do seu cão</h5>
-                    <p class="card-text">Nós promovemos uma palestra dando dicas de como cuidar do....</p>
-                    <a href="https://www.ecycle.com.br/como-cuidar-de-um-cachorro/" target="_blank" class="btn btn-success">Ler mais</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <br><br><br><br><br>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
