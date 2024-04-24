@@ -4,19 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function limparValidacao() {
         document.getElementById("txtnome").style["border-color"] = "#ced4da";
-        document.getElementById("txtemail").style["border-color"] = "#ced4da";
-        document.getElementById("ttefone").style["border-color"] = "#ced4da";
+        document.getElementById("temail").style["border-color"] = "#ced4da";
+        document.getElementById("ttelefone").style["border-color"] = "#ced4da";
         document.getElementById("tcpf").style["border-color"] = "#ced4da";
     }
 
     function cadastrar() {
         limparValidacao();
+        alert("oi");
         let nome = document.querySelector("#txtnome").value;
         let email = document.querySelector("#temail").value;
         let telefone = document.querySelector("#ttelefone").value;
         let cpf = document.querySelector("#tcpf").value;
         let op = document.querySelector("#op").value;
-
         let listaErros = [];
         if (nome == "") {
             listaErros.push("txtnome");
