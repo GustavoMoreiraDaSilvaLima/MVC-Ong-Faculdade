@@ -1,3 +1,4 @@
+//Rotas todas sem middleware, todas liberadas
 const express = require('express');
 const HomeController = require('../controllers/homeController');
 
@@ -7,9 +8,16 @@ router.get("/", ctrl.homeView);
 router.get("/QuemSomos", ctrl.QuemSomosView);
 router.get("/seja_um_voluntario", ctrl.sejaView);
 router.post("/seja_um_voluntario", ctrl.sejaViewPost);
-router.get("/voluntarios", ctrl.voluntariosView);
-router.post("/voluntarios", ctrl.voluntariosDel);
-router.get("/voluntarios/:cpf", ctrl.voluntariosAlterarView);
+
+//Doacao
+router.get("/doacao",ctrl.DoacaoView);
+router.get("/doacao/cartao",ctrl.DoaCartaoView);
+router.get("/doacao/pix",ctrl.DoaPixView);
+router.get("/doacao/boleto",ctrl.DoaBoletoView);
+
+//Noticia
+router.get('/', ctrl.listarNoticias);
+router.get('/espec/:id', ctrl.especNoticia);
 
 
 

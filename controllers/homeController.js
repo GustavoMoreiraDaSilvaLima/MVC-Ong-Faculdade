@@ -1,4 +1,6 @@
 const Voluntario = require(`../models/voluntarioModel`)
+const EventosModel = require("../models/eventosModel");
+const noticiaModel = require(`../models/noticiaModel`)
 
 class HomeController {
 
@@ -14,101 +16,50 @@ class HomeController {
     sejaView(req, res) {
         res.render('form');
     }
+   
+    async eventoView(req,res){  //Visualização de qualquer pessoa, salvo os voluntarios que terão opção extra
 
-    async voluntariosView(req,res){
-
-            const voluntario = new Voluntario();
-
-            
-            const listaVoluntarios = await voluntario.listar();
-
-            
-            res.render('voluntarios/voluntarios', {listaVoluntarios: listaVoluntarios});
-        
     }
 
-    async voluntariosDel(req,res){
-        let cj = req.body.cpf
-        console.log(cj)
-        const voluntario = new Voluntario();
-        
-        const listaVoluntarios = await voluntario.deletar_no_model(cj);
+    async parceirosView(req,res){
 
-        
-        res.render('voluntarios/voluntarios');
-    
     }
-    async voluntariosAlterarView(req,res){
-        let voluntario = new Voluntario();
-        let lista_Vol = await voluntario.listar();
-        let cj = req.params.cpf;
-        res.render('voluntarios/voluntario_alterar_form', { cj:cj , lista_Vol : lista_Vol});
-    }   
 
+    async projetosView(req,res){    //Se for voluntario dar opção de participar se não tiver acontecido
 
-    async sejaViewPost(req,res){
-        if(req.body.nome != '' &&
-         req.body.email != '' 
-         && req.body.telefone != '' 
-         && req.body.cpf != ''
-         && req.body.sobre_voce != '')
-        { //CPF, nome, email, telefone, desc
-
-
-            if(req.body.esc == 'false'){
-                let voluntario = new Voluntario(req.body.cpf, req.body.nome, req.body.email, req.body.telefone, req.body.sobre_voce);
-                let result = await voluntario.cadastrar_no_model();
-
-
-                if(result === "Erro: CPF já cadastrado")
-                {
-                    res.send({
-                        ok: false,
-                        msg: result
-                    });
-                }
-                if(result) {
-                    res.send({
-                        ok: true,
-                        msg: "Voluntario cadastrado com sucesso!"
-                    });
-                }   
-                else{
-                    res.send({
-                        ok: false,
-                        msg: result
-                    });
-                }                
-            }
-            else{
-                let voluntario = new Voluntario(req.body.cpf, req.body.nome, req.body.email, req.body.telefone, req.body.sobre_voce);
-                let result = await voluntario.alterar_no_model(req.body.cpf);
-
-                res.send()
-            }
-
-        }
-        else
-        {
-            res.send({
-                ok: false,
-                msg: "Parâmetros preenchidos incorretamente!"
-            });
-            
-            if(result) {
-                res.send({
-                    ok: true,
-                    msg: "Voluntario cadastrado com sucesso!"
-                });
-            }   
-            else{
-                res.send({
-                    ok: false,
-                    msg: result
-                });
-            }                
-        }
     }
+
+
+    //Visualização da noticia
+    async listarNoticias(req, res){
+        let noticia = new noticiaModel();
+        let lista = await noticia.noticia_exibir()
+
+        res.render('noticia/Noticias', {lista : lista});
+    }
+
+    //Exibir noticia detalhada
+    async especNoticia(req,res){
+        let noticia = new noticiaModel();
+        let not = await noticia.noticia_exibir_epsc(req.params.id);
+        res.render('noticia/noticia_esp', { not : not, layout : 'noticia/noticia_esp'})
+    }
+
+    //Doação
+    DoacaoView(req, res) {
+        res.render('doacao');
+    }
+    DoaCartaoView(req, res) {
+        res.render('formas_pagamento/cartao', { layout: 'formas_pagamento/cartao' });
+    }
+    DoaBoletoView(req, res) {
+        res.render('formas_pagamento/boleto', { layout: 'formas_pagamento/boleto' });
+    }
+    DoaPixView(req, res) {
+        res.render('formas_pagamento/pix', { layout: 'formas_pagamento/pix' });
+    }
+
+
 }
 
 //permite que a classe homeController seja importado
