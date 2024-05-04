@@ -8,8 +8,8 @@ const autent = new AutenticacaoMiddleware();
 
 let ctrl = new VoluntarioController();
 
-PerfilRouter.get("/voluntario",autent.NivelPermissaoVoluntario,ctrl.VoluntarioPerfil);
+PerfilRouter.get("/voluntario"/*,autent.NivelPermissaoVoluntario*/,ctrl.VoluntarioPerfil);
 //middleware para ver se é voluntário
-PerfilRouter.post("/EditarPerfil",autent.NivelPermissaoVoluntario,ctrl_v.editarPerfilVoluntario);
+PerfilRouter.post("/EditarPerfil"/*,autent.NivelPermissaoVoluntario*/,ctrl.editarPerfilVoluntario);
 
 module.exports = PerfilRouter;

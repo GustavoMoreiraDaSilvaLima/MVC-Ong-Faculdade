@@ -5,4 +5,4 @@ const LoginRouter = express.Router;
 let ctrl = new LoginController();
 
 
-module.exports = LoginRouter;
+//module.exports = LoginRouter;

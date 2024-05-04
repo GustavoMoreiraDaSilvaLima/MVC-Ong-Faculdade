@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 numcvv: cod
             }
 
-            fetch("/doacao/cartao", {
+            fetch("/send/cartao", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {

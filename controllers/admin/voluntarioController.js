@@ -1,4 +1,4 @@
-const Voluntario = require(`../../models/voluntarioModel`)
+const Voluntario = require('../../models/voluntarioModel');
 
 class voluntarioController {
 

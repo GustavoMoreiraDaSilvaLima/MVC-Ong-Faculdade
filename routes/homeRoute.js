@@ -7,7 +7,6 @@ let ctrl = new HomeController();
 router.get("/", ctrl.homeView);
 router.get("/QuemSomos", ctrl.QuemSomosView);
 router.get("/seja_um_voluntario", ctrl.sejaView);
-router.post("/seja_um_voluntario", ctrl.sejaViewPost);
 
 //Doacao
 router.get("/doacao",ctrl.DoacaoView);

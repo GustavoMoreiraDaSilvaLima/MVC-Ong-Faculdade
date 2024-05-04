@@ -1,4 +1,4 @@
-const noticiaModel = require(`../models/noticiaModel`)
+const noticiaModel = require(`../../models/noticiaModel`)
 
 class noticiaController {
 

@@ -1,7 +1,7 @@
 //Objetivo de ser uma maneira mais facil de fazer post publicos
 
-const Voluntario = require(`../../models/voluntarioModel`)
-const VendaModel = require(`../../models/vendaModel`);
+const Voluntario = require('../models/voluntarioModel');
+const VendaModel = require(`../models/vendaModel`);
 const DoacaoModel = require("../models/doacaoModel");
 
 class envioController {
