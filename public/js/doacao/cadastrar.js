@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 opcao1: op
             }
 
-            fetch("/doacao", {
+            fetch("/send/doacao", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {

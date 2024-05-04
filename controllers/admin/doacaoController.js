@@ -1,4 +1,4 @@
-const DoacaoModel = require("../models/doacaoModel");
+const DoacaoModel = require("../../models/doacaoModel");
 
 class doacaoController {
 

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 status: status
             }
 
-            fetch("/doacao/boleto", {
+            fetch("/send/boleto", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {

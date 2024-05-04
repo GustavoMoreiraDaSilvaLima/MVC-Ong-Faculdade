@@ -7,12 +7,12 @@ const ProjetoRouter = express.Router();
 
 let ctrl = new ProjetoController;
 
-ProjetoRouter.get('/',autent.NivelPermissaoAdm,ctrl.ProjetosView);
-ProjetoRouter.get('/adicionar',autent.NivelPermissaoAdm,ctrl.adicionarProjetoView);
-ProjetoRouter.get('/editar',autent.NivelPermissaoAdm,ctrl.editarProjetoView);
-ProjetoRouter.post('/adicionar',autent.NivelPermissaoAdm,ctrl.adicionarProjeto);
-ProjetoRouter.post('/editar',autent.NivelPermissaoAdm,ctrl.editarProjeto);
-ProjetoRouter.post('/excluir',autent.NivelPermissaoAdm,ctrl.excluirProjeto);
+ProjetoRouter.get('/'/*,autent.NivelPermissaoAdm*/,ctrl.ProjetosView);
+ProjetoRouter.get('/adicionar'/*,autent.NivelPermissaoAdm*/,ctrl.adicionarProjetoView);
+ProjetoRouter.get('/editar'/*,autent.NivelPermissaoAdm*/,ctrl.editarProjetoView);
+ProjetoRouter.post('/adicionar'/*,autent.NivelPermissaoAdm*/,ctrl.adicionarProjeto);
+ProjetoRouter.post('/editar'/*,autent.NivelPermissaoAdm*/,ctrl.editarProjeto);
+ProjetoRouter.post('/excluir'/*,autent.NivelPermissaoAdm*/,ctrl.excluirProjeto);
 
 
 module.exports = ProjetoRouter;

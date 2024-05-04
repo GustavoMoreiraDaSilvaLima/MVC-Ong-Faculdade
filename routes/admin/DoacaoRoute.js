@@ -10,10 +10,10 @@ let ctrl = new DoacaoController();
 
 
 
-DoacaoRouter.get("/", autent.NivelPermissaoAdm, ctrl.ListagemDoacaoView);
-DoacaoRouter.get("/alterar", autent.NivelPermissaoAdm,ctrl.AlterarDoacaoView);
-DoacaoRouter.post("/excluir", autent.NivelPermissaoAdm, ctrl.excluir);
-DoacaoRouter.post('/alterar', autent.NivelPermissaoAdm, ctrl.AlterarDoacao);
+DoacaoRouter.get("/", /*autent.NivelPermissaoAdm,*/ ctrl.ListagemDoacaoView);
+DoacaoRouter.get("/alterar", /*autent.NivelPermissaoAdm,*/ ctrl.AlterarDoacaoView);
+DoacaoRouter.post("/excluir", /*autent.NivelPermissaoAdm,*/ ctrl.excluir);
+DoacaoRouter.post('/alterar',/* autent.NivelPermissaoAdm,*/ ctrl.AlterarDoacao);
 
 
-module.exports = router;
+module.exports = DoacaoRouter;

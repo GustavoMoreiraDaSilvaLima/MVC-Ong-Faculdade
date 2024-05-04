@@ -12,6 +12,7 @@ let PatrimonioRoute = require("./routes/admin/PatrimonioRoute");
 let ProdutoRoute = require("./routes/admin/ProdutoRoute");
 let VendaRoute = require("./routes/admin/VendaRoute");
 let DoacaoRoute = require("./routes/admin/DoacaoRoute");
+let AdminRoute = require("./routes/admin/adminRoute");
 const app = express();
 
 //configura o ejs como view engine da nossa aplicação
@@ -21,7 +22,7 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 app.set("layout", "./layout");
 
-app.use(express.static("public"))
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(expressEjsLayout);
@@ -33,6 +34,7 @@ app.use("/send", enviosRoute);//Envio dos forms publicos
 app.use("/voluntario", voluntarioRoute);
 
 //Rotas especifacas para admin
+app.use("/admin",AdminRoute);
 app.use("/admin/voluntario", VoluntarioRoute);
 app.use("/admin/eventos",EventosRoute);
 app.use("/admin/noticia",NoticiaRoute);
