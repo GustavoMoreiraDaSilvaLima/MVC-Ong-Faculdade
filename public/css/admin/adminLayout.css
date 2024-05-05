@@ -1,6 +1,7 @@
 /* Cabeçalho/Header */
-/* ------------------------ *//* ------------------------ */
-header{
+/* ------------------------ */
+/* ------------------------ */
+header {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,44 +12,49 @@ header{
     flex-direction: column;
     border-bottom: 2px solid black;
 }
-.divTitulo{
-    margin-top:-50px;
+
+.divTitulo {
+    margin-top: -50px;
     display: flex;
     flex-direction: row;
     padding-left: 25%;
     padding-right: 25%;
 }
-.adminTitulo{
-    font-family:'Courier New', Courier, monospace;
+
+.adminTitulo {
+    font-family: 'Courier New', Courier, monospace;
     font-size: 50px;
     text-decoration: underline overline;
     text-align: center;
     color: black;
 }
 
-.adminTitulo:hover{
-    color:rgb(83, 83, 83)
+.adminTitulo:hover {
+    color: rgb(83, 83, 83)
 }
 
-.Menu{
+.Menu {
     display: flex;
     flex-direction: row;
     padding-bottom: 1%;
 }
-.MenuItem{
+
+.MenuItem {
     padding-left: 3%;
-    color:black;
+    color: black;
     text-decoration: none;
-    transition: text-decoration 0.3s ease; 
+    transition: text-decoration 0.3s ease;
     font-size: 30px;
 }
-.MenuItem:hover{
+
+.MenuItem:hover {
     text-decoration: underline;
+    color:green;
 }
 
-.botaoTamanho{
-    display: inline-block; 
-    padding: 10px 20px; 
+.botaoTamanho {
+    display: inline-block;
+    padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
@@ -58,7 +64,7 @@ header{
     text-overflow: ellipsis;
 }
 
-.botaoEstilo{
+.botaoEstilo {
     text-decoration: none;
     color: #ffffff;
     background-color: green;
@@ -67,32 +73,42 @@ header{
 
 }
 
-.botaoEstilo:hover{
+.botaoEstilo:hover {
     background-color: white;
     border: 2px solid green;
     color: green;
 }
 
-/* ------------------------ *//* ------------------------ */
+.p {
+    text-align: end;
+    margin-right: 1%;
+    padding-right: 1%;
+    margin-left: 60%;
+}
+
+/* ------------------------ */
+/* ------------------------ */
 
 /* Footer */
-/* ------------------------ *//* ------------------------ */
-footer{
+/* ------------------------ */
+/* ------------------------ */
+footer {
     background-color: #ffffff;
     z-index: 999;
     padding: 20px;
     border-top: 2px solid black;
     margin: 0;
 }
-.containerFooter{
+
+.containerFooter {
     display: flex;
     flex-direction: column;
 }
 
-.suporte{
+.suporte {
     display: flex;
     flex-direction: row;
-    align-items:end ;
+    align-items: end;
     text-align: end;
     float: right;
     margin-right: 1%;
@@ -102,14 +118,17 @@ footer{
 }
 
 
-.containerFooter1{
+.containerFooter1 {
     display: flex;
     flex-direction: row;
-    
+
 }
-/* ------------------------ *//* ------------------------ */
+
+/* ------------------------ */
+/* ------------------------ */
 /* utils */
-/* ------------------------ *//* ------------------------ */
+/* ------------------------ */
+/* ------------------------ */
 .removerUndeline {
     text-decoration: none;
 }
@@ -117,4 +136,69 @@ footer{
 h1 {
     font-size: 50px
 }
-/* ------------------------ *//* ------------------------ */
+
+/* ------------------------ */
+/* ------------------------ */
+/* Para resolução até 1366 */
+@media only screen and (max-width: 1366px) {
+
+    /* Footer */
+    footer {
+        background-color: #ffffff;
+        z-index: 999;
+        padding: 20px;
+        border-top: 2px solid black;
+        margin: 0;
+        width: 100%;
+        padding-bottom: 50px;
+    }
+
+    .suporte {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        text-align: end;
+        float: right;
+        margin-right: 1%;
+        padding-left: 1%;
+        padding-right: 1%;
+        border: 2px solid black;
+    }
+
+    .containerFooter {
+        display: flex;
+        flex-direction: column;
+        padding-right: 10%;
+    }
+
+    /* Header */
+    .divTitulo {
+        margin-top: -50px;
+        display: flex;
+        flex-direction: row;
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+
+    .adminTitulo {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 40px;
+        text-decoration: underline overline;
+        text-align: center;
+        color: black;
+    }
+
+    .Menu {
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 1%;
+    }
+
+    .MenuItem {
+        padding-left: 3%;
+        color: black;
+        text-decoration: none;
+        transition: text-decoration 0.3s ease;
+        font-size: 22px;
+    }
+}
