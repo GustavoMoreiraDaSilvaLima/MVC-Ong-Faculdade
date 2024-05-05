@@ -1,7 +1,7 @@
 class adminController {
 
     adminView(req, res) {
-        res.render('admin/adminHome', { layout: 'admin/adminHome' })
+        res.render('admin/adminHome', { layout: 'adminLayout' })
     }
 
 

@@ -1,10 +1,11 @@
+/*Containers Flexiveis*/
+/* ------------------------ *//* ------------------------ */
 main {
-    height: 300px;
-    width: 2000px;
+    height: 415px;
+    width: 2500px;
     display: flex;
 }
-
-div {
+.div {
     height: 400px;
     border: 1px solid #f9f9f9;
     transition-duration: 1s;
@@ -15,18 +16,18 @@ div {
 }
 
 #div1 {
-    background-color: aqua;
-    background-image: url(/img/admin/caixa.jpg);
+    background-color: white;
+    background-image: url(/img/admin/caixa.png);
 }
 
 #div2 {
-    background-color: green;
-    background-image: url(/img/admin/evento.jpg);
+    background-color: white;
+    background-image: url(/img/admin/noticia.png);
 }
 
 #div3 {
     background-color: white;
-    background-image: url(/img/admin/noticia.png);
+    background-image: url(/img/admin/voluntario.jpg);
 }
 
 #div4 {
@@ -36,51 +37,50 @@ div {
 
 #div5 {
     background-color: black;
-    background-image: url(download\ \(4\).jpg);
+    background-image: url(/img/admin/adotar.jpg);
 }
 
 #div6 {
-    background-color: blue;
-    background-image: url(download\ \(5\).jpg);
+    background-color: #f9f9f9;
+    background-image: url(/img/admin/produto.png);
 }
 
 #div7 {
     background-color: violet;
-    background-image: url(download\ \(6\).jpg);
+    background-image: url(/img/admin/evento.jpg);
 }
+
 #div8 {
     background-color: yellow;
-    background-image: url(download\ \(7\).jpg);
+    background-image: url(/img/admin/patrimonio.webp);
 }
+
 #div9 {
     background-color: green;
-    background-image: url(download\ \(8\).jpg);
+    background-image: url(/img/admin/parceiro.jpeg);
 }
-div:hover {
+
+.div:hover {
     flex-grow: 14;
 }
 
 .centrobody {
-    height: 100vh;
+    height: 1000px;
     width: 100vw;
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
     background-color: #f9f9f9;
 }
 
-.mainDentro{
+.mainDentro {
     text-align: center;
     margin-top: 170px;
 }
 
-.removerUndeline{
-    text-decoration: none;
-}
+/* ------------------------ *//* ------------------------ */
 
 
 
-h1{
-    font-size: 50px
-}
+
