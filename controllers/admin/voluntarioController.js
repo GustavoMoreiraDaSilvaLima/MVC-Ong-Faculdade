@@ -21,7 +21,7 @@ class voluntarioController {
         const listaVoluntarios = await voluntario.listar();
 
 
-        res.render('voluntarios/voluntarios', { listaVoluntarios: listaVoluntarios });
+        res.render('voluntarios/voluntarios', { layout : "adminLayout" ,listaVoluntarios : listaVoluntarios });
 
     }
 
@@ -33,14 +33,14 @@ class voluntarioController {
         const listaVoluntarios = await voluntario.deletar_no_model(cj);
 
 
-        res.render('voluntarios/voluntarios');
+        res.render('voluntarios/voluntarios', { layout : "adminLayout" });
 
     }
     async voluntariosAlterarView(req, res) {
         let voluntario = new Voluntario();
         let lista_Vol = await voluntario.listar();
         let cj = req.params.cpf;
-        res.render('voluntarios/voluntario_alterar_form', { cj: cj, lista_Vol: lista_Vol });
+        res.render('voluntarios/voluntario_alterar_form', { cj: cj, lista_Vol: lista_Vol, layout : "adminLayout" });
     }
 
     //Seja um Voluntario View/ Cadastrar Voluntário

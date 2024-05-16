@@ -15,7 +15,7 @@ router.get("/doacao/pix",ctrl.DoaPixView);
 router.get("/doacao/boleto",ctrl.DoaBoletoView);
 
 //Noticia
-router.get('/', ctrl.listarNoticias);
+router.get('/noticias', ctrl.listarNoticias);
 router.get('/espec/:id', ctrl.especNoticia);
 
 
