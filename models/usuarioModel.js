@@ -9,13 +9,15 @@ class usuarioModel{
     #tipo_usu
     #email_usu
     #senha_usu
+    #CPF
 
-    constructor(id_usu, nome_usu, tipo_usu, email_usu, senha_usu) {
+    constructor(id_usu, nome_usu, tipo_usu, email_usu, senha_usu, CPF) {
         this.#id_usu = id_usu;
         this.#nome_usu = nome_usu;
         this.#tipo_usu = tipo_usu;
         this.#email_usu = email_usu;
         this.#senha_usu = senha_usu;
+        this.#CPF = CPF
     }
 
     // Getters
