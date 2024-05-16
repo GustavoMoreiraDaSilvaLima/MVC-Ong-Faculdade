@@ -2,7 +2,7 @@ const Database = require("../utils/database");
 
 const banco = new Database();
 
-class vendaModel{
+class vendaModel {
     #id_venda
     #id_usu
     #id_prod
@@ -12,22 +12,20 @@ class vendaModel{
     #status_venda
     #quantidade
 
-
-constructor(id_venda, id_usu, id_prod, id_envio, data_envio, data_compra, status_venda, quantidade) {
-    this.#id_venda = id_venda;
-    this.#id_usu = id_usu;
-    this.#id_prod = id_prod;
-    this.#id_envio = id_envio;
-    this.#data_envio = data_envio;
-    this.#data_compra = data_compra;
-    this.#status_venda = status_venda;
-    this.#quantidade = quantidade;
-}
-
+    constructor(id_venda, id_usu, id_prod, id_envio, data_envio, data_compra, status_venda, quantidade) {
+        this.#id_venda = id_venda;
+        this.#id_usu = id_usu;
+        this.#id_prod = id_prod;
+        this.#id_envio = id_envio;
+        this.#data_envio = data_envio;
+        this.#data_compra = data_compra;
+        this.#status_venda = status_venda;
+        this.#quantidade = quantidade;
+    }
 
     // Getters
-    get CupomVenda() {
-        return this.#cupom_venda;
+    get id_venda() {
+        return this.#id_venda;
     }
 
     get IdUsu() {
@@ -39,20 +37,16 @@ constructor(id_venda, id_usu, id_prod, id_envio, data_envio, data_compra, status
     }
 
     get QuantidadeVenda() {
-        return this.#quantidade_venda;
+        return this.#quantidade;
     }
 
-    get ValorUniVendaProd() {
-        return this.#valorUni_venda_prod;
-    }
-
-    get StatusVenda(){
+    get StatusVenda() {
         return this.#status_venda;
     }
 
     // Setters
-    set CupomVenda(cupom_venda) {
-        this.#cupom_venda = cupom_venda;
+    set id_venda(id_venda) {
+        this.#id_venda = id_venda;
     }
 
     set IdUsu(id_usu) {
@@ -63,30 +57,26 @@ constructor(id_venda, id_usu, id_prod, id_envio, data_envio, data_compra, status
         this.#id_prod = id_prod;
     }
 
-    set QuantidadeVenda(quantidade_venda) {
-        this.#quantidade_venda = quantidade_venda;
+    set QuantidadeVenda(quantidade) {
+        this.#quantidade = quantidade;
     }
 
-    set ValorUniVendaProd(valorUni_venda_prod) {
-        this.#valorUni_venda_prod = valorUni_venda_prod;
-    }
-
-    set StatusVenda(status){
+    set StatusVenda(status) {
         this.#status_venda = status;
     }
 
-    async listarVenda(){
-        
+    async listarVenda() {
+        // Aqui você implementaria a lógica para listar as vendas no banco de dados
     }
 
-    async cadastrar_alterarVenda(){
-
-    }
-    //Intenção, obter o cupom completo da venda, com valor total, itens e quantidades
-    async obterCupomCompleto(cupom){
-
+    async cadastrar_alterarVenda() {
+        // Aqui você implementaria a lógica para cadastrar ou alterar uma venda no banco de dados
     }
 
+    // Intenção: obter o cupom completo da venda, com valor total, itens e quantidades
+    async obterCupomCompleto(cupom) {
+        // Aqui você implementaria a lógica para obter o cupom completo da venda com base no cupom fornecido
+    }
 }
 
 module.exports = vendaModel;
