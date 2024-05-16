@@ -17,7 +17,7 @@ class usuarioModel{
         this.#tipo_usu = tipo_usu;
         this.#email_usu = email_usu;
         this.#senha_usu = senha_usu;
-        this.#CPF = CPF
+        this.#CPF = CPF;
     }
 
     // Getters
