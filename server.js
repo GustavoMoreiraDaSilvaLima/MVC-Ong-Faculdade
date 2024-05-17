@@ -3,6 +3,7 @@ const expressEjsLayout = require('express-ejs-layouts');
 let homeRoute = require("./routes/homeRoute");
 let enviosRoute = require("./routes/enviosRoute");
 let voluntarioRoute = require("./routes/voluntario/voluntarioRoute");
+let vitrineRoute = require("./routes/vitrineRoute")
 //Rotas de admin
 let VoluntarioRoute = require("./routes/admin/VoluntarioRoute");
 let EventosRoute = require("./routes/admin/EventosRoute");
@@ -33,6 +34,7 @@ app.use(expressEjsLayout);
 app.use("/", homeRoute);
 app.use("/send", enviosRoute);//Envio dos forms publicos
 app.use("/voluntario", voluntarioRoute);
+app.use("/produtos", vitrineRoute);
 
 //Rotas especifacas para admin
 app.use("/admin",AdminRoute);
