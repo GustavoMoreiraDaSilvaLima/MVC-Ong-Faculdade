@@ -49,6 +49,10 @@ app.use("/admin/doacao", DoacaoRoute);
 app.use("/admin/projeto",ProjetoRoute);
 
 
+global.CAMINHO_IMG_BROWSER = "/img/produtos/"
+global.RAIZ_PROJETO = __dirname;
+
+
 
 //inicia o nosso servidor web
 app.listen(5000, function () {
