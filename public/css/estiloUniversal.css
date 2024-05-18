@@ -1,0 +1,44 @@
+/*Cores dos textos*/
+
+
+.branco{
+    color:white
+}
+
+.azul{
+    color:blue;
+}
+
+.azulclaro{
+    color:lightskyblue;
+}
+
+.preto{
+    color:black;
+}
+
+.amarelo{
+    color:yellow
+}
+
+.laranja{
+    color:orange
+}
+
+.laranja_vermelho{
+    color:orangered
+}
+
+.roxo{
+    color:purple
+}
+
+.verde{
+    color: green;
+}
+
+/*Sombra*/
+
+.sombra_preto{
+    text-shadow: 1px 1px 1px black;
+}

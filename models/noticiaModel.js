@@ -35,5 +35,20 @@ class noticiaModel{
         }
         return lista;
     }
+
+    async noticia_exibir_epsc(id){
+        let sql = "select * from ONG_NOTICIA where ONG_NOTICIA_ID = ?";
+
+        let value = [id]
+
+        let rows = await banco.ExecutaComando(sql, value);
+
+        if(rows.length > 0){
+            let row = rows[0];
+            return new noticiaModel(row["ONG_NOTICIA_ID"], row["ONG_NOTICIA_TITULO"], row["ONG_NOTICIA_DESCRICAO"], row["ONG_NOTICIA_CONTEUDO"], row["ONG_NOTICIA_EDITADO"], row["ONG_NOTICIA_ULTIMA_ALTERACAO"], 0);
+        }
+
+        return null;
+    }
 }
 module.exports = noticiaModel;

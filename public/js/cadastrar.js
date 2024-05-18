@@ -14,13 +14,14 @@ document.addEventListener("DOMContentLoaded", function() {
         limparValidacao();
         let nome = document.querySelector("#nome").value;
         let cpf = document.querySelector("#cpf").value;
+        let esc = document.querySelector("#esc").value;
         let email = document.querySelector("#email").value;
         let telefone = document.querySelector("#telefone").value;
         let sobre_voce = document.querySelector("#sobre_voce").value;
 
         let listaErros = [];
         if(nome == "") {
-            listaErros.push("nomePedido");
+            listaErros.push("nome");
         }
         if(cpf == ""){
             listaErros.push("cpf")
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             //enviar ao backend com fetch
 
             let obj = {
+                esc:esc,
                 nome: nome,
                 cpf: cpf,
                 email: email,
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    alert('Pedido Realizado Com sucesso')
+                    alert(r.msg)
                     window.location.href="/";
                     
                 }   
