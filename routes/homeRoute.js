@@ -16,8 +16,9 @@ router.get("/doacao/boleto",ctrl.DoaBoletoView);
 
 //Noticia
 router.get('/noticias', ctrl.listarNoticias);
-router.get('/espec/:id', ctrl.especNoticia);
-
+router.get('/espec/:id', async (req,res) => {
+    ctrl.especNoticia(req,res);
+})
 
 
 module.exports = router;

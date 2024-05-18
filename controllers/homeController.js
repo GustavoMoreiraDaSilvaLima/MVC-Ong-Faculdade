@@ -2,6 +2,8 @@ const Voluntario = require(`../models/voluntarioModel`)
 const EventosModel = require("../models/eventosModel");
 const noticiaModel = require(`../models/noticiaModel`)
 
+let contador_esp_noticias = 0
+
 class HomeController {
 
     homeView(req, res) {
@@ -40,9 +42,12 @@ class HomeController {
 
     //Exibir noticia detalhada
     async especNoticia(req,res){
+        if((contador_esp_noticias == 0 || contador_esp_noticias != req.params.id) && req.params.id > 0){
+            contador_esp_noticias = req.params.id
+        }
         let noticia = new noticiaModel();
-        let not = await noticia.noticia_exibir_epsc(req.params.id);
-        res.render('noticia/noticia_esp', { not : not, layout : 'noticia/noticia_esp'})
+        let not = await noticia.noticia_exibir_epsc(contador_esp_noticias);
+        res.render('noticia/noticia_esp', { not : not, layout : 'layout'})
     }
 
     //Doação
