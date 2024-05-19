@@ -42,8 +42,8 @@ class doacaoModel {
             return result;
         }
         else {
-            let sql = "update tb_doacao set doa_status = ?, doa_nome = ?, doa_tipo = ? where doa_id = ?";
-            let valores = [this.#doa_status, this.#doa_nome, this.#doa_tipo, this.#doa_id];
+            let sql = "update tb_doacao set doa_status = ?, doa_nome = ?, doa_tipo = ?,doa_valor = ? where doa_id = ?";
+            let valores = [this.#doa_status, this.#doa_nome, this.#doa_tipo, this.#doa_valor, this.#doa_id];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
@@ -56,7 +56,7 @@ class doacaoModel {
         let valores = [id];
 
         let rows = await banco.ExecutaComando(sql, valores);
-        
+
         if (rows.length > 0) {
             let row = rows[0];
             return new doacaoModel(row["doa_id"], row["doa_tipo"], row["doa_data"], row["doa_nome"], row["doa_valor"], row["doa_status"]);
@@ -98,6 +98,15 @@ LIMIT 10 OFFSET 10;*/
 
         return result;
     }
-
+    toJSON() {
+        return {
+            "id": this.#doa_id,
+            "nome": this.#doa_nome,
+            "tipo": this.#doa_tipo,
+            "status": this.doa_status,
+            "data": this.#doa_data,
+            "valor": this.#doa_valor
+        }
+    }
 }
 module.exports = doacaoModel;

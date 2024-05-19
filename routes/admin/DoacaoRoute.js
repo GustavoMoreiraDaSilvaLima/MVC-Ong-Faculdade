@@ -15,6 +15,7 @@ DoacaoRouter.get("/alterar", /*autent.NivelPermissaoAdm,*/ ctrl.AlterarDoacaoVie
 DoacaoRouter.post("/excluir", /*autent.NivelPermissaoAdm,*/ ctrl.excluir);
 DoacaoRouter.post('/alterar',/* autent.NivelPermissaoAdm,*/ ctrl.AlterarDoacao);
 DoacaoRouter.get("/alterar/search/:id",/* autent.NivelPermissaoAdm,*/ctrl.obterDoacao);
+DoacaoRouter.get("/tabela/:intervalo",/* autent.NivelPermissaoAdm,*/ctrl.AtualizarLista)
 
 
 module.exports = DoacaoRouter;
