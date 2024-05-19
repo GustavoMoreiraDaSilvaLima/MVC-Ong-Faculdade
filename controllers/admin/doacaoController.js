@@ -5,10 +5,10 @@ class doacaoController {
 
     //Doação
     async ListagemDoacaoView(req, res) {
-        let doacao = new DoacaoModel();
-        let listadoacao = await doacao.doacao_exibir();
+        let Doacao = new DoacaoModel();
+        let listadoacao = await Doacao.doacao_listar();
 
-        res.render('admin/listagemdoacao', { layout: 'admin/listagemdoacao', listagemDoacao: listadoacao });
+        res.render('admin/adminDoacao', { layout: 'adminLayout', listagemDoacao: listadoacao });
     }
 
     async excluir(req, res) {

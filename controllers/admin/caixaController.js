@@ -4,8 +4,8 @@ class CaixaController{
 
 
 
-    CaixaView(){
-
+    CaixaView(req,res){
+        res.render("admin/adminCaixa",{layout: 'adminLayout'});
     }
 
     atualizarCaixa(){

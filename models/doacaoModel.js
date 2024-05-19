@@ -1,4 +1,4 @@
-const Database = require("../utils/database");
+const Database = require("../db/database");
 
 const banco = new Database();
 
@@ -9,47 +9,20 @@ class doacaoModel {
     #doa_nome
     #doa_valor
     #doa_status
-    get doa_id() {
-        return this.#doa_id;
-    }
-    set doa_id(id) {
-        this.#doa_id = id;
-    }
+    get doa_id() { return this.#doa_id; }
+    set doa_id(id) { this.#doa_id = id; }
+    get doa_tipo() { return this.#doa_tipo; }
+    set doa_tipo(tipo) { this.#doa_tipo = tipo; }
+    get doa_data() { return this.#doa_data; }
+    set doa_data(data) { this.#doa_data = data; }
+    get doa_nome() { return this.#doa_nome; }
+    set doa_nome(nome) { this.#doa_nome = nome; }
+    get doa_valor() { return this.#doa_valor; }
+    set doa_valor(valor) { this.#doa_valor = valor; }
+    get doa_status() { return this.#doa_status; }
+    set doa_status(status) { this.#doa_status = status; }
 
-    get doa_tipo() {
-        return this.#doa_tipo;
-    }
-    set doa_tipo(tipo) {
-        this.#doa_tipo = tipo;
-    }
 
-    get doa_data() {
-        return this.#doa_data;
-    }
-    set doa_data(data) {
-        this.#doa_data = data;
-    }
-
-    get doa_nome() {
-        return this.#doa_nome;
-    }
-    set doa_nome(nome) {
-        this.#doa_nome = nome;
-    }
-
-    get doa_valor() {
-        return this.#doa_valor;
-    }
-    set doa_valor(valor) {
-        this.#doa_valor = valor;
-    }
-
-    get doa_status() {
-        return this.#doa_status;
-    }
-    set doa_status(status) {
-        this.#doa_status = status;
-    }
     constructor(id, tipo, data, nome, valor, status) {
         this.#doa_id = id;
         this.#doa_tipo = tipo;
@@ -92,7 +65,7 @@ class doacaoModel {
         return null;
 
     }
-    async doacao_exibir() {
+    async doacao_listar() {
         let sql = "select * from tb_doacao";
 
         let rows = await banco.ExecutaComando(sql);
@@ -108,7 +81,7 @@ class doacaoModel {
         let sql = "delete from tb_doacao where doa_id = ?";
 
         let valores = [id];
-        
+
         let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
         return result;

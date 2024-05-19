@@ -15,6 +15,7 @@ let VendaRoute = require("./routes/admin/VendaRoute");
 let DoacaoRoute = require("./routes/admin/DoacaoRoute");
 let AdminRoute = require("./routes/admin/adminRoute");
 let ProjetoRoute = require("./routes/admin/ProjetoRoute");
+let CaixaRoute = require("./routes/admin/CaixaRoute");
 const app = express();
 
 //configura o ejs como view engine da nossa aplicação
@@ -47,6 +48,7 @@ app.use("/admin/produto",ProdutoRoute);
 app.use("/admin/venda",VendaRoute);
 app.use("/admin/doacao", DoacaoRoute);
 app.use("/admin/projeto",ProjetoRoute);
+app.use("/admin/caixa",CaixaRoute);
 
 
 global.CAMINHO_IMG_BROWSER = "/img/produtos/"
