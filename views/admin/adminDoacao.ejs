@@ -1,42 +1,77 @@
-<main>
+<link rel="stylesheet" type="text/css" href="/css/admin/adminDoacao.css">
+<main style="margin-left: 10px;margin-right: 10px; margin-bottom: 10px;">
   <div class="p-5">
     <h1>Doações Cadastradas</h1>
   </div>
-  <div class="tableDiv">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Tipo</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Valor</th>
-          <th scope="col">Status</th>
-          <th scope="col">Data</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let i=0; i < 10; i++) { %>
+  <div class="my-container">
+    <div style="flex-direction: row;">
+      <a href="/admin/caixa" class="btn btn-info">Voltar ao caixa</a>
+      <h1>Hi</h1>
+    </div>
+    <div class="tableDiv" style="padding-left: 20px;">
+      <h3>Exportar tabela</h3>
+      <div class="custom-control custom-checkbox">
+        <input class="custom-control-input" type="checkbox" id="ExportExcel"><label>Excel</label>
+        <input class="custom-control-input" type="checkbox" id="ExportPdf"><label>PDF</label>
+        <button class="btn btn-outline-warning btn-sm" id="ExportarTabela" disabled>Exportar <i class="fa fa-file" aria-hidden="true"></i></i></button>
+      </div>
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td scope="row">
-              <%= listagemDoacao[i].doa_tipo %>
-            </td>
-            <td>
-              <%= listagemDoacao[i].doa_nome %>
-            </td>
-            <td>
-              <%= listagemDoacao[i].doa_valor %>
-            </td>
-            <td>
-              <%= listagemDoacao[i].doa_status %>
-            </td>
-            <td>
-              <%= listagemDoacao[i].doa_data %>
-            </td>
-            <td><button data-codigoexclusao="<%= listagemDoacao[i].doa_id %>" class="btn btn-danger btnExclusao"
-                id="btnExcluir"><i class="fas fa-trash"></i></button></td>
+            <th scope="col">Tipo</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Status</th>
+            <th scope="col">Data</th>
+            <th scope="col">Ações</th>
           </tr>
-          <% } %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody id="conteudo">
+          <% for (let i=0; i < 10; i++) { %>
+            <tr id="<%= listagemDoacao[i].doa_id %>">
+              <td scope="row">
+                <%= listagemDoacao[i].doa_tipo %>
+              </td>
+              <td>
+                <%= listagemDoacao[i].doa_nome %>
+              </td>
+              <td>
+                <%= listagemDoacao[i].doa_valor %>
+              </td>
+              <td>
+                <%= listagemDoacao[i].doa_status %>
+              </td>
+              <td>
+                <%= listagemDoacao[i].doa_data %>
+              </td>
+
+              <td>
+                <div>
+                  <button class="btn btn-primary btnEditar">
+                    <i id="1" class="fas fa-pen"></i>
+                  </button>
+                  <button data-codigoexclusao="<%= listagemDoacao[i].doa_id %>" class="btn btn-danger btnExcluir"
+                    id=""><i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+      <p style="text-align: center;">Páginas</p>
+      <div style="align-items: center; justify-content: center; text-align: center;">
+        <div id="paginas">
+          <button type="button" class="btn btn-outline-dark">&lt;&lt;</button>
+          <button type="button" class="btn btn-outline-dark">&lt;</button>
+          <button data-pagina="1" id="atual" type="button" class="btn btn-outline-dark" disabled>1</button>
+          <button type="button" class="btn btn-outline-dark">&gt;</button>
+          <button type="button" class="btn btn-outline-dark">&gt;&gt;</button>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
+
+<script src="/js/admin/adminDoacao.js"></script>

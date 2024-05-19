@@ -56,7 +56,7 @@ class Validador {
                 soma += parseInt(cnpj.charAt(i)) * peso[i];
             }
             let primeiroDigitoVerificador = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-            if (primeiroDigitoVerificador !== parseInt(cnpj.charAt(12))) {
+            if (primeiroDigitoVerificador !== parseInt(this.#cpf_cnpj.charAt(12))) {
                 return false;
             }
 
@@ -64,17 +64,16 @@ class Validador {
             soma = 0;
             peso = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
             for (let i = 0; i < 13; i++) {
-                soma += parseInt(cnpj.charAt(i)) * peso[i];
+                soma += parseInt(this.#cpf_cnpj.charAt(i)) * peso[i];
             }
             let segundoDigitoVerificador = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-            if (segundoDigitoVerificador !== parseInt(cnpj.charAt(13))) {
+            if (segundoDigitoVerificador !== parseInt(this.#cpf_cnpj.charAt(13))) {
                 return false;
             }
 
             return true;
         }
         else {
-            tipo = "Invalido"
             return false;
         }
     }

@@ -56,7 +56,7 @@ class doacaoModel {
         let valores = [id];
 
         let rows = await banco.ExecutaComando(sql, valores);
-
+        
         if (rows.length > 0) {
             let row = rows[0];
             return new doacaoModel(row["doa_id"], row["doa_tipo"], row["doa_data"], row["doa_nome"], row["doa_valor"], row["doa_status"]);
@@ -65,10 +65,22 @@ class doacaoModel {
         return null;
 
     }
-    async doacao_listar() {
-        let sql = "select * from tb_doacao";
+    /*SELECT *
+FROM usuarios
+LIMIT 10 OFFSET 10;*/
+    async doacao_listar(intervalo = 0) {
+        let sql = '';
+        let valores = [];
+        if (intervalo == 0) {
+            sql = "select * from tb_doacao order by doa_id DESC limit 10";
 
-        let rows = await banco.ExecutaComando(sql);
+        } else {
+            sql = "select * from tb_doacao order by doa_id DESC limit 10 OFFSET ?";
+            valores = [intervalo];
+        }
+
+
+        let rows = await banco.ExecutaComando(sql, valores);
         let lista = [];
 
         for (let i = 0; i < rows.length; i++) {
