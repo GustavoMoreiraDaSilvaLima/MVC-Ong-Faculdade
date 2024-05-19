@@ -1,0 +1,9 @@
+.tableDiv{
+    width: 75%;
+    height: 75%;
+}
+
+.my-container{
+    display: flex;
+    flex-direction: row;
+}
