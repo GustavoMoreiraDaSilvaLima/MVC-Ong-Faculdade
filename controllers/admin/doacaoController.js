@@ -14,24 +14,29 @@ class doacaoController {
     async AtualizarLista(req, res) {
         let Doacao = new DoacaoModel();
         let status = "disponivel";
-        if(req.params.intervalo < 1){
-            req.params.intervalo == 1;
+        let intervalo = req.params.intervalo;
+        if (intervalo < 1) {
+            intervalo = 1;
         }
-        if(req.params.intervalo == 1){
+        if (intervalo == 1) {
             status = "comeco";
         }
 
-        let lista = await Doacao.doacao_listar((req.params.intervalo - 1) * 10);
+        let lista = await Doacao.doacao_listar((intervalo - 1) * 10);
 
         let listaCompleta = [];
 
         //Inserir via JSON em uma lista para enviar ao Javascript no Front-End
-        for(let i = 0; i< lista.length;i++){
+        for (let i = 0; i < lista.length; i++) {
             listaCompleta[i] = lista[i].toJSON();
         }
 
-        if(listaCompleta.length<10){
-            status="fim";
+        if (listaCompleta.length < 10) {
+            status = "fim";
+        }
+
+        if (listaCompleta.length == 0) {
+            status = "erro tabela";
         }
 
         let ok = false
@@ -39,7 +44,7 @@ class doacaoController {
             ok = true
         }
 
-        res.send({ ok: ok, item: listaCompleta,status: status});
+        res.send({ ok: ok, item: listaCompleta, status: status });
     }
 
     async obterDoacao(req, res) {
@@ -52,19 +57,17 @@ class doacaoController {
 
 
     async excluir(req, res) {
+        let ok = false
+        let msg = "Erro ao excluir"
         if (req.body.id != null) {
             let doacao = new DoacaoModel();
-            let ok = await doacao.excluir(req.body.id);
-            if (ok) {
-                res.send({ ok: true });
-            }
-            else {
-                res.send({ ok: false, msg: "Erro ao excluir doação" })
+            let verifica = await doacao.excluir(req.body.id);
+            if (verifica == true) {
+                ok = true
+                msg = "Doação excluida"
             }
         }
-        else {
-            res.send({ ok: false, msg: "O id para exclusão não foi enviado" })
-        }
+        res.send({ ok: ok, msg: msg });
     }
 
     async AlterarDoacaoView(req, res) {

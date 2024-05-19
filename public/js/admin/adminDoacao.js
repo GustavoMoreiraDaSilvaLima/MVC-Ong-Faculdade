@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
-                    <button data-codigoexclusao="<%= listagemDoacao[i].doa_id %>" class="btn btn-danger btnExcluir"
+                    <button data-codigoexclusao="${dadosTabela.item[i].id}" class="btn btn-danger btnExcluir"
                     id=""><i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -56,23 +56,30 @@ document.addEventListener("DOMContentLoaded", function () {
             lista += `</tbody>`;
 
             Tabela.innerHTML = lista;
-            CarregarPaginas(1,dadosTabela.status);
+            CarregarPaginas(1, dadosTabela.status);
             CarregarNovosConteudos();
         }
     }
 
 
-    function CarregarPaginas(numPag = 1, status ="disponivel") {
+    function CarregarPaginas(numPag = 1, status = "disponivel") {
 
-        let desabilitaC = status == "comeco"? "disabled":"";
-        let desabilitaF = status == "fim" ? "disabled":"";
-            Paginas.innerHTML = `
-        <button id="btn_voltaDez" data-quant="-10" type="button" class="btn btn-outline-dark" ${desabilitaC}>&lt;&lt;</button>
-        <button id="btn_voltaUm" data-quant="-1" type="button" class="btn btn-outline-dark"  ${desabilitaC}>&lt;</button>
-        <button id="btn_atual" data-pagina="${numPag}" type="button" class="btn btn-outline-dark" disabled>${numPag}</button>
-        <button id="btn_andaUm" data-quant="1" type="button" class="btn btn-outline-dark" ${desabilitaF}>&gt;</button>
-        <button id="btn_andaDez" data-quant="10" type="button" class="btn btn-outline-dark" ${desabilitaF}>&gt;&gt;</button>
+
+        if (numPag < 0) {
+            numPag = 1;
+        }
+
+        let desabilitaC = status == "comeco" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+        let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled":"'btn btn-outline-primary btnAtualizador'";
+        let desabilitaFim = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+        Paginas.innerHTML = `
+                <button data-quant="-10" type="button" class=${desabilitaC}>&lt;&lt;</button>
+                <button  data-quant="-1" type="button" class=${desabilitaC}>&lt;</button>
+                <button id="btn_atual" data-pagina="${numPag}" type="button" class="btn btn-outline-dark">${numPag}</button>
+                <button data-quant="1" type="button" class=${desabilitaF}>&gt;</button>
+                <button data-quant="10" type="button" class=${desabilitaFim}>&gt;&gt;</button>
         `;
+
     }
 
     async function BuscarTabela(intervalo = 1) {
@@ -88,30 +95,51 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function CarregarNovosConteudos() {
-        var Conteudo = document.querySelector("#conteudo");
+
         // var Paginas = document.querySelector("#paginas");
         let BotaoEditar = document.querySelectorAll(".btnEditar");
         let BotaoExcluir = document.querySelectorAll(".btnExcluir");
+        let BotaoPagina = document.querySelectorAll(".btnAtualizador");
 
-
-        // var btn_atual = document.querySelector("#btn_atual");
-        // var btn_voltaDez = document.querySelector("#btn_voltaDez");
-        // var btn_voltaUm = document.querySelector("#btn_voltaUm");
-        // var btn_andaUm = document.querySelector("#btn_andaUm");
-        // var btn_andaDez = document.querySelector("btn_andaDez");
-
-        // btn_voltaDez.addEventListener("click", MenosAtualizaLista);
-        // btn_voltaUm.addEventListener("click", MenosAtualizaLista);
-        // btn_andaDez.addEventListener("click", MaisAtualizaLista);
-        // btn_andaUm.addEventListener("click", MaisAtualizaLista);
+        for (let i = 0; i < BotaoPagina.length; i++) {
+            BotaoPagina[i].addEventListener("click", AtualizarTabela);
+        }
 
 
 
         for (let i = 0; i < BotaoEditar.length; i++) {
             BotaoEditar[i].addEventListener("click", Editar);
+            BotaoExcluir[i].addEventListener("click", Excluir);
         }
     }
-
+    function Excluir() {
+        let id = this.dataset.codigoexclusao;
+        if (confirm("Tem certeza que deseja excluir esta doação?")) {
+            if (id != '') {
+                let obj = {
+                    id: id
+                }
+                fetch("/admin/doacao/excluir", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(r=> {
+                    return r.json();
+                })
+                .then(r=>{
+                    if(r.ok){
+                        alert(r.msg);
+                        CancelarAlteracao();
+                    }else{
+                        alert(r.msg);
+                    }
+                })
+            }
+        }
+    }
 
     async function Editar() {
         let idAlterar = this.parentElement.parentElement.parentElement.id
@@ -122,21 +150,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         linha.innerHTML = `
             <td scope="row">
-                <select id="select-${informacao.Id}">
+                <select class="form-control" id="select-${informacao.Id}"style="width: 70px;">
                     <option value = "1" selected>${informacao.Tipo}</option>
                     <!--Renderizar os tipos de doação-->
             </td>
             <td>
-                <input type="text" id="nome-${informacao.Id}" value="${informacao.Nome}">
+                <input type="text" class="form-control" id="nome-${informacao.Id}" value="${informacao.Nome}" placeholder="Doador">
             </td>
             <td>
-                <input type="number" id="valor-${informacao.Id}" value="${informacao.Valor}">
+                <input type="number" class="form-control" id="valor-${informacao.Id}" value="${informacao.Valor}" placeholder="Valor">
             </td>
             <td>
-                <input type="text" id="status-${informacao.Id}" value="${informacao.Status}">
+                <input type="text" class="form-control" id="status-${informacao.Id}" value="${informacao.Status}" placeholder="Status da Transação">
             </td>
             <td>
-                <input type="text" value="${informacao.Data}" disabled>
+                <input type="text" class="form-control" value="${informacao.Data}" disabled>
             </td>
 
             <td>
@@ -145,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <i id="1" class="fa fa-check"></i>
                 </button>
                 <button class="btn btn-danger btnCancelar"
-                    id="cancelar-${informacao.Id}"><i class="fa fa-times" aria-hidden="true"></i>
+                    id="cancelar-${informacao.Id}" ><i class="fa fa-times" aria-hidden="true"></i>
                 </button>
                 </div>
         </td>
@@ -195,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     if (r.ok) {
                         alert(r.msg);
+                        CancelarAlteracao();
                     }
                     else {
                         alert(r.msg);
@@ -203,11 +232,11 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             alert("Dados Faltando ou incorreto!");
         }
-        CancelarAlteracao();
+
     }
 
     function CancelarAlteracao() {
-
+        AtualizarTabela(0);
     }
 
     function BuscarBanco(id) {
@@ -220,18 +249,66 @@ document.addEventListener("DOMContentLoaded", function () {
             })
 
     }
-    function MenosAtualizaLista() {
+    async function AtualizarTabela(quantidade = 1) {
+        if (quantidade != 0) {
+            quantidade = this.dataset.quant;
+        }
+        let atual = document.querySelector("#btn_atual").dataset.pagina;
+        let NovaPagina = parseInt(atual) + parseInt(quantidade);
+        let Tabela_att = await BuscarTabela(NovaPagina);
+        if (Tabela_att.status == "erro tabela") {
+            NovaPagina = parseInt(atual);
+        }
+
+
+        CarregarPaginas(NovaPagina, Tabela_att.status);
+        AtualizaTd(Tabela_att.item, Tabela_att.status);
+        CarregarNovosConteudos()
 
     }
 
-    function MaisAtualizaLista() {
+    function AtualizaTd(item, disponibilidade = "disponivel") {
+
+        if (disponibilidade != "erro tabela") {
+            let Conteudo = document.querySelector("#conteudo");
+            let TabelaNova = "";
+            for (let i = 0; i < item.length; i++) {
+                TabelaNova += `
+                <tr id="${item[i].id}">
+                <td scope="row">
+                    ${item[i].tipo}
+                </td>
+                <td>
+                    ${item[i].nome}
+                </td>
+                <td>
+                    ${item[i].valor}
+                </td>
+                <td>
+                ${item[i].status}
+
+                </td>
+                <td>
+                    ${item[i].data}
+                </td>
+                <td>
+                <div>
+                    <button class="btn btn-primary btnEditar">
+                    <i id="1" class="fas fa-pen"></i>
+                    </button>
+                    <button data-codigoexclusao="${item[i].id}" class="btn btn-danger btnExcluir"
+                    id=""><i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                </td>
+            `
+            }
+            Conteudo.innerHTML = TabelaNova;
+        }
 
     }
 
 
-    function AtualizarLista(numero) {
-
-    }
 
 
 })
