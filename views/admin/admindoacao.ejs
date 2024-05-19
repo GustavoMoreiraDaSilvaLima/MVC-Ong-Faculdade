@@ -1,89 +1,33 @@
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-            color: #fff;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 30px;
-            color: rgb(54, 54, 54);
-        }
-
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #dddddd;
-        }
-
-        th {
-            background-color: #6ab04c;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        tr:hover {
-            background-color: #f2f2f2;
-        }
-
-        td {
-            color: #555;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f8f8f8;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-    </style>
-</head>
-<body>
-      <div class="p-5">
-        <h1>Doações Cadastradas</h1>
+<link rel="stylesheet" type="text/css" href="/css/admin/adminDoacao.css">
+<main style="margin-left: 10px;margin-right: 10px; margin-bottom: 10px;">
+  <div class="p-5">
+    <h1>Doações Cadastradas</h1>
+  </div>
+  <div class="my-container">
+    <div style="flex-direction: row;">
+      <a href="/admin/caixa" class="btn btn-info">Voltar ao caixa</a>
+    </div>
+    <div class="tableDiv" style="padding-left: 20px;">
+      <h3>Exportar tabela</h3>
+      <div class="custom-control custom-checkbox">
+        <input class="custom-control-input" type="checkbox" id="ExportExcel"><label>Excel</label>
+        <input class="custom-control-input" type="checkbox" id="ExportPdf"><label>PDF</label>
+        <button class="btn btn-outline-warning btn-sm" id="ExportarTabela" disabled>Exportar <i class="fa fa-file" aria-hidden="true"></i></i></button>
       </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Tipo</th>
-                <th>Nome</th>
-                <th>Valor</th>
-                <th>Status</th>
-                <th>Data</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for (let i = 0; i < listagemDoacao.length; i++) { %>
-                <tr>
-                    <td><%= listagemDoacao[i].doa_tipo %></td>
-                    <td><%= listagemDoacao[i].doa_nome %></td>
-                    <td><%= listagemDoacao[i].doa_valor %></td>
-                    <td><%= listagemDoacao[i].doa_status %></td>
-                    <td><%= listagemDoacao[i].doa_data %></td>
-                    <td><button data-codigoexclusao="<%= listagemDoacao[i].doa_id %>" class="btn btn-danger btnExclusao" id="btnExcluir"><i class="fas fa-trash"></i></button></td>
-                </tr>
-            <% } %>
-        </tbody>
-    </table>
-  
+      <table id="Tabela" class="table table-striped">
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-      <link rel="icon" href="https://raw.githubusercontent.com/DanielAugustoFreire/ONG-SITE-BOotstrap/main/assets/logo3.png?token=GHSAT0AAAAAACQAGVQQUKLK6GQCCLLQEYJ2ZP7N7SA" type="icon">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-      <script src="/js/admin/excluir.js"></script>
+      </table>
+      <p style="text-align: center;">Páginas</p>
+      <div style="align-items: center; justify-content: center; text-align: center;">
+        <div id="paginas">
+
+        </div>
+      </div>
+    </div>
+    <div style="padding-left: 50px;">
+      <a class="btn btn-success " href="/admin/doacao/inserir">Inserir nova Doação</a>
+    </div>
+  </div>
+</main>
+
+<script src="/js/admin/adminDoacao.js"></script>

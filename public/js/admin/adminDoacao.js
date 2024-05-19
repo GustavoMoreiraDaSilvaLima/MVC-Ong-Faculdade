@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             numPag = 1;
         }
 
-        let desabilitaC = status == "comeco" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+        let desabilitaC = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" :status == "comeco" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
         let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled":"'btn btn-outline-primary btnAtualizador'";
         let desabilitaFim = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
         Paginas.innerHTML = `

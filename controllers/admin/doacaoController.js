@@ -99,6 +99,13 @@ class doacaoController {
         res.send({ ok, msg });
     }
 
+    DoacaoManualView(req,res){
+        
+    }
+    DoacaoManual(req,res){
+
+    }
+
 }
 
 module.exports = doacaoController;
