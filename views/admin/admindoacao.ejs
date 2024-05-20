@@ -4,8 +4,11 @@
     <h1>Doações Cadastradas</h1>
   </div>
   <div class="my-container">
-    <div style="flex-direction: row;">
-      <a href="/admin/caixa" class="btn btn-info">Voltar ao caixa</a>
+    <div style="flex-direction: column;text-align: center; ">
+      
+      <a class="btn btn-success" href="/admin/doacao/nova">Inserir nova Doação em Valores</a><br>
+      <a style="margin-top:20px" class="btn btn-warning" href="/admin/doacao/nova/produto">Registrar Doação de Produto</a><br>
+      <a style="margin-top:20px" href="/admin/caixa" class="btn btn-info">Voltar ao caixa</a><br>
     </div>
     <div class="tableDiv" style="padding-left: 20px;">
       <h3>Exportar tabela</h3>
@@ -24,7 +27,9 @@
         </div>
       </div>
     </div>
-
+    <div style="padding-left: 50px;">
+      <a class="btn btn-success " href="/admin/doacao/inserir">Inserir nova Doação</a>
+    </div>
   </div>
 </main>
 
