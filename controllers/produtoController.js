@@ -6,7 +6,7 @@ class produtoController {
         let produto = new ProdutoModel();
         let listaProdutos = await produto.listarProdutos();
 
-        res.render('vitrine', { layout: 'vitrine', produtos: listaProdutos });
+        res.render('vitrine', { layout: 'layout', produtos: listaProdutos });
     }
 
 }
