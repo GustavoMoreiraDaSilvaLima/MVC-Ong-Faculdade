@@ -13,7 +13,7 @@ let ctrl = new DoacaoController();
 DoacaoRouter.get("/", /*autent.NivelPermissaoAdm,*/ ctrl.ListagemDoacaoView);
 DoacaoRouter.get("/nova/produto",  /*autent.NivelPermissaoAdm,*/  ctrl.DoacaoProdutoView);
 DoacaoRouter.post("/nova/produto",  /*autent.NivelPermissaoAdm,*/  ctrl.DoacaoProduto);
-DoacaoRouter.get("/nova ",  /*autent.NivelPermissaoAdm,*/  ctrl.DoacaoManualView);
+DoacaoRouter.get("/nova",  /*autent.NivelPermissaoAdm,*/  ctrl.DoacaoManualView);
 DoacaoRouter.post("/nova",  /*autent.NivelPermissaoAdm,*/  ctrl.DoacaoManual);
 DoacaoRouter.post("/excluir", /*autent.NivelPermissaoAdm,*/ ctrl.excluir);
 DoacaoRouter.post('/alterar',/* autent.NivelPermissaoAdm,*/ ctrl.AlterarDoacao);
