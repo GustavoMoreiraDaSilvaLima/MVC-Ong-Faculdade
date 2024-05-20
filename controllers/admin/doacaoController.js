@@ -6,10 +6,8 @@ class doacaoController {
     
     //Doação
     async ListagemDoacaoView(req, res) {
-        let Doacao = new DoacaoModel();
-        let listadoacao = await Doacao.doacao_listar();
 
-        res.render('admin/adminDoacao', { layout: 'adminLayout', listagemDoacao: listadoacao });
+        res.render('admin/adminDoacao', { layout: 'adminLayout'});
     }
 
     async AtualizarLista(req, res) {
@@ -71,9 +69,6 @@ class doacaoController {
         res.send({ ok: ok, msg: msg });
     }
 
-    async AlterarDoacaoView(req, res) {
-
-    }
 
     //Post
     async AlterarDoacao(req, res) {
@@ -101,9 +96,15 @@ class doacaoController {
     }
 
     DoacaoManualView(req,res){
-        
+        res.render('admin/adminDoacaoManual',{layout: "adminLayout"})
     }
     DoacaoManual(req,res){
+
+    }
+    DoacaoProdutoView(req,res){
+        res.render('admin/adminDoacaoProduto',{layout: "adminLayout"})
+    }
+    DoacaoProduto(req,res){
 
     }
 
