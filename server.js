@@ -4,13 +4,14 @@ let homeRoute = require("./routes/homeRoute");
 let enviosRoute = require("./routes/enviosRoute");
 let voluntarioRoute = require("./routes/voluntario/voluntarioRoute");
 let vitrineRoute = require("./routes/vitrineRoute")
+let produtoRoute = require("./routes/produtoRoute")
 //Rotas de admin
 let VoluntarioRoute = require("./routes/admin/VoluntarioRoute");
 let EventosRoute = require("./routes/admin/EventosRoute");
 let NoticiaRoute = require("./routes/admin/NoticiaRoute");
 let ParceiroRoute = require("./routes/admin/ParceiroRoute");
 let PatrimonioRoute = require("./routes/admin/PatrimonioRoute");
-let ProdutoRoute = require("./routes/admin/ProdutoRoute");
+let ProdutoRouteAdmin = require("./routes/admin/ProdutoRoute");
 let VendaRoute = require("./routes/admin/VendaRoute");
 let DoacaoRoute = require("./routes/admin/DoacaoRoute");
 let AdminRoute = require("./routes/admin/adminRoute");
@@ -36,6 +37,7 @@ app.use("/", homeRoute);
 app.use("/send", enviosRoute);//Envio dos forms publicos
 app.use("/voluntario", voluntarioRoute);
 app.use("/produtos", vitrineRoute);
+app.use("/produto", produtoRoute);
 
 //Rotas especifacas para admin
 app.use("/admin",AdminRoute);
@@ -44,7 +46,7 @@ app.use("/admin/eventos",EventosRoute);
 app.use("/admin/noticia",NoticiaRoute);
 app.use("/admin/parceiro",ParceiroRoute);
 app.use("/admin/patrimonio",PatrimonioRoute);
-app.use("/admin/produto",ProdutoRoute);
+app.use("/admin/produto",ProdutoRouteAdmin);
 app.use("/admin/venda",VendaRoute);
 app.use("/admin/doacao", DoacaoRoute);
 app.use("/admin/projeto",ProjetoRoute);
