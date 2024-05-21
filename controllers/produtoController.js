@@ -9,6 +9,13 @@ class ProdutoController {
         res.render('produto/listar', {lista: lista});
     }
 
+    async vitrineView(req, res) {
+        let produto = new ProdutoModel();
+        let listaProdutos = await produto.listarProdutos();
+
+        res.render('vitrine', { layout: 'layout', produtos: listaProdutos });
+    }
+
     async excluirProduto(req, res){
         var ok = true;
         if(req.body.codigo != "") {
