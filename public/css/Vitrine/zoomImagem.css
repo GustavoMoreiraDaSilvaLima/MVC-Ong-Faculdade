@@ -1,0 +1,9 @@
+#Zoom:hover {
+    position: relative;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    z-index: 1000;
+    transition: transform 0.5s;
+}

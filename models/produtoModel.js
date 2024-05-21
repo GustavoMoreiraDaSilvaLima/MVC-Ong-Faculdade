@@ -1,4 +1,4 @@
-const Database = require('../utils/database');
+const Database = require('../db/database');
 
 const conexao = new Database();
 class ProdutoModel {

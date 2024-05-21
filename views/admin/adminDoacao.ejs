@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href="/css/admin/adminDoacao.css">
+<main style="margin-left: 10px;margin-right: 10px; margin-bottom: 10px;">
+  <div class="p-5">
+    <h1>Doações Cadastradas</h1>
+  </div>
+  <div class="my-container">
+    <div style="flex-direction: column;text-align: center; ">
+      <a class="btn btn-success" href="/admin/doacao/nova">Inserir nova Doação em Valores</a><br>
+      <a style="margin-top:20px" class="btn btn-warning" href="/admin/doacao/nova/produto">Registrar Doação de Produto</a><br>
+      <a style="margin-top:20px" href="/admin/caixa" class="btn btn-info">Voltar ao caixa</a><br>
+    </div>
+    <div class="tableDiv" style="padding-left: 20px;">
+      <h3>Exportar tabela</h3>
+      <div class="custom-control custom-checkbox">
+        <input class="custom-control-input" type="checkbox" id="ExportExcel"><label>Excel</label>
+        <input class="custom-control-input" type="checkbox" id="ExportPdf"><label>PDF</label>
+        <button class="btn btn-outline-warning btn-sm" id="ExportarTabela" disabled>Exportar <i class="fa fa-file" aria-hidden="true"></i></i></button>
+      </div>
+      <table id="Tabela" class="table table-striped">
+
+      </table>
+      <p style="text-align: center;">Páginas</p>
+      <div style="align-items: center; justify-content: center; text-align: center;">
+        <div id="paginas">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="/js/admin/adminDoacao.js"></script>
