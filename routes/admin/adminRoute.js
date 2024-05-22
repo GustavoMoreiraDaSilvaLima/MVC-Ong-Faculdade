@@ -10,7 +10,7 @@ let ctrl = new AdminController();
 
 
 
-adminRouter.get("/",/*autent.NivelPermissaoAdm,*/ ctrl.adminView);
+adminRouter.get("/",autent.NivelPermissaoAdm, ctrl.adminView);
 
 
 
