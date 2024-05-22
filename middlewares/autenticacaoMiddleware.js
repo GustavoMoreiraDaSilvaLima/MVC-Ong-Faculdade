@@ -1,4 +1,4 @@
-const LoginModel = require("../models/loginModel");
+const usuarioModel = require("../models/usuarioModel");
 const UsuarioModel = require("../models/usuarioModel");
 
 
@@ -16,16 +16,15 @@ class AutenticacaoMiddleware {
     }
 
 
-    // login_status 1 = ativo e login_perfil 1 = administrador
+    // usuario_status 1 = ativo e usuario_perfil 1 = administrador
     async NivelPermissaoAdm(req, res, next) {
         if (req.cookies != undefined && req.cookies.usuarioLogado != null) {
-            let loginId = req.cookies.usuarioLogado;
-            let login = new LoginModel();
-            login = await login.obter(loginId);
-            if (login != null && login.login_status == 1 && login.login_perfil == 1) {
-                let usuario = new UsuarioModel();
+            let usuarioId = req.cookies.usuarioLogado;
+            let usuario = new UsuarioModel();
+            usuario = await usuario.obter(usuarioId);
+            if (usuario != null && usuario.usuario_status == 1 && usuario.usuario_perfil == 1) {
 
-                res.locals.usuarioLogado = usuario.acharPeloLogin(loginId);
+                res.locals.usuarioLogado = usuario;
                 next();
             }
             else {
