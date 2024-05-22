@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 </td>
                 <td>
-                    ${dadosTabela.item[i].data}
+                    ${new Date(dadosTabela.item[i].data).toLocaleString()}
                 </td>
                 <td>
                 <div>
@@ -69,8 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
             numPag = 1;
         }
 
-        let desabilitaC = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" :status == "comeco" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
-        let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled":"'btn btn-outline-primary btnAtualizador'";
+        let desabilitaC = status == "comeco" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+        let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
         let desabilitaFim = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
         Paginas.innerHTML = `
                 <button data-quant="-10" type="button" class=${desabilitaC}>&lt;&lt;</button>
@@ -126,17 +126,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     body: JSON.stringify(obj)
                 })
-                .then(r=> {
-                    return r.json();
-                })
-                .then(r=>{
-                    if(r.ok){
-                        alert(r.msg);
-                        CancelarAlteracao();
-                    }else{
-                        alert(r.msg);
-                    }
-                })
+                    .then(r => {
+                        return r.json();
+                    })
+                    .then(r => {
+                        if (r.ok) {
+                            alert(r.msg);
+                            CancelarAlteracao();
+                        } else {
+                            alert(r.msg);
+                        }
+                    })
             }
         }
     }
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="text" class="form-control" id="status-${informacao.Id}" value="${informacao.Status}" placeholder="Status da Transação">
             </td>
             <td>
-                <input type="text" class="form-control" value="${informacao.Data}" disabled>
+                <input type="text" class="form-control" value="${new Date(informacao.Data).toLocaleDateString()}" disabled>
             </td>
 
             <td>
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 </td>
                 <td>
-                    ${item[i].data}
+                    ${new Date(item[i].data).toLocaleString()}
                 </td>
                 <td>
                 <div>
