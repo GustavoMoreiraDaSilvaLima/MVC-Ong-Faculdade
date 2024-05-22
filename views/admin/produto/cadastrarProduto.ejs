@@ -1,0 +1,57 @@
+
+<script src="/js/Produto/cadastrar.js"></script>
+<div>
+    <h1>Cadastrar produto</h1>
+</div>
+
+<div>
+    <form>
+        <div class="form-group">
+          <label for="inputCodigo">Código</label>
+          <input type="text" class="form-control" id="inputCodigo">
+        </div>
+        <div class="form-group">
+            <label for="inputNome">Nome</label>
+            <input type="text" class="form-control" id="inputNome">
+          </div>
+        <div class="form-group">
+            <label for="inputQtde">Quantidade</label>
+            <input type="number" class="form-control" id="inputQtde">
+        </div>
+        <div class="form-group">
+          <label for="inputValor">Valor</label>
+          <input class="form-control" id="inputValor">
+        </div>
+        <div class="form-group">
+          <label for="selMarca">Marca</label>
+          <select class="form-control" id="selMarca">
+            <option value="0">--Selecione--</option>
+            <% for(let i = 0; i<listaMarcas.length; i++) { %>
+                <option value="<%=listaMarcas[i].marcaId%>"><%= listaMarcas[i].marcaNome %></option>
+            <% } %>                 
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="selCategoria">Categoria</label>
+          <select class="form-control" id="selCategoria">
+            <option value="0">--Selecione</option>
+            <% for(let i = 0; i<listaCategorias.length; i++) { %>
+                <option value="<%=listaCategorias[i].categoriaId%>"><%= listaCategorias[i].categoriaNome %></option>
+            <% } %>  
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputImagem">Imagem do produto</label>
+          <input type="file" class="form-control" id="inputImagem" />
+        </div>
+
+        <div>
+            <img id="previaImagem" width="200" />
+        </div>
+
+        <div>
+            <button class="btn btn-primary" type="button" id="btnGravar">Gravar</button>
+            <a href="/produto" class="btn btn-default">Voltar</a>
+        </div>
+      </form>
+</div>

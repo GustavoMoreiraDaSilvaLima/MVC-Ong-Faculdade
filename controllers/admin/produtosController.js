@@ -6,7 +6,7 @@ class ProdutoController {
     async listarView(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.render('admin/adminProduto', {lista: lista});
+        res.render('admin/produto/adminProduto', {lista: lista});
     }
 
     async excluirProduto(req, res){
@@ -97,7 +97,7 @@ class ProdutoController {
         let categoria = new CategoriaModel();
         listaCategorias = await categoria.listarCategorias();
 
-        res.render('produto/cadastro', { listaMarcas: listaMarcas, listaCategorias: listaCategorias });
+        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias });
     }
 
     async obter(req, res) {

@@ -1,0 +1,67 @@
+
+<script src="/js/Produto/alterar.js"></script>
+<div>
+    <h1>Alterar produto</h1>
+</div>
+
+<div>
+    <form>
+        <div class="form-group">
+          <input type="hidden" id="inputId" value="<%= produtoAlter.produtoId %>">
+          <label for="inputCodigo">Código</label>
+          <input type="text" value="<%= produtoAlter.produtoCodigo %>" class="form-control" id="inputCodigo">
+        </div>
+        <div class="form-group">
+            <label for="inputNome">Nome</label>
+            <input type="text" value="<%= produtoAlter.produtoNome %>" class="form-control" id="inputNome">
+          </div>
+        <div class="form-group">
+            <label for="inputQtde">Quantidade</label>
+            <input type="number" value="<%= produtoAlter.produtoQuantidade %>" class="form-control" id="inputQtde">
+        </div>
+        <div class="form-group">
+          <label for="inputValor">Valor</label>
+          <input value="<%= produtoAlter.produtoValor %>" class="form-control" id="inputValor">
+        </div>
+        <div class="form-group">
+          <label for="selMarca">Marca</label>
+          <select class="form-control" id="selMarca">
+            <option value="0">--Selecione--</option>
+            <% for(let i = 0; i<listaMarcas.length; i++) { %>
+                <% if (listaMarcas[i].marcaId == produtoAlter.marcaId) { %>
+                    <option selected value="<%=listaMarcas[i].marcaId%>"><%= listaMarcas[i].marcaNome %></option>
+                <%} else { %>
+                    <option value="<%=listaMarcas[i].marcaId%>"><%= listaMarcas[i].marcaNome %></option>
+                <%} %>                
+            <% } %>                 
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="selCategoria">Categoria</label>
+          <select class="form-control" id="selCategoria">
+            <option value="0">--Selecione</option>
+            <% for(let i = 0; i<listaCategorias.length; i++) { %>
+                <% if (listaCategorias[i].categoriaId == produtoAlter.categoriaId) { %>
+                    <option selected value="<%=listaCategorias[i].categoriaId%>"><%= listaCategorias[i].categoriaNome %></option>
+                <%} else { %>
+                    <option value="<%=listaCategorias[i].categoriaId%>"><%= listaCategorias[i].categoriaNome %></option>
+                <%} %>                
+            <% } %>    
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputImagem">Imagem do produto:</label>
+          <input class="form-control" id="inputImagem" type="file" />
+        </div>
+
+        <div>
+          <img id="previaImagem" width="200" src="<%= produtoAlter.imagem %>" />
+        </div>
+        <div>
+
+            <button class="btn btn-primary" type="button" id="btnAlterar">Alterar</button>
+            <a href="/produto" class="btn btn-default">Voltar</a>
+        </div>
+      </form>
+</div>
