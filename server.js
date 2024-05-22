@@ -12,11 +12,14 @@ let NoticiaRoute = require("./routes/admin/NoticiaRoute");
 let ParceiroRoute = require("./routes/admin/ParceiroRoute");
 let PatrimonioRoute = require("./routes/admin/PatrimonioRoute");
 let ProdutoRouteAdmin = require("./routes/admin/ProdutoRoute");
+let CategoriaRoute = require("./routes/admin/CategoriaRoute");
+let MarcaRoute = require("./routes/admin/MarcaRoute");
 let VendaRoute = require("./routes/admin/VendaRoute");
 let DoacaoRoute = require("./routes/admin/DoacaoRoute");
 let AdminRoute = require("./routes/admin/adminRoute");
 let ProjetoRoute = require("./routes/admin/ProjetoRoute");
 let CaixaRoute = require("./routes/admin/CaixaRoute");
+const marcaRouter = require('./routes/admin/MarcaRoute');
 const app = express();
 
 //configura o ejs como view engine da nossa aplicação
@@ -47,6 +50,8 @@ app.use("/admin/noticia",NoticiaRoute);
 app.use("/admin/parceiro",ParceiroRoute);
 app.use("/admin/patrimonio",PatrimonioRoute);
 app.use("/admin/produto",ProdutoRouteAdmin);
+app.use("/admin/produto/categoria",CategoriaRoute);
+app.use("/admin/produto/marca",marcaRouter);
 app.use("/admin/venda",VendaRoute);
 app.use("/admin/doacao", DoacaoRoute);
 app.use("/admin/projeto",ProjetoRoute);

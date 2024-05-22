@@ -1,4 +1,6 @@
 const ProdutoModel = require("../../models/produtoModel");
+const MarcaModel = require("../../models/MarcaModel");
+const CategoriaModel = require("../../models/CategoriaModel");
 const fs = require("fs");
 
 class ProdutoController {
@@ -21,6 +23,7 @@ class ProdutoController {
 
         res.send({ok: ok});
     }
+    
     async cadastrarProduto(req, res){
         var ok = true;
         if(req.body.codigo != "" && req.body.nome != "" && 
@@ -88,14 +91,14 @@ class ProdutoController {
 
     async cadastroView(req, res) {
 
-        let listaMarcas = [];
-        let listaCategorias = [];
+            let listaMarcas = [];
+            let listaCategorias = [];
 
-        let marca = new MarcaModel();
-        listaMarcas = await marca.listarMarcas();
+            let marca = new MarcaModel();
+            listaMarcas = await marca.listarMarcas();
 
-        let categoria = new CategoriaModel();
-        listaCategorias = await categoria.listarCategorias();
+            let categoria = new CategoriaModel();
+            listaCategorias = await categoria.listarCategorias();
 
         res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias });
     }

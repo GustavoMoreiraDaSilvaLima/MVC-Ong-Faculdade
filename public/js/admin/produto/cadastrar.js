@@ -1,3 +1,5 @@
+console.log(`entrou`)
+
 document.addEventListener("DOMContentLoaded", function(){
 
     var btnGravar = document.getElementById("btnGravar");
@@ -27,6 +29,7 @@ function exibirPreviaImagem() {
 
 function gravarProduto() {
 
+    debugger
     var inputCodigo = document.getElementById("inputCodigo");
     var inputNome = document.getElementById("inputNome");
     var inputQtde = document.getElementById("inputQtde");
@@ -45,14 +48,6 @@ function gravarProduto() {
     inputValor > 0)
     {
 
-        /*var data = {
-            codigo: inputCodigo.value,
-            nome: inputNome.value,
-            quantidade: inputQtde.value,
-            marca: selMarca.value,
-            categoria: selCategoria.value
-        }*/
-
         let formData = new FormData();
 
         formData.append("codigo", inputCodigo.value);
@@ -63,7 +58,7 @@ function gravarProduto() {
         formData.append("imagem", arquivos[0]);
         formData.append("valor", inputValor);
 
-        fetch('/produto/cadastro', {
+        fetch('/admin/produto/cadastro', {
             method: "POST",
             body: formData
         })
