@@ -7,9 +7,9 @@ const VendaRouter = express.Router();
 
 let ctrl = new VendaController();
 
-VendaRouter.get('/'/*,autent.NivelPermissaoAdm*/,ctrl.VendasView);
-VendaRouter.get('/alterar'/*,autent.NivelPermissaoAdm*/,ctrl.AlterarVendaView);
-VendaRouter.post('/alterar'/*,autent.NivelPermissaoAdm*/,ctrl.AlterarVenda);
-VendaRouter.get('/excluir'/*,autent.NivelPermissaoAdm*/,ctrl.ExcluirVenda);
+VendaRouter.get('/',autent.NivelPermissaoAdm,ctrl.VendasView);
+VendaRouter.get('/alterar',autent.NivelPermissaoAdm, ctrl.AlterarVendaView);
+VendaRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.AlterarVenda);
+VendaRouter.get('/excluir',autent.NivelPermissaoAdm,ctrl.ExcluirVenda);
 
 module.exports = VendaRouter;
