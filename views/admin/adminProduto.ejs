@@ -1,0 +1,52 @@
+<script src="/js/Produto/listar.js"></script>
+
+
+<div style="padding: 3%;">
+    <br><br><br>
+    <h1>Produtos</h1>
+    <div>
+        <a href="/produto/cadastro" class="btn btn-primary"><i class="fas fa-plus"></i> Cadastrar</a>
+    </div>
+    <div class="table-responsive" style="margin-top: 15px;">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Categoria</th>
+                    <th>Marca</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% lista.map(function(value, index) { %>
+                    <tr>
+                        <td>
+                            <% if(value.imagem != "") { %>
+                                <img src="<%= value.imagem %>" width="80" />
+                            <% }
+                            else { %>
+                                <img src="/img/sem-foto.png" width="80">
+                            <% } %>
+                            
+                        </td>
+                        <td><%= value.produtoCodigo %></td>
+                        <td><%= value.produtoNome %></td>
+                        <td><%= value.produtoQuantidade %></td>
+                        <td><%= value.categoriaNome %></td>
+                        <td><%= value.marcaNome %></td>                   
+                        <td>
+                            <div>
+                                <a href="/produto/alterar/<%= value.produtoId %>" class="btn btn-primary"> <i class="bi bi-pen"></i></a>
+                                <button data-codigo="<%=value.produtoId %>" class="btn btn-danger btnExcluir"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+

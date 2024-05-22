@@ -6,7 +6,7 @@ class ProdutoController {
     async listarView(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.render('produto/listar', {lista: lista});
+        res.render('admin/adminProduto', {lista: lista});
     }
 
     async excluirProduto(req, res){
