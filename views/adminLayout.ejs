@@ -31,7 +31,7 @@
             </a>
         </div>
         <div class="Menu">
-            <a class="MenuItem" href="/caixa">Caixa</a>
+            <a class="MenuItem" href="/admin/caixa">Caixa</a>
             <a class="MenuItem" href="/admin/noticia">Noticia</a>
             <a class="MenuItem" href="/admin/voluntario">Voluntario</a>
             <a class="MenuItem" href="/admin/projeto">Projeto</a>
@@ -41,9 +41,9 @@
             <a class="MenuItem" href="/admin/patrimonio">Patrimonio</a>
             <a class="MenuItem" href="/admin/parceiro">Parceiro</a>
         </div>
-        <p style="margin-left: 1%;">Olá <strong><!--<%= locals.usuarioLogado.usuario_nome %>!--></strong></p>
+        <p style="margin-left: 1%;">Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong></p>
     </header>
-    <div style="margin-top:160px">
+    <div style="margin-top:200px">
         <!-- Fim do Header -->
 
         <%- body %>
