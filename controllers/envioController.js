@@ -84,7 +84,7 @@ class envioController {
             let tipocartao = "Cartão";
             let data = new Date();
             let status = "APROVADO"
-            let cartao = new DoacaoModel(0, tipocartao, data, cont.nome, cont.valor, status);
+            let cartao = new DoacaoModel(0, 6, 1,1, cont.nome, cont.valor,data);
 
             let result = await cartao.doacao_inserir_atualizar();
             if (result) {
@@ -112,7 +112,7 @@ class envioController {
         if (status) {
             let tipo = "Boleto"
             let data = new Date();
-            let boleto = new DoacaoModel(0, tipo, data, null, null, status);
+            let boleto = new DoacaoModel(0, 4, 1,1, "Amin", 520,data);
 
             let result = await boleto.doacao_inserir_atualizar();
             if (result) {
@@ -141,7 +141,7 @@ class envioController {
         if (status) {
             let tipo = "Pix"
             let data = new Date();
-            let boleto = new DoacaoModel(0, tipo, data, null, null, status);
+            let boleto = new DoacaoModel(0, 5, 1,1, "Amdin", 520,data);
 
             let result = await boleto.doacao_inserir_atualizar();
             if (result) {

@@ -1,13 +1,18 @@
 const DoacaoModel = require("../../models/doacaoModel");
+const FormasPagamentoModel = require("../../models/FormasPagamentoModel");
+const UsuarioModel = require("../../models/usuarioModel");
+const StatusDoacaoModel = require("../../models/statusDoacaoModel");
 
 class doacaoController {
 
 
-    
+
     //Doação
     async ListagemDoacaoView(req, res) {
 
-        res.render('admin/adminDoacao', { layout: 'adminLayout'});
+
+
+        res.render('admin/adminDoacao', { layout: 'adminLayout' });
     }
 
     async AtualizarLista(req, res) {
@@ -49,7 +54,8 @@ class doacaoController {
     async obterDoacao(req, res) {
         let Doacao = new DoacaoModel();
         let suaDoa = await Doacao.obter(req.params.id);
-        res.send({ Id: suaDoa.doa_id, Tipo: suaDoa.doa_tipo, Nome: suaDoa.doa_nome, Valor: suaDoa.doa_valor, Status: suaDoa.doa_status, Data: suaDoa.doa_data });
+        suaDoa = suaDoa.toJSON();
+        res.send({lista: suaDoa });
 
 
     }
@@ -80,7 +86,7 @@ class doacaoController {
         let ok = false;
         let msg = "Dados faltando ou incorreto"
         if (id != null && nome != '' && tipo > 0 && status != '' && valor > 0) {
-            let doacao = new DoacaoModel(id, tipo, null, nome, valor, status);
+            let doacao = new DoacaoModel(id, tipo, null, status,nome, valor);
 
             let alter = await doacao.doacao_inserir_atualizar();
             if (alter == true) {
@@ -95,16 +101,23 @@ class doacaoController {
         res.send({ ok, msg });
     }
 
-    DoacaoManualView(req,res){
-        res.render('admin/adminDoacaoManual',{layout: "adminLayout"})
+    async DoacaoManualView(req, res) {
+        let pagamentoLista = new FormasPagamentoModel();
+        pagamentoLista = await pagamentoLista.listar();
+        let UsuariosCadas = new UsuarioModel();
+        UsuariosCadas = await UsuariosCadas.listar();
+        let Status = new StatusDoacaoModel();
+        Status = await Status.listar();
+
+        res.render('admin/adminDoacaoManual', { layout: "adminLayout", pagamento: pagamentoLista, lista_usu: UsuariosCadas, status: Status});
     }
-    DoacaoManual(req,res){
+    DoacaoManual(req, res) {
 
     }
-    DoacaoProdutoView(req,res){
-        res.render('admin/adminDoacaoProduto',{layout: "adminLayout"})
+    DoacaoProdutoView(req, res) {
+        res.render('admin/adminDoacaoProduto', { layout: "adminLayout" })
     }
-    DoacaoProduto(req,res){
+    DoacaoProduto(req, res) {
 
     }
 

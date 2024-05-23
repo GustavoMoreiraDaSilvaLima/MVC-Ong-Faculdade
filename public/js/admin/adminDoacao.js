@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (numPag < 0) {
             numPag = 1;
         }
-
+        console.log(status);
         let desabilitaC = status == "comeco" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
         let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
         let desabilitaFim = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
@@ -150,30 +150,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
         linha.innerHTML = `
             <td scope="row">
-                <select class="form-control" id="select-${informacao.Id}"style="width: 70px;">
-                    <option value = "1" selected>${informacao.Tipo}</option>
+                <select class="form-control" id="select-${informacao.lista.id}"style="width: 70px;">
+                    <option value = "1" selected>${informacao.lista.tipo}</option>
                     <!--Renderizar os tipos de doação-->
             </td>
             <td>
-                <input type="text" class="form-control" id="nome-${informacao.Id}" value="${informacao.Nome}" placeholder="Doador">
+                <input type="text" class="form-control" id="nome-${informacao.lista.id}" value="${informacao.lista.nome}" placeholder="Doador">
             </td>
             <td>
-                <input type="number" class="form-control" id="valor-${informacao.Id}" value="${informacao.Valor}" placeholder="Valor">
+                <input type="number" class="form-control" id="valor-${informacao.lista.id}" value="${informacao.lista.valor}" placeholder="Valor">
             </td>
             <td>
-                <input type="text" class="form-control" id="status-${informacao.Id}" value="${informacao.Status}" placeholder="Status da Transação">
+                <input type="text" class="form-control" id="status-${informacao.lista.id}" value="${informacao.lista.status}" placeholder="Status da Transação">
             </td>
             <td>
-                <input type="text" class="form-control" value="${new Date(informacao.Data).toLocaleDateString()}" disabled>
+                <input type="text" class="form-control" value="${new Date(informacao.lista.data).toLocaleDateString()}" disabled>
             </td>
 
             <td>
                 <div>
-                <button data-id="${informacao.Id}" class="btn btn-success btnSalvar">
+                <button data-id="${informacao.lista.id}" class="btn btn-success btnSalvar">
                     <i id="1" class="fa fa-check"></i>
                 </button>
                 <button class="btn btn-danger btnCancelar"
-                    id="cancelar-${informacao.Id}" ><i class="fa fa-times" aria-hidden="true"></i>
+                    id="cancelar-${informacao.lista.id}" ><i class="fa fa-times" aria-hidden="true"></i>
                 </button>
                 </div>
         </td>

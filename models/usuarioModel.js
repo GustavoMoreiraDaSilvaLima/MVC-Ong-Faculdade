@@ -80,6 +80,23 @@ class UsuarioModel {
         return null;
     }
 
+
+    async listar() {
+        let sql = "select * from tb_usuario"
+
+        let valores = [];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        let lista = []
+
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[0];
+            lista.push(new UsuarioModel(row["usuario_id"], row["usuario_perfil"], row["usuario_status"], row["usuario_nome"], row["usuario_documento"], row["usuario_dataNasc"], row["usuario_email"], row["usuario_senha"]));
+        }
+        return lista;
+
+    }
 }
 
 module.exports = UsuarioModel;
