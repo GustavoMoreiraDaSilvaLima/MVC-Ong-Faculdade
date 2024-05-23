@@ -39,7 +39,7 @@ function alterarProduto() {
 
 
     //if de validação básica
-    if(inputCodigo.value != "" && inputNome.value != "" && inputQtde.value != "" && inputQtde.value != '0' && selMarca.value != '0' && selCategoria.value != '0' && inputValor > 0){
+    if(inputCodigo.value != "" && inputNome.value != "" && inputQtde.value != "" && inputQtde.value != '0' && selMarca.value != '0' && selCategoria.value != '0' && inputValor > 0 && inputQtde.value > 0){
 
         /*var data = {
             id: inputId.value,

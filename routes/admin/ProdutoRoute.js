@@ -33,7 +33,7 @@ ProdutoRouterAdmin.post('/cadastro'/*,autent.NivelPermissaoAdm*/,upload.single("
 
 ProdutoRouterAdmin.get('/alterar/:id'/*,autent.NivelPermissaoAdm*/,ctrl.alterarView);
 ProdutoRouterAdmin.post('/alterar'/*,autent.NivelPermissaoAdm*/,upload.single("imagem"), ctrl.alterarProduto);
-//ProdutoRouterAdmin.post('/deletar'/*,autent.NivelPermissaoAdm*/,ctrl.deletarProduto);
+ProdutoRouterAdmin.post('/deletar'/*,autent.NivelPermissaoAdm*/,ctrl.excluirProduto);
 //ProdutoRouterAdmin.post('/inserir'/*,autent.NivelPermissaoAdm*/,ctrl.inserirProduto);
 
 module.exports = ProdutoRouterAdmin;
