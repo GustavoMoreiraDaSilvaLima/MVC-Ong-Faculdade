@@ -14,6 +14,10 @@ router.get("/doacao/cartao",ctrl.DoaCartaoView);
 router.get("/doacao/pix",ctrl.DoaPixView);
 router.get("/doacao/boleto",ctrl.DoaBoletoView);
 
+//Evento
+router.get("/eventos",ctrl.listarEventos);
+//router.get("/eventos/espec/:id",ctrl.especEvento);
+
 //Noticia
 router.get('/noticias', ctrl.listarNoticias);
 router.get('/espec/:id', async (req,res) => {
