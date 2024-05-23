@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     var btnAddCarrinho = document.querySelectorAll(".btnAddCarrinho");
-  
+
+    var btnConfirmar = document.querySelector("#btnConfirmarPedido");
+
+    btnConfirmar.addEventListener("click", gravarPedido);
+
     let carrinho = [];
     
     if (localStorage.getItem("carrinho") != null) {
@@ -17,6 +21,31 @@ document.addEventListener("DOMContentLoaded", function () {
       carregarCarrinho();
     });
   
+    function gravarPedido() {
+
+      let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+      if(listaCarrinho.length > 0) {
+
+          fetch("/pedido/gravar", {
+              method: "POST",
+              headers: {
+                  'Content-Type': "application/json"
+              },
+              body: JSON.stringify(listaCarrinho)
+          })
+          .then(r=> {
+              return r.json();
+          })
+          .then(r=> {
+              console.log(r);
+          })
+
+      }
+      else{
+          alert("O carrinho está vazio!");
+      }
+  }
+
     function carregarCarrinho() {
       let html = "";
       let soma = 0;
@@ -122,9 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function removerItemCarrinho(item){
       let lista = localStorage.getItem("carrinho");
       let identificador_remocao = -1;
-  
-      console.log(123)
-  
   
       carrinho = JSON.parse(lista);
       for (let i = 0; i < carrinho.length; i++) {

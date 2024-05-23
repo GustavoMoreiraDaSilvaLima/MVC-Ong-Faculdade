@@ -5,6 +5,7 @@ let enviosRoute = require("./routes/enviosRoute");
 let voluntarioRoute = require("./routes/voluntario/voluntarioRoute");
 let vitrineRoute = require("./routes/vitrineRoute")
 let produtoRoute = require("./routes/produtoRoute")
+let pedidoRoute = require("./routes/pedidoRoute")
 //Rotas de admin
 let VoluntarioRoute = require("./routes/admin/VoluntarioRoute");
 let EventosRoute = require("./routes/admin/EventosRoute");
@@ -41,6 +42,7 @@ app.use("/send", enviosRoute);//Envio dos forms publicos
 app.use("/voluntario", voluntarioRoute);
 app.use("/produtos", vitrineRoute);
 app.use("/produto", produtoRoute);
+app.use("/pedido", pedidoRoute)
 
 //Rotas especifacas para admin
 app.use("/admin",AdminRoute);
