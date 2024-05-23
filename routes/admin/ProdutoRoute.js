@@ -30,11 +30,10 @@ let ctrl = new ProdutoController()
 ProdutoRouterAdmin.get('/'/*,autent.NivelPermissaoAdm*/,ctrl.listarView);
 ProdutoRouterAdmin.get('/cadastro'/*,autent.NivelPermissaoAdm*/,ctrl.cadastroView);
 ProdutoRouterAdmin.post('/cadastro'/*,autent.NivelPermissaoAdm*/,upload.single("imagem"), ctrl.cadastrarProduto);
-//ProdutoRouterAdmin.get('/'/*,autent.NivelPermissaoAdm*/,ctrl.ProdutoView);
-//ProdutoRouterAdmin.get('/inserir'/*,autent.NivelPermissaoAdm*/,ctrl.inserirProdutoView);
-//ProdutoRouterAdmin.get('/alterar'/*,autent.NivelPermissaoAdm*/,ctrl.alterarProdutoView);
-//ProdutoRouterAdmin.post('/inserir'/*,autent.NivelPermissaoAdm*/,ctrl.inserirProduto);
-//ProdutoRouterAdmin.post('/alterar'/*,autent.NivelPermissaoAdm*/,ctrl.alterarProduto);
+
+ProdutoRouterAdmin.get('/alterar/:id'/*,autent.NivelPermissaoAdm*/,ctrl.alterarView);
+ProdutoRouterAdmin.post('/alterar'/*,autent.NivelPermissaoAdm*/,upload.single("imagem"), ctrl.alterarProduto);
 //ProdutoRouterAdmin.post('/deletar'/*,autent.NivelPermissaoAdm*/,ctrl.deletarProduto);
+//ProdutoRouterAdmin.post('/inserir'/*,autent.NivelPermissaoAdm*/,ctrl.inserirProduto);
 
 module.exports = ProdutoRouterAdmin;

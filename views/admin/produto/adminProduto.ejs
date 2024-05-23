@@ -1,4 +1,4 @@
-<script src="/js/Produto/listar.js"></script>
+<script src="/js/admin/produto/listar.js"></script>
 
 
 <div style="padding: 3%;">
@@ -45,7 +45,7 @@
                         <td><%= value.marcaNome %></td>                   
                         <td>
                             <div>
-                                <a href="/produto/alterar/<%= value.produtoId %>" class="btn btn-primary"> <i class="bi bi-pen"></i></a>
+                                <a href="produto/alterar/<%= value.produtoId %>" class="btn btn-primary"> <i class="bi bi-pen"></i></a>
                                 <button data-codigo="<%=value.produtoId %>" class="btn btn-danger btnExcluir"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>

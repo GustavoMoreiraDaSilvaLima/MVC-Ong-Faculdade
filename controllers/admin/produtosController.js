@@ -3,6 +3,8 @@ const MarcaModel = require("../../models/MarcaModel");
 const CategoriaModel = require("../../models/CategoriaModel");
 const fs = require("fs");
 
+let solucao = 0
+
 class ProdutoController {
 
     async listarView(req, res) {
@@ -43,21 +45,25 @@ class ProdutoController {
         res.send({ ok: ok })
     }
 
-    async alterarView(req, res){
+    async alterarView(req, res){ 
+        if((solucao == 0 || solucao != req.params.id) && req.params.id > 0){
+            solucao = req.params.id
+        }
         let produto = new ProdutoModel();
         let marca = new MarcaModel();
         
         let categoria = new CategoriaModel();
-        if(req.params.id != undefined && req.params.id != ""){
-            produto = await produto.buscarProduto(req.params.id);
+        if(solucao != undefined && solucao != ""){
+            produto = await produto.buscarProduto(solucao);
         }
 
         let listaMarca = await marca.listarMarcas();
         let listaCategoria = await categoria.listarCategorias();
-        res.render("produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria});
+        res.render("admin/produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria});
     }
 
     async alterarProduto(req, res) {
+        debugger
         var ok = true;
         if(req.body.codigo != "" && req.body.nome != "" && req.body.quantidade != "" && req.body.quantidade  != '0' && req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0) {
 
