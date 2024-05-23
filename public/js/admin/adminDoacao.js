@@ -22,31 +22,42 @@ document.addEventListener("DOMContentLoaded", function () {
         </thead>
         <tbody id="conteudo">`;
             //Carregar o conteudo da lista para monta-lá
-            for (let i = 0; i < dadosTabela.item.length; i++) {
+            for (let l = 0; l < dadosTabela.item.length; l++) {
                 lista += `
-            <tr id="${dadosTabela.item[i].id}">
-                <td scope="row">
-                    ${dadosTabela.item[i].tipo}
-                </td>
-                <td>
-                    ${dadosTabela.item[i].nome}
-                </td>
-                <td>
-                    ${dadosTabela.item[i].valor}
-                </td>
-                <td>
-                ${dadosTabela.item[i].status}
+            <tr id="${dadosTabela.item[l].id}">
+                <td scope="row">`
+                for (let i = 0; i < dadosTabela.pgt.length; i++) {
+                    if (dadosTabela.item[l].tipo == dadosTabela.pgt[i].id) {
 
+                        lista += `${dadosTabela.pgt[i].nome}`
+                    }
+                }
+
+                lista += `</td>
+                <td>
+                    ${dadosTabela.item[l].nome}
                 </td>
                 <td>
-                    ${new Date(dadosTabela.item[i].data).toLocaleString()}
+                    ${dadosTabela.item[l].valor}
+                </td>
+                <td>`
+                for (let i = 0; i < dadosTabela.situacao.length; i++) {
+                    if (dadosTabela.item[l].status == dadosTabela.situacao[i].id) {
+
+                        lista += `${dadosTabela.situacao[i].nome}`
+                    }
+                }
+
+                lista += `</td>
+                <td>
+                    ${new Date(dadosTabela.item[l].data).toLocaleString()}
                 </td>
                 <td>
                 <div>
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
-                    <button data-codigoexclusao="${dadosTabela.item[i].id}" class="btn btn-danger btnExcluir"
+                    <button data-codigoexclusao="${dadosTabela.item[l].id}" class="btn btn-danger btnExcluir"
                     id=""><i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -146,22 +157,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         let informacao = await BuscarBanco(idAlterar);
-        let linha = document.getElementById(idAlterar);
+        let linha = ''
+        let html = document.getElementById(idAlterar);
 
-        linha.innerHTML = `
+        console.log(informacao.usu);
+        console.log(informacao.lista);
+        console.log(informacao.stt);
+        linha = `
             <td scope="row">
-                <select class="form-control" id="select-${informacao.lista.id}"style="width: 70px;">
-                    <option value = "1" selected>${informacao.lista.tipo}</option>
-                    <!--Renderizar os tipos de doação-->
+                <select class="form-control" id="select-${informacao.lista.id}"style="width: 120px;">`
+        for (let i = 0; i < informacao.pgt.length; i++) {
+            if (informacao.lista.tipo == informacao.pgt[i].id) {
+                linha += `
+                        <option value = "${informacao.lista.tipo}" selected>${informacao.pgt[i].nome}</option>
+                        <!--Renderizar os tipos de doação-->`
+            } else {
+                linha += `
+                        <option value = "${informacao.pgt[i].id}">${informacao.pgt[i].nome}</option>
+                        <!--Renderizar os tipos de doação-->`
+            }
+        }
+        linha += `
             </td>
             <td>
-                <input type="text" class="form-control" id="nome-${informacao.lista.id}" value="${informacao.lista.nome}" placeholder="Doador">
-            </td>
+                <select class="form-control"  id="nome-${informacao.lista.id}" style="width: 140px;">`
+
+        for (let i = 0; i < informacao.usu.length; i++) {
+            if (informacao.lista.usuario == informacao.usu[i].id) {
+                linha += `<option value="${informacao.lista.usuario}" selected>${informacao.usu[i].usuario}</option>`
+            }
+            else {
+                linha += `<option value="${informacao.usu[i].id}">${informacao.usu[i].usuario}</option>`
+            }
+        }
+        linha += `</td>
             <td>
                 <input type="number" class="form-control" id="valor-${informacao.lista.id}" value="${informacao.lista.valor}" placeholder="Valor">
             </td>
             <td>
-                <input type="text" class="form-control" id="status-${informacao.lista.id}" value="${informacao.lista.status}" placeholder="Status da Transação">
+                <select class="form-control"  id="status-${informacao.lista.id}" style="width: 140px;">
+            `
+        for (let i = 0; i < informacao.stt.length; i++) {
+            if (informacao.lista.status == informacao.stt[i].id) {
+                linha += `
+                    <option value = "${informacao.lista.status}" selected>${informacao.stt[i].nome}</option>
+                    <!--Renderizar os tipos de doação-->`
+            } else {
+                linha += `
+                    <option value = "${informacao.stt[i].id}" selected>${informacao.stt[i].nome}</option>
+                    <!--Renderizar os tipos de doação-->`
+            }
+        }
+        linha += `
             </td>
             <td>
                 <input type="text" class="form-control" value="${new Date(informacao.lista.data).toLocaleDateString()}" disabled>
@@ -178,6 +225,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
         </td>
         `;
+
+        html.innerHTML = linha
         // Carregar botão de salvar ou cancelar a operação
         carregarNovosBotao();
     }
@@ -262,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         CarregarPaginas(NovaPagina, Tabela_att.status);
-        AtualizaTd(Tabela_att.item, Tabela_att.status);
+        AtualizaTd(Tabela_att, Tabela_att.status);
         CarregarNovosConteudos()
 
     }
@@ -272,31 +321,42 @@ document.addEventListener("DOMContentLoaded", function () {
         if (disponibilidade != "erro tabela") {
             let Conteudo = document.querySelector("#conteudo");
             let TabelaNova = "";
-            for (let i = 0; i < item.length; i++) {
+            for (let l = 0; l < item.item.length; l++) {
                 TabelaNova += `
-                <tr id="${item[i].id}">
-                <td scope="row">
-                    ${item[i].tipo}
-                </td>
-                <td>
-                    ${item[i].nome}
-                </td>
-                <td>
-                    ${item[i].valor}
-                </td>
-                <td>
-                ${item[i].status}
+                <tr id="${item.item[l].id}">
+                <td scope="row">`
+                for (let i = 0; i < item.pgt.length; i++) {
+                    if (item.item[l].tipo == item.pgt[i].id) {
 
+                        TabelaNova += `${item.pgt[i].nome}`
+                    }
+                }
+                TabelaNova += `</td>
+                <td>
+                    ${item.item[l].nome}
                 </td>
                 <td>
-                    ${new Date(item[i].data).toLocaleString()}
+                    ${item.item[l].valor}
+                </td>
+                <td>`
+                for (let i = 0; i < item.situacao.length; i++) {
+                    if (item.item[l].status == item.situacao[i].id) {
+
+                        TabelaNova += `${item.situacao[i].nome}`
+                    }
+                }
+
+                TabelaNova +=
+                    `</td>
+                <td>
+                    ${new Date(item.item[l].data).toLocaleString()}
                 </td>
                 <td>
                 <div>
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
-                    <button data-codigoexclusao="${item[i].id}" class="btn btn-danger btnExcluir"
+                    <button data-codigoexclusao="${item.item[l].id}" class="btn btn-danger btnExcluir"
                     id=""><i class="fas fa-trash"></i>
                     </button>
                 </div>

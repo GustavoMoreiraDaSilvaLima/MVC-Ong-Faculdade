@@ -48,14 +48,26 @@ class doacaoController {
             ok = true
         }
 
-        res.send({ ok: ok, item: listaCompleta, status: status });
+        let Situacao = new StatusDoacaoModel();
+        let Formas = new FormasPagamentoModel();
+        Situacao = await Situacao.listar();    
+        Formas = await Formas.listar();
+
+        res.send({ ok: ok, item: listaCompleta, status: status, pgt: Formas, situacao: Situacao });
     }
 
     async obterDoacao(req, res) {
         let Doacao = new DoacaoModel();
+        let Usuario = new UsuarioModel();
+        let Status = new StatusDoacaoModel();
+        let Formas = new FormasPagamentoModel();
+
         let suaDoa = await Doacao.obter(req.params.id);
-        suaDoa = suaDoa.toJSON();
-        res.send({lista: suaDoa });
+        Usuario = await Usuario.listar() 
+        Status = await Status.listar();    
+        Formas = await Formas.listar();
+        
+        res.send({ lista: suaDoa, pgt: Formas, stt: Status, usu: Usuario });
 
 
     }
@@ -86,7 +98,9 @@ class doacaoController {
         let ok = false;
         let msg = "Dados faltando ou incorreto"
         if (id != null && nome != '' && tipo > 0 && status != '' && valor > 0) {
-            let doacao = new DoacaoModel(id, tipo, null, status,nome, valor);
+            let Usuario = new UsuarioModel();
+            Usuario = await Usuario.obter(nome);
+            let doacao = new DoacaoModel(id, tipo, nome, status, Usuario.usuario_nome, valor);
 
             let alter = await doacao.doacao_inserir_atualizar();
             if (alter == true) {
@@ -109,10 +123,27 @@ class doacaoController {
         let Status = new StatusDoacaoModel();
         Status = await Status.listar();
 
-        res.render('admin/adminDoacaoManual', { layout: "adminLayout", pagamento: pagamentoLista, lista_usu: UsuariosCadas, status: Status});
+        res.render('admin/adminDoacaoManual', { layout: "adminLayout", pagamento: pagamentoLista, lista_usu: UsuariosCadas, status: Status });
     }
-    DoacaoManual(req, res) {
+    async DoacaoManual(req, res) {
+        var ok = true;
+        let forma = req.body.forma;
+        let status = req.body.status;
+        let usuario = req.body.usuario;
+        let valor = req.body.valor;
 
+        if (forma != 0 && status != 0 && usuario != 0 && valor > 0) {
+            let data = new Date();
+            let Usuario = new UsuarioModel();
+            Usuario = await Usuario.obter(usuario);
+            let Doacao = new DoacaoModel(0, forma, usuario, status, Usuario.usuario_nome, valor, data);
+
+            ok = await Doacao.doacao_inserir_atualizar();
+        } else {
+            ok = false;
+        }
+
+        res.send({ ok: ok });
     }
     DoacaoProdutoView(req, res) {
         res.render('admin/adminDoacaoProduto', { layout: "adminLayout" })

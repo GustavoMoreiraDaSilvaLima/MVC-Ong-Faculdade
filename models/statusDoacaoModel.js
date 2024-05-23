@@ -29,6 +29,12 @@ class statusDoacaoModel {
         }
         return lista;
     }
+    toJSON(){
+        return{
+            "id": this.#status_doacao_id,
+            "nome": this.#status_doacao_nome
+        }
+    }
 }
 
 module.exports = statusDoacaoModel;

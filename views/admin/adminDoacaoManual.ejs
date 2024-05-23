@@ -7,7 +7,7 @@
         <div>
             <label for="DoaForma">Forma Doação</label>
             <select class="form-control" name="" id="DoaForma" style="width: 30%;">
-                <option selected value=""></option>
+                <option selected value="0"></option>
                 <% for(let i=0; i < pagamento.length; i++){ %>
                     <option value="<%= pagamento[i].pagamento_id %>">
                         <%=pagamento[i].pagamento_nome %>
@@ -20,7 +20,7 @@
         <div>
             <label>Status</label>
             <select class="form-control" name="" id="DoaStatus" style="width: 30%;">
-                <option selected value=""></option>
+                <option selected value="0"></option>
                 <% for(let i=0; i < status.length; i++){ %>
                     <option value="<%= status[i].status_doacao_id %>">
                         <%= status[i].status_doacao_nome %>
@@ -33,7 +33,7 @@
             <div>
                 <label>Usuário:</label>
                 <select class="form-control" id="DoaUsuario" style="width: 50%;">
-                    <option selected value=""></option>
+                    <option selected value="0"></option>
                     <% for(let i=0; i < lista_usu.length; i++){ %>
                         <% if( lista_usu[i].usuario_status==1 ){ %>
                             <option value="<%= lista_usu[i].usuario_id %>">
@@ -58,4 +58,4 @@
 
 </main>
 
-<script src="/js/admin/adminDoacaoManual.js"
+<script src="/js/admin/adminDoacaoManual.js"></script>

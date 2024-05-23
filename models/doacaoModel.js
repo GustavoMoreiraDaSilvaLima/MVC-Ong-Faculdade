@@ -17,8 +17,8 @@ class doacaocaoModel {
     get doacao_tipo() { return this.#doacao_tipo; }
     set doacao_tipo(tipo) { this.#doacao_tipo = tipo; }
 
-    set doacao_usuario(id) { this.#doacao_usuario = id }
-    get doacao_usuario() { this.#doacao_usuario }
+    set doacao_usuario(id) {  this.#doacao_usuario = id }
+    get doacao_usuario() { return this.#doacao_usuario }
 
     get doacao_data() { return this.#doacao_data; }
     set doacao_data(data) { this.#doacao_data = data; }
@@ -54,7 +54,7 @@ class doacaocaoModel {
             return result;
         }
         else {
-            let sql = "update tb_doacao set doacao_status = ?, doacao_nome = ?, doacao_tipo = ?,doacao_valor = ?, doacao_usuario where doacao_id = ?";
+            let sql = "update tb_doacao set doacao_status = ?, doacao_nome = ?, doacao_tipo = ?,doacao_valor = ?, doacao_usuario = ? where doacao_id = ?";
             let valores = [this.#doacao_status, this.#doacao_nome, this.#doacao_tipo, this.#doacao_valor, this.#doacao_usuario, this.#doacao_id];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
@@ -73,7 +73,7 @@ class doacaocaoModel {
 
         if (rows.length > 0) {
             let row = rows[0];
-            return new doacaocaoModel(row["doacao_id"], row["doacao_tipo"],row["doacao_usuario"], row["doacao_status"], row["doacao_nome"], row["doacao_valor"], row["doacao_data"]);
+            return new doacaocaoModel(row["doacao_id"], row["doacao_tipo"], row["doacao_usuario"], row["doacao_status"], row["doacao_nome"], row["doacao_valor"], row["doacao_data"]);
         }
 
         return null;
@@ -99,7 +99,7 @@ LIMIT 10 OFFSET 10;*/
 
         for (let i = 0; i < rows.length; i++) {
             let row = rows[i]
-            lista.push(new doacaocaoModel(row["doacao_id"], row["doacao_tipo"],row["doacao_usuario"], row["doacao_status"], row["doacao_nome"], row["doacao_valor"], row["doacao_data"]));
+            lista.push(new doacaocaoModel(row["doacao_id"], row["doacao_tipo"], row["doacao_usuario"], row["doacao_status"], row["doacao_nome"], row["doacao_valor"], row["doacao_data"]));
         }
         return lista;
     }
@@ -117,7 +117,7 @@ LIMIT 10 OFFSET 10;*/
         return {
             "id": this.#doacao_id,
             "tipo": this.#doacao_tipo,
-            "usuario":this.#doacao_usuario,
+            "usuario": this.#doacao_usuario,
             "status": this.#doacao_status,
             "nome": this.#doacao_nome,
             "valor": this.#doacao_valor,

@@ -38,7 +38,12 @@ class formasPagamentoModel {
 
 
     }
-
+    toJSON(){
+        return{
+            "id": this.#pagamento_id,
+            "nome": this.#pagamento_nome
+        }
+    }
 
 }
 
