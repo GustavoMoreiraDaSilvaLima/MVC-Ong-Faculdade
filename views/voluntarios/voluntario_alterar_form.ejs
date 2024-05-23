@@ -61,7 +61,7 @@
     </style>
 </head>
 
-<script src="../js/cadastrar.js"></script>
+<script src="/js/cadastrar.js"></script>
 <div id="j" class="p-3">
     <br><br>    
 
@@ -70,39 +70,37 @@
         <div class="row justify-content-center opacity-100" >
             <div>
                 <div class="custom-form-box">
-                    <h1 class="text-center">Formulário de Alteracao CPF: <%= cj %></h1>
-                    <div class="form-group hide">
-                        <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="cpf" name="cpf" value="<%= cj %>" hidden>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="esc" name="esc" value="true" hidden>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="email">Email:</label>
-                      <input type="email" class="form-control" id="email" name="email"  placeholder="Digite seu e-mail">
-                  </div>
-                  
-
-                    <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00)00000-0000" onkeypress="mascara(' +## (##) #####-####',this,event)" >
-                        
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sobre_voce">Conte mais sobre você:</label>
-                        <textarea class="form-control" id="sobre_voce" name="sobre_voce" rows="4"></textarea>
-                    </div>
-                    <br><br>
-
-                    <button class="btn btn-success" type="button" id="butao_pedido">Enviar</button>
+                        <h1 class="text-center">Formulário de Alteracao CPF: <%= cpf %></h1>
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" value="<%= voluntario.nome %>">
+                        </div>
+            
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cpf" name="cpf" value="<%= voluntario.cpf %>" hidden>
+                        </div>
+            
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="esc" name="esc" value="true" hidden>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= voluntario.email %>">
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" class="form-control" id="telefone" name="telefone" value="<%= voluntario.telefone %>">
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="sobre_voce">Conte mais sobre você:</label>
+                            <textarea class="form-control" id="sobre_voce" name="sobre_voce" rows="4"><%= voluntario.desc %></textarea>
+                        </div>
+                        <br><br>
+            
+                        <button class="btn btn-success" type="button" id="butao_pedido">Enviar</button>
                 </div>
             </div>
         </div>

@@ -79,7 +79,7 @@
                 <td><%= listaVoluntarios[i].email %></td>
                 <td><%= listaVoluntarios[i].telefone %></td>
                 <td>
-                    <a href="/voluntarios/<%= listaVoluntarios[i].CPF %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                    <a href="voluntario/<%= listaVoluntarios[i].CPF %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                     <button data-codigo="<%= listaVoluntarios[i].CPF %>" id="btnExclusao" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>

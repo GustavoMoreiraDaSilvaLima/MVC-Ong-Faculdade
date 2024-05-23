@@ -35,12 +35,14 @@ class voluntarioController {
 
         res.render('voluntarios/voluntarios', { layout : "adminLayout" });
 
-    }
+    } 
+
+
     async voluntariosAlterarView(req, res) {
-        let voluntario = new Voluntario();
-        let lista_Vol = await voluntario.listar();
-        let cj = req.params.cpf;
-        res.render('voluntarios/voluntario_alterar_form', { cj: cj, lista_Vol: lista_Vol, layout : "adminLayout" });
+        let volun = new Voluntario();
+        let cpf = req.params.cpf;
+        let voluntario  = await volun.voluntario_exibir_epsc(cpf); 
+        res.render('voluntarios/voluntario_alterar_form', { cpf: cpf, voluntario : voluntario , layout : "adminLayout" });
     }
 
     //Seja um Voluntario View/ Cadastrar Voluntário

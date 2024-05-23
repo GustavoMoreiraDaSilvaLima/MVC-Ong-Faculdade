@@ -59,8 +59,21 @@ class Voluntario {
         this.desc = desc;
     }
 
+    async voluntario_exibir_epsc(cpf){
+        let sql = "select * from ONG_VOLUNTARIO where ONG_VOLUNTARIO_CPF = ?";
 
-    //implementar as funções para manipulação das informações no banco
+        let value = [cpf]
+
+        let rows = await banco.ExecutaComando(sql, value);
+
+        if(rows.length > 0){
+            let row = rows[0];
+            return new Voluntario(row["ONG_VOLUNTARIO_CPF"], row["ONG_VOLUNTARIO_NOME"], row["ONG_VOLUNTARIO_EMAIL"], row["ONG_VOLUNTARIO_TELEFONE"], row["ONG_VOLUNTARIO_DESC"]);
+        }
+
+        return null;
+    }
+
     async listar() {
 
         let sql = "select * from ONG_VOLUNTARIO ORDER BY ONG_VOLUNTARIO_NOME asc";

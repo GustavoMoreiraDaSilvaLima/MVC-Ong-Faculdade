@@ -1,4 +1,4 @@
-const Voluntario = require(`../models/voluntarioModel`)
+const VoluntarioModel = require(`../models/voluntarioModel`)
 const EventosModel = require("../models/eventosModel");
 const noticiaModel = require(`../models/noticiaModel`)
 
@@ -14,7 +14,6 @@ class HomeController {
         res.render('QuemSomos');
     }
 
-
     sejaView(req, res) {
         res.render('form');
     }
@@ -29,6 +28,24 @@ class HomeController {
 
     async projetosView(req,res){    //Se for voluntario dar opção de participar se não tiver acontecido
 
+    }
+
+    async cadastrarVoluntarios(req,res){
+        var ok = true;
+        if(req.body.email != "" && req.body.nome != "" && 
+        req.body.telefone != "" && req.body.desc  != '' && 
+        req.body.cpf != '0') {
+            let voluntario = new VoluntarioModel(0, req.body.email, 
+                req.body.nome, req.body.telefone, 
+                req.body.desc, req.body.cpf);
+
+            ok = await voluntario.cadastrar_no_model();
+        }
+        else{
+            ok = false;
+        }
+
+        res.send({ ok: ok })
     }
 
 

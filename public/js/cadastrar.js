@@ -1,3 +1,4 @@
+console.log(123)
 document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("butao_pedido").addEventListener("click", cadastrar);
