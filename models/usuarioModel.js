@@ -80,6 +80,41 @@ class UsuarioModel {
         return null;
     }
 
+
+    async listar() {
+        let sql = "select * from tb_usuario"
+
+        let valores = [];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        let lista = []
+
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[i];
+            lista.push(new UsuarioModel(row["usuario_id"], row["usuario_perfil"], row["usuario_status"], row["usuario_nome"], row["usuario_documento"], row["usuario_dataNasc"], row["usuario_email"], row["usuario_senha"]));
+        }
+        return lista;
+
+    }
+    UsuarioPrivate() {
+        return {
+            "id": this.#usuario_id,
+            "perfil": this.#usuario_perfil,
+            "status":this.#usuario_status,
+            "nome": this.#usuario_nome,
+            "documento": this.#usuario_documento,
+            "dataNasc": this.#usuario_dataNasc,
+            "email": this.#usuario_email,
+            "senha": this.#usuario_senha
+        }
+    }
+    toJSON(){
+        return {
+            "id": this.#usuario_id,
+            "usuario":this.#usuario_nome,
+        }
+    }
 }
 
 module.exports = UsuarioModel;

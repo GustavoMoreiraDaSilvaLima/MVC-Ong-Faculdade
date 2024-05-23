@@ -10,7 +10,7 @@ let ctrl = new CaixaController();
 
 
 
-caixaRouter.get("/", autent.NivelPermissaoAdm,ctrl.CaixaView);
+caixaRouter.get("/", autent.NivelPermissaoAdm, ctrl.CaixaView);
 
 
 

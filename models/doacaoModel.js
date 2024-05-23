@@ -2,56 +2,70 @@ const Database = require("../db/database");
 
 const banco = new Database();
 
-class doacaoModel {
-    #doa_id
-    #doa_tipo
-    #doa_data
-    #doa_nome
-    #doa_valor
-    #doa_status
-    get doa_id() { return this.#doa_id; }
-    set doa_id(id) { this.#doa_id = id; }
-    get doa_tipo() { return this.#doa_tipo; }
-    set doa_tipo(tipo) { this.#doa_tipo = tipo; }
-    get doa_data() { return this.#doa_data; }
-    set doa_data(data) { this.#doa_data = data; }
-    get doa_nome() { return this.#doa_nome; }
-    set doa_nome(nome) { this.#doa_nome = nome; }
-    get doa_valor() { return this.#doa_valor; }
-    set doa_valor(valor) { this.#doa_valor = valor; }
-    get doa_status() { return this.#doa_status; }
-    set doa_status(status) { this.#doa_status = status; }
+class doacaocaoModel {
+    #doacao_id
+    #doacao_tipo
+    #doacao_usuario
+    #doacao_status
+    #doacao_nome
+    #doacao_valor
+    #doacao_data
+
+    get doacao_id() { return this.#doacao_id; }
+    set doacao_id(id) { this.#doacao_id = id; }
+
+    get doacao_tipo() { return this.#doacao_tipo; }
+    set doacao_tipo(tipo) { this.#doacao_tipo = tipo; }
+
+    set doacao_usuario(id) {  this.#doacao_usuario = id }
+    get doacao_usuario() { return this.#doacao_usuario }
+
+    get doacao_data() { return this.#doacao_data; }
+    set doacao_data(data) { this.#doacao_data = data; }
+
+    get doacao_nome() { return this.#doacao_nome; }
+    set doacao_nome(nome) { this.#doacao_nome = nome; }
+
+    get doacao_valor() { return this.#doacao_valor; }
+    set doacao_valor(valor) { this.#doacao_valor = valor; }
+
+    get doacao_status() { return this.#doacao_status; }
+    set doacao_status(status) { this.#doacao_status = status; }
 
 
-    constructor(id, tipo, data, nome, valor, status) {
-        this.#doa_id = id;
-        this.#doa_tipo = tipo;
-        this.#doa_data = data;
-        this.#doa_nome = nome;
-        this.#doa_valor = valor;
-        this.#doa_status = status;
+    constructor(id, tipo, usuario, status, nome, valor, data) {
+        this.#doacao_id = id;
+        this.#doacao_tipo = tipo;
+        this.#doacao_usuario = usuario;
+        this.#doacao_status = status;
+        this.#doacao_nome = nome;
+        this.#doacao_valor = valor;
+        this.#doacao_data = data;
+
     }
     async doacao_inserir_atualizar() {
-        if (this.#doa_id == 0) {
-            let sql = "insert into tb_doacao (doa_id,doa_tipo,doa_data,doa_nome,doa_valor,doa_status) values (?,?,?,?,?,?)";
+        if (this.#doacao_id == 0) {
+            let sql = "insert into tb_doacao (doacao_id,doacao_tipo,doacao_usuario,doacao_status,doacao_nome,doacao_valor,doacao_data) values (?,?,?,?,?,?,?)";
 
-            let valores = [this.#doa_id, this.#doa_tipo, this.#doa_data, this.#doa_nome, this.#doa_valor, this.#doa_status];
+            let valores = [this.#doacao_id, this.#doacao_tipo, this.#doacao_usuario, this.#doacao_status, this.#doacao_nome, this.#doacao_valor, this.#doacao_data];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
             return result;
         }
         else {
-            let sql = "update tb_doacao set doa_status = ?, doa_nome = ?, doa_tipo = ?,doa_valor = ? where doa_id = ?";
-            let valores = [this.#doa_status, this.#doa_nome, this.#doa_tipo, this.#doa_valor, this.#doa_id];
+            let sql = "update tb_doacao set doacao_status = ?, doacao_nome = ?, doacao_tipo = ?,doacao_valor = ?, doacao_usuario = ? where doacao_id = ?";
+            let valores = [this.#doacao_status, this.#doacao_nome, this.#doacao_tipo, this.#doacao_valor, this.#doacao_usuario, this.#doacao_id];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
             return result;
         }
     }
+
+
     async obter(id) {
-        let sql = "select * from tb_doacao where doa_id = ?";
+        let sql = "select * from tb_doacao where doacao_id = ?";
 
         let valores = [id];
 
@@ -59,7 +73,7 @@ class doacaoModel {
 
         if (rows.length > 0) {
             let row = rows[0];
-            return new doacaoModel(row["doa_id"], row["doa_tipo"], row["doa_data"], row["doa_nome"], row["doa_valor"], row["doa_status"]);
+            return new doacaocaoModel(row["doacao_id"], row["doacao_tipo"], row["doacao_usuario"], row["doacao_status"], row["doacao_nome"], row["doacao_valor"], row["doacao_data"]);
         }
 
         return null;
@@ -72,10 +86,10 @@ LIMIT 10 OFFSET 10;*/
         let sql = '';
         let valores = [];
         if (intervalo == 0) {
-            sql = "select * from tb_doacao order by doa_id DESC limit 10";
+            sql = "select * from tb_doacao order by doacao_id DESC limit 10";
 
         } else {
-            sql = "select * from tb_doacao order by doa_id DESC limit 10 OFFSET ?";
+            sql = "select * from tb_doacao order by doacao_id DESC limit 10 OFFSET ?";
             valores = [intervalo];
         }
 
@@ -84,13 +98,14 @@ LIMIT 10 OFFSET 10;*/
         let lista = [];
 
         for (let i = 0; i < rows.length; i++) {
-            lista.push(new doacaoModel(rows[i]["doa_id"], rows[i]["doa_tipo"], rows[i]["doa_data"], rows[i]["doa_nome"], rows[i]["doa_valor"], rows[i]["doa_status"]));
+            let row = rows[i]
+            lista.push(new doacaocaoModel(row["doacao_id"], row["doacao_tipo"], row["doacao_usuario"], row["doacao_status"], row["doacao_nome"], row["doacao_valor"], row["doacao_data"]));
         }
         return lista;
     }
 
     async excluir(id) {
-        let sql = "delete from tb_doacao where doa_id = ?";
+        let sql = "delete from tb_doacao where doacao_id = ?";
 
         let valores = [id];
 
@@ -100,13 +115,14 @@ LIMIT 10 OFFSET 10;*/
     }
     toJSON() {
         return {
-            "id": this.#doa_id,
-            "nome": this.#doa_nome,
-            "tipo": this.#doa_tipo,
-            "status": this.doa_status,
-            "data": this.#doa_data,
-            "valor": this.#doa_valor
+            "id": this.#doacao_id,
+            "tipo": this.#doacao_tipo,
+            "usuario": this.#doacao_usuario,
+            "status": this.#doacao_status,
+            "nome": this.#doacao_nome,
+            "valor": this.#doacao_valor,
+            "data": this.#doacao_data
         }
     }
 }
-module.exports = doacaoModel;
+module.exports = doacaocaoModel;
