@@ -1,3 +1,36 @@
-<h1>
-    Ola
-</h1>
+<main class="container mt-5">
+    <div style="display: flex; justify-content: space-around; align-items: flex-start;">
+        <div class="mb-4">
+            <h1 class="mb-4">Doações</h1>
+            <a class="btn btn-primary" id="btnDoar" href="/admin/doacao">Doação</a>
+            <button class="btn btn-primary" id="btnMetodopagamento">Método de Pagamento</button>
+        </div>
+        
+        <div class="table-responsive">
+            <h1>Fechamento de Caixa</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data e Hora</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Forma de Pag.</th>
+                        <th>Comprovante</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01/01/2024 12:00</td>
+                        <td>Doação Exemplo</td>
+                        <td>R$ 100,00</td>
+                        <td>Cartão</td>
+                        <td><a href="#">Comprovante</a></td>
+                        <td>Aprovado</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main> 

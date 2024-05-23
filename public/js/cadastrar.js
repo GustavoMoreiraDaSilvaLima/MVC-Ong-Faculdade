@@ -1,4 +1,4 @@
-console.log(123)
+
 document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("butao_pedido").addEventListener("click", cadastrar);
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function cadastrar() {
         limparValidacao();
         let nome = document.querySelector("#nome").value;
-        let cpf = document.querySelector("#cpf").value;
+        let cpf = document.getElementById("cpf").value;
         let esc = document.querySelector("#esc").value;
         let email = document.querySelector("#email").value;
         let telefone = document.querySelector("#telefone").value;
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 sobre_voce: sobre_voce
             }
 
-            fetch("/seja_um_voluntario", {
+            fetch("/send/seja_um_voluntario", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {

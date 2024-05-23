@@ -117,10 +117,10 @@ class Voluntario {
         return result;
     }
 
-    async deletar_no_model(){
+    async deletar_no_model(cpf){
         const sql = `DELETE FROM ONG_VOLUNTARIO WHERE ONG_VOLUNTARIO_CPF = ?;`
 
-        let valores = [this.CPF];
+        let valores = [cpf];
 
         let result = await banco.ExecutaComandoNonQuery(sql, valores);
 

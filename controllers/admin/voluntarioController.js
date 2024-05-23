@@ -12,6 +12,24 @@ class voluntarioController {
         
     }
 
+    async atualizarVoluntario(req,res){
+        var ok = true;
+        if(req.body.email != "" && req.body.nome != "" && 
+        req.body.telefone != "" && req.body.desc  != '' && 
+        req.body.cpf != '0') {
+            let voluntario = new VoluntarioModel(0, req.body.email, 
+                req.body.nome, req.body.telefone, 
+                req.body.desc, req.body.cpf);
+
+            ok = await voluntario.cadastrar_no_model();
+        }
+        else{       
+            ok = false;
+        }
+
+        res.send({ ok: ok })
+    }
+
     //Voluntario
     async voluntariosView(req, res) {
 
@@ -24,16 +42,16 @@ class voluntarioController {
         res.render('voluntarios/voluntarios', { layout : "adminLayout" ,listaVoluntarios : listaVoluntarios });
 
     }
-
+ 
     async voluntariosDel(req, res) {
         let cj = req.body.cpf
         console.log(cj)
         const voluntario = new Voluntario();
+        
+        let result = await voluntario.deletar_no_model(cj)
 
-        const listaVoluntarios = await voluntario.deletar_no_model(cj);
 
-
-        res.render('voluntarios/voluntarios', { layout : "adminLayout" });
+        res.send({ok: result});
 
     } 
 
