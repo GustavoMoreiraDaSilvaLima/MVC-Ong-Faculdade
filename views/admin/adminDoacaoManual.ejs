@@ -1,6 +1,7 @@
 <main class="bg-light">
     <div>
-        <a class="btn btn-success" href="/admin/doacao">Voltar</a>
+        <br>
+        <a class="btn btn-success" style="margin-left: 35px;" href="/admin/doacao">Voltar</a>
     </div>
     <div class="container">
         <h1>Inserir Doação</h1>
@@ -28,33 +29,34 @@
                     <% } %>
 
             </select>
-        </div>
-        <div>
-            <div>
-                <label>Usuário:</label>
-                <select class="form-control" id="DoaUsuario" style="width: 50%;">
-                    <option selected value="0"></option>
-                    <% for(let i=0; i < lista_usu.length; i++){ %>
-                        <% if( lista_usu[i].usuario_status==1 ){ %>
-                            <option value="<%= lista_usu[i].usuario_id %>">
-                                <%= lista_usu[i].usuario_nome %>
-                            </option>
-                            <% } %>
+            <div style="display: flex; align-items: center;">
+                <div>
+                    <label>Usuário:</label>
+                    <select class="form-control" id="DoaUsuario" style="width: 532%;">
+                        <option selected value=""></option>
+                        <% for(let i=0; i < lista_usu.length; i++){ %>
+                            <% if( lista_usu[i].usuario_status==1 ){ %>
+                                <option value="<%= lista_usu[i].usuario_id %>">
+                                    <%= lista_usu[i].usuario_nome %>
+                                </option>
                                 <% } %>
-                </select>
+                                    <% } %>
+                    </select>
+                </div>
+                <div style="margin-left: 325px; margin-top: 25px">
+                    <a href="#" class="btn btn-info">Cadastrar novo usuário</a>
+                </div>
             </div>
-            <div>
-                <a href="#" class="btn btn-info">Cadastrar novo usuário</a>
-            </div>
-        </div>
-        <div>
-            <label for="DoaValor">Valor</label>
-            <input class="form-control" type="number" id="DoaValor">
-        </div>
-        <button class="btn btn-success" id="btnCadastrar">Cadastrar informações sobre a doação</button>
 
+            <div>
+                <label for="DoaValor">Valor</label>
+                <input class="form-control" type="number" style="width: 30%;" id="DoaValor">
+            </div>
+            <br>
+            <button class="btn btn-success" id="btnCadastrar">Cadastrar informações sobre a doação</button>
+        </div>
     </div>
-    </div>
+    <br>
 
 </main>
 
