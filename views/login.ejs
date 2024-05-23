@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" href="/img/home/logo_ong.png" type="icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgb(0, 0, 0), rgb(253, 253, 253));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(18, 15, 51, 0.970), rgba(1, 34, 7, 0.971))
+        }
+
+        .logar {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body class="gradient-custom">
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <form class="logar " action="/login/validar" method="POST">
+                                <div class="form-outline form-white mb-4">
+                                    <img class="mb-4" src="/img/home/logo_ong.png" alt="" width="120px"
+                                        style="margin-right: 20px;"><br>
+                                    <a href="/ ">Entrar como Visitante</a><br>
+                                </div>
+                                <hr>
+                                <p class="text-white-50 mb-5">Por favor entre com seu email e senha!</p>
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="typeEmailX">Email</label>
+                                    <input type="email" name="email" id="typeEmailX"
+                                        class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="typePasswordX">Senha</label>
+                                    <input type="password" name="password" id="typePasswordX"
+                                        class="form-control form-control-lg" />
+                                </div>
+
+                                <br>
+
+                                <button class="btn btn-outline-light btn-lg px-5">Login</button>
+
+                                <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                    <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                    <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                    <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

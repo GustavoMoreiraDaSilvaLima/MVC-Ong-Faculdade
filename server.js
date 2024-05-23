@@ -1,5 +1,6 @@
 const express = require('express')
 const expressEjsLayout = require('express-ejs-layouts');
+const cookieParser = require("cookie-parser");
 let homeRoute = require("./routes/homeRoute");
 let enviosRoute = require("./routes/enviosRoute");
 let voluntarioRoute = require("./routes/voluntario/voluntarioRoute");
@@ -21,6 +22,8 @@ let AdminRoute = require("./routes/admin/adminRoute");
 let ProjetoRoute = require("./routes/admin/ProjetoRoute");
 let CaixaRoute = require("./routes/admin/CaixaRoute");
 const marcaRouter = require('./routes/admin/MarcaRoute');
+let LoginRouter = require('./routes/loginRoute');
+
 const app = express();
 
 //configura o ejs como view engine da nossa aplicação
@@ -29,6 +32,7 @@ const app = express();
 app.set("views", "./views");
 app.set("view engine", "ejs");
 app.set("layout", "./layout");
+app.use(cookieParser());
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +43,7 @@ app.use(expressEjsLayout);
 //configura as rotas existentes no nosso sistema
 app.use("/", homeRoute);
 app.use("/send", enviosRoute);//Envio dos forms publicos
+app.use("/login", LoginRouter);
 app.use("/voluntario", voluntarioRoute);
 app.use("/produtos", vitrineRoute);
 app.use("/produto", produtoRoute);

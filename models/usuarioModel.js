@@ -2,73 +2,119 @@ const Database = require("../db/database");
 
 const banco = new Database();
 
-class usuarioModel{
-    
-    #id_usu
-    #nome_usu
-    #tipo_usu
-    #email_usu
-    #senha_usu
-    #CPF
+class UsuarioModel {
 
-    constructor(id_usu, nome_usu, tipo_usu, email_usu, senha_usu, CPF) {
-        this.#id_usu = id_usu;
-        this.#nome_usu = nome_usu;
-        this.#tipo_usu = tipo_usu;
-        this.#email_usu = email_usu;
-        this.#senha_usu = senha_usu;
-        this.#CPF = CPF;
-    }
+    #usuario_id // Int
+    #usuario_perfil // Int
+    #usuario_status // Int
+    #usuario_nome // VARCHAR
+    #usuario_documento // VARCHAR
+    #usuario_dataNasc // DATE
+    #usuario_email
+    #usuario_senha
 
-    // Getters
-    get IdUsu() {
-        return this.#id_usu;
-    }
+    constructor(id = null, perfil, status, nome, documento, data, email, senha) {
 
-    get NomeUsu() {
-        return this.#nome_usu;
-    }
-
-    get TipoUsu() {
-        return this.#tipo_usu;
-    }
-
-    get EmailUsu() {
-        return this.#email_usu;
-    }
-
-    get SenhaUsu() {
-        return this.#senha_usu;
-    }
-
-    // Setters
-    set IdUsu(id_usu) {
-        this.#id_usu = id_usu;
-    }
-
-    set NomeUsu(nome_usu) {
-        this.#nome_usu = nome_usu;
-    }
-
-    set TipoUsu(tipo_usu) {
-        this.#tipo_usu = tipo_usu;
-    }
-
-    set EmailUsu(email_usu) {
-        this.#email_usu = email_usu;
-    }
-
-    set SenhaUsu(senha_usu) {
-        this.#senha_usu = senha_usu;
-    }
-
-    async obter(id){
+        this.#usuario_id = id;
+        this.#usuario_perfil = perfil;
+        this.#usuario_status = status;
+        this.#usuario_nome = nome;
+        this.#usuario_documento = documento;
+        this.#usuario_dataNasc = data;
+        this.#usuario_email = email
+        this.#usuario_senha = senha
 
     }
 
-    async obterPorEmailSenha(email, senha){
+    get usuario_id() { return this.#usuario_id; }
+    set usuario_id(id) { this.#usuario_id = id; }
 
+    get usuario_perfil() { return this.#usuario_perfil; }
+    set usuario_perfil(perfil) { this.#usuario_perfil = perfil; }
+
+    get usuario_status() { return this.#usuario_status; }
+    set usuario_status(status) { this.#usuario_status = status; }
+
+    get usuario_nome() { return this.#usuario_nome; }
+    set usuario_nome(nome) { this.#usuario_nome = nome; }
+
+    get usuario_documento() { return this.#usuario_documento; }
+    set usuario_documento(documento) { this.#usuario_documento = documento; }
+
+    get usuario_dataNasc() { return this.#usuario_dataNasc; }
+    set usuario_dataNasc(data) { this.#usuario_dataNasc = data; }
+
+    get usuario_email() { return this.#usuario_email; }
+    set usuario_email(email) { this.#usuario_email = email; }
+
+    get usuario_senha() { return this.#usuario_senha; }
+    set usuario_senha(senha) { this.#usuario_senha = senha; }
+
+    async obterPorEmailSenha(email, senha) {
+        let sql = "select * from tb_usuario where usuario_email = ? and usuario_senha = ?";
+
+        let valores = [email, senha];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        if (rows.length > 0) {
+            let row = rows[0];
+            return new UsuarioModel(row["usuario_id"], row["usuario_perfil"], row["usuario_status"], row["usuario_nome"], row["usuario_documento"], row["usuario_dataNasc"], row["usuario_email"], row["usuario_senha"]);
+        }
+
+        return null;
+    }
+
+    async obter(id) {
+        let sql = "select * from tb_usuario where usuario_id = ?";
+
+        let valores = [id];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        if (rows.length > 0) {
+            let row = rows[0];
+            return new UsuarioModel(row["usuario_id"], row["usuario_perfil"], row["usuario_status"], row["usuario_nome"], row["usuario_documento"], row["usuario_dataNasc"], row["usuario_email"], row["usuario_senha"]);
+        }
+
+        return null;
+    }
+
+
+    async listar() {
+        let sql = "select * from tb_usuario"
+
+        let valores = [];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        let lista = []
+
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[i];
+            lista.push(new UsuarioModel(row["usuario_id"], row["usuario_perfil"], row["usuario_status"], row["usuario_nome"], row["usuario_documento"], row["usuario_dataNasc"], row["usuario_email"], row["usuario_senha"]));
+        }
+        return lista;
+
+    }
+    UsuarioPrivate() {
+        return {
+            "id": this.#usuario_id,
+            "perfil": this.#usuario_perfil,
+            "status":this.#usuario_status,
+            "nome": this.#usuario_nome,
+            "documento": this.#usuario_documento,
+            "dataNasc": this.#usuario_dataNasc,
+            "email": this.#usuario_email,
+            "senha": this.#usuario_senha
+        }
+    }
+    toJSON(){
+        return {
+            "id": this.#usuario_id,
+            "usuario":this.#usuario_nome,
+        }
     }
 }
 
-module.exports = usuarioModel;
+module.exports = UsuarioModel;

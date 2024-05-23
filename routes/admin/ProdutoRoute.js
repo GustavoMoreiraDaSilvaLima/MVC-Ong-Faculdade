@@ -27,6 +27,7 @@ let upload = multer({storage});
 
 let ctrl = new ProdutoController() 
 
+
 ProdutoRouterAdmin.get('/'/*,autent.NivelPermissaoAdm*/,ctrl.listarView);
 ProdutoRouterAdmin.get('/cadastro'/*,autent.NivelPermissaoAdm*/,ctrl.cadastroView);
 ProdutoRouterAdmin.post('/cadastro'/*,autent.NivelPermissaoAdm*/,upload.single("imagem"), ctrl.cadastrarProduto);

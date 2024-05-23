@@ -1,11 +1,63 @@
-<main>
+<main class="bg-light">
     <div>
-        <h1>Nova Doação</h1>
+        <br>
+        <a class="btn btn-success" style="margin-left: 35px;" href="/admin/doacao">Voltar</a>
     </div>
-    <div>
-        <h1>=================================</h1>
-        <h1>Em Desenvolvimento</h1>
-        <h1>=================================</h1>
-        
+    <div class="container">
+        <h1>Inserir Doação</h1>
+        <div>
+            <label for="DoaForma">Forma Doação</label>
+            <select class="form-control" name="" id="DoaForma" style="width: 30%;">
+                <option selected value="0"></option>
+                <% for(let i=0; i < pagamento.length; i++){ %>
+                    <option value="<%= pagamento[i].pagamento_id %>">
+                        <%=pagamento[i].pagamento_nome %>
+                    </option>
+                    <% } %>
+
+            </select>
+        </div>
+
+        <div>
+            <label>Status</label>
+            <select class="form-control" name="" id="DoaStatus" style="width: 30%;">
+                <option selected value="0"></option>
+                <% for(let i=0; i < status.length; i++){ %>
+                    <option value="<%= status[i].status_doacao_id %>">
+                        <%= status[i].status_doacao_nome %>
+                    </option>
+                    <% } %>
+
+            </select>
+            <div style="display: flex; align-items: center;">
+                <div>
+                    <label>Usuário:</label>
+                    <select class="form-control" id="DoaUsuario" style="width: 532%;">
+                        <option selected value=""></option>
+                        <% for(let i=0; i < lista_usu.length; i++){ %>
+                            <% if( lista_usu[i].usuario_status==1 ){ %>
+                                <option value="<%= lista_usu[i].usuario_id %>">
+                                    <%= lista_usu[i].usuario_nome %>
+                                </option>
+                                <% } %>
+                                    <% } %>
+                    </select>
+                </div>
+                <div style="margin-left: 325px; margin-top: 25px">
+                    <a href="#" class="btn btn-info">Cadastrar novo usuário</a>
+                </div>
+            </div>
+
+            <div>
+                <label for="DoaValor">Valor</label>
+                <input class="form-control" type="number" style="width: 30%;" id="DoaValor">
+            </div>
+            <br>
+            <button class="btn btn-success" id="btnCadastrar">Cadastrar informações sobre a doação</button>
+        </div>
     </div>
+    <br>
+
 </main>
+
+<script src="/js/admin/adminDoacaoManual.js"></script>
