@@ -4,6 +4,57 @@ document.addEventListener("DOMContentLoaded", function () {
     var Tabela = document.querySelector("#Tabela");
     var Paginas = document.querySelector("#paginas");
 
+    // Elementos para exportar tabela
+    var ExportExcel = document.getElementById('ExportExcel');
+    var ExportPdf = document.getElementById('ExportPdf');
+    var exportarTabela = document.getElementById("ExportarTabela");
+
+
+    ExportExcel.addEventListener("input",LiberarBotao);
+    ExportPdf.addEventListener("input",LiberarBotao);
+    exportarTabela.addEventListener("click",ExporTabela)
+
+    function LiberarBotao(){
+        if(ExportPdf.checked || ExportExcel.checked ){
+            //Alguma habilitada
+            exportarTabela.disabled = false; 
+            
+
+        }
+        else if(!ExportPdf.checked && !ExportExcel.checked){
+            //As duas desabilitadas
+            exportarTabela.disabled = true; 
+        }
+    }  
+    async function ExporTabela(){
+        let Dados = await BuscarTabela(-99);
+        let paginaAtual = document.getElementById('btn_atual').dataset.pagina;
+        paginaAtual = parseInt(paginaAtual);
+
+        AtualizaTd(Dados,Dados.status);
+        if(ExportExcel.checked){
+            exportarExcel();
+        }
+        if(ExportPdf.checked){
+            window.print();
+        }
+
+        Dados = await BuscarTabela(paginaAtual);
+        AtualizaTd(Dados,Dados.status);
+
+        
+
+    }
+
+    function exportarExcel() {
+        //chama a biblioteca para gerar o excel
+        var wb = XLSX.utils.table_to_book(document.getElementById("Tabela"));
+        /* Export to file (start a download) */
+        XLSX.writeFile(wb, "relatorio-doacao.xlsx");
+    }
+
+
+
     async function CarregarTabela() {
         let dadosTabela = await BuscarTabela();
 
@@ -17,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <th scope="col">Valor</th>
                 <th scope="col">Status</th>
                 <th scope="col">Data</th>
-                <th scope="col">Ações</th>
+                <th class="retirar" scope="col">Ações</th>
             </tr>
         </thead>
         <tbody id="conteudo">`;
@@ -52,8 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>
                     ${new Date(dadosTabela.item[l].data).toLocaleString()}
                 </td>
-                <td>
-                <div>
+                <td class="retirar">
+                <div class="retirar">
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
@@ -214,8 +265,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="text" class="form-control" value="${new Date(informacao.lista.data).toLocaleDateString()}" disabled>
             </td>
 
-            <td>
-                <div>
+            <td class="retirar">
+                <div class="retirar">
                 <button data-id="${informacao.lista.id}" class="btn btn-success btnSalvar">
                     <i id="1" class="fa fa-check"></i>
                 </button>
@@ -351,8 +402,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>
                     ${new Date(item.item[l].data).toLocaleString()}
                 </td>
-                <td>
-                <div>
+                <td class="retirar">
+                <div class="retirar">
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
