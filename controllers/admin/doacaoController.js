@@ -19,14 +19,18 @@ class doacaoController {
         let Doacao = new DoacaoModel();
         let status = "disponivel";
         let intervalo = req.params.intervalo;
-        if (intervalo < 1) {
-            intervalo = 1;
+        let lista = ''
+        if (intervalo == -99) {
+            lista = await Doacao.doacao_listar(intervalo);
+        } else {
+            if (intervalo < 1) {
+                intervalo = 1;
+            }
+            if (intervalo == 1) {
+                status = "comeco";
+            }
+            lista = await Doacao.doacao_listar((intervalo - 1) * 10);
         }
-        if (intervalo == 1) {
-            status = "comeco";
-        }
-
-        let lista = await Doacao.doacao_listar((intervalo - 1) * 10);
 
         let listaCompleta = [];
 
@@ -50,7 +54,7 @@ class doacaoController {
 
         let Situacao = new StatusDoacaoModel();
         let Formas = new FormasPagamentoModel();
-        Situacao = await Situacao.listar();    
+        Situacao = await Situacao.listar();
         Formas = await Formas.listar();
 
         res.send({ ok: ok, item: listaCompleta, status: status, pgt: Formas, situacao: Situacao });
@@ -63,10 +67,10 @@ class doacaoController {
         let Formas = new FormasPagamentoModel();
 
         let suaDoa = await Doacao.obter(req.params.id);
-        Usuario = await Usuario.listar() 
-        Status = await Status.listar();    
+        Usuario = await Usuario.listar()
+        Status = await Status.listar();
         Formas = await Formas.listar();
-        
+
         res.send({ lista: suaDoa, pgt: Formas, stt: Status, usu: Usuario });
 
 
