@@ -11,7 +11,7 @@ class HomeController {
     }
 
     QuemSomosView(req, res) {
-        res.render('quemsomos');
+        res.render('QuemSomos');
     }
 
     sejaView(req, res) {

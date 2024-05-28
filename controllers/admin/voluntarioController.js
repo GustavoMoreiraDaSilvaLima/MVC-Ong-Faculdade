@@ -39,7 +39,7 @@ class voluntarioController {
         const listaVoluntarios = await voluntario.listar();
 
 
-        res.render('voluntarios/voluntarios', { layout : "adminlayout" ,listaVoluntarios : listaVoluntarios });
+        res.render('voluntarios/voluntarios', { layout : "adminLayout" ,listaVoluntarios : listaVoluntarios });
 
     }
  
@@ -60,7 +60,7 @@ class voluntarioController {
         let volun = new Voluntario();
         let cpf = req.params.cpf;
         let voluntario  = await volun.voluntario_exibir_epsc(cpf); 
-        res.render('voluntarios/voluntario_alterar_form', { cpf: cpf, voluntario : voluntario , layout : "adminlayout" });
+        res.render('voluntarios/voluntario_alterar_form', { cpf: cpf, voluntario : voluntario , layout : "adminLayout" });
     }
 
     //Seja um Voluntario View/ Cadastrar Voluntário

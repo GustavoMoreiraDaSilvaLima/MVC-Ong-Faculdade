@@ -5,7 +5,7 @@ class CategoriaController {
     async listarView(req, res) {
         let cat = new CategoriaModel
         let lista = await cat.listarCategorias();
-        res.render('admin/admincategorialistar', {lista: lista, layout : "adminlayout"});
+        res.render('admin/adminCategoriaListar', {lista: lista, layout : "adminLayout"});
     }
 }   
 

@@ -10,7 +10,7 @@ class ProdutoController {
     async listarView(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.render('admin/produto/adminproduto', {lista: lista, layout:'adminlayout'});
+        res.render('admin/produto/adminProduto', {lista: lista, layout:'adminLayout'});
     }
 
     async AtualizarLista(req, res) {

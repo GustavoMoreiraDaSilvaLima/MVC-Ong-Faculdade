@@ -7,7 +7,7 @@ class noticiaController {
         let noticia = new noticiaModel();
         let lista = await noticia.noticia_exibir()
 
-        res.render('noticia/noticias', { lista: lista, layout : "adminlayout" });
+        res.render('noticia/noticias', { lista: lista, layout : "adminLayout" });
     }
 
 

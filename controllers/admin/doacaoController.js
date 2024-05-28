@@ -12,7 +12,7 @@ class doacaoController {
 
 
 
-        res.render('admin/admindoacao', { layout: 'adminlayout' });
+        res.render('admin/adminDoacao', { layout: 'adminLayout' });
     }
 
     async AtualizarLista(req, res) {
@@ -127,7 +127,7 @@ class doacaoController {
         let Status = new StatusDoacaoModel();
         Status = await Status.listar();
 
-        res.render('admin/admindoacaomanual', { layout: "adminlayout", pagamento: pagamentoLista, lista_usu: UsuariosCadas, status: Status });
+        res.render('admin/adminDoacaoManual', { layout: "adminLayout", pagamento: pagamentoLista, lista_usu: UsuariosCadas, status: Status });
     }
     async DoacaoManual(req, res) {
         var ok = true;
@@ -150,7 +150,7 @@ class doacaoController {
         res.send({ ok: ok });
     }
     DoacaoProdutoView(req, res) {
-        res.render('admin/admindoacaoproduto', { layout: "adminlayout" })
+        res.render('admin/adminDoacaoProduto', { layout: "adminLayout" })
     }
     DoacaoProduto(req, res) {
 
