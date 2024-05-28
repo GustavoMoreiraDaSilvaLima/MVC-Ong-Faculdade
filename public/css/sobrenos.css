@@ -1,0 +1,157 @@
+/* Gerais */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  background-color: #f8f9fa;
+}
+
+.home {
+  position: relative;
+  max-height: 90vh; /* Define a altura máxima da seção home */
+  overflow: hidden;
+}
+
+.imginicial {
+  width: 100%;
+  height: auto;
+  max-height: 100vh; /* Define a altura máxima da imagem */
+  object-fit: cover; /* Faz a imagem cobrir a área do contêiner */
+}
+
+.sobrenos {
+  padding: 50px;
+  margin-top: 2em;
+  margin-bottom: 4em;
+  font-size: 1.4em;
+  color: black;
+
+}
+
+.h1sobrenos {
+  font-size: 3em;
+  text-align: center;
+}
+
+
+
+
+
+
+.botao {
+  position: absolute;
+  bottom: 12em;
+  right: 8em;
+  padding: 15px 100px;
+  background-color: #198754;
+  color: white;
+  border-radius: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.botao:hover {
+  background-color: #117948;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+img.rounded-circle {
+  border: 5px solid #ffffff;
+}
+
+.bg-light {
+  background-color: #ffffff !important;
+  padding: 60px 0;
+}
+
+.bg-light h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.bg-light p.fs-5 {
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+.card {
+  margin: 7px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card-body {
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.card-img-top {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.card img {
+  background-color: rgb(255, 255, 255);
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.card img:hover {
+  transform: scale(1.1);
+}
+
+.card-title {
+  color: black;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Media Queries */
+@media (max-width: 767.98px) {
+  .h1sobrenos {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .sobrenos {
+    font-size: 1rem;
+    margin: 2em 1em;
+    text-align: center;
+  }
+
+  .home .btn {
+    display: block;
+    margin: 1em auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .h1sobrenos {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .sobrenos {
+    font-size: 1.2rem;
+    margin: 2em 5em;
+    text-align: center;
+  }
+}
