@@ -10,7 +10,7 @@ class ProdutoController {
     async listarView(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.render('admin/produto/adminProduto', {lista: lista, layout:'adminLayout'});
+        res.render('admin/produto/adminproduto', {lista: lista, layout:'adminlayout'});
     }
 
     async AtualizarLista(req, res) {
@@ -104,7 +104,7 @@ class ProdutoController {
 
         let listaMarca = await marca.listarMarcas();
         let listaCategoria = await categoria.listarCategorias();
-        res.render("admin/produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria});
+        res.render("admin/produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria , layout:'adminlayout'});
     }
 
     async alterarProduto(req, res) {
@@ -151,7 +151,7 @@ class ProdutoController {
             let categoria = new CategoriaModel();
             listaCategorias = await categoria.listarCategorias();
 
-        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias });
+        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias , layout:'adminlayout'});
     }
 
     async obter(req, res) {
