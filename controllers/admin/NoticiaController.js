@@ -7,8 +7,9 @@ class noticiaController {
         let noticia = new noticiaModel();
         let lista = await noticia.noticia_exibir()
 
-        res.render('noticia/noticias', { lista: lista, layout : "adminLayout" });
+        res.render('admin/noticias/adminNoticia', { lista: lista, layout : "adminLayout" });
     }
+    
 
 
     /*//Ver Noticias/EXibir mais detalhamente             Pode melhorar e quando o ADM clicar para ver, aparecer a opção de editar
@@ -25,12 +26,24 @@ class noticiaController {
     }
 
     adicionarNoticaView(req, res) {
+        res.render('admin/noticias/adminCadastrar');
 
     }
 
     async adicionarNoticia(req, res) {
+        debugger
+        console.log(req.body)
+        if (req.body.titulo != "" , req.body.descricao != "" , req.body.conteudo != "") {
+            let noticia = new noticiaModel(0, req.body.titulo, req.body.descricao, req.body.conteudo);
+            let result = await noticia.noticia_inserir_atualizar();
 
+            res.send ({ok: result});
+        }
+        else res.send({ok: false});
+            
     }
+
+    
 
 
     async editarNoticiaView(req, res) {
@@ -42,5 +55,6 @@ class noticiaController {
     }
 
 }
+
 
 module.exports = noticiaController;

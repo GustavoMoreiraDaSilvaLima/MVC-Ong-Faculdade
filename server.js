@@ -53,7 +53,7 @@ app.use("/pedido", pedidoRoute)
 app.use("/admin",AdminRoute);
 app.use("/admin/voluntario", VoluntarioRoute);
 app.use("/admin/eventos",EventosRoute);
-app.use("/admin/noticia",NoticiaRoute);
+app.use("/admin/noticias",NoticiaRoute);
 app.use("/admin/parceiro",ParceiroRoute);
 app.use("/admin/patrimonio",PatrimonioRoute);
 app.use("/admin/produto",ProdutoRouteAdmin);

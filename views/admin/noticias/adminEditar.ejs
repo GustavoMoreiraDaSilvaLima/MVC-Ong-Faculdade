@@ -1,0 +1,24 @@
+<div class="container p-5">
+    <h1 class="p-5">Editar Notícia</h1>
+    <form action="/editar_noticia" method="POST">
+        <input type="hidden" name="id" value="<%= noticia.ONG_NOTICIA_ID %>">
+        <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="<%= noticia.ONG_NOTICIA_TITULO %>">
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <textarea class="form-control" id="descricao" name="descricao"><%= noticia.ONG_NOTICIA_DESCRICAO %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="conteudo">Conteúdo:</label>
+            <textarea class="form-control" id="conteudo" name="conteudo"><%= noticia.ONG_NOTICIA_CONTEUDO %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="editado">Editado:</label>
+            <input type="checkbox" id="editado" name="editado" <% if (noticia.ONG_NOTICIA_EDITADO) { %> checked <% } %>>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btnGravar">Salvar Alterações</button>
+    </form>
+    <br><br><br><br><br>
+</div>
