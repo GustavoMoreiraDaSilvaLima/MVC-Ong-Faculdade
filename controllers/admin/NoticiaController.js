@@ -26,7 +26,7 @@ class noticiaController {
     }
 
     adicionarNoticaView(req, res) {
-        res.render('admin/noticias/adminCadastrar');
+        res.render('admin/noticias/adminCadastrar', {layout : "adminLayout"});
 
     }
 

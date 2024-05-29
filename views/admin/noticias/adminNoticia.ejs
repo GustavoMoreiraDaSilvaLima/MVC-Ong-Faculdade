@@ -2,10 +2,10 @@
     <h1 class="p-5">Últimas Notícias</h1>
     <div class="list-group">
         <% for (let i = 0; i < lista.length; i++)  { %>
-        <a href="espec/<%= lista[i].ONG_NOTICIA_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
+        <a href="/espec/<%= lista[i].ONG_NOTICIA_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
             <div class="row">
                 <div class="col-md-1 my-auto">
-                    <img src="./img/logo3.png" alt="Ícone Notícia 1" class="img-fluid"> <!-- Ajuste o caminho da imagem -->
+                    <img src="/img/logo3.png" alt="Ícone Notícia 1" class="img-fluid"> <!-- Ajuste o caminho da imagem -->
                 </div>
                 <div class="col-md-11">
                     <div class="d-flex w-100 justify-content-between">
@@ -17,7 +17,7 @@
             </div>
         </a>
         <% } %>
-        <a href="/admin/noticias/adminCadastrar" type="submit" class="btn btn-primary">Criar Notricia</a>
+        <a href="/admin/noticias/adminCadastrar" type="submit" class="btn btn-success">Criar Notricia</a>
     </div>
     <br><br><br><br><br>
 </div>
