@@ -151,7 +151,7 @@ class ProdutoController {
             let categoria = new CategoriaModel();
             listaCategorias = await categoria.listarCategorias();
 
-        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias , layout:'adminlayout'});
+        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias , layout:'adminLayout'});
     }
 
     async obter(req, res) {
