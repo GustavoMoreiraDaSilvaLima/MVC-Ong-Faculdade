@@ -21,8 +21,17 @@ class noticiaController {
     */
 
     //Excluir uma noticia
-    async excluirNoticia(req, res) {
+    async excluirNoticia(req, res){
+        var ok = true;
+        if(req.body.NoticiaId != "") {
+            let noticia = new noticiaModel();
+            ok = await noticia.excluir(req.body.NoticiaId);
+        }
+        else{
+            ok = false;
+        }
 
+        res.send({ok: ok});
     }
 
     adicionarNoticaView(req, res) {

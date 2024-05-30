@@ -12,7 +12,7 @@ NoticiaRouter.get('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.adicionarNotic
 //NoticiaRouter.get('/alterar', autent.NivelPermissaoAdm,ctrl.editarNoticiaView);
 NoticiaRouter.post('/adminCadastrar', autent.NivelPermissaoAdm,ctrl.adicionarNoticia);
 //NoticiaRouter.post('/alterar', autent.NivelPermissaoAdm,ctrl.editarNoticia);
-//NoticiaRouter.post('/excluir', autent.NivelPermissaoAdm,ctrl.excluirNoticia);
+NoticiaRouter.post('/excluir/:id', autent.NivelPermissaoAdm,ctrl.excluirNoticia);
 
 
 module.exports = NoticiaRouter;

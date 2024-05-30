@@ -1,20 +1,31 @@
 <div class="container p-5">
     <h1 class="p-5">Últimas Notícias</h1>
+    <style>
+        .editar{
+            margin-right: 1.5rem;
+        }
+    </style>
+    <script src="/js/admin/noticias/excluir.js"></script>
+
     <div class="list-group">
         <% for (let i = 0; i < lista.length; i++)  { %>
         <a href="/espec/<%= lista[i].ONG_NOTICIA_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
             <div class="row">
                 <div class="col-md-1 my-auto">
-                    <img src="/img/logo3.png" alt="Ícone Notícia 1" class="img-fluid"> <!-- Ajuste o caminho da imagem -->
+                    <img src="/img/logo3.png" alt="Ícone Notícia 1" class="img-fluid">
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-8">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><%= lista[i].ONG_NOTICIA_TITULO %></h5>
                     </div>
                     <p class="mb-1"><%= lista[i].ONG_NOTICIA_DESCRICAO%></p>
                 </div>
-                
+                <div class="col-md-3">
+                    <a id="editar" href="noticias/<%= lista[i].ONG_NOTICIA_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                    <button data-codigo="<%= lista[i].ONG_NOTICIA_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
+                </div>
             </div>
+            
         </a>
         <% } %>
         <a href="/admin/noticias/adminCadastrar" type="submit" class="btn btn-success">Criar Notricia</a>
