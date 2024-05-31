@@ -3,60 +3,56 @@ const Database = require("../db/database");
 const banco = new Database();
 
 class patrimonioModel{
-    #id_patri     //Chave Primário
-    #nome_patri
-    #dataAquisicao_patri
-    #desc_patri
-    #status_patri //Caso o patrimonio seja destruido ou quebrado irá ser informado no Status
+    #ONG_PATRIMONIO_ID   //Chave Primário
+    #ONG_PATRIMONIO_NOME
+    #ONG_PATRIMONIO_DESCRICAO
+    #ONG_PATRIMONIO_QUANTIDADE
+    #ONG_PATRIMONIO_STATUS //Caso o patrimonio seja destruido ou quebrado irá ser informado no Status
 
-    constructor(id, nome, dataAquisicao, desc, status) {
-        this.#id_patri = id;
-        this.#nome_patri = nome;
-        this.#dataAquisicao_patri = dataAquisicao;
-        this.#desc_patri = desc;
-        this.#status_patri = status;
+    constructor(id, nome, descricao, quantidade, status) {
+        this.#ONG_PATRIMONIO_ID = id;
+        this.#ONG_PATRIMONIO_NOME = nome;
+        this.#ONG_PATRIMONIO_DESCRICAO = descricao;
+        this.#ONG_PATRIMONIO_QUANTIDADE = quantidade
+        this.#ONG_PATRIMONIO_STATUS = status;
     }
 
     // Getters
-    get IdPatri() {
-        return this.#id_patri;
+    get ONG_PATRIMONIO_ID() {
+        return this.#ONG_PATRIMONIO_ID;
     }
 
-    get NomePatri() {
-        return this.#nome_patri;
+    get ONG_PATRIMONIO_NOME() {
+        return this.#ONG_PATRIMONIO_NOME;
     }
 
-    get DataAquisicaoPatri() {
-        return this.#dataAquisicao_patri;
+    get ONG_PATRIMONIO_DESCRICAO() {
+        return this.#ONG_PATRIMONIO_DESCRICAO;
     }
 
-    get DescPatri() {
-        return this.#desc_patri;
+    get ONG_PATRIMONIO_QUANTIDADE() {
+        return this.#ONG_PATRIMONIO_QUANTIDADE;
     }
 
-    get StatusPatri() {
-        return this.#status_patri;
+    get ONG_PATRIMONIO_STATUS() {
+        return this.#ONG_PATRIMONIO_STATUS;
     }
 
-    // Setters
+    //Setters
     set IdPatri(id) {
-        this.#id_patri = id;
+        this.#ONG_PATRIMONIO_ID = id;
     }
 
-    set NomePatri(nome) {
-        this.#nome_patri = nome;
+    set ONG_PATRIMONIO_NOME(nome) {
+        this.#ONG_PATRIMONIO_NOME = nome;
     }
 
-    set DataAquisicaoPatri(dataAquisicao) {
-        this.#dataAquisicao_patri = dataAquisicao;
+    set ONG_PATRIMONIO_DESCRICAO(descricao) {
+        this.#ONG_PATRIMONIO_DESCRICAO = descricao;
     }
 
-    set DescPatri(desc) {
-        this.#desc_patri = desc;
-    }
-
-    set StatusPatri(status) {
-        this.#status_patri = status;
+    set ONG_PATRIMONIO_STATUS(status) {
+        this.#ONG_PATRIMONIO_STATUS = status;
     }
     async obterPatrimonio(id) {
 
@@ -71,6 +67,21 @@ class patrimonioModel{
 
 
     //Sem Excluir, seria o alterar, incluir no alterar o Status
+
+    async exibirPatrimonio(){
+        let sql = "select * from ONG_PATRIMONIOS";
+
+        let rows = await banco.ExecutaComando(sql);
+        let lista = [];
+
+        for(let i = 0; i < rows.length; i++) {
+            lista.push(new patrimonioModel(rows[i]["ONG_PATRIMONIO_ID"], rows[i]["ONG_PATRIMONIO_NOME"], rows[i]["ONG_PATRIMONIO_DESCRICAO"], rows[i]["ONG_PATRIMONIO_QUANTIDADE"], rows[i]["ONG_PATRIMONIO_STATUS"], rows[i]["ONG_PATRIMONIO_IMG"]));
+        }
+        return lista;
+    }
+
 }
 
 module.exports = patrimonioModel;
+
+
