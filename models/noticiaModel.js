@@ -19,6 +19,7 @@ class noticiaModel{
         this.ONG_NOTICIA_ADMINISTRADOR_CPF = noticia_adm_cpf;
     }
         async noticia_inserir_atualizar() {
+            debugger
             if (this.ONG_NOTICIA_ID == 0) {
                 let sql = "insert into ONG_NOTICIA (ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO) values (?,?,?)";
     
@@ -27,11 +28,10 @@ class noticiaModel{
                 let result = await banco.ExecutaComandoNonQuery(sql, valores);
     
                 return result;
-            }
+            } 
             else {
-                console.log("entrou no else de atualizar")
-                let sql = "update ONG_NOTICIA (ONG_NOTICIA_ID, ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO,ONG_NOTICIA_EDITADO) values (?,?,?,?,?)";
-                let valores = [this.ONG_NOTICIA_ID, this.ONG_NOTICIA_TITULO, this.ONG_NOTICIA_DESCRICAO, this.ONG_NOTICIA_CONTEUDO, this.ONG_NOTICIA_ULTIMA_ALTERACAO];
+                let sql = "update ONG_NOTICIA SET ONG_NOTICIA_TITULO = ?, ONG_NOTICIA_DESCRICAO = ?,ONG_NOTICIA_CONTEUDO = ?  where ONG_NOTICIA_ID = ?";
+                let valores = [this.ONG_NOTICIA_TITULO, this.ONG_NOTICIA_DESCRICAO, this.ONG_NOTICIA_CONTEUDO, this.ONG_NOTICIA_ID];
     
                 let result = await banco.ExecutaComandoNonQuery(sql, valores);
 

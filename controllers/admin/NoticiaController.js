@@ -41,7 +41,6 @@ class noticiaController {
     }
 
     async adicionarNoticia(req, res) {
-        debugger
         console.log(req.body)
         if (req.body.titulo != "" , req.body.descricao != "" , req.body.conteudo != "") {
             let noticia = new noticiaModel(0, req.body.titulo, req.body.descricao, req.body.conteudo);
@@ -64,9 +63,9 @@ class noticiaController {
     }
     //Essa ou a de abrir a notica já vir para editar
     async editarNoticia(req, res) {
-        console.log("entrou editar noticia")
-        if (req.body.titulo != "" , req.body.descricao != "" , req.body.conteudo != "") {
-            let noticia = new noticiaModel( req.body.titulo, req.body.descricao, req.body.conteudo);
+        console.log("controller")
+        if (req.body.id != "", req.body.titulo != "" , req.body.descricao != "" , req.body.conteudo != "") {
+            let noticia = new noticiaModel(req.body.id, req.body.titulo, req.body.descricao, req.body.conteudo);
             let result = await noticia.noticia_inserir_atualizar();
 
             res.send ({ok: result});

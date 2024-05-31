@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 function alterarNoticia() {
-    console.log("entrou");
 
     //limparErros();
     
@@ -21,7 +20,7 @@ function alterarNoticia() {
 
     var listaErros = [];
 
-    console.log(noticiaTitulo)
+    console.log(noticiaId)
     if(noticiaTitulo == "" || noticiaTitulo == undefined || noticiaTitulo == null){
         listaErros.push("novoTitulo");
     }
@@ -47,7 +46,7 @@ function alterarNoticia() {
             id: noticiaId,
         };
 
-        fetch('/admin/noticias/adminAlterar', { 
+        fetch('/admin/noticias/adminEditar', { 
             method: "POST",
             headers: {
                 "Content-type": "application/json"
