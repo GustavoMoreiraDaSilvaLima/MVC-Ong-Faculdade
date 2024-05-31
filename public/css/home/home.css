@@ -1,0 +1,34 @@
+.box {
+    
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.box h2 {
+    color: rgb(0, 0, 0);
+}
+
+.box p {
+    font-size: 1.2em;
+}
+
+.box a {
+    color: lightblue;
+}
+#btn-finalhome {
+    background-color: #198754; /* cor de fundo amarelo */
+    color: #ffffff; /* cor do texto preto */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+#btn-finalhome:hover {
+    background-color: #157347; /* cor de fundo amarelo escuro ao passar o mouse */
+     /* cor do texto branco ao passar o mouse */
+}
