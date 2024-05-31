@@ -61,7 +61,7 @@ class HomeController {
         let noticia = new noticiaModel();
         let lista = await noticia.noticia_exibir()
 
-        res.render('noticia/Noticias', {lista : lista});
+        res.render('noticia/noticias', {lista : lista});
     }
 
     //Exibir noticia detalhada

@@ -1,55 +1,47 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    document.getElementById("butao_pedido").addEventListener("click", cadastrar);
+    document.getElementById("btnCadastrar").addEventListener("click", cadastrar);
 
     function limparValidacao() {
         document.getElementById("nome").style["border-color"] = "#ced4da";
-        document.getElementById("cpf").style["border-color"] = "#ced4da";
-        document.getElementById("email").style["border-color"] = "#ced4da";
-        document.getElementById("telefone").style["border-color"] = "#ced4da";
-        document.getElementById("sobre_voce").style["border-color"] = "#ced4da";
+        document.getElementById("quantidade").style["border-color"] = "#ced4da";
+        document.getElementById("descricao").style["border-color"] = "#ced4da";
+        document.getElementById("status").style["border-color"] = "#ced4da";
     }
 
     function cadastrar() {
         limparValidacao();
         let nome = document.querySelector("#nome").value;
-        let cpf = document.getElementById("cpf").value;
-        let esc = document.querySelector("#esc").value;
-        let email = document.querySelector("#email").value;
-        let telefone = document.querySelector("#telefone").value;
-        let sobre_voce = document.querySelector("#sobre_voce").value;
+        let quantidade = document.getElementById("quantidade").value;
+        let descricao = document.querySelector("#descricao").value;
+        let status = document.querySelector("#status").value;
 
         let listaErros = [];
         if(nome == "") {
             listaErros.push("nome");
         }
-        if(cpf == ""){
-            listaErros.push("cpf")
+        if(quantidade > 0){
+            listaErros.push("quantidade")
         }
-        if(email == "") {
-            listaErros.push("email");
+        if(descricao == "") {
+            listaErros.push("descricao");
         }
-        if(telefone == "") {
-            listaErros.push("telefone");
+        if(status == "") {
+            listaErros.push("status");
         }
-        if(sobre_voce == "") {
-            listaErros.push("sobre_voce");
-        }
-
         if(listaErros.length == 0) {
             //enviar ao backend com fetch
 
             let obj = {
-                esc:esc,
+        
                 nome: nome,
-                cpf: cpf,
-                email: email,
-                telefone: telefone,
-                sobre_voce: sobre_voce
+                quantidade: quantidade,
+                descricao: descricao,
+                status: status
             }
 
-            fetch("/send/seja_um_voluntario", {
+            fetch("/admin/patrimonio/adminCadastrar", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {

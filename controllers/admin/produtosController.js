@@ -10,7 +10,52 @@ class ProdutoController {
     async listarView(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.render('admin/produto/adminProduto', {lista: lista});
+        res.render('admin/produto/adminProduto', {lista: lista, layout:'adminLayout'});
+    }
+
+    async AtualizarLista(req, res) {
+        let Doacao = new ProdutoModel();
+        let status = "disponivel";
+        let intervalo = req.params.intervalo;
+        let lista = ''
+        if (intervalo == -99) {
+            lista = await Doacao.doacao_listar(intervalo);
+        } else {
+            if (intervalo < 1) {
+                intervalo = 1;
+            }
+            if (intervalo == 1) {
+                status = "comeco";
+            }
+            lista = await Doacao.doacao_listar((intervalo - 1) * 10);
+        }
+
+        let listaCompleta = [];
+
+        //Inserir via JSON em uma lista para enviar ao Javascript no Front-End
+        for (let i = 0; i < lista.length; i++) {
+            listaCompleta[i] = lista[i].toJSON();
+        }
+
+        if (listaCompleta.length < 10) {
+            status = "fim";
+        }
+
+        if (listaCompleta.length == 0) {
+            status = "erro tabela";
+        }
+
+        let ok = false
+        if (listaCompleta.length > 0) {
+            ok = true
+        }
+
+        let Situacao = new StatusDoacaoModel();
+        let Formas = new FormasPagamentoModel();
+        Situacao = await Situacao.listar();
+        Formas = await Formas.listar();
+
+        res.send({ ok: ok, item: listaCompleta, status: status, pgt: Formas, situacao: Situacao });
     }
 
     async excluirProduto(req, res){
@@ -59,7 +104,7 @@ class ProdutoController {
 
         let listaMarca = await marca.listarMarcas();
         let listaCategoria = await categoria.listarCategorias();
-        res.render("admin/produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria});
+        res.render("admin/produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria , layout:'adminlayout'});
     }
 
     async alterarProduto(req, res) {
@@ -106,7 +151,7 @@ class ProdutoController {
             let categoria = new CategoriaModel();
             listaCategorias = await categoria.listarCategorias();
 
-        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias });
+        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias , layout:'adminLayout'});
     }
 
     async obter(req, res) {

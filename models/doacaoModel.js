@@ -17,7 +17,7 @@ class doacaocaoModel {
     get doacao_tipo() { return this.#doacao_tipo; }
     set doacao_tipo(tipo) { this.#doacao_tipo = tipo; }
 
-    set doacao_usuario(id) {  this.#doacao_usuario = id }
+    set doacao_usuario(id) { this.#doacao_usuario = id }
     get doacao_usuario() { return this.#doacao_usuario }
 
     get doacao_data() { return this.#doacao_data; }
@@ -88,6 +88,8 @@ LIMIT 10 OFFSET 10;*/
         if (intervalo == 0) {
             sql = "select * from tb_doacao order by doacao_id DESC limit 10";
 
+        } else if (intervalo == -99) {
+            sql = `select * from tb_doacao order by doacao_id DESC`;
         } else {
             sql = "select * from tb_doacao order by doacao_id DESC limit 10 OFFSET ?";
             valores = [intervalo];

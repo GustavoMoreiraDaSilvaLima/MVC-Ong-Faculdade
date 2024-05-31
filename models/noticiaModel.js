@@ -18,9 +18,27 @@ class noticiaModel{
         this.ONG_NOTICIA_ULTIMA_ALTERACAO = alterado;
         this.ONG_NOTICIA_ADMINISTRADOR_CPF = noticia_adm_cpf;
     }
-    noticia_inserir_excluir(){
+        async noticia_inserir_atualizar() {
+            if (this.ONG_NOTICIA_ID == 0) {
+                let sql = "insert into ONG_NOTICIA (ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO) values (?,?,?)";
+    
+                let valores = [this.ONG_NOTICIA_TITULO, this.ONG_NOTICIA_DESCRICAO, this.ONG_NOTICIA_CONTEUDO];
+    
+                let result = await banco.ExecutaComandoNonQuery(sql, valores);
+    
+                return result;
+            }
+            else {
+                let sql = "update ONG_NOTICIA (ONG_NOTICIA_ID, ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO,ONG_NOTICIA_EDITADO) values (?,?,?,?,?)";
+                let valores = [this.ONG_NOTICIA_ID, this.ONG_NOTICIA_TITULO, this.ONG_NOTICIA_DESCRICAO, this.ONG_NOTICIA_CONTEUDO, this.ONG_NOTICIA_ULTIMA_ALTERACAO];
+    
+                let result = await banco.ExecutaComandoNonQuery(sql, valores);
+    
+                return result;
+            }
+        }
         
-    }
+    
     noticia_atualizar(){
         
     }
@@ -49,6 +67,14 @@ class noticiaModel{
         }
 
         return null;
+    }
+    async excluir(ONG_NOTICIA_ID){
+        let sql = "delete from ONG_NOTICIA where ONG_NOTICIA_ID = ?"
+        let valores = [ONG_NOTICIA_ID];
+
+        var result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
     }
 }
 module.exports = noticiaModel;

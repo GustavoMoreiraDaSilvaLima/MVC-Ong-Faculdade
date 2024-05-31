@@ -11,7 +11,7 @@ let ctrl = new VoluntarioController();
 VoluntarioRouter.get("/", autent.NivelPermissaoAdm, ctrl.voluntariosView);
 VoluntarioRouter.get("/:cpf", autent.NivelPermissaoAdm, ctrl.voluntariosAlterarView);
 VoluntarioRouter.post("/deletacao", autent.NivelPermissaoAdm, ctrl.voluntariosDel);
-VoluntarioRouter.post("/alterar", autent.NivelPermissaoAdm, ctrl.voluntariosDel);
+VoluntarioRouter.post("/alterar", autent.NivelPermissaoAdm, ctrl.atualizarVoluntario);
 
 module.exports = VoluntarioRouter;
  

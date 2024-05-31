@@ -8,12 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function deletar() {
-
         let cpf = this.dataset.codigo
         let obj = {
             cpf: cpf
         }
-        fetch("/voluntarios", {
+        fetch("/admin/voluntario/deletacao", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(r => {
                 if (r.ok) {
-                    window.location.href = "/voluntarios";
+                    window.location.href = "/admin/voluntario";
                 }
                 else {
                     alert(r.msg);

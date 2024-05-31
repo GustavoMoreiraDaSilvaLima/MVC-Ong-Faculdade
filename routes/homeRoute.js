@@ -7,7 +7,6 @@ let ctrl = new HomeController();
 router.get("/", ctrl.homeView);
 router.get("/QuemSomos", ctrl.QuemSomosView);
 router.get("/seja_um_voluntario", ctrl.sejaView);
-router.post("/seja_um_voluntario", ctrl.cadastrarVoluntarios);
 
 //Doacao
 router.get("/doacao",ctrl.DoacaoView);
@@ -24,6 +23,8 @@ router.get('/noticias', ctrl.listarNoticias);
 router.get('/espec/:id', async (req,res) => {
     ctrl.especNoticia(req,res);
 })
+
+
 
 
 module.exports = router;

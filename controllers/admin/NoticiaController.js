@@ -7,8 +7,9 @@ class noticiaController {
         let noticia = new noticiaModel();
         let lista = await noticia.noticia_exibir()
 
-        res.render('noticia/Noticias', { lista: lista });
+        res.render('admin/noticias/adminNoticia', { lista: lista, layout : "adminLayout" });
     }
+    
 
 
     /*//Ver Noticias/EXibir mais detalhamente             Pode melhorar e quando o ADM clicar para ver, aparecer a opção de editar
@@ -20,17 +21,38 @@ class noticiaController {
     */
 
     //Excluir uma noticia
-    async excluirNoticia(req, res) {
+    async excluirNoticia(req, res){
+        var ok = true;
+        if(req.body.NoticiaId != "") {
+            let noticia = new noticiaModel();
+            ok = await noticia.excluir(req.body.NoticiaId);
+        }
+        else{
+            ok = false;
+        }
 
+        res.send({ok: ok});
     }
 
     adicionarNoticaView(req, res) {
+        res.render('admin/noticias/adminCadastrar', {layout : "adminLayout"});
 
     }
 
     async adicionarNoticia(req, res) {
+        debugger
+        console.log(req.body)
+        if (req.body.titulo != "" , req.body.descricao != "" , req.body.conteudo != "") {
+            let noticia = new noticiaModel(0, req.body.titulo, req.body.descricao, req.body.conteudo);
+            let result = await noticia.noticia_inserir_atualizar();
 
+            res.send ({ok: result});
+        }
+        else res.send({ok: false});
+            
     }
+
+    
 
 
     async editarNoticiaView(req, res) {
@@ -42,5 +64,6 @@ class noticiaController {
     }
 
 }
+
 
 module.exports = noticiaController;
