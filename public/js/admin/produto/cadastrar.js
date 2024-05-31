@@ -68,6 +68,7 @@ function gravarProduto() {
         .then(r=> {
             if(r.ok) {
                 alert("Produto cadastrado!");
+                window.location.href="/admin/produto";
             }
             else{
                 alert("Erro ao cadastrar produto");
