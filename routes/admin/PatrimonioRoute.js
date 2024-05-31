@@ -8,10 +8,10 @@ const PatrimonioRouter = express.Router();
 let ctrl = new PatrimonioController();
 
 PatrimonioRouter.get('/',autent.NivelPermissaoAdm,ctrl.patrimonioView);
-PatrimonioRouter.get('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.adicionarPatrimonioView);
+PatrimonioRouter.get('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.cadastrarPatrimonioView);
 PatrimonioRouter.get('/alterar/:id',autent.NivelPermissaoAdm,ctrl.editarPatrimonioView);
 PatrimonioRouter.post('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.patrimonioPost);
-PatrimonioRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.editarPatrimonio);
+PatrimonioRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.atualizarPatrimonioPost);
 PatrimonioRouter.post('/excluir',autent.NivelPermissaoAdm,ctrl.excluirPatrimonio);
 
 //Noticia

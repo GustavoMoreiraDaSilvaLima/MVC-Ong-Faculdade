@@ -58,12 +58,19 @@ class patrimonioModel{
 
     }
     async listarPatrimonio(){
-
+       
     }
 
-    async inclu_alterar_Patrimonio() {
+    async atualizarPatrimonio() {
+        if(this.ONG_PATRIMONIO_ID == 0){
+            let sql = "insert into ONG_PATRIMONIO (this.#ONG_PATRIMONIO_ID, this.#ONG_PATRIMONIO_NOME, this.#ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_QUANTIDADE, this.#ONG_PATRIMONIO_STATUS)";
+            let valores = [this.#ONG_PATRIMONIO_NOME, this.ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_STATUS];
+            let resultado = await banco.ExecutaComandoNonQuery(sql,valores);
 
-    }
+            return resultado;
+            }
+        }
+    
 
 
     //Sem Excluir, seria o alterar, incluir no alterar o Status
