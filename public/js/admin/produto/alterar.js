@@ -71,6 +71,8 @@ function alterarProduto() {
         .then(r=> {
             if(r.ok) {
                 alert("Produto alterado!");
+                window.location.href="/admin/produto";
+
             }
             else{
                 alert("Erro ao alterar produto");

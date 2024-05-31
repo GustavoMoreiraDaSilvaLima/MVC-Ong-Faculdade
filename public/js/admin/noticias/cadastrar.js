@@ -61,6 +61,7 @@ function gravarNoticia() {
         .then(r=> {
             if(r.ok) {
                 alert("Noticia cadastrada!");
+                window.location.href="/admin/noticias";
             }
             else{
                 alert("Erro ao criar noticia");

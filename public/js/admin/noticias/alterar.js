@@ -55,9 +55,16 @@ function alterarNoticia() {
         })
         .then(r=> {
             return r.json();
+            
         })
         .then(r=> {          
-  
+            if(r.ok) {
+                alert("Produto alterado!");
+                window.location.href="/admin/noticias";
+            }
+            else{
+                alert("Erro ao alterar produto");
+            }
         })
         .catch(e=> {
             console.log(e);
