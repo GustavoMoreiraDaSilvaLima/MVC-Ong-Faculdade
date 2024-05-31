@@ -10,14 +10,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-function excluirNoticia() {
 
-        //recuperar id pelo dataset
+function excluirNoticia() {
+        if(window.confirm("Tem certeza que deseja excluir esta notícia?"))
+{
+
+
+//recuperar id pelo dataset
         let id = this.dataset.codigo;
         var data = {
             NoticiaId: id
         }
-    console.log(id);
+   
 
         fetch("/admin/noticias/excluir/" + id, {
             method: "POST",
@@ -37,6 +41,7 @@ function excluirNoticia() {
         })
 
 
+}
 }
 
 /*function carregarUsuarios() {
