@@ -29,11 +29,12 @@ class noticiaModel{
                 return result;
             }
             else {
+                console.log("entrou no else de atualizar")
                 let sql = "update ONG_NOTICIA (ONG_NOTICIA_ID, ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO,ONG_NOTICIA_EDITADO) values (?,?,?,?,?)";
                 let valores = [this.ONG_NOTICIA_ID, this.ONG_NOTICIA_TITULO, this.ONG_NOTICIA_DESCRICAO, this.ONG_NOTICIA_CONTEUDO, this.ONG_NOTICIA_ULTIMA_ALTERACAO];
     
                 let result = await banco.ExecutaComandoNonQuery(sql, valores);
-    
+
                 return result;
             }
         }
@@ -53,6 +54,7 @@ class noticiaModel{
         }
         return lista;
     }
+    
 
     async noticia_exibir_epsc(id){
         let sql = "select * from ONG_NOTICIA where ONG_NOTICIA_ID = ?";

@@ -34,7 +34,8 @@ class noticiaController {
         res.send({ok: ok});
     }
 
-    adicionarNoticaView(req, res) {
+    async adicionarNoticaView(req, res) {
+
         res.render('admin/noticias/adminCadastrar', {layout : "adminLayout"});
 
     }
@@ -56,11 +57,21 @@ class noticiaController {
 
 
     async editarNoticiaView(req, res) {
-
+        let id = req.params.id;
+        let noticia = new noticiaModel();
+        let lista = await noticia.noticia_exibir_epsc(id)
+        res.render('admin/noticias/adminAlterar', {lista: lista, layout : "adminLayout"});
     }
     //Essa ou a de abrir a notica já vir para editar
     async editarNoticia(req, res) {
+        console.log("entrou editar noticia")
+        if (req.body.titulo != "" , req.body.descricao != "" , req.body.conteudo != "") {
+            let noticia = new noticiaModel( req.body.titulo, req.body.descricao, req.body.conteudo);
+            let result = await noticia.noticia_inserir_atualizar();
 
+            res.send ({ok: result});
+        }
+        else res.send({ok: false});
     }
 
 }
