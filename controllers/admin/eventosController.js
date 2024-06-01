@@ -2,8 +2,11 @@ const EventosModel = require("../../models/eventosModel");
 
 class eventosController{
 
-    EventosView(req,res){       // Visualização do ADM
-
+    async EventosView(req,res){       // Visualização do ADM
+        let evento = new EventosModel();
+        let lista = await evento.exibirEvento();
+        
+        res.render('admin/adminEvento',{layout: 'adminLayout',lista : lista});
     }
 
     EventosCadastrarView(req,res){
