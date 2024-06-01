@@ -6,35 +6,35 @@
 }
 
 .azul{
-    color:blue;
+    color:rgb(255, 255, 255);
 }
 
 .azulclaro{
-    color:lightskyblue;
+    color:rgb(255, 255, 255);
 }
 
 .preto{
-    color:black;
+    color:rgb(255, 255, 255);
 }
 
 .amarelo{
-    color:yellow
+    color:rgb(255, 255, 255);
 }
 
 .laranja{
-    color:orange
+    color:rgb(255, 255, 255);
 }
 
 .laranja_vermelho{
-    color:orangered
+    color:rgb(255, 255, 255);
 }
 
 .roxo{
-    color:purple
+    color:rgb(255, 255, 255);
 }
 
 .verde{
-    color: green;
+    color: rgb(255, 255, 255);
 }
 
 /*Sombra*/
