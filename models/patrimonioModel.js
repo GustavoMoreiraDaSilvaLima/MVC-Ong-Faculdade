@@ -63,8 +63,8 @@ class patrimonioModel{
 
     async atualizarPatrimonio() {
         if(this.ONG_PATRIMONIO_ID == 0){
-            let sql = "insert into ONG_PATRIMONIO (this.#ONG_PATRIMONIO_ID, this.#ONG_PATRIMONIO_NOME, this.#ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_QUANTIDADE, this.#ONG_PATRIMONIO_STATUS)";
-            let valores = [this.#ONG_PATRIMONIO_NOME, this.ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_STATUS];
+            let sql = "insert into ONG_PATRIMONIOS (ONG_PATRIMONIO_NOME, ONG_PATRIMONIO_DESCRICAO, ONG_PATRIMONIO_QUANTIDADE, ONG_PATRIMONIO_STATUS) values (?,?,?,?)";
+            let valores = [this.#ONG_PATRIMONIO_NOME, this.ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_QUANTIDADE, this.#ONG_PATRIMONIO_STATUS];
             let resultado = await banco.ExecutaComandoNonQuery(sql,valores);
 
             return resultado;
