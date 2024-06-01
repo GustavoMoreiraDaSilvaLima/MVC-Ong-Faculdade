@@ -18,24 +18,18 @@
             <div class="form-group">
               <label>Categoria</label><br>
               <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                <label class="btn btn-outline-secondary flex-fill">
+                <label class="radio flex-fill">
                   <input type="radio" name="category" id="category1" autocomplete="off"> Categoria 1
-                </label>
-                <label class="btn btn-outline-secondary flex-fill">
-                  <input type="radio" name="category" id="category2" autocomplete="off"> Categoria 2
-                </label>
-                <label class="btn btn-outline-secondary flex-fill">
-                  <input type="radio" name="category" id="category3" autocomplete="off"> Categoria 3
                 </label>
               </div>
             </div>
             <div class="form-group">
               <label>Ordenar por Preço</label><br>
               <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                <label class="btn btn-outline-secondary flex-fill">
+                <label class="radio flex-fill">
                   <input type="radio" name="priceOrder" id="priceAsc" autocomplete="off"> Ascendente
                 </label>
-                <label class="btn btn-outline-secondary flex-fill">
+                <label class="radio flex-fill">
                   <input type="radio" name="priceOrder" id="priceDesc" autocomplete="off"> Descendente
                 </label>
               </div>
@@ -85,13 +79,15 @@
               <div class="form-group">
                 <label>Categoria</label><br>
                 <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                  <label class="btn btn-outline-secondary flex-fill">
-                    <input type="radio" name="category" id="category1" autocomplete="off"> Categoria 1
+                  <% lista.map(function(value, index) { %>
+                  <label class="radio flex-fill">
+                    <input type="radio" name="category" id="category1" autocomplete="off"> <%= value.categoriaNome %>    
                   </label>
-                  <label class="btn btn-outline-secondary flex-fill">
+                  <% }) %>
+                  <label class="radio flex-fill">
                     <input type="radio" name="category" id="category2" autocomplete="off"> Categoria 2
                   </label>
-                  <label class="btn btn-outline-secondary flex-fill">
+                  <label class="radio flex-fill">
                     <input type="radio" name="category" id="category3" autocomplete="off"> Categoria 3
                   </label>
                 </div>
@@ -99,10 +95,10 @@
               <div class="form-group">
                 <label>Ordenar por Preço</label><br>
                 <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                  <label class="btn btn-outline-secondary flex-fill">
+                  <label class="radio flex-fill">
                     <input type="radio" name="priceOrder" id="priceAsc" autocomplete="off"> Ascendente
                   </label>
-                  <label class="btn btn-outline-secondary flex-fill">
+                  <label class="radio flex-fill">
                     <input type="radio" name="priceOrder" id="priceDesc" autocomplete="off"> Descendente
                   </label>
                 </div>
@@ -115,21 +111,16 @@
                   <option>Marca 3</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="quantityRange">Quantidade</label>
-                <input type="range" class="form-control-range" id="quantityRange" min="0" max="800" step="100">
-                <div class="d-flex justify-content-between mt-2">
-                  <span>0</span>
-                  <span>100</span>
-                  <span>200</span>
-                  <span>300</span>
-                  <span>400</span>
-                  <span>500</span>
-                  <span>600</span>
-                  <span>700</span>
-                  <span>800</span>
+              <div class="form-row">
+                <div class="col">
+                    <label for="quantityMin">Quantidade Mínima</label>
+                    <input type="number" class="form-control" id="quantityMin" min="0" placeholder="Mínimo">
                 </div>
-              </div>
+                <div class="col">
+                    <label for="quantityMax">Quantidade Máxima</label>
+                    <input type="number" class="form-control" id="quantityMax" min="0" placeholder="Máximo">
+                </div>
+            </div>
               <button type="submit" class="btn btn-primary btn-block">Buscar</button>
             </form>
           </div>
