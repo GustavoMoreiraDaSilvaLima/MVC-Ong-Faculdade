@@ -15,8 +15,6 @@
   <!-- Font Awesome -->
   <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-
 </head>
 
 <body>
@@ -24,15 +22,16 @@
     <!-- Inicio do Header -->
 
     <header>
-        <a id="Retornar" class="botaoTamanho botaoEstilo" style="z-index: 1001" href="/">Pagina Inicial<img
-                src="/img/admin/logo_ong.png" width="20" height="20"></a>
+        <a id="Retornar" class="botaoTamanho botaoEstilo" href="/">
+            Pagina Inicial
+            <img src="/img/admin/logo_ong.png" width="20" height="20" alt="Logo">
+        </a>
         <div class="divTitulo">
-            <a href="/admin"><img src="/img/admin/admin.png" width="100" height="100"></a>
             <a href="/admin">
-                <h1 class="adminTitulo" alt="clique para voltar ao menu">Admin</h1>
+                <img src="/img/admin/admin.png" width="100" height="100" alt="Admin">
             </a>
         </div>
-        <div class="Menu">
+        <nav class="Menu">
             <a class="MenuItem text-success" href="/admin/caixa">Caixa</a>
             <a class="MenuItem text-success" href="/admin/noticias">Noticia</a>
             <a class="MenuItem text-success" href="/admin/voluntario">Voluntario</a>
@@ -42,8 +41,8 @@
             <a class="MenuItem text-success" href="/admin/eventos">Evento</a>
             <a class="MenuItem text-success" href="/admin/patrimonio">Patrimonio</a>
             <a class="MenuItem" href="/admin/parceiro">Parceiro</a>
-        </div>
-        <p style="margin-left: 1%;">Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong></p>
+        </nav>
+        <p>Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong></p>
     </header>
     <div style="margin-top:200px">
         <!-- Fim do Header -->
