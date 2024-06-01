@@ -77,22 +77,6 @@
                 <input type="text" class="form-control" id="productName" placeholder="Digite o nome do produto">
               </div>
               <div class="form-group">
-                <label>Categoria</label><br>
-                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                  <% lista.map(function(value, index) { %>
-                  <label class="radio flex-fill">
-                    <input type="radio" name="category" id="category1" autocomplete="off"> <%= value.categoriaNome %>    
-                  </label>
-                  <% }) %>
-                  <label class="radio flex-fill">
-                    <input type="radio" name="category" id="category2" autocomplete="off"> Categoria 2
-                  </label>
-                  <label class="radio flex-fill">
-                    <input type="radio" name="category" id="category3" autocomplete="off"> Categoria 3
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
                 <label>Ordenar por Preço</label><br>
                 <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
                   <label class="radio flex-fill">
@@ -104,12 +88,24 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="brandSelect">Marca</label>
-                <select class="form-control" id="brandSelect">
-                  <option>Marca 1</option>
-                  <option>Marca 2</option>
-                  <option>Marca 3</option>
-                </select>
+                <label>Categoria</label><br>
+                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                  <% listaCate.map(function(value, index) { %>
+                  <label class="radio flex-fill">
+                    <input type="checkbox" name="category" id="<%= value.categoriaId %>" autocomplete="off"> <%= value.categoriaNome %>    
+                  </label>
+                  <% }) %>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Marca</label><br>
+                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                  <% listaMarca.map(function(value, index) { %>
+                  <label class="radio flex-fill">
+                    <input type="checkbox" name="category" id="<%= value.marcaId %>" autocomplete="off"> <%= value.marcaNome %>    
+                  </label>
+                  <% }) %>
+                </div>
               </div>
               <div class="form-row">
                 <div class="col">
