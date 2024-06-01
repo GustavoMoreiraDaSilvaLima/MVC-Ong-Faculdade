@@ -10,71 +10,90 @@
     <link rel="stylesheet" type="text/css" href="/css/admin/adminLayout.css">
     <link rel="stylesheet" type="text/css" href="/css/estiloUniversal.css">
     <link rel="icon" type="image/png" href="/img/admin/icon.png">
-      <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
 <body>
 
     <!-- Inicio do Header -->
-
     <header>
-        <a id="Retornar" class="botaoTamanho botaoEstilo" href="/">
-            Pagina Inicial
-            <img src="/img/admin/logo_ong.png" width="20" height="20" alt="Logo">
-        </a>
-        <div class="divTitulo">
-            <a href="/admin">
-                <img src="/img/admin/admin.png" width="100" height="100" alt="Admin">
-            </a>
-        </div>
-        <nav class="Menu">
-            <a class="MenuItem text-success" href="/admin/caixa">Caixa</a>
-            <a class="MenuItem text-success" href="/admin/noticias">Noticia</a>
-            <a class="MenuItem text-success" href="/admin/voluntario">Voluntario</a>
-            <a class="MenuItem" href="/admin/projeto">Projeto</a>
-            <a class="MenuItem" href="/admin/adocao">Adoção</a>
-            <a class="MenuItem text-success" href="/admin/produto">Produto</a>
-            <a class="MenuItem text-success" href="/admin/eventos">Evento</a>
-            <a class="MenuItem text-success" href="/admin/patrimonio">Patrimonio</a>
-            <a class="MenuItem" href="/admin/parceiro">Parceiro</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a id="Retornar" class="navbar-brand" href="/admin">
+                    Pagina Admin
+                    <img src="/img/admin/logo_ong.png" width="20" height="20">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/admin/caixa">Caixa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/admin/noticias">Noticia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/admin/voluntario">Voluntario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/projeto">Projeto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/adocao">Adoção</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/admin/produto">Produto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/admin/eventos">Evento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/admin/patrimonio">Patrimonio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/parceiro">Parceiro</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text">
+                        Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong>
+                    </span>
+                </div>
+            </div>
         </nav>
-        <p>Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong></p>
     </header>
-    <div style="margin-top:200px">
+    <div style="margin-top:100px">
         <!-- Fim do Header -->
 
         <%- body %>
-        
+
     </div>
     <!-- Inicio do Footer -->
     <footer>
-
-        <div class="containerFooter">
+        <div class="containerFooter text-secondary">
             <div class="containerFooter1">
                 <p>© 2023 Company, Inc</p>
-                <p class="p">Suporte Tecnico:
-                </p>
+                <p class="p">Suporte Tecnico:</p>
                 <div class="suporte">
                     <p>Email: Luminatech@gmail.com<br>Telefone: (18) 99999-9999<br>Rod. Raposo Tavares, km 572 -
                         Limoeiro,<br> Pres. Prudente - SP, 19067-175</p>
                     <img src="/img/admin/suporte.png" width="100" height="100">
                 </div>
-
             </div>
         </div>
     </footer>
-
     <!-- Fim do Footer -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="/js/admin/adminLayout.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-<script src="/js/admin/adminLayout.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 </html>
