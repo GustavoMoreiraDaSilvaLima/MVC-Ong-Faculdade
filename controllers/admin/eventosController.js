@@ -23,7 +23,7 @@ class eventosController{
         if(req.body.nome != '' && req.body.descricao != '' && req.body.local != '' && req.body.inicio && req.body.duracao > 0 && 
         req.body.duracao < 24 && req.body.data >= dataAtual){
             let arquivo = req.file != null ? req.file.filename : null;
-            let Evento =  new EventosModel(0,req.body.nome,req.body.descricao,req.body.inicio,req.body.data,req.body.duracao,req.body.local, arquivo,"");
+            let Evento =  new EventosModel(0,req.body.nome,req.body.descricao,req.body.inicio,req.body.data,req.body.duracao,req.body.local, arquivo,"","");
             
             ok = await Evento.inclu_alterar_Evento();
             msg="Evento Cadastrado com sucesso!!!";
