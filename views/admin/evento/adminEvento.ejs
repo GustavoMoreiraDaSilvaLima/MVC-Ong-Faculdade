@@ -56,7 +56,7 @@
                         <p class="card-text text-center"><small class="text-muted">Data: <%= new Date(lista[i].evento_data).toLocaleDateString() %><br> Inicio: <%= lista[i].evento_inicio %> Duração: <%= lista[i].evento_duracao %> Horas</small></p>
                         <div style="flex-direction: row;">
                             <a data-codigocancelamente="<%= lista[i].evento_id %>" href="#" class="btn btn-danger"> Cancelar Evento</a>
-                            <button data-id="<%= lista[i].evento_id %>" class="btn btn-primary">Editar/Registar saida</button>
+                            <a href="/admin/eventos/alterar/<%= lista[i].evento_id %>" class="btn btn-primary">Editar/Registar saida</a>
                         </div>
                     </div>
                 </div>
@@ -72,8 +72,8 @@
                         <p class="card-text"><%= lista[i+1].evento_descricao %></p>
                         <p class="card-text text-center"><small class="text-muted">Data: <%= new Date(lista[i+1].evento_data).toLocaleDateString() %><br> Inicio: <%= lista[i+1].evento_inicio %> Duração: <%= lista[i+1].evento_duracao %> Horas</small></p>
                         <div style="flex-direction: row;">
-                            <a data-codigocancelamente="<%= lista[i+1].evento_id %>" href="#" class="btn btn-danger"> Cancelar Evento</a>
-                            <button data-id="<%= lista[i+1].evento_id %>" class="btn btn-primary">Editar/Registar saida</button>
+                            <button data-codigocancelamente="<%= lista[i+1].evento_id %>" href="#" class="btn btn-danger"> Cancelar Evento</button>
+                            <a href="/admin/eventos/alterar/<%= lista[i+1].evento_id %>" class="btn btn-primary">Editar/Registar saida</a>
                         </div>
                     </div>
                 </div>
@@ -89,8 +89,8 @@
                         <p class="card-text"><%= lista[i+2].evento_descricao %></p>
                         <p class="card-text text-center"><small class="text-muted">Data: <%= new Date(lista[i+2].evento_data).toLocaleDateString() %><br> Inicio: <%= lista[i+2].evento_inicio %> Duração: <%= lista[i+2].evento_duracao %> Horas</small></p>
                         <div style="flex-direction: row;">
-                            <a data-codigocancelamente="<%= lista[i+2].evento_id %>" href="#" class="btn btn-danger"> Cancelar Evento</a>
-                            <button data-id="<%= lista[i+2].evento_id %>" class="btn btn-primary">Editar/Registar saida</button>
+                            <button data-codigocancelamente="<%= lista[i+2].evento_id %>" class="btn btn-danger"> Cancelar Evento</button>
+                            <a href="/admin/eventos/alterar/<%= lista[i+2].evento_id %>" class="btn btn-primary">Editar/Registar saida</a>
                         </div>
                     </div>
                 </div>

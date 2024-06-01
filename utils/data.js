@@ -26,6 +26,12 @@ class Data {
         return DataAtual;
     }
 
+    formatarData() {
+
+    
+        return this.#data.toISOString().split('T')[0];
+    }
+
 }
 
 module.exports = Data;
