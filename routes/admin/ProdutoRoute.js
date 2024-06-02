@@ -39,4 +39,6 @@ ProdutoRouterAdmin.post('/deletar',autent.NivelPermissaoAdm,ctrl.excluirProduto)
 //ProdutoRouterAdmin.post('/inserir',autent.NivelPermissaoAdm,ctrl.inserirProduto);
 ProdutoRouterAdmin.get("/tabela", autent.NivelPermissaoAdm, ctrl.AtualizarLista);
 
+ProdutoRouterAdmin.get("/listaCompleta",autent.NivelPermissaoAdm, ctrl.Listar)//Rota para listar todos os produtos
+
 module.exports = ProdutoRouterAdmin;

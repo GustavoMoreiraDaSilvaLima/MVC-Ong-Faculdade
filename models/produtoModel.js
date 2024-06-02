@@ -152,7 +152,8 @@ class ProdutoModel {
             "produtoId": this.#produtoId,
             "produtoImagem": this.#imagem,
             "marcaNome": this.#marcaNome,
-            "categoriaNome": this.#categoriaNome
+            "categoriaNome": this.#categoriaNome,
+            "produtoQuantidade": this.#produtoQuantidade
         }
     }
 

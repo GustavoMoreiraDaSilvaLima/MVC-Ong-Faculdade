@@ -161,6 +161,14 @@ class ProdutoController {
 
         res.send({produtoEncontrado: produto});
     }
+
+
+    async Listar(req,res){
+        let produto = new ProdutoModel();
+        produto = await produto.listarProdutos();
+
+        res.send({item: produto});
+    }
 }
 
 module.exports = ProdutoController;

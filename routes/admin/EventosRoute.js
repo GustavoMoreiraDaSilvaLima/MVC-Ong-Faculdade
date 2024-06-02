@@ -30,6 +30,7 @@ EventoRouter.get("/registro/:tipo",autent.NivelPermissaoAdm,ctrl.EventoRegistarL
 EventoRouter.post('/cadastrar',autent.NivelPermissaoAdm, upload.single("imagem"),ctrl.EventosCadastrar);
 EventoRouter.post("/alterar",autent.NivelPermissaoAdm,upload.single("imagem"), ctrl.EventosAlterar);
 EventoRouter.post('/excluir', autent.NivelPermissaoAdm, ctrl.EventoExcluir);
+EventoRouter.post('/saidaEvento/:filtro',autent.NivelPermissaoAdm, ctrl.RegistrarSaida);
 
 
 module.exports = EventoRouter;

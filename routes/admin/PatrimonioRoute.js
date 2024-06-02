@@ -14,6 +14,8 @@ PatrimonioRouter.post('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.patrimonio
 PatrimonioRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.atualizarPatrimonioPost);
 PatrimonioRouter.post('/excluir',autent.NivelPermissaoAdm,ctrl.excluirPatrimonio);
 
+PatrimonioRouter.get("/listaCompleta",autent.NivelPermissaoAdm,ctrl.Listar)//Rota para listar todos os produtos
+
 //Noticia
 PatrimonioRouter.get('/patrimonio', ctrl.patrimonioView);
 PatrimonioRouter.get('/espec/:id', async (req,res) => {

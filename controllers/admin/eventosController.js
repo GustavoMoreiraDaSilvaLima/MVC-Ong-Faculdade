@@ -92,8 +92,18 @@ class eventosController {
     async EventoRegistarLista(req, res) {
 
     }
+    //Registra a saida de evento
+    async RegistrarSaida(req, res) {
+        let filtro = req.params.filtro;
+        let ok = false;
+        let msg = ''
+        if(filtro=="produto"){
 
-    async Registro(req, res) {
+        }else if (filtro == "patrimonio"){
+
+        }else{
+            msg = "Erro, Não foi possivel realizar a conexão"
+        }
 
     }
 
