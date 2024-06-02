@@ -1,4 +1,4 @@
-export class Validador {
+class Validador {
     #numberLocale
 
 
