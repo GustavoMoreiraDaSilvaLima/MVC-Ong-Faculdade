@@ -70,10 +70,7 @@ class patrimonioModel{
             return resultado;
             }
         }
-    
 
-
-    //Sem Excluir, seria o alterar, incluir no alterar o Status
 
     async exibirPatrimonio(){
         let sql = "select * from ONG_PATRIMONIOS";
@@ -87,7 +84,19 @@ class patrimonioModel{
         return lista;
     }
 
+    async excluirPatrimonio(ONG_PATRIMONIO_ID) {
+
+        let sql = "delete from ONG_PATRIMONIOS where ONG_PATRIMONIO_ID = ?";
+        let valores = [ONG_PATRIMONIO_ID];
+
+        var resultado = await banco.ExecutaComandoNonQuery(sql,valores);
+
+        return resultado;
+
+    }
+
 }
+
 
 module.exports = patrimonioModel;
 

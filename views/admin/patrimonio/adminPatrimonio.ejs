@@ -1,23 +1,47 @@
 <div class="container">
-    <h1 class="">Patrimonios registrados</h1>
+    <script src="/js/admin/patrimonio/excluir.js"></script>
+    <h1 class="">Patrimônios Registrados</h1>
+    <style>
+        .editar {
+            margin-right: 1.5rem;
+        }
+
+        .custom-link {
+            color: inherit; /* Usa a cor padrão do texto */
+            text-decoration: none; /* Remove o sublinhado */
+            cursor: pointer; /* Muda o cursor para parecer mais um botão */
+        }
+
+        .custom-link:hover {
+            color: inherit; /* Mantém a cor quando o mouse passa por cima */
+        }
+    </style>
+
     <div class="list-group">
-        <% for (let i = 0; i < lista.length; i++)  { %>
-        <a href="alterar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
-            <div class="row">
-                <div class="col-md-1 my-auto">
-                    <img src="/img/logo3.png" alt="Ícone Notícia 1" class="img-fluid"> <!-- Ajuste o caminho da imagem -->
-                </div>
-                <div class="col-md-11">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><%= lista[i].ONG_PATRIMONIO_NOME %></h5>
+        <% for (let i = 0; i < lista.length; i++) { %>
+            <div class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black p-2 bd-highlight">
+                <a href="alterar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="custom-link">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-1 my-auto">
+                                <img src="/img/logo3.png" alt="Ícone Patrimônio" class="img-fluid">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><%= lista[i].ONG_PATRIMONIO_NOME %></h5>
+                                </div>
+                                <p class="mb-1"><%= lista[i].ONG_PATRIMONIO_DESCRICAO %></p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="mb-1"><%= lista[i].ONG_PATRIMONIO_DESCRICAO%></p>
+                </a>
+                <div class="col-lg-12" style="text-align: right;">
+                    <a id="editar" href="noticias/adminEditar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                    <button data-codigo="<%= lista[i].ONG_PATRIMONIO_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
                 </div>
-                
             </div>
-        </a>
         <% } %>
-        <a href="/admin/patrimonio/adminCadastrar" type="submit" class="btn btn-success">Registrar Patrimonio</a>
+        <a href="/admin/patrimonio/adminCadastrar" type="submit" class="btn btn-success">Registrar Patrimônio</a>
     </div>
     <br><br><br><br><br>
 </div>

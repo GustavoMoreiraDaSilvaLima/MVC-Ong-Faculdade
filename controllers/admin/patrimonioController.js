@@ -1,3 +1,4 @@
+const patrimonioModel = require("../../models/patrimonioModel");
 const PatrimonioModel = require("../../models/patrimonioModel");
 
 class PatrimonioController {
@@ -34,8 +35,17 @@ class PatrimonioController {
     }
 
     async excluirPatrimonio(req, res) {
-        // Implementar a lógica para excluir um patrimônio
+        var ok = true;
+        if(req.body.patrimonioId != ""){
+            let patrimonio = new patrimonioModel();
+            ok = await patrimonio.excluirPatrimonio(req.body.patrimonioId);
+        }else{
+            ok = false;
+        }
+        res.send({ok: ok});
+
     }
+
     async atualizarPatrimonioPost() {
         var ok = true;
         if(req.body.id !="", req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){

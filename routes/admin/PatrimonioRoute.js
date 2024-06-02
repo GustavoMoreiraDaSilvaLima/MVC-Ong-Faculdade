@@ -12,7 +12,7 @@ PatrimonioRouter.get('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.cadastrarPa
 PatrimonioRouter.post('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.cadastrarPatrimonioPost);
 PatrimonioRouter.get('/alterar/:id',autent.NivelPermissaoAdm,ctrl.editarPatrimonioView);
 PatrimonioRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.atualizarPatrimonioPost);
-PatrimonioRouter.post('/excluir',autent.NivelPermissaoAdm,ctrl.excluirPatrimonio);
+PatrimonioRouter.post('/excluir/:id',autent.NivelPermissaoAdm,ctrl.excluirPatrimonio);
 
 //Noticia
 PatrimonioRouter.get('/patrimonio', ctrl.patrimonioView);
