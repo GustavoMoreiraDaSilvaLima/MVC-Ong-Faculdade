@@ -17,6 +17,51 @@ class ProdutoController {
         res.render('admin/produto/adminProduto', {lista: lista, listaCate : listaCate, listaMarca : listaMarca, layout:'adminLayout'});
     }
 
+    async Filtracao(req, res) {
+        try {
+            const { nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax } = req.body;
+    
+            let prod = new ProdutoModel();
+            let lista = await prod.filtrarAvancado(nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax);
+    
+            // Log para verificar a lista antes de enviar
+            console.log("Antes de transformar:", lista);
+    
+            // Função para transformar objetos removendo propriedades privadas
+            const transform = (produto) => {
+                return {
+                    produtoId: produto.produtoId,
+                    produtoCodigo: produto.produtoCodigo,
+                    produtoNome: produto.produtoNome,
+                    produtoQuantidade: produto.produtoQuantidade,
+                    categoriaId: produto.categoriaId,
+                    categoriaNome: produto.categoriaNome,
+                    produtoValor: produto.produtoValor,
+                    produtoImagem: produto.imagem,
+                    marcaId: produto.marcaId,
+                    marcaNome: produto.marcaNome
+                };
+            };
+    
+            // Aplicando a transformação em cada item da lista
+            let listaTransformada = lista.map(transform);
+    
+            // Log para verificar a lista transformada
+            console.log("Depois de transformar:", listaTransformada);
+
+            let marca = new MarcaModel();
+            let listaMarca = await marca.listarMarcas();
+            let categoria = new CategoriaModel();
+            let listaCate = await categoria.listarCategorias();
+    
+            res.json({ lista: listaTransformada , listaMarca : listaMarca, listaCate : listaCate});
+        } catch (error) {
+            console.error("Erro ao filtrar produtos:", error);
+            res.status(500).json({ error: "Erro ao filtrar produtos." });
+        }
+    }
+    
+
     async AtualizarLista(req, res) {
         let Doacao = new ProdutoModel();
         let status = "disponivel";
@@ -58,6 +103,8 @@ class ProdutoController {
         let Formas = new FormasPagamentoModel();
         Situacao = await Situacao.listar();
         Formas = await Formas.listar();
+
+        
 
         res.send({ ok: ok, item: listaCompleta, status: status, pgt: Formas, situacao: Situacao });
     }

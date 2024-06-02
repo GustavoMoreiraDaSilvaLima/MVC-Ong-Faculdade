@@ -11,54 +11,55 @@
                 <h4 class="mb-0">Filtro de Produtos</h4>
             </div>
             <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label for="productName"><strong>Nome do Produto</strong></label>
-                        <input type="text" class="form-control" id="productName" placeholder="Digite o nome do produto">
+              <div>
+                <div class="form-group">
+                    <label for="productName"><strong>Nome do Produto</strong></label>
+                    <input type="text" class="form-control" id="productName" placeholder="Digite o nome do produto">
+                </div>
+                <div class="form-group">
+                    <label><strong>Ordenar por Preço</strong></label><br>
+                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                        <label class="radio flex-fill">
+                            <input type="radio" class="itemFiltro priceOrder" name="priceOrder" id="ascendente" autocomplete="off"> ascendente
+                        </label>
+                        <label class="radio flex-fill">
+                            <input type="radio" class="itemFiltro priceOrder" name="priceOrder" id="descendente" autocomplete="off"> descendente
+                        </label>
                     </div>
-                    <div class="form-group">
-                        <label><strong>Ordenar por Preço</strong></label><br>
-                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                            <label class="radio flex-fill">
-                                <input type="radio" name="priceOrder" id="priceAsc" autocomplete="off"> Ascendente
-                            </label>
-                            <label class="radio flex-fill">
-                                <input type="radio" name="priceOrder" id="priceDesc" autocomplete="off"> Descendente
-                            </label>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Categoria</strong></label><br>
+                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                        <% listaCate.map(function(value, index) { %>
+                        <label class="checkbox flex-fill">
+                            <input type="checkbox" class="itemFiltro" name="category" id="<%= value.categoriaId %>" autocomplete="off"> <%= value.categoriaNome %>    
+                        </label>
+                        <% }) %>
                     </div>
-                    <div class="form-group">
-                        <label><strong>Categoria</strong></label><br>
-                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                            <% listaCate.map(function(value, index) { %>
-                            <label class="checkbox flex-fill">
-                                <input type="checkbox" name="category" id="<%= value.categoriaId %>" autocomplete="off"> <%= value.categoriaNome %>    
-                            </label>
-                            <% }) %>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Marca</strong></label><br>
+                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                        <% listaMarca.map(function(value, index) { %>
+                        <label class="checkbox flex-fill">
+                            <input type="checkbox" class="itemFiltro" name="brand" id="<%= value.marcaId %>" autocomplete="off"> <%= value.marcaNome %>    
+                        </label>
+                        <% }) %>
                     </div>
-                    <div class="form-group">
-                        <label><strong>Marca</strong></label><br>
-                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                            <% listaMarca.map(function(value, index) { %>
-                            <label class="checkbox flex-fill">
-                                <input type="checkbox" name="category" id="<%= value.marcaId %>" autocomplete="off"> <%= value.marcaNome %>    
-                            </label>
-                            <% }) %>
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="quantityMin"><strong>Quantidade Mínima</strong></label>
+                        <input type="number" class="form-control" id="quantityMin" min="0" placeholder="Mínimo">
                     </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label for="quantityMin"><strong>Quantidade Mínima</strong></label>
-                            <input type="number" class="form-control" id="quantityMin" min="0" placeholder="Mínimo">
-                        </div>
-                        <div class="col">
-                            <label for="quantityMax"><strong>Quantidade Máxima</strong></label>
-                            <input type="number" class="form-control" id="quantityMax" min="0" placeholder="Máximo">
-                        </div>
+                    <div class="col">
+                        <label for="quantityMax"><strong>Quantidade Máxima</strong></label>
+                        <input type="number" class="form-control" id="quantityMax" min="0" placeholder="Máximo">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block mt-3">Buscar</button>
-                </form>
+                </div>
+                <button type="button" class="btn btn-primary btn-block mt-3" id="btnFiltrar">Buscar</button>
+            </div>
+            
             </div>
         </div>
     </div>
@@ -89,11 +90,12 @@
                 <th>Nome</th>
                 <th>Quantidade</th>
                 <th>Categoria</th>
+                <th>Preco</th>
                 <th>Marca</th>
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="venda">
               <% lista.map(function(value, index) { %>
               <tr>
                 <td>
@@ -107,6 +109,7 @@
                 <td><%= value.produtoNome %></td>
                 <td><%= value.produtoQuantidade %></td>
                 <td><%= value.categoriaNome %></td>
+                <td><%= value.produtoValor %></td>
                 <td><%= value.marcaNome %></td>                   
                 <td>
                   <div class="btn-group" role="group" aria-label="Ações">
