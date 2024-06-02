@@ -1,0 +1,112 @@
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        /* Altura fixa para as imagens */
+        object-fit: cover;
+        /* Para ajustar a imagem ao contêiner */
+    }
+    
+    .separar {
+            display: grid;
+            grid-template-columns: 10fr 90fr; /* 5% para a primeira coluna e 95% para a segunda */
+            height: 100%;
+        }
+        .left {
+            
+            padding: 10px;
+        }
+        .right {
+            
+            padding: 10px;
+        }
+</style>
+<div class="separar retirar">
+    <div class="left" >
+        <h2>Filtros</h2>
+        <hr>
+        <input class="pt-1"  type="checkbox"><label>Mostrar Cancelados</label><!--Filtrar todos-->
+        <input  class="pt-1" type="checkbox"><label>Proximos</label><!--Filtrar pegando a data atual-->
+        <label>Data maior que</label>
+        <input class="form-control" type="date" id="DataMaior"><!--Filtrar por data maior que esta-->
+        <button id="aplicarFiltros" class="btn btn-outline-info btn-sm mt-2">Aplicar Filtros</button>
+        <button class="btn btn-outline-danger btn-sm mt-2">Exportar Pagina em PDF</button>
+    </div>
+<div class="container mt-5 right" style="padding: 2%;">
+   
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="display-4">Administração de Eventos</h1>
+            <p class="lead">Confira nossos próximos eventos</p>
+            <a class="btn btn-outline-success" href="/admin/eventos/cadastrar">Cadastrar Novo evento</a>
+        </div>
+    </div>
+    <div>
+        <% if(lista != undefined ) { %>
+        <% for(let i = 0; i < lista.length; i+=3) { %>
+        <div class="row mt-4">
+            <!-- Event 1 -->
+            <% if(lista[i]!= undefined){ %>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="<%= lista[i].evento_imagem %>" class="card-img-top" alt="Evento 1">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= lista[i].evento_nome %></h5>
+                        <p class="card-text"><%= lista[i].evento_descricao %></p>
+                        <p class="card-text text-center"><small class="text-muted">Data: <%= new Date(lista[i].evento_data).toLocaleDateString() %><br> Inicio: <%= lista[i].evento_inicio %> Duração: <%= lista[i].evento_duracao %> Horas</small></p>
+                        <div style="flex-direction: row;">
+                            <a data-codigocancelamente="<%= lista[i].evento_id %>" href="#" class="btn btn-danger"> Cancelar Evento</a>
+                            <a href="/admin/eventos/alterar/<%= lista[i].evento_id %>" class="btn btn-primary">Editar/Registar saida</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <!-- Event 2 -->
+            <% if(lista[i+1]!= undefined){ %>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="<%= lista[i+1].evento_imagem %>" class="card-img-top" alt="Evento 2">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= lista[i+1].evento_nome %></h5>
+                        <p class="card-text"><%= lista[i+1].evento_descricao %></p>
+                        <p class="card-text text-center"><small class="text-muted">Data: <%= new Date(lista[i+1].evento_data).toLocaleDateString() %><br> Inicio: <%= lista[i+1].evento_inicio %> Duração: <%= lista[i+1].evento_duracao %> Horas</small></p>
+                        <div style="flex-direction: row;">
+                            <button data-codigocancelamente="<%= lista[i+1].evento_id %>" href="#" class="btn btn-danger"> Cancelar Evento</button>
+                            <a href="/admin/eventos/alterar/<%= lista[i+1].evento_id %>" class="btn btn-primary">Editar/Registar saida</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <!-- Event 3 -->
+            <% if(lista[i+2]!= undefined){ %>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="<%= lista[i+2].evento_imagem %>" class="card-img-top" alt="Evento 3">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= lista[i+2].evento_nome %></h5>
+                        <p class="card-text"><%= lista[i+2].evento_descricao %></p>
+                        <p class="card-text text-center"><small class="text-muted">Data: <%= new Date(lista[i+2].evento_data).toLocaleDateString() %><br> Inicio: <%= lista[i+2].evento_inicio %> Duração: <%= lista[i+2].evento_duracao %> Horas</small></p>
+                        <div style="flex-direction: row;">
+                            <button data-codigocancelamente="<%= lista[i+2].evento_id %>" class="btn btn-danger"> Cancelar Evento</button>
+                            <a href="/admin/eventos/alterar/<%= lista[i+2].evento_id %>" class="btn btn-primary">Editar/Registar saida</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <% } %>
+        </div>
+
+            <% } %>
+        <% } else { %>
+
+            <h1><strong>Nenhum Evento encontrado</strong></h1>
+
+            <% } %>
+
+    </div>
+</div>
+
+
+</div>

@@ -1,0 +1,97 @@
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        /* Altura fixa para as imagens */
+        object-fit: cover;
+        /* Para ajustar a imagem ao contêiner */
+    }
+
+    .form-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+        margin-bottom: 20px;
+    }
+</style>
+
+
+<!-- Main Content -->
+<div class="container mt-5 pb-5 pt-3">
+    <div id="AlterarComeco">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Registro de Saida de evento</h1>
+                <% if(saida){ %>
+                    <a class="btn btn-outline-primary btn-lg">Saida Registrada</a>
+                <% } else{ %>
+                    <button id="btnAlterarView" class="btn btn-outline-primary btn-lg">Clique aqui para iniciar</button>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+
+        <!-- Event Registration Form -->
+        <input type="hidden" id="inputId" value="<%= dados.evento_id %>">
+        <div id="alterarConteudo">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="form-container">
+                        <h2 class="text-center form-title">Cadastrar Novo Evento</h2>
+                        <div>
+                            <div class="form-group">
+                                <label for="eventName">Nome do Evento</label>
+                                <input type="text" class="form-control" id="eventName"
+                                    placeholder="Digite o nome do evento" value="<%= dados.evento_nome %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDescription">Descrição do Evento</label>
+                                <textarea class="form-control" id="eventDescription" rows="3"
+                                    placeholder="Descreva o evento"><%= dados.evento_descricao %></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventLocation">Local do Evento</label>
+                                <input type="text" class="form-control" id="eventLocation"
+                                    placeholder="Digite o local do evento" value="<%= dados.evento_local %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventStartTime">Horário de Início</label>
+                                <input type="time" class="form-control" id="eventStartTime"
+                                    value="<%= dados.evento_inicio %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDuration">Duração (horas)</label>
+                                <input type="number" class="form-control" id="eventDuration"
+                                    placeholder="Digite a duração em horas" value="<%= dados.evento_duracao %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDate">Data do Evento</label>
+                                <input type="date" class="form-control" id="eventDate" value="<%= dados.evento_data %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventImage">Imagem do Evento</label>
+                                <input type="file" class="form-control-file" id="eventImage">
+                            </div>
+                            <div>
+                                <img src="<%= dados.evento_imagem %>" id="previaImagem" width="200" />
+                            </div>
+                            <a href="/admin/eventos" class="btn btn-danger">Voltar</a>
+                            <button id="btnAlterar" class="btn btn-primary btn-block">Cadastrar Evento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="/js/admin/evento/eventoAlterar.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
