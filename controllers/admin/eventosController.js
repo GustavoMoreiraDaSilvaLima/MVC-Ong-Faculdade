@@ -43,7 +43,7 @@ class eventosController {
     //Função a ser utilizada para Registar saida de evento
     async EventosAlterView(req, res) {
         let Evento = new EventosModel();
-        
+
         if (req.params.id != undefined && req.params.id != "") {
             Evento = await Evento.obterEvento(req.params.id);
         }
@@ -51,9 +51,9 @@ class eventosController {
         dataFormatada = dataFormatada.formatarData(Evento.evento_data);
         Evento.evento_data = dataFormatada;
         let SaidaRegistrada = await Evento.VerificarSaida(req.params.id);
-        if(SaidaRegistrada.length > 0){
+        if (SaidaRegistrada.length > 0) {
             SaidaRegistrada = true;
-        }else{
+        } else {
             SaidaRegistrada = false;
         }
 
@@ -103,79 +103,90 @@ class eventosController {
         let ok = false;
         let msg = ''
         let Evento = new EventosModel();
-        if (filtro == "produto") {
-            let idEvento = req.body.id;
-            let idProduto = req.body.idProduto;
-            let quantidadeProduto = req.body.quantidadeProduto;
-            //Verificar Estoque de produtos
-            let Validacao = [];
-            let Produto = new ProdutoModel();
-            for (let i = 0; i < idProduto.length; i++) {
-                let Temp = await Produto.validarEstoque(idProduto[i], quantidadeProduto[i]);
-                if (Temp) {
-                    Validacao.push(Temp[i]);
-                }
-            }
-            if (Validacao.length == idProduto.length) {
-
-                Evento = await Evento.RegistrarSaidaEvento(idEvento, idProduto, quantidadeProduto, filtro);
-                Produto = await Produto.RetirarEstoqueSaidaEvento(idProduto, quantidadeProduto);
-                if (Evento && Produto) {
-                    ok = true
-                    msg = "Saida de Produtos cadastrada com sucesso";
-                } else if (Evento) {
-                    ok = false;
-                    msg = "Não possivel registrar dar baixa no estoque, faça manualmente";
-                } else if (Produto) {
-                    ok = false;
-                    msg = "Não possivel registrar as saidas do evento, mas o estoque foi alterado, por favor corrija";
-                } else {
-                    ok = false;
-                    msg = "Não foi possivel registar nem retirar do estoque";
-                }
-            } else {
-                ok = false;
-                msg = "Alguns produtos estão quantidades incorretas!";
-            }
-        } else if (filtro == "patrimonio") {
-            let idEvento = req.body.id;
-            let idPatrimonio = req.body.idPatrimonio;
-            let quantidadePatrimonio = req.body.quantidadePatrimonio;
-            //Verificar Estoque de produtos
-            let Validacao = [];
-            let Patrimonio = new PatrimonioModel();
-            for (let i = 0; i < idPatrimonio.length; i++) {
-                let Temp = await Patrimonio.validarEstoque(idPatrimonio[i], quantidadePatrimonio[i]);
-                if (Temp) {
-                    Validacao.push(Temp[i]);
-                }
-            }
-            if (Validacao.length == idPatrimonio.length) {
-
-                Evento = await Evento.RegistrarSaidaEvento(idEvento, idPatrimonio, quantidadePatrimonio, filtro);
-                Patrimonio = await Patrimonio.RetirarEstoqueSaidaEvento(idPatrimonio, quantidadePatrimonio);
-                if (Evento && Patrimonio) {
-                    ok = true
-                    msg = "Saida de Patrimonio cadastrada com sucesso";
-                } else if (Evento) {
-                    ok = false;
-                    msg = "Não possivel registrar dar baixa no estoque, faça manualmente";
-                } else if (Patrimonio) {
-                    ok = false;
-                    msg = "Não possivel registrar as saidas do evento, mas o estoque foi alterado, por favor corrija";
-                } else {
-                    ok = false;
-                    msg = "Não foi possivel registar nem retirar do estoque";
-                }
-            } else {
-                ok = false;
-                msg = "Alguns Patrimonio estão quantidades incorretas!";
-            }
+        let SaidaRegistrada = await Evento.VerificarSaida(req.params.id);
+        if (SaidaRegistrada.length > 0) {
+            SaidaRegistrada = true;
         } else {
-            ok = false
-            msg = "Erro, Não foi possivel realizar a conexão";
+            SaidaRegistrada = false;
         }
-        res.send({ ok: ok, msg: msg })
+        if (!SaidaRegistrada) {
+            if (filtro == "produto") {
+                let idEvento = req.body.id;
+                let idProduto = req.body.idProduto;
+                let quantidadeProduto = req.body.quantidadeProduto;
+                //Verificar Estoque de produtos
+                let Validacao = [];
+                let Produto = new ProdutoModel();
+                for (let i = 0; i < idProduto.length; i++) {
+                    let Temp = await Produto.validarEstoque(idProduto[i], quantidadeProduto[i]);
+                    if (Temp) {
+                        Validacao.push(Temp[i]);
+                    }
+                }
+                if (Validacao.length == idProduto.length) {
+
+                    Evento = await Evento.RegistrarSaidaEvento(idEvento, idProduto, quantidadeProduto, filtro);
+                    Produto = await Produto.RetirarEstoqueSaidaEvento(idProduto, quantidadeProduto);
+                    if (Evento && Produto) {
+                        ok = true
+                        msg = "Saida de Produtos cadastrada com sucesso";
+                    } else if (Evento) {
+                        ok = false;
+                        msg = "Não possivel registrar dar baixa no estoque, faça manualmente";
+                    } else if (Produto) {
+                        ok = false;
+                        msg = "Não possivel registrar as saidas do evento, mas o estoque foi alterado, por favor corrija";
+                    } else {
+                        ok = false;
+                        msg = "Não foi possivel registar nem retirar do estoque";
+                    }
+                } else {
+                    ok = false;
+                    msg = "Alguns produtos estão quantidades incorretas!";
+                }
+            } else if (filtro == "patrimonio") {
+                let idEvento = req.body.id;
+                let idPatrimonio = req.body.idPatrimonio;
+                let quantidadePatrimonio = req.body.quantidadePatrimonio;
+                //Verificar Estoque de produtos
+                let Validacao = [];
+                let Patrimonio = new PatrimonioModel();
+                for (let i = 0; i < idPatrimonio.length; i++) {
+                    let Temp = await Patrimonio.validarEstoque(idPatrimonio[i], quantidadePatrimonio[i]);
+                    if (Temp) {
+                        Validacao.push(Temp[i]);
+                    }
+                }
+                if (Validacao.length == idPatrimonio.length) {
+
+                    Evento = await Evento.RegistrarSaidaEvento(idEvento, idPatrimonio, quantidadePatrimonio, filtro);
+                    Patrimonio = await Patrimonio.RetirarEstoqueSaidaEvento(idPatrimonio, quantidadePatrimonio);
+                    if (Evento && Patrimonio) {
+                        ok = true
+                        msg = "Saida de Patrimonio cadastrada com sucesso";
+                    } else if (Evento) {
+                        ok = false;
+                        msg = "Não possivel registrar dar baixa no estoque, faça manualmente";
+                    } else if (Patrimonio) {
+                        ok = false;
+                        msg = "Não possivel registrar as saidas do evento, mas o estoque foi alterado, por favor corrija";
+                    } else {
+                        ok = false;
+                        msg = "Não foi possivel registar nem retirar do estoque";
+                    }
+                } else {
+                    ok = false;
+                    msg = "Alguns Patrimonio estão quantidades incorretas!";
+                }
+            } else {
+                ok = false
+                msg = "Erro, Não foi possivel realizar a conexão";
+            }
+        }else{
+            ok = false;
+            msg = "Este evento já tem uma saida Registrado, impossivel fazer outra!!!";
+        }
+        res.send({ ok: ok, msg: msg });
 
 
     }
