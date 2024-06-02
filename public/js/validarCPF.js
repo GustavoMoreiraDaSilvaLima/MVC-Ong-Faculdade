@@ -58,7 +58,6 @@ class Validador {
             if (primeiroDigitoVerificador !== parseInt(this.#numberLocale .charAt(12))) {
                 return false;
             }
-
             // Calcula o segundo dígito verificador
             soma = 0;
             peso = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];

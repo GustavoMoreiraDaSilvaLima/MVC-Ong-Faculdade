@@ -1,6 +1,7 @@
 const express = require('express')
 const expressEjsLayout = require('express-ejs-layouts');
 const cookieParser = require("cookie-parser");
+const path = require('path');
 let homeRoute = require("./routes/homeRoute");
 let enviosRoute = require("./routes/enviosRoute");
 let voluntarioRoute = require("./routes/voluntario/voluntarioRoute");
@@ -34,7 +35,7 @@ app.set("view engine", "ejs");
 app.set("layout", "./layout");
 app.use(cookieParser());
 
-app.use(express.static("public"));
+app.use(express.static(path.join('public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(expressEjsLayout);
