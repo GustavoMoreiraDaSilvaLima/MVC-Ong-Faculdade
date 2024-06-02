@@ -93,7 +93,7 @@ class ProdutoController {
 
         res.send({ ok: ok })
     }
-
+   
     async alterarView(req, res){ 
         if((solucao == 0 || solucao != req.params.id) && req.params.id > 0){
             solucao = req.params.id
