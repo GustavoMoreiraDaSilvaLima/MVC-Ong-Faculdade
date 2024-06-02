@@ -148,7 +148,7 @@ class eventosModel {
                 Evento.evento_data = formatarData;
 
                 let valores = [Evento.evento_id,idItem[i],quantidade[i],Evento.evento_data];
-                
+
                 resultado[i] = await banco.ExecutaComandoNonQuery(sql, valores);
             }
             let ListaConfirma = [];
@@ -178,6 +178,16 @@ class eventosModel {
         } else {
             return false;
         }
+    }
+
+
+    async VerificarSaida(id){
+        let sql = "select * from tb_saida_evento where saida_evento_id = ?";
+        let valores = [id];
+        let result = await banco.ExecutaComando(sql,valores);
+        //Quando for maior que zero é porque achou, no caso true
+        return result
+
     }
 
     toJSON() {

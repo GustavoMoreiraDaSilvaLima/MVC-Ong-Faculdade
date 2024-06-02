@@ -50,7 +50,14 @@ class eventosController {
         let dataFormatada = new UtilData();
         dataFormatada = dataFormatada.formatarData(Evento.evento_data);
         Evento.evento_data = dataFormatada;
-        res.render("admin/evento/adminAlterarEvento", { layout: 'adminLayout', dados: Evento });
+        let SaidaRegistrada = await Evento.VerificarSaida(req.params.id);
+        if(SaidaRegistrada.length > 0){
+            SaidaRegistrada = true;
+        }else{
+            SaidaRegistrada = false;
+        }
+
+        res.render("admin/evento/adminAlterarEvento", { layout: 'adminLayout', dados: Evento, saida: SaidaRegistrada });
     }
 
 
