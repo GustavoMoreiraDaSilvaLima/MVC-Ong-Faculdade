@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let nome = document.getElementById("productName").value;
     let tipoPreco =
       document.querySelector('input[name="priceOrder"]:checked')?.id || "";
-    let categorias = Array.from(
-      document.querySelectorAll('input[name="category"]:checked')
-    ).map((el) => el.id);
     let marcas = Array.from(
       document.querySelectorAll('input[name="brand"]:checked')
+    ).map((el) => el.id);
+    let categorias = Array.from(
+      document.querySelectorAll('input[name="category"]:checked')
     ).map((el) => el.id);
     let quantiaMin = document.getElementById("quantityMin").value;
     let quantiaMax = document.getElementById("quantityMax").value;
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nome: nome,
       tipoPreco: tipoPreco,
       categorias: categorias,
-      marcas: marcas.length,
+      marcas: marcas,
       quantiaMin: quantiaMin,
       quantiaMax: quantiaMax,
     };
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return r.json();
       })
       .then((r) => {
-        if (r.lista) {
+        if (r.lista.length > 0) {
             console.log(r.lista[0])
           let htmlCorpo = "";
           for (let i = 0; i <= r.lista.length; i++) {
@@ -99,6 +99,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             `;
             document.getElementById("venda").innerHTML = htmlCorpo;
           }
+        }else{
+          let htmlCorpo = "<h1>Produto nao encontrado</h1>"
+          document.getElementById("venda").innerHTML = htmlCorpo;
         }
       });
   }
