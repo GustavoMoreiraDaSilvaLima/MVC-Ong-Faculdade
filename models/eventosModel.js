@@ -1,4 +1,5 @@
 const Database = require("../db/database");
+const UtilData = require("../utils/data");
 
 const banco = new Database();
 
@@ -68,7 +69,7 @@ class eventosModel {
             let imagem = '';
 
 
-            evento = new eventosModel(row["evento_id"], row["evento_nome"], row["evento_descricao"], row["evento_inicio"], row["evento_data"], row["evento_duracao"], row["evento_local"],"","", row["evento_status"]);
+            evento = new eventosModel(row["evento_id"], row["evento_nome"], row["evento_descricao"], row["evento_inicio"], row["evento_data"], row["evento_duracao"], row["evento_local"], "", "", row["evento_status"]);
             if (row["evento_imagem"] != null) {
                 evento.evento_imagem = global.CAMINHO_IMG_EVENTO + row["evento_imagem"];
                 evento.possuiImagem = true;
@@ -133,21 +134,48 @@ class eventosModel {
 
 
         }
-
     }
 
-    toJSON(){
-        return{
-            "evento_id":this.#evento_id,
-            "evento_nome":this.#evento_nome,
-            "evento_descricao":this.#evento_descricao,
-            "evento_local":this.#evento_local,
-            "evento_data":this.#evento_data,
-            "evento_inicio":this.#evento_inicio,
-            "evento_duracao":this.#evento_duracao,
-            "evento_imagem":this.#evento_imagem,
-            "evento_saida":this.#evento_saida,
-            "evento_status":this.#evento_status
+
+    async RegistrarSaidaEvento(id, idItem, quantidade, tipo) {
+        let Evento = await this.obterEvento(id);
+        let resultado = [];
+        if (tipo == "produto") {
+            for (let i = 0; i < idItem.length; i++) {
+                let sql = `insert into tb_saida_evento (saida_evento_id,saida_produto_id,saida_quantidade,saida_evento_data) values (?,?,?,?)`
+                let formatarData = new UtilData();
+                formatarData = formatarData.formatarData(Evento.evento_data);
+                Evento.evento_data = formatarData;
+                let valores = [Evento.evento_id,idItem[i],quantidade[i],Evento.evento_data];
+                resultado[i] = await banco.ExecutaComandoNonQuery(sql, valores);
+            }
+            let ListaConfirma = [];
+            for(let i =0; i< resultado.length;i++){
+                if(resultado[i]==true){
+                    ListaConfirma.push(resultado[i]);
+                }
+            }
+            return ListaConfirma.length == resultado.length
+
+        } else if (tipo == "patrimonio") {
+
+        } else {
+            return false;
+        }
+    }
+
+    toJSON() {
+        return {
+            "evento_id": this.#evento_id,
+            "evento_nome": this.#evento_nome,
+            "evento_descricao": this.#evento_descricao,
+            "evento_local": this.#evento_local,
+            "evento_data": this.#evento_data,
+            "evento_inicio": this.#evento_inicio,
+            "evento_duracao": this.#evento_duracao,
+            "evento_imagem": this.#evento_imagem,
+            "evento_saida": this.#evento_saida,
+            "evento_status": this.#evento_status
         }
     }
 

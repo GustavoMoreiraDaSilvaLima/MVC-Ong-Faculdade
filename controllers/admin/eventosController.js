@@ -45,8 +45,8 @@ class eventosController {
         if (req.params.id != undefined && req.params.id != "") {
             Evento = await Evento.obterEvento(req.params.id);
         }
-        let dataFormatada = new UtilData(Evento.evento_data);
-        dataFormatada = dataFormatada.formatarData();
+        let dataFormatada = new UtilData();
+        dataFormatada = dataFormatada.formatarData(Evento.evento_data);
         Evento.evento_data = dataFormatada;
         res.render("admin/evento/adminAlterarEvento", { layout: 'adminLayout', dados: Evento });
     }
@@ -85,25 +85,37 @@ class eventosController {
             ok = false;
             msg = "Erro ao Atualizar o cadastro";
         }
-        res.send({ok: ok, msg: msg});
+        res.send({ ok: ok, msg: msg });
     }
 
-
-    async EventoRegistarLista(req, res) {
-
-    }
     //Registra a saida de evento
     async RegistrarSaida(req, res) {
         let filtro = req.params.filtro;
         let ok = false;
         let msg = ''
-        if(filtro=="produto"){
+        let Evento = new EventosModel();
+        if (filtro == "produto") {
+            let idEvento = req.body.id;
+            let idProduto = req.body.idProduto;
+            let quantidadeProduto = req.body.quantidadeProduto;
+            //Verificar Estoque de produtos
 
-        }else if (filtro == "patrimonio"){
+            Evento = await Evento.RegistrarSaidaEvento(idEvento, idProduto, quantidadeProduto, filtro)
+            if (Evento) {
+                ok = true
+                msg = "Saida de Produtos cadastrada com sucesso";
+            }else{
+                ok = false;
+                msg = "Não possivel registrar todas as saidas";
+            }
+        } else if (filtro == "patrimonio") {
 
-        }else{
+        } else {
+            ok = false
             msg = "Erro, Não foi possivel realizar a conexão"
         }
+        res.send({ok: ok, msg:msg})
+
 
     }
 

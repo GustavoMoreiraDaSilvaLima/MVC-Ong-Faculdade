@@ -1,15 +1,6 @@
 
 
 class Data {
-    #data
-
-    get data() { return this.#data; }
-    set data(data) { this.#data = data; }
-
-    constructor(data) {
-        this.#data = data
-    }
-
     dataAtual() {
         let DataAtual = new Date();
         let dia = DataAtual.getDate();
@@ -26,10 +17,11 @@ class Data {
         return DataAtual;
     }
 
-    formatarData() {
-
+    formatarData(data) {
+        data = new Date(data);
+        let dataFormatada = data.toISOString().split('T')[0];
     
-        return this.#data.toISOString().split('T')[0];
+        return dataFormatada
     }
 
 }

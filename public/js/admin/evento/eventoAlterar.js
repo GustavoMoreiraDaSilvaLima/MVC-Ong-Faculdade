@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let inputQuantidade = document.querySelectorAll(".quantidade");
             for (let i=0;i< inputQuantidade.length;i++){
-                inputQuantidade[i].addEventListener("change",VerificaValor);
+                inputQuantidade[i].addEventListener("input",VerificaValor);
             }
 
         }
@@ -374,10 +374,12 @@ document.addEventListener("DOMContentLoaded", function () {
             let ValorAtual = this.value;
             let ValorMaximo = this.parentElement.previousElementSibling.dataset.quantidade;
 
-            if(ValorAtual > ValorMaximo){
+            if(parseInt(ValorAtual) > parseInt(ValorMaximo)){
                 this.value = ValorMaximo;
-            }else if(ValorAtual<=0){
+            }else if(parseInt(ValorAtual)<=0){
                 this.value = 1
+            }else{
+                this.value = ValorAtual;
             }
         }
 
