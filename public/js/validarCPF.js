@@ -1,4 +1,4 @@
-class Validador {
+export class Validador {
     #numberLocale
 
 
@@ -12,7 +12,7 @@ class Validador {
     Validar_CPF_CNPJ() {
 
         // Remove caracteres não numéricos
-        this.#numberLocale = numberLocale.replace(/[^\d]/g, '');
+        this.#numberLocale = this.#numberLocale.replace(/[^\d]/g, '');
         // Verifica se todos os dígitos são iguais
         if (/^(\d)\1+$/.test(this.#numberLocale)) {
             return false;

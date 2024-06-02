@@ -1,4 +1,5 @@
-import { Validador } from './validarCPF'
+
+import {Validador} from './validarCPF.js';
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -29,10 +30,12 @@ document.addEventListener("DOMContentLoaded", function() {
         if(cpf == ""){
             listaErros.push("cpf")
         }else{
-            let Validaitor = new Validador(cpf);
-            if(!Validaitor.Validar_CPF_CNPJ()){
-                listaErros.push("cpf")
+
+            let validar = new Validador(cpf);
+            if(!validar.Validar_CPF_CNPJ()){
+                listaErros.push("cpf"); 
             }
+
         }
         if(email == "") {
             listaErros.push("email");
