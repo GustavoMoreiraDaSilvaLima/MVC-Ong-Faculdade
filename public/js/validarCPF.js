@@ -77,3 +77,4 @@ class Validador {
 }
 
 export { Validador };
+
