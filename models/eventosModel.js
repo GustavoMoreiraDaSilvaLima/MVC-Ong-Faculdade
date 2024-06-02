@@ -146,7 +146,9 @@ class eventosModel {
                 let formatarData = new UtilData();
                 formatarData = formatarData.formatarData(Evento.evento_data);
                 Evento.evento_data = formatarData;
+
                 let valores = [Evento.evento_id,idItem[i],quantidade[i],Evento.evento_data];
+                
                 resultado[i] = await banco.ExecutaComandoNonQuery(sql, valores);
             }
             let ListaConfirma = [];

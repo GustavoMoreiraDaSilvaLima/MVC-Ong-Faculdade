@@ -1,4 +1,6 @@
 const EventosModel = require("../../models/eventosModel");
+const PatrimonioModel = require("../../models/patrimonioModel");
+const ProdutoModel = require("../../models/produtoModel");
 const UtilData = require("../../utils/data");
 
 class eventosController {
@@ -99,14 +101,35 @@ class eventosController {
             let idProduto = req.body.idProduto;
             let quantidadeProduto = req.body.quantidadeProduto;
             //Verificar Estoque de produtos
+            let Validacao = [];
+            let Produto = new ProdutoModel();
+            for (let i = 0; i < idProduto.length; i++) {
+                let quantidadeProduto = req.body.quantidadeProduto;
+                let Temp = await Produto.validarEstoque(idProduto[i], quantidadeProduto[i]);
+                if (Temp) {
+                    Validacao.push(Temp[i]);
+                }
+            }
+            if (Validacao.length == idProduto.length) {
 
-            Evento = await Evento.RegistrarSaidaEvento(idEvento, idProduto, quantidadeProduto, filtro)
-            if (Evento) {
-                ok = true
-                msg = "Saida de Produtos cadastrada com sucesso";
+                Evento = await Evento.RegistrarSaidaEvento(idEvento, idProduto, quantidadeProduto, filtro);
+                Produto = await Produto.RetirarEstoqueSaidaEvento(idProduto, quantidadeProduto);
+                if (Evento && Produto) {
+                    ok = true
+                    msg = "Saida de Produtos cadastrada com sucesso";
+                } else if (Evento) {
+                    ok = false;
+                    msg = "Não possivel registrar dar baixa no estoque, faça manualmente";
+                } else if (Produto) {
+                    ok = false;
+                    msg = "Não possivel registrar as saidas do evento, mas o estoque foi alterado, por favor corrija";
+                } else {
+                    ok = false;
+                    msg = "Não foi possivel registar nem retirar do estoque";
+                }
             } else {
                 ok = false;
-                msg = "Não possivel registrar todas as saidas";
+                msg = "Alguns produtos estão quantidades incorretas!";
             }
         } else if (filtro == "patrimonio") {
             let idEvento = req.body.id;

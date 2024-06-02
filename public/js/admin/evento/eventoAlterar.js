@@ -480,6 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     if (r.ok) {
                         alert(r.msg);
+                        ProdutoView();
                     } else {
                         alert(r.msg);
                     }
@@ -598,6 +599,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     if (r.ok) {
                         alert(r.msg);
+                        PatrimonioView();
                     } else {
                         alert(r.msg);
                     }
