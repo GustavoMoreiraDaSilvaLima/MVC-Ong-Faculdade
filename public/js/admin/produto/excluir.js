@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var ExportPdf = document.getElementById("ExportPdf");
   var exportarTabela = document.getElementById("ExportarTabela");
 
-  var filtroEscolhido = 0;
-
-  let itemFiltro = document.querySelectorAll(".itemFiltro");
 
   document.getElementById("btnFiltrar").addEventListener("click", buscar);
   console.log(123);
@@ -28,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelectorAll('input[name="category"]:checked')
     ).map((el) => el.id);
     let quantiaMin = document.getElementById("quantityMin").value;
+    if(quantiaMin < 0){
+      document.getElementById("quantityMin").innerHTML = 0;
+    }
     let quantiaMax = document.getElementById("quantityMax").value;
 
     console.log(
