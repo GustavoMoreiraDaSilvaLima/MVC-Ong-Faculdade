@@ -79,7 +79,14 @@ class patrimonioModel {
         }
     }
 
+    async validarEstoque(id,quantidade){
+        let sql = "select * from ONG_PATRIMONIOS where ONG_PATRIMONIO_ID = ? and ONG_PATRIMONIO_QUANTIDADE >= ?";
+        let valores = [id, quantidade];
 
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        return rows.length > 0;
+    }
 
     //Sem Excluir, seria o alterar, incluir no alterar o Status
 
@@ -94,6 +101,24 @@ class patrimonioModel {
         }
         return lista;
     }
+
+    async RetirarEstoqueSaidaEvento(id,quantidade){
+        let resultado = []
+        for (let i = 0; i < id.length; i++) {
+            let sql = "update ONG_PATRIMONIOS set ONG_PATRIMONIO_QUANTIDADE = ONG_PATRIMONIO_QUANTIDADE - ? where ONG_PATRIMONIO_ID = ?"
+            let valores = [quantidade[i], id[i]];
+            resultado[i] = await banco.ExecutaComandoNonQuery(sql, valores)
+        }
+        let ListaConfirma = [];
+        for(let i =0; i< resultado.length;i++){
+            if(resultado[i]==true){
+                ListaConfirma.push(resultado[i]);
+            }
+        }
+
+        return ListaConfirma.length == resultado.length;
+    }
+
     toJSON() {
         return {
             "patrimonioid": this.#ONG_PATRIMONIO_ID,

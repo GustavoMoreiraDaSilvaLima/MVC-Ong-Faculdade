@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    
+
     function Alterar() {
         limparValidacao();
         let nomeEvento = document.getElementById("eventName");
@@ -150,7 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
         var ListaProdutos = [];
         var ListaPatrimonio = [];
         var posicao = [];
-        var posicaoPatrimonio = []
+        var posicaoPatrimonio = [];
+        var SaidaCompleta = [];
         let htmlCima = `
 
         <div class="row">
@@ -365,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        function CarregarListaPatrimonio(){
+        function CarregarListaPatrimonio() {
             let ListaItens = document.getElementById("Itens");
             let BotaoAdd = document.querySelectorAll(".btnAdicionarPatrimonio");
 
@@ -428,7 +429,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        function ExcluirPatrimonio(){
+        function ExcluirPatrimonio() {
             console.log(this.dataset.codigoposicao)
             let posicaoRemover = posicaoPatrimonio.indexOf(this.dataset.codigoposicao);
             if (posicaoRemover > -1) {
@@ -437,7 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
             CarregarListaPatrimonio();
         }
 
-        function AdicionarItemPatrimonio(){
+        function AdicionarItemPatrimonio() {
             let id = this.dataset.id;
             this.disabled = true
             let busca = true;
@@ -451,8 +452,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             CarregarListaPatrimonio();
         }
-        
-        function EnviarPatrimonio(){
+
+        function EnviarPatrimonio() {
             let idProduto = document.querySelectorAll('[data-idpatrimonioEnviar]');
             let quantidade = document.querySelectorAll(".quantidade");
             let listaEnvio = [];
@@ -477,10 +478,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     return r.json();
                 })
-                .then(r => {
+                .then(async r => {
                     if (r.ok) {
                         alert(r.msg);
-                        ProdutoView();
+                        SaidaCompleta.push(r.ok);
+                        if (SaidaCompleta.length == 2) {
+                            alert("Registro Completo!");
+                            window.location.href = `/admin/eventos/alterar/${EventoId.value}`;
+                        } else {
+                            await ProdutoView();
+                            let btnAlterarPatrimonio = document.getElementById("btnAlterarPatrimonio");
+                            btnAlterarPatrimonio.disabled = true;
+                        }
                     } else {
                         alert(r.msg);
                     }
@@ -596,10 +605,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     return r.json();
                 })
-                .then(r => {
+                .then(async r => {
                     if (r.ok) {
                         alert(r.msg);
-                        PatrimonioView();
+                        SaidaCompleta.push(r.ok);
+                        if (SaidaCompleta.length == 2) {
+                            alert("Registro Completo!");
+                            window.location.href = `/admin/eventos/alterar/${EventoId.value}`;
+                        } else {
+                            await PatrimonioView();
+                            let btnAlterarProduto = document.getElementById("btnAlterarProduto");
+                            btnAlterarProduto.disabled = true;
+
+                        }
+
+
                     } else {
                         alert(r.msg);
                     }

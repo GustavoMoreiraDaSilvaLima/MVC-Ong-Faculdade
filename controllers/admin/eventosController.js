@@ -43,7 +43,7 @@ class eventosController {
     //Função a ser utilizada para Registar saida de evento
     async EventosAlterView(req, res) {
         let Evento = new EventosModel();
-
+        
         if (req.params.id != undefined && req.params.id != "") {
             Evento = await Evento.obterEvento(req.params.id);
         }
@@ -104,7 +104,6 @@ class eventosController {
             let Validacao = [];
             let Produto = new ProdutoModel();
             for (let i = 0; i < idProduto.length; i++) {
-                let quantidadeProduto = req.body.quantidadeProduto;
                 let Temp = await Produto.validarEstoque(idProduto[i], quantidadeProduto[i]);
                 if (Temp) {
                     Validacao.push(Temp[i]);
@@ -136,19 +135,38 @@ class eventosController {
             let idPatrimonio = req.body.idPatrimonio;
             let quantidadePatrimonio = req.body.quantidadePatrimonio;
             //Verificar Estoque de produtos
+            let Validacao = [];
+            let Patrimonio = new PatrimonioModel();
+            for (let i = 0; i < idPatrimonio.length; i++) {
+                let Temp = await Patrimonio.validarEstoque(idPatrimonio[i], quantidadePatrimonio[i]);
+                if (Temp) {
+                    Validacao.push(Temp[i]);
+                }
+            }
+            if (Validacao.length == idPatrimonio.length) {
 
-            Evento = await Evento.RegistrarSaidaEvento(idEvento, idPatrimonio, quantidadePatrimonio, filtro)
-            if (Evento) {
-                ok = true
-                msg = "Saida de Produtos cadastrada com sucesso";
+                Evento = await Evento.RegistrarSaidaEvento(idEvento, idPatrimonio, quantidadePatrimonio, filtro);
+                Patrimonio = await Patrimonio.RetirarEstoqueSaidaEvento(idPatrimonio, quantidadePatrimonio);
+                if (Evento && Patrimonio) {
+                    ok = true
+                    msg = "Saida de Patrimonio cadastrada com sucesso";
+                } else if (Evento) {
+                    ok = false;
+                    msg = "Não possivel registrar dar baixa no estoque, faça manualmente";
+                } else if (Patrimonio) {
+                    ok = false;
+                    msg = "Não possivel registrar as saidas do evento, mas o estoque foi alterado, por favor corrija";
+                } else {
+                    ok = false;
+                    msg = "Não foi possivel registar nem retirar do estoque";
+                }
             } else {
                 ok = false;
-                msg = "Não possivel registrar todas as saidas";
+                msg = "Alguns Patrimonio estão quantidades incorretas!";
             }
-
         } else {
             ok = false
-            msg = "Erro, Não foi possivel realizar a conexão"
+            msg = "Erro, Não foi possivel realizar a conexão";
         }
         res.send({ ok: ok, msg: msg })
 
