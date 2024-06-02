@@ -29,7 +29,6 @@ class CategoriaModel {
                 listaRetorno.push(new CategoriaModel(row['cat_id'], row['cat_nome']));
             }
         }
-
         return listaRetorno;
     }
 
