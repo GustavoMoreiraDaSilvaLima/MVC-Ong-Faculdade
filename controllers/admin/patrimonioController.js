@@ -45,9 +45,12 @@ class PatrimonioController {
         ok = await produto.cadastrarPatrimonioView();
         
         }
-        
-    
-   
+     async Listar(req,res){
+        let Patrimonio = new PatrimonioModel()
+        Patrimonio = await Patrimonio.exibirPatrimonio();
+
+        res.send({item: Patrimonio});
+    }
 }
 
 module.exports = PatrimonioController;
