@@ -18,8 +18,8 @@ class Data {
     }
 
     formatarData(data) {
-        data = new Date(data);
-        let dataFormatada = data.toISOString().split('T')[0];
+        let dataObj = new Date(data);
+        const dataFormatada = dataObj.toISOString().split('T')[0];
     
         return dataFormatada
     }

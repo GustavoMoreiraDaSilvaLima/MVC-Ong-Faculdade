@@ -104,17 +104,30 @@ class eventosController {
             if (Evento) {
                 ok = true
                 msg = "Saida de Produtos cadastrada com sucesso";
-            }else{
+            } else {
                 ok = false;
                 msg = "Não possivel registrar todas as saidas";
             }
         } else if (filtro == "patrimonio") {
+            let idEvento = req.body.id;
+            let idPatrimonio = req.body.idPatrimonio;
+            let quantidadePatrimonio = req.body.quantidadePatrimonio;
+            //Verificar Estoque de produtos
+
+            Evento = await Evento.RegistrarSaidaEvento(idEvento, idPatrimonio, quantidadePatrimonio, filtro)
+            if (Evento) {
+                ok = true
+                msg = "Saida de Produtos cadastrada com sucesso";
+            } else {
+                ok = false;
+                msg = "Não possivel registrar todas as saidas";
+            }
 
         } else {
             ok = false
             msg = "Erro, Não foi possivel realizar a conexão"
         }
-        res.send({ok: ok, msg:msg})
+        res.send({ ok: ok, msg: msg })
 
 
     }

@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
+    
     function Alterar() {
         limparValidacao();
         let nomeEvento = document.getElementById("eventName");
@@ -143,13 +143,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
+    //Alteração da pagina  
     function AlterarPagina() {
         let tudo = document.getElementById("AlterarComeco");
         let conteudo = document.getElementById("alterarConteudo");
         var ListaProdutos = [];
         var ListaPatrimonio = [];
-        var posicao = []
+        var posicao = [];
+        var posicaoPatrimonio = []
         let htmlCima = `
 
         <div class="row">
@@ -164,35 +165,86 @@ document.addEventListener("DOMContentLoaded", function () {
         let htmlConteudo = `
     
     `;
-
+        //Botão de Produto e patrimonio
         renderizarPagina();
-
         CarregarBotao();
 
 
 
-        function PatrimonioView() {
+        async function PatrimonioView() {
             htmlCima = `
-
-        <div class="row">
-            <div class="col-12 text-center">
-                <a class="btn btn-outline-danger" href="/admin/eventos/alterar/${EventoId.value}">Voltar a editar</a>
-                <h1 class="display-4">Escolha qual saida deseja lançar</h1>
-                <button id="btnAlterarProduto" class="btn btn-outline-dark btn-lg">Produto</button>
-                <button id="btnAlterarPatrimonio" class="btn btn-dark btn-lg">Patrimonio</button>
-            </div>
-        </div>
-    `;
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <a class="btn btn-outline-danger" href="/admin/eventos/alterar/${EventoId.value}">Voltar a editar</a>
+                        <h1 class="display-4">Escolha qual saida deseja lançar</h1>
+                        <button id="btnAlterarProduto" class="btn btn-outline-dark btn-lg">Produto</button>
+                        <button id="btnAlterarPatrimonio" class="btn btn-dark btn-lg">Patrimonio</button>
+                    </div>
+                </div>
+                    `;
 
             // /admin/patrimonio
-            ListaPatrimonio = Buscar("patrimonio");
+            ListaPatrimonio = await Buscar("patrimonio");
 
-            htmlConteudo = ``
+            //HTML a ser feito
+            htmlConteudo =
+                `
+                    <div>
+                        <h1 class="text-center">Lista Adicionados</h1>
+                        <div id="Itens">
+        
+                        </div>
+                        <div class="table-responsive">
+                            <h1>Lista de itens</h1>
+                            <div>
+                            <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Imagem</th>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Quantidade</th>
+                                    <th>Status</th>
+                                    <th>Descricao</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            `;
+            console.log(ListaPatrimonio)
+            //Comando de imagem quando tiver pois esta dando erro quando não vem ${ListaPatrimonio.item[i].patrimonioImg}
+            for (let i = 0; i < ListaPatrimonio.item.length; i++) {
+                htmlConteudo += `
+                            <tr>
+                                <td><img src="/img/evento/sem-foto.png" width="80"></td>
+                                <td>${ListaPatrimonio.item[i].patrimonioid}</td>
+                                <td>${ListaPatrimonio.item[i].patrimonioNome}</td>
+                                <td>${ListaPatrimonio.item[i].patrimonioQuantidade}</td>
+                                <td>${ListaPatrimonio.item[i].patrimonioStatus}</td>
+                                <td>${ListaPatrimonio.item[i].patrimonioDescricao}</td>
+                                <td><button class="btnAdicionarPatrimonio btn btn-outline-success" data-id="${ListaPatrimonio.item[i].patrimonioid}" data-posicao="${i}">Adicionar</button></td>
+                            </tr>
+                            
+                            `
+            }
+
+
+
+            htmlConteudo += `
+                            </tbody>
+                            </div>
+                        </div>
+        
+        
+        
+                    </div>
+        
+                `
 
 
             //Final
             renderizarPagina();
-            CarregarListaProduto()
+            CarregarListaPatrimonio();
         }
 
         async function ProdutoView() {
@@ -296,10 +348,15 @@ document.addEventListener("DOMContentLoaded", function () {
             let btnAlterarPatrimonio = document.getElementById("btnAlterarPatrimonio");
             let btnAlterarProduto = document.getElementById("btnAlterarProduto");
             let btnAdicionar = document.querySelectorAll(".btnAdicionar");
+            let btnAdicionarPatrimonio = document.querySelectorAll(".btnAdicionarPatrimonio");
 
 
             for (let i = 0; i < btnAdicionar.length; i++) {
                 btnAdicionar[i].addEventListener("click", AdicionarItemProduto);
+            }
+
+            for (let i = 0; i < btnAdicionarPatrimonio.length; i++) {
+                btnAdicionarPatrimonio[i].addEventListener("click", AdicionarItemPatrimonio);
             }
 
 
@@ -308,10 +365,131 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+        function CarregarListaPatrimonio(){
+            let ListaItens = document.getElementById("Itens");
+            let BotaoAdd = document.querySelectorAll(".btnAdicionarPatrimonio");
+
+
+            for (let i = 0; i < BotaoAdd.length; i++) {
+                BotaoAdd[i].disabled = false;
+                for (let j = 0; j < posicaoPatrimonio.length; j++) {
+                    if (BotaoAdd[i].dataset.posicao == posicaoPatrimonio[j]) {
+                        BotaoAdd[i].disabled = true;
+                    }
+                }
+
+            }
+
+
+
+            let html = `                
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Quantidade(Disponivel)</th>
+                <th>Quantidade a ser levada</th>
+                <th>Remover</th>
+            </tr>
+            <tbody class="">`;
+            //${ListaPatrimonio.item[i].patrimonioImg} Imagem a ser alterada quando vir do banco de dados
+
+            for (let i = 0; i < posicaoPatrimonio.length; i++) {
+
+                html += `
+            <tr data-idpatrimonioEnviar=${ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioid}>
+                <td><img src="/img/evento/sem-foto.png" width="80"></td>
+                <td>${ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioNome}</td>
+                <td data-quantidade="${ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioQuantidade}">${ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioQuantidade}</td>
+                <td><input class="form-control quantidade" type="number" placeholder="Coloque a quantidade" value="1"></td>
+                <td><button data-codigoremover="${ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioid}" data-codigoposicao="${posicaoPatrimonio[i]}" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></td>
+            </tr>       
+            `
+            }
+            html += `
+                </tbody>
+            </table>
+            <button id="btnEnviar" class="btn btn-outline-primary">Enviar Produtos</button>
+        `
+
+            ListaItens.innerHTML = html;
+
+            let btnExcluir = document.querySelectorAll(".btnExcluir");
+            for (let i = 0; i < btnExcluir.length; i++) {
+                btnExcluir[i].addEventListener("click", ExcluirPatrimonio)
+            }
+
+            let btnEnviar = document.getElementById("btnEnviar");
+            btnEnviar.addEventListener("click", EnviarPatrimonio);
+
+            let inputQuantidade = document.querySelectorAll(".quantidade");
+            for (let i = 0; i < inputQuantidade.length; i++) {
+                inputQuantidade[i].addEventListener("input", VerificaValor);
+            }
+        }
+
+        function ExcluirPatrimonio(){
+            console.log(this.dataset.codigoposicao)
+            let posicaoRemover = posicaoPatrimonio.indexOf(this.dataset.codigoposicao);
+            if (posicaoRemover > -1) {
+                posicaoPatrimonio.splice(posicaoRemover, 1);
+            }
+            CarregarListaPatrimonio();
+        }
+
+        function AdicionarItemPatrimonio(){
+            let id = this.dataset.id;
+            this.disabled = true
+            let busca = true;
+            for (let i = 0; i < posicaoPatrimonio.length; i++) {
+                if (posicaoPatrimonio[i] == this.dataset.posicao) {
+                    busca = false
+                }
+            }
+            if (busca == true) {
+                posicaoPatrimonio.push(this.dataset.posicao);
+            }
+            CarregarListaPatrimonio();
+        }
+        
+        function EnviarPatrimonio(){
+            let idProduto = document.querySelectorAll('[data-idpatrimonioEnviar]');
+            let quantidade = document.querySelectorAll(".quantidade");
+            let listaEnvio = [];
+            let listaQuantidade = [];
+            for (let i = 0; i < idProduto.length; i++) {
+                listaEnvio.push(idProduto[i].dataset.idpatrimonioenviar);
+                listaQuantidade.push(quantidade[i].value);
+            }
+
+            let obj = {
+                id: EventoId.value,
+                idPatrimonio: listaEnvio,
+                quantidadePatrimonio: listaQuantidade
+            }
+            fetch('/admin/eventos/saidaEvento/patrimonio', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(r => {
+                    return r.json();
+                })
+                .then(r => {
+                    if (r.ok) {
+                        alert(r.msg);
+                    } else {
+                        alert(r.msg);
+                    }
+                })
+        }
+
         function CarregarListaProduto() {
             let ListaItens = document.getElementById("Itens");
             let BotaoAdd = document.querySelectorAll(".btnAdicionar");
-          
+
 
             for (let i = 0; i < BotaoAdd.length; i++) {
                 BotaoAdd[i].disabled = false;
@@ -364,21 +542,21 @@ document.addEventListener("DOMContentLoaded", function () {
             btnEnviar.addEventListener("click", EnviarProduto);
 
             let inputQuantidade = document.querySelectorAll(".quantidade");
-            for (let i=0;i< inputQuantidade.length;i++){
-                inputQuantidade[i].addEventListener("input",VerificaValor);
+            for (let i = 0; i < inputQuantidade.length; i++) {
+                inputQuantidade[i].addEventListener("input", VerificaValor);
             }
 
         }
 
-        function VerificaValor(){
+        function VerificaValor() {
             let ValorAtual = this.value;
             let ValorMaximo = this.parentElement.previousElementSibling.dataset.quantidade;
 
-            if(parseInt(ValorAtual) > parseInt(ValorMaximo)){
+            if (parseInt(ValorAtual) > parseInt(ValorMaximo)) {
                 this.value = ValorMaximo;
-            }else if(parseInt(ValorAtual)<=0){
+            } else if (parseInt(ValorAtual) <= 0) {
                 this.value = 1
-            }else{
+            } else {
                 this.value = ValorAtual;
             }
         }
@@ -407,23 +585,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 idProduto: listaEnvio,
                 quantidadeProduto: listaQuantidade
             }
-            fetch('/admin/eventos/saidaEvento/produto',{
-                method:"POST",
+            fetch('/admin/eventos/saidaEvento/produto', {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(obj)
             })
-            .then(r => {
-                return r.json();
-            })
-            .then(r => {
-                if (r.ok) {
-                    alert(r.msg);
-                } else {
-                    alert(r.msg);
-                }
-            })
+                .then(r => {
+                    return r.json();
+                })
+                .then(r => {
+                    if (r.ok) {
+                        alert(r.msg);
+                    } else {
+                        alert(r.msg);
+                    }
+                })
 
 
 

@@ -158,7 +158,21 @@ class eventosModel {
             return ListaConfirma.length == resultado.length
 
         } else if (tipo == "patrimonio") {
-
+            for (let i = 0; i < idItem.length; i++) {
+                let sql = `insert into tb_saida_evento (saida_evento_id,saida_patrimonio_id,saida_quantidade,saida_evento_data) values (?,?,?,?)`
+                let formatarData = new UtilData();
+                formatarData = formatarData.formatarData(Evento.evento_data);
+                Evento.evento_data = formatarData;
+                let valores = [Evento.evento_id,idItem[i],quantidade[i],Evento.evento_data];
+                resultado[i] = await banco.ExecutaComandoNonQuery(sql, valores);
+            }
+            let ListaConfirma = [];
+            for(let i =0; i< resultado.length;i++){
+                if(resultado[i]==true){
+                    ListaConfirma.push(resultado[i]);
+                }
+            }
+            return ListaConfirma.length == resultado.length
         } else {
             return false;
         }
