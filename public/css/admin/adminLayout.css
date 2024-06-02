@@ -27,22 +27,16 @@ header {
     padding: 10px 0;
 }
 
-#Retornar {
+.botaoinicial {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-}
-
-
-.nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 10px;
-}
-
-
-.botaoTamanho {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: green;
+    border-radius: 5px;
+    border: 2px solid green;
+    transition: background-color 0.3s ease, color 0.3s ease;
     display: inline-flex;
     align-items: center;
     padding: 10px 20px;
@@ -55,14 +49,14 @@ header {
     text-overflow: ellipsis;
 }
 
-.botaoEstilo {
-    text-decoration: none;
-    color: #ffffff;
-    background-color: green;
-    border-radius: 5px;
-    border: 2px solid green;
-    transition: background-color 0.3s ease, color 0.3s ease;
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 10px;
 }
+
 
 p {
     text-align: center;

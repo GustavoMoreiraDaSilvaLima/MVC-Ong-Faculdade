@@ -22,12 +22,12 @@
 
     <!-- Inicio do Header -->
     <header>
+        <a class="botaoinicial"  href="/">
+            Página inicial
+            <img src="/img/admin/logo_ong.png" width="20" height="20">
+        </a>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a id="Retornar" class="navbar-brand" href="/admin">
-                    Pagina Admin
-                    <img src="/img/admin/logo_ong.png" width="20" height="20">
-                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -62,12 +62,12 @@
                             <a class="nav-link" href="/admin/parceiro">Parceiro</a>
                         </li>
                     </ul>
-                    <span class="navbar-text">
-                        Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong>
-                    </span>
                 </div>
             </div>
         </nav>
+        <span class="navbar-text">
+            Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong>
+        </span>
     </header>
     <div style="margin-top:100px">
         <!-- Fim do Header -->
