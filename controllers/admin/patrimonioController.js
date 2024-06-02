@@ -16,8 +16,8 @@ class PatrimonioController {
     }
 
     async cadastrarPatrimonioPost(req, res) {
-        if(req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
-            let patrimonio = new PatrimonioModel(0, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
+        if(req.body.coditem > 0, req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
+            let patrimonio = new PatrimonioModel(0, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
             let resultado = await patrimonio.atualizarPatrimonio();
             res.send ({ok: resultado, msg: 'Patrimonio cadastrado!'});
             }else
@@ -48,10 +48,10 @@ class PatrimonioController {
 
     async atualizarPatrimonioPost() {
         var ok = true;
-        if(req.body.id !="", req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
+        if(req.body.id !="", req.body.coditem > 0,  req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
 
         }
-        let produto = new ProdutoModel(req.body.id, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
+        let produto = new ProdutoModel(req.body.id, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
         ok = await produto.cadastrarPatrimonioView();
         
         }
