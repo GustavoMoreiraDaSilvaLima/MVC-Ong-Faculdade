@@ -118,25 +118,30 @@ class ProdutoModel {
                 INNER JOIN tb_categoria c ON p.cat_id = c.cat_id
                 INNER JOIN tb_marca m ON p.mar_id = m.mar_id
                 WHERE 1=1`;
-        
+        let values = []
             if (nome !== undefined && nome !== '') {
-                query += ' AND p.prd_nome LIKE "' + nome + '%"';
+                query += ' AND p.prd_nome LIKE " ? %"';
+                values.push(nome)
             }
 
             if (categorias !== undefined && categorias.length > 0) {
-                query += ' AND p.cat_id IN (' + categorias.join(',') + ')';
+                query += ' AND p.cat_id IN (?)';
+                values.push(categorias.join(','))
             }
         
             if (marcas !== undefined && marcas.length > 0) {
-                query += ' AND p.mar_id IN (' + marcas.join(',') + ')';
+                query += ' AND p.mar_id IN (?)';
+                values.push(marcas.join(','))
             }
         
             if (quantiaMin !== undefined && quantiaMin !== '') {
-                query += ' AND p.prd_quantidade >= ' + quantiaMin;
+                query += ' AND p.prd_quantidade >= ? ';
+                values.push(quantiaMin)
             }
         
             if (quantiaMax !== undefined && quantiaMax !== '') {
-                query += ' AND p.prd_quantidade <= ' + quantiaMax;
+                query += ' AND p.prd_quantidade <= ?' ;
+                values.push(quantiaMax)
             }
                     
             if (tipoPreco !== undefined && tipoPreco !== '') {
@@ -148,7 +153,7 @@ class ProdutoModel {
             }
         
         try {
-            var rows = await conexao.ExecutaComando(query);
+            var rows = await conexao.ExecutaComando(query, values);
     
             let listaRetorno = [];
     

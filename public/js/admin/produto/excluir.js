@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   document.getElementById("btnFiltrar").addEventListener("click", buscar);
-  console.log(123);
 
   function buscar() {
     let nome = document.getElementById("productName").value;
@@ -66,9 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
       quantiaMin: quantMin,
       quantiaMax: quantMax,
     };
-    console.log(obj.nome);
-    console.log(obj.nome);
-    console.log(obj.nome);
 
     fetch(`/admin/produto/filtrar`, {
       method: "POST",

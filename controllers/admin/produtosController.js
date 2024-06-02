@@ -24,10 +24,8 @@ class ProdutoController {
             let prod = new ProdutoModel();
             let lista = await prod.filtrarAvancado(nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax);
     
-            // Log para verificar a lista antes de enviar
             console.log("Antes de transformar:", lista);
     
-            // Função para transformar objetos removendo propriedades privadas
             const transform = (produto) => {
                 return {
                     produtoId: produto.produtoId,
@@ -43,10 +41,8 @@ class ProdutoController {
                 };
             };
     
-            // Aplicando a transformação em cada item da lista
             let listaTransformada = lista.map(transform);
     
-            // Log para verificar a lista transformada
             console.log("Depois de transformar:", listaTransformada);
 
             let marca = new MarcaModel();
