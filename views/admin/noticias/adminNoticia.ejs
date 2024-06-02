@@ -1,34 +1,47 @@
-<div class="container p-5">
-    <h1 class="p-5">Últimas Notícias</h1>
+<div class="container">
+    <h1 class="">Últimas Notícias</h1>
     <style>
-        .editar{
+        .editar {
             margin-right: 1.5rem;
+        }
+
+        .custom-link {
+            color: inherit; /* Usa a cor padrão do texto */
+            text-decoration: none; /* Remove o sublinhado */
+            cursor: pointer; /* Muda o cursor para parecer mais um botão */
+        }
+
+        .custom-link:hover {
+            color: inherit; /* Mantém a cor quando o mouse passa por cima */
         }
     </style>
     <script src="/js/admin/noticias/excluir.js"></script>
 
     <div class="list-group">
         <% for (let i = 0; i < lista.length; i++)  { %>
-        <a href="/espec/<%= lista[i].ONG_NOTICIA_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
-            <div class="row">
-                <div class="col-md-1 my-auto">
-                    <img src="/img/logo3.png" alt="Ícone Notícia 1" class="img-fluid">
-                </div>
-                <div class="col-md-8">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><%= lista[i].ONG_NOTICIA_TITULO %></h5>
+        <div class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black p-2 bd-highlight">
+            <a href="/espec/<%= lista[i].ONG_NOTICIA_ID %>" class="custom-link">
+                <div>
+                    <div class="row">
+                        <div class="col-md-1 my-auto">
+                            <img src="/img/logo3.png" alt="Ícone Notícia 1" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1"><%= lista[i].ONG_NOTICIA_TITULO %></h5>
+                            </div>
+                            <p class="mb-1"><%= lista[i].ONG_NOTICIA_DESCRICAO%></p>
+                        </div>
                     </div>
-                    <p class="mb-1"><%= lista[i].ONG_NOTICIA_DESCRICAO%></p>
                 </div>
-                <div class="col-md-3">
-                    <a id="editar" href="noticias/adminEditar/<%= lista[i].ONG_NOTICIA_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                    <button data-codigo="<%= lista[i].ONG_NOTICIA_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
-                </div>
+            </a>
+            <div class="col-lg-12" style="text-align: right;">
+                <a id="editar" href="noticias/adminEditar/<%= lista[i].ONG_NOTICIA_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                <button data-codigo="<%= lista[i].ONG_NOTICIA_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
             </div>
-            
-        </a>
+        </div>
         <% } %>
-        <a href="/admin/noticias/adminCadastrar" type="submit" class="btn btn-success">Criar Notricia</a>
+        <a href="/admin/noticias/adminCadastrar" type="submit" class="btn btn-success">Criar Noticia</a>
     </div>
     <br><br><br><br><br>
 </div>

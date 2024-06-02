@@ -43,6 +43,7 @@ function gravarProduto() {
     inputNome.value != "" && 
     inputQtde.value != "" && 
     inputQtde.value != '0' && 
+    inputQtde.value > 0 &&
     selMarca.value != '0' && 
     selCategoria.value != '0' &&
     inputValor > 0)

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if(nome == "") {
             listaErros.push("nome");
         }
-        if(quantidade > 0){
+        if(quantidade < 0){
             listaErros.push("quantidade")
         }
         if(descricao == "") {
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         if(listaErros.length == 0) {
             //enviar ao backend com fetch
-
+            
             let obj = {
         
                 nome: nome,
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(r=> {
                 if(r.ok) {
                     alert(r.msg)
-                    window.location.href="/";
+                    window.location.href="/admin/patrimonio";
                     
                 }   
                 else {

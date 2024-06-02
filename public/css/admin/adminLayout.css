@@ -1,6 +1,18 @@
 /* Cabeçalho/Header */
 /* ------------------------ */
 /* ------------------------ */
+/* Reset básico para remover margens e paddings padrões */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 160px; /* Espaço para o header fixo */
+}
+
 header {
     position: fixed;
     top: 0;
@@ -10,81 +22,25 @@ header {
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    align-items: center;
     border-bottom: 2px solid black;
+    padding: 10px 0;
 }
 
-.divTitulo {
-    margin-top: -50px;
+.nav {
     display: flex;
-    flex-direction: row;
-    padding-left: 25%;
-    padding-right: 25%;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 10px;
 }
 
-.adminTitulo {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 50px;
-    text-decoration: underline overline;
+
+p {
     text-align: center;
-    color: black;
+    margin-top: 10px;
+    font-size: 18px;
 }
 
-.adminTitulo:hover {
-    color: rgb(83, 83, 83)
-}
-
-.Menu {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 1%;
-}
-
-.MenuItem {
-    padding-left: 3%;
-    color: black;
-    text-decoration: none;
-    transition: text-decoration 0.3s ease;
-    font-size: 30px;
-}
-
-.MenuItem:hover {
-    text-decoration: underline;
-    color:green;
-}
-
-.botaoTamanho {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    max-width: 200px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.botaoEstilo {
-    text-decoration: none;
-    color: #ffffff;
-    background-color: green;
-    border-radius: 5px;
-    border: 2px solid green;
-
-}
-
-.botaoEstilo:hover {
-    background-color: white;
-    border: 2px solid green;
-    color: green;
-}
-
-.p {
-    text-align: end;
-    margin-right: 1%;
-    padding-right: 1%;
-    margin-left: 60%;
-}
 
 /* ------------------------ */
 /* ------------------------ */

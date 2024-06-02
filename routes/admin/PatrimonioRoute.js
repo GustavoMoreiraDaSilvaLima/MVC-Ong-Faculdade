@@ -9,8 +9,8 @@ let ctrl = new PatrimonioController();
 
 PatrimonioRouter.get('/',autent.NivelPermissaoAdm,ctrl.patrimonioView);
 PatrimonioRouter.get('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.cadastrarPatrimonioView);
+PatrimonioRouter.post('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.cadastrarPatrimonioPost);
 PatrimonioRouter.get('/alterar/:id',autent.NivelPermissaoAdm,ctrl.editarPatrimonioView);
-PatrimonioRouter.post('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.patrimonioPost);
 PatrimonioRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.atualizarPatrimonioPost);
 PatrimonioRouter.post('/excluir',autent.NivelPermissaoAdm,ctrl.excluirPatrimonio);
 

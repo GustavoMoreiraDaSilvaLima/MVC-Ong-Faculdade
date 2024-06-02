@@ -11,17 +11,16 @@ class PatrimonioController {
     }
 
     cadastrarPatrimonioView(req, res) {
-        if(req.body.id !="", req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
-        let patrimonio = new PatrimonioModel();
-        let resultado = patrimonio.atualizarPatrimonio();
-        res.render ({ok: resultado});
-        }else
-        res.render({ok: false});
+        res.render('admin/patrimonio/adminCadastrar', {layout:'adminLayout'});
     }
 
     async cadastrarPatrimonioPost(req, res) {
-        res.render('/admin/patrimonio/adminCadastrar', {layout:'adminLayout'});
-        
+        if(req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
+            let patrimonio = new PatrimonioModel(0, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
+            let resultado = await patrimonio.atualizarPatrimonio();
+            res.send ({ok: resultado, msg: 'Patrimonio cadastrado!'});
+            }else
+            res.send({ok: false, msg: 'Erro ao cadastrar patrimonio.'});
     }
 
     async editarPatrimonioView(req, res) {
@@ -46,22 +45,7 @@ class PatrimonioController {
         ok = await produto.cadastrarPatrimonioView();
         
         }
-        
-    
-    async patrimonioPost(){
-
-        if (req.body.nome != "" , req.body.descricao != "" , req.body.quantidade > 0, req.body.status != "") {
-        let patrimonio = new PatrimonioModel(0, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
-        let lista = await patrimonio.exibirPatrimonio();
-
-            res.send ({ok: lista});
-        }
-        else res.send({ok: false});
-
-    }
-
-
-    async Listar(req,res){
+     async Listar(req,res){
         let Patrimonio = new PatrimonioModel()
         Patrimonio = await Patrimonio.exibirPatrimonio();
 

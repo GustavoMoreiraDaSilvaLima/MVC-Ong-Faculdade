@@ -10,8 +10,53 @@ class ProdutoController {
     async listarView(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.render('admin/produto/adminProduto', {lista: lista, layout:'adminLayout'});
+        let marca = new MarcaModel();
+        let listaMarca = await marca.listarMarcas();
+        let categoria = new CategoriaModel();
+        let listaCate = await categoria.listarCategorias();
+        res.render('admin/produto/adminProduto', {lista: lista, listaCate : listaCate, listaMarca : listaMarca, layout:'adminLayout'});
     }
+
+    async Filtracao(req, res) {
+        try {
+            const { nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax } = req.body;
+    
+            let prod = new ProdutoModel();
+            let lista = await prod.filtrarAvancado(nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax);
+    
+            console.log("Antes de transformar:", lista);
+    
+            const transform = (produto) => {
+                return {
+                    produtoId: produto.produtoId,
+                    produtoCodigo: produto.produtoCodigo,
+                    produtoNome: produto.produtoNome,
+                    produtoQuantidade: produto.produtoQuantidade,
+                    categoriaId: produto.categoriaId,
+                    categoriaNome: produto.categoriaNome,
+                    produtoValor: produto.produtoValor,
+                    produtoImagem: produto.imagem,
+                    marcaId: produto.marcaId,
+                    marcaNome: produto.marcaNome
+                };
+            };
+    
+            let listaTransformada = lista.map(transform);
+    
+            console.log("Depois de transformar:", listaTransformada);
+
+            let marca = new MarcaModel();
+            let listaMarca = await marca.listarMarcas();
+            let categoria = new CategoriaModel();
+            let listaCate = await categoria.listarCategorias();
+    
+            res.json({ lista: listaTransformada , listaMarca : listaMarca, listaCate : listaCate});
+        } catch (error) {
+            console.error("Erro ao filtrar produtos:", error);
+            res.status(500).json({ error: "Erro ao filtrar produtos." });
+        }
+    }
+    
 
     async AtualizarLista(req, res) {
         let Doacao = new ProdutoModel();
@@ -55,6 +100,8 @@ class ProdutoController {
         Situacao = await Situacao.listar();
         Formas = await Formas.listar();
 
+        
+
         res.send({ ok: ok, item: listaCompleta, status: status, pgt: Formas, situacao: Situacao });
     }
 
@@ -89,7 +136,7 @@ class ProdutoController {
 
         res.send({ ok: ok })
     }
-
+   
     async alterarView(req, res){ 
         if((solucao == 0 || solucao != req.params.id) && req.params.id > 0){
             solucao = req.params.id

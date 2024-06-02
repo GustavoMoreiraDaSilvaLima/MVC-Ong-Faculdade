@@ -9,6 +9,7 @@ let produtoRoute = require("./routes/produtoRoute")
 let pedidoRoute = require("./routes/pedidoRoute")
 //Rotas de admin
 let VoluntarioRoute = require("./routes/admin/VoluntarioRoute");
+let AdocaoRoute = require("./routes/admin/AdocaoRoute")
 let EventosRoute = require("./routes/admin/EventosRoute");
 let NoticiaRoute = require("./routes/admin/NoticiaRoute");
 let ParceiroRoute = require("./routes/admin/ParceiroRoute");
@@ -21,7 +22,6 @@ let DoacaoRoute = require("./routes/admin/DoacaoRoute");
 let AdminRoute = require("./routes/admin/adminRoute");
 let ProjetoRoute = require("./routes/admin/ProjetoRoute");
 let CaixaRoute = require("./routes/admin/CaixaRoute");
-const marcaRouter = require('./routes/admin/MarcaRoute');
 let LoginRouter = require('./routes/loginRoute');
 
 const app = express();
@@ -52,13 +52,14 @@ app.use("/pedido", pedidoRoute)
 //Rotas especifacas para admin
 app.use("/admin",AdminRoute);
 app.use("/admin/voluntario", VoluntarioRoute);
+app.use("/admin/adocao", AdocaoRoute);
 app.use("/admin/eventos",EventosRoute);
 app.use("/admin/noticias",NoticiaRoute);
 app.use("/admin/parceiro",ParceiroRoute);
 app.use("/admin/patrimonio",PatrimonioRoute);
 app.use("/admin/produto",ProdutoRouteAdmin);
 app.use("/admin/produto/categoria",CategoriaRoute);
-app.use("/admin/produto/marca",marcaRouter);
+app.use("/admin/produto/marca",MarcaRoute);
 app.use("/admin/venda",VendaRoute);
 app.use("/admin/doacao", DoacaoRoute);
 app.use("/admin/projeto",ProjetoRoute);

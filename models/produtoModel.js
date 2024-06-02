@@ -12,8 +12,8 @@ class ProdutoModel {
     #marcaId;
     #marcaNome;
     #imagem;
-    #possuiImagem;
     #produtoValor;
+
 
     get produtoId() { return this.#produtoId; } set produtoId(produtoId) { this.#produtoId = produtoId; }
     get produtoCodigo() { return this.#produtoCodigo; } set produtoCodigo(produtoCodigo) { this.#produtoCodigo = produtoCodigo; }
@@ -26,6 +26,7 @@ class ProdutoModel {
     get imagem() { return this.#imagem; } set imagem(imagem) { this.#imagem = imagem; }
     get possuiImagem() { return this.#possuiImagem; } set possuiImagem(possuiImagem) { this.#possuiImagem = possuiImagem; }
     get produtoValor() { return this.#produtoValor; } set produtoValor(produtoValor) { this.#produtoValor = produtoValor; }
+
 
 
     constructor(produtoId, produtoCodigo, produtoNome, produtoQuantidade, categoriaId, marcaId, categoriaNome, marcaNome, imagem, produtoValor) {
@@ -114,6 +115,71 @@ class ProdutoModel {
 
         return produto;
     }
+
+    async filtrarAvancado(nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax) {
+        let query = `SELECT * FROM tb_produto p
+                INNER JOIN tb_categoria c ON p.cat_id = c.cat_id
+                INNER JOIN tb_marca m ON p.mar_id = m.mar_id
+                WHERE 1=1`;
+        let values = []
+            if (nome !== undefined && nome !== '') {
+                query += ' AND p.prd_nome LIKE " ? %"';
+                values.push(nome)
+            }
+
+            if (categorias !== undefined && categorias.length > 0) {
+                query += ' AND p.cat_id IN (?)';
+                values.push(categorias.join(','))
+            }
+        
+            if (marcas !== undefined && marcas.length > 0) {
+                query += ' AND p.mar_id IN (?)';
+                values.push(marcas.join(','))
+            }
+        
+            if (quantiaMin !== undefined && quantiaMin !== '') {
+                query += ' AND p.prd_quantidade >= ? ';
+                values.push(quantiaMin)
+            }
+        
+            if (quantiaMax !== undefined && quantiaMax !== '') {
+                query += ' AND p.prd_quantidade <= ?' ;
+                values.push(quantiaMax)
+            }
+                    
+            if (tipoPreco !== undefined && tipoPreco !== '') {
+                if (tipoPreco === 'ascendente') {
+                    query += ' ORDER BY p.prd_valor ASC';
+                } else if (tipoPreco === 'descendente') {
+                    query += ' ORDER BY p.prd_valor DESC';
+                }
+            }
+        
+        try {
+            var rows = await conexao.ExecutaComando(query, values);
+    
+            let listaRetorno = [];
+    
+            if(rows.length > 0){
+                for(let i=0; i<rows.length; i++){
+    
+                    var row = rows[i];
+    
+                    let imagem = row["prd_imagem"] ? global.CAMINHO_IMG_BROWSER + row["prd_imagem"] : global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+    
+                    listaRetorno.push(new ProdutoModel(row['prd_id'], 
+                    row['prd_cod'], row['prd_nome'], row['prd_quantidade'], 
+                    row['cat_id'], row['mar_id'], row['cat_nome'], row['mar_nome'], imagem, row["prd_valor"]));
+                }
+            }
+            return listaRetorno;
+        } catch (error) {
+            // Lidar com erros
+            console.error("Erro ao filtrar produtos:", error);
+            throw error;
+        }
+    }
+    
 
     async listarProdutos() {
 
