@@ -124,8 +124,8 @@ class ProdutoModel {
                 WHERE 1=1`;
         let values = []
             if (nome !== undefined && nome !== '') {
-                query += ' AND p.prd_nome LIKE " ? %"';
-                values.push(nome)
+                query += ' AND p.prd_nome LIKE ?';
+                values.push('%' + nome + '%')
             }
 
             if (categorias !== undefined && categorias.length > 0) {

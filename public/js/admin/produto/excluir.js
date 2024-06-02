@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("btnFiltrar").addEventListener("click", buscar);
 
-  function buscar() {
+  async function buscar() {
     let nome = document.getElementById("productName").value;
     let tipoPreco =
       document.querySelector('input[name="priceOrder"]:checked')?.id || "";
