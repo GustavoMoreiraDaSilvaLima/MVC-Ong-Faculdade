@@ -1,3 +1,4 @@
+import {Validador} from './validarCPF.js';
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -26,6 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         if(cpf == ""){
             listaErros.push("cpf")
+        }else{
+            let validar = new Validador(cpf);
+            if(!validar.Validar_CPF_CNPJ()){
+                listaErros.push("cpf"); 
+            }
+
         }
         if(email == "") {
             listaErros.push("email");
