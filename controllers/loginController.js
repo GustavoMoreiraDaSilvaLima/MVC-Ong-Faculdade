@@ -18,10 +18,12 @@ class loginController {
             }
             else {
                 msg = "Usuário/Senha incorretos!";
+        res.render('login',{ layout: 'login', msg: msg})
             }
         }
         else {
             msg = "Usuário/Senha incorretos!";
+        res.render('login',{ layout: 'login', msg: msg})
         }
     }
 
