@@ -48,12 +48,7 @@ class ProdutoController {
 
         console.log(req.body.tipoPreco)
 
-        let marca = new MarcaModel();
-        let listaMarca = await marca.listarMarcas();
-        let categoria = new CategoriaModel();
-        let listaCate = await categoria.listarCategorias();
-
-        res.render('admin/produto/adminProduto', {lista: lista, listaCate : listaCate, listaMarca : listaMarca, layout:'adminLayout'});
+        res.send({lista: lista});
     }
 
     async AtualizarLista(req, res) {

@@ -90,11 +90,12 @@
                 <th>Nome</th>
                 <th>Quantidade</th>
                 <th>Categoria</th>
+                <th>Preco</th>
                 <th>Marca</th>
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="venda">
               <% lista.map(function(value, index) { %>
               <tr>
                 <td>
@@ -108,6 +109,7 @@
                 <td><%= value.produtoNome %></td>
                 <td><%= value.produtoQuantidade %></td>
                 <td><%= value.categoriaNome %></td>
+                <td><%= value.produtoValor %></td>
                 <td><%= value.marcaNome %></td>                   
                 <td>
                   <div class="btn-group" role="group" aria-label="Ações">

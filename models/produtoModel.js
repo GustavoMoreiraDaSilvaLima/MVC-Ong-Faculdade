@@ -119,10 +119,9 @@ class ProdutoModel {
         let query = 'SELECT * FROM tb_produto WHERE 1=1';
     
         if (nome !== undefined && nome !== '') {
-            query += ' AND prd_nome LIKE "%' + nome + '%"';
+            query += ' AND prd_nome LIKE "' + nome + '%"';
         }
 
-    
         if (categorias !== undefined && categorias.length > 0) {
             query += ' AND cat_id IN (' + categorias.join(',') + ')';
         }
