@@ -3,125 +3,66 @@
 
 
 <div class="container">
-    <!-- Filtro de Produtos para telas menores -->
-    <div class="filter-container d-block d-md-none">
-      <div class="card">
-        <div class="card-header">
-          <h4>Filtro de Produtos</h4>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <label for="productName">Nome do Produto</label>
-              <input type="text" class="form-control" id="productName" placeholder="Digite o nome do produto">
-            </div>
-            <div class="form-group">
-              <label>Categoria</label><br>
-              <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                <label class="radio flex-fill">
-                  <input type="radio" name="category" id="category1" autocomplete="off"> Categoria 1
-                </label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Ordenar por Preço</label><br>
-              <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                <label class="radio flex-fill">
-                  <input type="radio" name="priceOrder" id="priceAsc" autocomplete="off"> Ascendente
-                </label>
-                <label class="radio flex-fill">
-                  <input type="radio" name="priceOrder" id="priceDesc" autocomplete="off"> Descendente
-                </label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="brandSelect">Marca</label>
-              <select class="form-control" id="brandSelect">
-                <option>Marca 1</option>
-                <option>Marca 2</option>
-                <option>Marca 3</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="quantityRange">Quantidade</label>
-              <input type="range" class="form-control-range" id="quantityRange" min="0" max="800" step="100">
-              <div class="d-flex justify-content-between mt-2">
-                <span>0</span>
-                <span>100</span>
-                <span>200</span>
-                <span>300</span>
-                <span>400</span>
-                <span>500</span>
-                <span>600</span>
-                <span>700</span>
-                <span>800</span>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Buscar</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
     <div class="row">
       <!-- Coluna do filtro para telas maiores -->
       <div class="col-md-4 d-none d-md-block">
         <div class="card">
-          <div class="card-header">
-            <h4>Filtro de Produtos</h4>
-          </div>
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label for="productName">Nome do Produto</label>
-                <input type="text" class="form-control" id="productName" placeholder="Digite o nome do produto">
-              </div>
-              <div class="form-group">
-                <label>Ordenar por Preço</label><br>
-                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                  <label class="radio flex-fill">
-                    <input type="radio" name="priceOrder" id="priceAsc" autocomplete="off"> Ascendente
-                  </label>
-                  <label class="radio flex-fill">
-                    <input type="radio" name="priceOrder" id="priceDesc" autocomplete="off"> Descendente
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Categoria</label><br>
-                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                  <% listaCate.map(function(value, index) { %>
-                  <label class="radio flex-fill">
-                    <input type="checkbox" name="category" id="<%= value.categoriaId %>" autocomplete="off"> <%= value.categoriaNome %>    
-                  </label>
-                  <% }) %>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Marca</label><br>
-                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                  <% listaMarca.map(function(value, index) { %>
-                  <label class="radio flex-fill">
-                    <input type="checkbox" name="category" id="<%= value.marcaId %>" autocomplete="off"> <%= value.marcaNome %>    
-                  </label>
-                  <% }) %>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                    <label for="quantityMin">Quantidade Mínima</label>
-                    <input type="number" class="form-control" id="quantityMin" min="0" placeholder="Mínimo">
-                </div>
-                <div class="col">
-                    <label for="quantityMax">Quantidade Máxima</label>
-                    <input type="number" class="form-control" id="quantityMax" min="0" placeholder="Máximo">
-                </div>
+            <div class="card-header">
+                <h4 class="mb-0">Filtro de Produtos</h4>
             </div>
-              <button type="submit" class="btn btn-primary btn-block">Buscar</button>
-            </form>
-          </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="productName"><strong>Nome do Produto</strong></label>
+                        <input type="text" class="form-control" id="productName" placeholder="Digite o nome do produto">
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Ordenar por Preço</strong></label><br>
+                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                            <label class="radio flex-fill">
+                                <input type="radio" name="priceOrder" id="priceAsc" autocomplete="off"> Ascendente
+                            </label>
+                            <label class="radio flex-fill">
+                                <input type="radio" name="priceOrder" id="priceDesc" autocomplete="off"> Descendente
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Categoria</strong></label><br>
+                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                            <% listaCate.map(function(value, index) { %>
+                            <label class="checkbox flex-fill">
+                                <input type="checkbox" name="category" id="<%= value.categoriaId %>" autocomplete="off"> <%= value.categoriaNome %>    
+                            </label>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Marca</strong></label><br>
+                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                            <% listaMarca.map(function(value, index) { %>
+                            <label class="checkbox flex-fill">
+                                <input type="checkbox" name="category" id="<%= value.marcaId %>" autocomplete="off"> <%= value.marcaNome %>    
+                            </label>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="quantityMin"><strong>Quantidade Mínima</strong></label>
+                            <input type="number" class="form-control" id="quantityMin" min="0" placeholder="Mínimo">
+                        </div>
+                        <div class="col">
+                            <label for="quantityMax"><strong>Quantidade Máxima</strong></label>
+                            <input type="number" class="form-control" id="quantityMax" min="0" placeholder="Máximo">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Buscar</button>
+                </form>
+            </div>
         </div>
-      </div>
+    </div>
+    
 
       <!-- Coluna da tabela -->
       <div class="col-md-8">
