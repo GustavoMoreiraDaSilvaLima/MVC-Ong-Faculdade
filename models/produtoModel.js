@@ -115,6 +115,64 @@ class ProdutoModel {
         return produto;
     }
 
+    async filtrarAvancado(nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax) {
+        let query = 'SELECT * FROM tb_produto WHERE 1=1';
+    
+        if (nome !== undefined && nome !== '') {
+            query += ' AND prd_nome LIKE "%' + nome + '%"';
+        }
+
+    
+        if (categorias !== undefined && categorias.length > 0) {
+            query += ' AND cat_id IN (' + categorias.join(',') + ')';
+        }
+    
+        if (marcas !== undefined && marcas.length > 0) {
+            query += ' AND marca_id IN (' + marcas.join(',') + ')';
+        }
+    
+        if (quantiaMin !== undefined && quantiaMin !== '') {
+            query += ' AND prd_quantidade >= ' + quantiaMin;
+        }
+    
+        if (quantiaMax !== undefined && quantiaMax !== '') {
+            query += ' AND prd_quantidade <= ' + quantiaMax;
+        }
+                
+        if (tipoPreco !== undefined && tipoPreco !== '') {
+            if (tipoPreco === 'ascendente') {
+                query += ' ORDER BY prd_valor ASC';
+            } else if (tipoPreco === 'descendente') {
+                query += ' ORDER BY prd_valor DESC';
+            }
+        }
+        
+        try {
+            var rows = await conexao.ExecutaComando(query);
+    
+            let listaRetorno = [];
+    
+            if(rows.length > 0){
+                for(let i=0; i<rows.length; i++){
+    
+                    var row = rows[i];
+    
+                    let imagem = row["prd_imagem"] ? global.CAMINHO_IMG_BROWSER + row["prd_imagem"] : global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+    
+                    listaRetorno.push(new ProdutoModel(row['prd_id'], 
+                    row['prd_cod'], row['prd_nome'], row['prd_quantidade'], 
+                    row['cat_id'], row['mar_id'], row['cat_nome'], row['mar_nome'], imagem, row["prd_valor"]));
+                }
+            }
+            return listaRetorno;
+        } catch (error) {
+            // Lidar com erros
+            console.error("Erro ao filtrar produtos:", error);
+            throw error;
+        }
+    }
+    
+
     async listarProdutos() {
 
         let sql = 'select * from tb_produto p inner join tb_categoria c on p.cat_id = c.cat_id inner join tb_marca m on p.mar_id = m.mar_id order by prd_id';

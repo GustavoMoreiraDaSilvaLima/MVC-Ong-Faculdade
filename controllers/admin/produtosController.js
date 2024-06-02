@@ -17,6 +17,45 @@ class ProdutoController {
         res.render('admin/produto/adminProduto', {lista: lista, listaCate : listaCate, listaMarca : listaMarca, layout:'adminLayout'});
     }
 
+    async Filtracao(req,res){
+        let nome
+        let tipoPreco
+        let categorias
+        let marcas
+        let quantiaMin
+        let quantiaMax
+        if(req.body.nome){
+            nome = req.body.nome
+        }
+        if(req.body.tipoPreco){
+            tipoPreco = req.body.tipoPreco
+        }
+        if(req.body.categorias){
+            categorias = req.body.categorias
+        }
+        if(req.body.marcas){
+            marcas = req.body.marcas
+        }
+        if(req.body.quantiaMin){
+            quantiaMin = req.body.quantiaMin
+        }
+        if(req.body.quantiaMax){
+            quantiaMax = req.body.quantiaMax
+        }
+
+        let prod = new ProdutoModel();
+        let lista = await prod.filtrarAvancado(nome,tipoPreco,categorias,marcas,quantiaMin,quantiaMax);
+
+        console.log(req.body.tipoPreco)
+
+        let marca = new MarcaModel();
+        let listaMarca = await marca.listarMarcas();
+        let categoria = new CategoriaModel();
+        let listaCate = await categoria.listarCategorias();
+
+        res.render('admin/produto/adminProduto', {lista: lista, listaCate : listaCate, listaMarca : listaMarca, layout:'adminLayout'});
+    }
+
     async AtualizarLista(req, res) {
         let Doacao = new ProdutoModel();
         let status = "disponivel";
