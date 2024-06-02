@@ -13,6 +13,7 @@ class ProdutoModel {
     #marcaNome;
     #imagem;
     #produtoValor;
+    #possuiImagem
 
 
     get produtoId() { return this.#produtoId; } set produtoId(produtoId) { this.#produtoId = produtoId; }
