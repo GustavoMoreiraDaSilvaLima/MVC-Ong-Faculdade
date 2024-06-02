@@ -9,12 +9,28 @@ document.addEventListener("DOMContentLoaded", function () {
   var ExportPdf = document.getElementById("ExportPdf");
   var exportarTabela = document.getElementById("ExportarTabela");
 
+  let quantiaMin = document.getElementById("quantityMin");
+  let quantiaMax = document.getElementById("quantityMax");
+  quantiaMin.addEventListener("change", () => {
+    if(quantiaMin.value < 0){
+      quantiaMin.value = 0;
+    }else if(quantiaMin.value > 999){
+      quantiaMin.value = 999
+    }
+  })
+  quantiaMax.addEventListener("change", () => {
+    if(quantiaMax.value < 0){
+      quantiaMax.value = 0;
+    }else if(quantiaMax.value > 999){
+      quantiaMax.value = 999
+    }
+  })
+  
 
   document.getElementById("btnFiltrar").addEventListener("click", buscar);
   console.log(123);
 
   function buscar() {
-    debugger
     let nome = document.getElementById("productName").value;
     let tipoPreco =
       document.querySelector('input[name="priceOrder"]:checked')?.id || "";
@@ -24,11 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let categorias = Array.from(
       document.querySelectorAll('input[name="category"]:checked')
     ).map((el) => el.id);
-    let quantiaMin = document.getElementById("quantityMin").value;
-    if(quantiaMin < 0){
-      document.getElementById("quantityMin").innerHTML = 0;
-    }
-    let quantiaMax = document.getElementById("quantityMax").value;
+    let quantMin = document.getElementById("quantityMin").value;
+    let quantMax = document.getElementById("quantityMax").value;
 
     console.log(
       "Nome:" +
@@ -40,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "  marca :" +
         marcas +
         "  minima :" +
-        quantiaMin +
+        quantMin +
         "  maxima :" +
-        quantiaMax
+        quantMax
     );
 
     let obj = {
@@ -50,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
       tipoPreco: tipoPreco,
       categorias: categorias,
       marcas: marcas,
-      quantiaMin: quantiaMin,
-      quantiaMax: quantiaMax,
+      quantiaMin: quantMin,
+      quantiaMax: quantMax,
     };
     console.log(obj.nome);
     console.log(obj.nome);
@@ -73,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
           let htmlCorpo = "";
           for (let i = 0; i <= r.lista.length; i++) {
             console.log(r.lista[i])
-            debugger
             htmlCorpo += `<tr><td>`
             
             if(r.lista[i].produtoImagem != ""){
