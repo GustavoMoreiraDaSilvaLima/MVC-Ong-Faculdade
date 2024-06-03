@@ -1,0 +1,54 @@
+
+<script src="/js/admin/patrimonio/editar.js"></script>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <div class="col-md-8 mt-5">
+          <div class="card">
+              <div class="card-header">
+                  <h1 class="h3 mb-0">Editar Patrimônios</h1>
+              </div>
+              <div class="card-body">
+                  <form>
+                      <div class="form-group">
+                          <label for="inputCodigo">Código do item</label>
+                          <input type="number" class="form-control" id="NovoCoditem">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputNome">Nome do item</label>
+                          <input type="text" class="form-control" id="NovoNome">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputQuantidade">Quantidade</label>
+                          <input type="number" class="form-control" id="NovaQuantidade">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputValor">Descricão do item</label>
+                          <input type="text" class="form-control" id="NovaDescricao">
+                      </div>
+                      <div class="form-group">
+                          <label for="selMarca">Status</label>
+                          <select class="form-control" id="NovoStatus">
+                              <option value="0"disabled selected></option>
+                                  <option value="disponivel">Disponivel</option>
+                                  <option value="indisponivel">Indisponivel</option>
+                                  <option value="inoperante">Inoperante</option>
+                                           
+                          </select>
+                      </div>
+                      <div class="form-group mt-1">
+                        <label for="inputImagem">Imagem do produto</label>
+                        <input type="file" class="form-control" id="inputImagem" name="imagem"/>
+                      </div>
+                      <div class="form-group mt-1">
+                        <img id="previaImagem" width="200" />
+                    </div>
+                      <div class="form-group mt-4">
+                          <button class="btn btn-primary" type="button" id="btnEditar">Editar</button>
+                          <a href="/admin/patrimonio" class="btn btn-secondary">Voltar</a>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

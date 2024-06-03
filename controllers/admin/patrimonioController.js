@@ -46,7 +46,7 @@ class PatrimonioController {
 
     }
 
-    async atualizarPatrimonioPost() {
+    async exibirPatrimonioPost() {
         var ok = true;
         if(req.body.id !="", req.body.coditem > 0,  req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
 
