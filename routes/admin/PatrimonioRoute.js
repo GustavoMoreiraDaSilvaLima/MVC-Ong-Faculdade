@@ -32,6 +32,7 @@ let ctrl = new PatrimonioController();
 PatrimonioRouter.get('/',autent.NivelPermissaoAdm,ctrl.patrimonioView);
 PatrimonioRouter.get('/adminCadastrar',autent.NivelPermissaoAdm,ctrl.cadastrarPatrimonioView);
 PatrimonioRouter.post('/adminCadastrar',autent.NivelPermissaoAdm,upload.single("imagem",), ctrl.cadastrarPatrimonioPost);
+PatrimonioRouter.post('/adminEditar',autent.NivelPermissaoAdm,upload.single("imagem",), ctrl.EditarPatrimonioPost);
 PatrimonioRouter.get('/alterar/:id',autent.NivelPermissaoAdm,ctrl.editarPatrimonioView);
 PatrimonioRouter.post('/alterar',autent.NivelPermissaoAdm,ctrl.exibirPatrimonioPost);
 PatrimonioRouter.post('/excluir/:id',autent.NivelPermissaoAdm,ctrl.excluirPatrimonio);

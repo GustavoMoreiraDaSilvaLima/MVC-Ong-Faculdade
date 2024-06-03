@@ -24,7 +24,7 @@
                     <div>
                         <div class="row">
                             <div class="col-md-1 my-auto">
-                                <img src="/img/logo3.png" alt="Ícone Patrimônio" class="img-fluid">
+                                <img src="<%= lista[i].ONG_PATRIMONIO_IMG %>" alt="Ícone Patrimônio" class="img-fluid">
                             </div>
                             <div class="col-md-8">
                                 <div class="d-flex w-100 justify-content-between">
@@ -36,7 +36,7 @@
                     </div>
                 </a>
                 <div class="col-lg-12" style="text-align: right;">
-                    <a id="editar" href="noticias/adminEditar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                    <a id="editar" href="patrimonio/alterar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                     <button data-codigo="<%= lista[i].ONG_PATRIMONIO_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
                 </div>
             </div>

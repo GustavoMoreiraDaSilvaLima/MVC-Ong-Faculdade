@@ -16,18 +16,34 @@ class PatrimonioController {
     }
 
     async cadastrarPatrimonioPost(req, res) {
-        if(req.body.coditem > 0, req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
-            let patrimonio = new PatrimonioModel(0, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
+        if(req.body.coditem !=  0 && req.body.nome !="" && req.body.descricao !="" && req.body.quantidade > 0 && req.body.status !=""){
+            let arquivo = req.file != null ? req.file.filename : null;
+            let patrimonio = new PatrimonioModel(req.body.id, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status, arquivo);
             let resultado = await patrimonio.atualizarPatrimonio();
+
+
             res.send ({ok: resultado, msg: 'Patrimonio cadastrado!'});
-            }else
-            res.send({ok: false, msg: 'Erro ao cadastrar patrimonio.'});
+        }
+    
+    }
+
+    async EditarPatrimonioPost(req, res) {
+        if(req.body.coditem !=  0 && req.body.nome !="" && req.body.descricao !="" && req.body.quantidade > 0 && req.body.status !=""){
+            let arquivo = req.file != null ? req.file.filename : null;
+            let patrimonio = new PatrimonioModel(req.body.id, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status, arquivo);
+            let resultado = await patrimonio.atualizarPatrimonio();
+
+
+            res.send ({ok: resultado, msg: 'Patrimonio cadastrado!'});
+        }
+    
     }
 
     async editarPatrimonioView(req, res) {
+        let id = req.params.id;
         let patrimonio= new PatrimonioModel();
-        let lista = await patrimonio.exibirPatrimonio();
-        res.render('admin/patrimonio/adminPatrimonio', {lista: lista, layout: 'adminLayout'});
+        let obj = await patrimonio.obterPatrimonio(id);
+        res.render('admin/patrimonio/adminEditar', {obj: obj, layout: 'adminLayout'});
     }
 
     async editarPatrimonioPost(req, res) {

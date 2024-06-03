@@ -9,25 +9,28 @@
               </div>
               <div class="card-body">
                   <form>
+                      <div>
+                        <input type="number" class="form-control" id="id" hidden value="<%=  obj.ONG_PATRIMONIO_ID %>">
+                      </div>
                       <div class="form-group">
                           <label for="inputCodigo">Código do item</label>
-                          <input type="number" class="form-control" id="NovoCoditem">
+                          <input type="number" class="form-control" id="coditem" value="<%=  obj.ONG_PATRIMONIO_CODITEM %>">
                       </div>
                       <div class="form-group">
                           <label for="inputNome">Nome do item</label>
-                          <input type="text" class="form-control" id="NovoNome">
+                          <input type="text" class="form-control" id="nome" value="<%= obj.ONG_PATRIMONIO_NOME %>">
                       </div>
                       <div class="form-group">
                           <label for="inputQuantidade">Quantidade</label>
-                          <input type="number" class="form-control" id="NovaQuantidade">
+                          <input type="number" class="form-control" id="quantidade" value="<%= obj.ONG_PATRIMONIO_QUANTIDADE %>">
                       </div>
                       <div class="form-group">
                           <label for="inputValor">Descricão do item</label>
-                          <input type="text" class="form-control" id="NovaDescricao">
+                          <input type="text" class="form-control" id="descricao" value="<%= obj.ONG_PATRIMONIO_DESCRICAO %>">
                       </div>
                       <div class="form-group">
                           <label for="selMarca">Status</label>
-                          <select class="form-control" id="NovoStatus">
+                          <select class="form-control" id="status" value="<%= obj.ONG_PATRIMONIO_STATUS %>">
                               <option value="0"disabled selected></option>
                                   <option value="disponivel">Disponivel</option>
                                   <option value="indisponivel">Indisponivel</option>
@@ -40,10 +43,10 @@
                         <input type="file" class="form-control" id="inputImagem" name="imagem"/>
                       </div>
                       <div class="form-group mt-1">
-                        <img id="previaImagem" width="200" />
+                        <img id="previaImagem" width="200"  src="/img/produtos/<%= obj.ONG_PATRIMONIO_IMG %>"/>
                     </div>
                       <div class="form-group mt-4">
-                          <button class="btn btn-primary" type="button" id="btnEditar">Editar</button>
+                          <button class="btn btn-primary" type="button" id="btnCadastrar">Editar</button>
                           <a href="/admin/patrimonio" class="btn btn-secondary">Voltar</a>
                       </div>
                   </form>
