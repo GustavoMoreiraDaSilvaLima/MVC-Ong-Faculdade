@@ -4,24 +4,30 @@ const banco = new Database();
 
 class patrimonioModel {
     #ONG_PATRIMONIO_ID   //Chave Primário
+    #ONG_PATRIMONIO_CODITEM
     #ONG_PATRIMONIO_NOME
     #ONG_PATRIMONIO_DESCRICAO
     #ONG_PATRIMONIO_QUANTIDADE
-    #ONG_PATRIMONIO_STATUS //Caso o patrimonio seja destruido ou quebrado irá ser informado no Status
+    #ONG_PATRIMONIO_STATUS
+    #ONG_PATRIMONIO_IMAGEM //Caso o patrimonio seja destruido ou quebrado irá ser informado no Status
     #ONG_PATRIMONIO_IMG
 
-    constructor(id, nome, descricao, quantidade, status, img) {
+    constructor(id, coditem, nome, descricao, quantidade, status, imagem) {
         this.#ONG_PATRIMONIO_ID = id;
+        this.#ONG_PATRIMONIO_CODITEM = coditem;
         this.#ONG_PATRIMONIO_NOME = nome;
         this.#ONG_PATRIMONIO_DESCRICAO = descricao;
         this.#ONG_PATRIMONIO_QUANTIDADE = quantidade
         this.#ONG_PATRIMONIO_STATUS = status;
-        this.#ONG_PATRIMONIO_IMG = img
+        this.#ONG_PATRIMONIO_IMAGEM = imagem;
     }
 
     // Getters
     get ONG_PATRIMONIO_ID() {
         return this.#ONG_PATRIMONIO_ID;
+    }
+    get ONG_PATRIMONIO_CODITEM() {
+        return this.#ONG_PATRIMONIO_CODITEM;
     }
 
     get ONG_PATRIMONIO_NOME() {
@@ -39,12 +45,18 @@ class patrimonioModel {
     get ONG_PATRIMONIO_STATUS() {
         return this.#ONG_PATRIMONIO_STATUS;
     }
+    get ONG_PATRIMONIO_IMAGEM() {
+        return this.#ONG_PATRIMONIO_IMAGEM;
+    }
 
     get ONG_PATRIMONIO_IMG() { return this.#ONG_PATRIMONIO_IMG; }
 
     //Setters
     set IdPatri(id) {
         this.#ONG_PATRIMONIO_ID = id;
+    }
+    set ONG_PATRIMONIO_CODITEM(coditem) {
+        this.#ONG_PATRIMONIO_CODITEM = coditem;
     }
 
     set ONG_PATRIMONIO_NOME(nome) {
@@ -58,10 +70,9 @@ class patrimonioModel {
     set ONG_PATRIMONIO_STATUS(status) {
         this.#ONG_PATRIMONIO_STATUS = status;
     }
-
-    set ONG_PATRIMONIO_IMG(img) { this.#ONG_PATRIMONIO_IMG = img }
-
-
+    set ONG_PATRIMONIO_IMAGEM(imagem) {
+        this.#ONG_PATRIMONIO_IMAGEM = imagem;
+    }
     async obterPatrimonio(id) {
 
     }
@@ -72,24 +83,15 @@ class patrimonioModel {
     async atualizarPatrimonio() {
 
         if(this.ONG_PATRIMONIO_ID == 0){
-            let sql = "insert into ONG_PATRIMONIOS (ONG_PATRIMONIO_NOME, ONG_PATRIMONIO_DESCRICAO, ONG_PATRIMONIO_QUANTIDADE, ONG_PATRIMONIO_STATUS) values (?,?,?,?)";
-            let valores = [this.#ONG_PATRIMONIO_NOME, this.ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_QUANTIDADE, this.#ONG_PATRIMONIO_STATUS];
+            let sql = "insert into ONG_PATRIMONIOS (ONG_PATRIMONIO_CODITEM, ONG_PATRIMONIO_NOME, ONG_PATRIMONIO_DESCRICAO, ONG_PATRIMONIO_QUANTIDADE, ONG_PATRIMONIO_STATUS) values (?,?,?,?,?)";
+            let valores = [this.#ONG_PATRIMONIO_CODITEM, this.#ONG_PATRIMONIO_NOME, this.#ONG_PATRIMONIO_DESCRICAO, this.#ONG_PATRIMONIO_QUANTIDADE, this.#ONG_PATRIMONIO_STATUS];
             let resultado = await banco.ExecutaComandoNonQuery(sql,valores);
 
             return resultado;
         }
-    }
 
-    async validarEstoque(id,quantidade){
-        let sql = "select * from ONG_PATRIMONIOS where ONG_PATRIMONIO_ID = ? and ONG_PATRIMONIO_QUANTIDADE >= ?";
-        let valores = [id, quantidade];
+        
 
-        let rows = await banco.ExecutaComando(sql, valores);
-
-        return rows.length > 0;
-    }
-
-    //Sem Excluir, seria o alterar, incluir no alterar o Status
 
     async exibirPatrimonio() {
         let sql = "select * from ONG_PATRIMONIOS";
@@ -98,40 +100,24 @@ class patrimonioModel {
         let lista = [];
 
         for (let i = 0; i < rows.length; i++) {
-            lista.push(new patrimonioModel(rows[i]["ONG_PATRIMONIO_ID"], rows[i]["ONG_PATRIMONIO_NOME"], rows[i]["ONG_PATRIMONIO_DESCRICAO"], rows[i]["ONG_PATRIMONIO_QUANTIDADE"], rows[i]["ONG_PATRIMONIO_STATUS"], rows[i]["ONG_PATRIMONIO_IMG"]));
+            lista.push(new patrimonioModel(rows[i]["ONG_PATRIMONIO_ID"], rows[i]["ONG_PATRIMONIO_CODITEM"], rows[i]["ONG_PATRIMONIO_NOME"], rows[i]["ONG_PATRIMONIO_DESCRICAO"], rows[i]["ONG_PATRIMONIO_QUANTIDADE"], rows[i]["ONG_PATRIMONIO_STATUS"]));
         }
         return lista;
     }
 
-    async RetirarEstoqueSaidaEvento(id,quantidade){
-        let resultado = []
-        for (let i = 0; i < id.length; i++) {
-            let sql = "update ONG_PATRIMONIOS set ONG_PATRIMONIO_QUANTIDADE = ONG_PATRIMONIO_QUANTIDADE - ? where ONG_PATRIMONIO_ID = ?"
-            let valores = [quantidade[i], id[i]];
-            resultado[i] = await banco.ExecutaComandoNonQuery(sql, valores)
-        }
-        let ListaConfirma = [];
-        for(let i =0; i< resultado.length;i++){
-            if(resultado[i]==true){
-                ListaConfirma.push(resultado[i]);
-            }
-        }
+    async excluirPatrimonio(ONG_PATRIMONIO_ID) {
 
-        return ListaConfirma.length == resultado.length;
-    }
+        let sql = "delete from ONG_PATRIMONIOS where ONG_PATRIMONIO_ID = ?";
+        let valores = [ONG_PATRIMONIO_ID];
 
-    toJSON() {
-        return {
-            "patrimonioid": this.#ONG_PATRIMONIO_ID,
-            "patrimonioNome": this.#ONG_PATRIMONIO_NOME,
-            "patrimonioQuantidade":this.#ONG_PATRIMONIO_QUANTIDADE,
-            "patrimonioStatus":this.#ONG_PATRIMONIO_STATUS,
-            "patrimonioDescricao":this.#ONG_PATRIMONIO_DESCRICAO,
-            "patrimonioImg":this.#ONG_PATRIMONIO_IMG
-        }
+        var resultado = await banco.ExecutaComandoNonQuery(sql,valores);
+
+        return resultado;
+
     }
 
 }
+
 
 module.exports = patrimonioModel;
 

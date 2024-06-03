@@ -12,12 +12,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function cadastrar() {
         limparValidacao();
+        let coditem = document.getElementById("coditem").value;
         let nome = document.querySelector("#nome").value;
         let quantidade = document.getElementById("quantidade").value;
         let descricao = document.querySelector("#descricao").value;
         let status = document.querySelector("#status").value;
 
         let listaErros = [];
+        if(coditem < 0) {
+            listaErros.push("coditem");
+        }
         if(nome == "") {
             listaErros.push("nome");
         }
@@ -34,11 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
             //enviar ao backend com fetch
             
             let obj = {
-        
+                
+                coditem: coditem,
                 nome: nome,
                 quantidade: quantidade,
                 descricao: descricao,
                 status: status
+    
             }
 
             fetch("/admin/patrimonio/adminCadastrar", {
@@ -71,5 +77,6 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("Preencha corretamente os campos!");
         }
     }
+
 
 })
