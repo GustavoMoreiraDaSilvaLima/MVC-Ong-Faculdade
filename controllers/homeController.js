@@ -51,10 +51,10 @@ class HomeController {
 
     //Visualização da noticia
     async listarEventos(req,res){
-        //let evento = new eventosModel();
-        //let lista = await evento.evento_exibir()
+        let evento = new EventosModel();
+        let lista = await evento.exibirEvento();
 
-        res.render('evento')
+        res.render('evento', {lista: lista})
     }
 
     async listarNoticias(req, res){
