@@ -142,6 +142,17 @@ class PatrimonioModel {
         let resultado = await banco.ExecutaComandoNonQuery(sql, valores);
         return resultado;
     }
+
+    toJSON() {
+        return {
+            "patrimonioid": this.#ONG_PATRIMONIO_ID,
+            "patrimonioNome": this.#ONG_PATRIMONIO_NOME,
+            "patrimonioQuantidade":this.#ONG_PATRIMONIO_QUANTIDADE,
+            "patrimonioStatus":this.#ONG_PATRIMONIO_STATUS,
+            "patrimonioDescricao":this.#ONG_PATRIMONIO_DESCRICAO,
+            "patrimonioImg":this.#ONG_PATRIMONIO_IMG
+        }
+    }
 }
 
 module.exports = PatrimonioModel;
