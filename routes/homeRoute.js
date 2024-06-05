@@ -1,6 +1,6 @@
 //Rotas todas sem middleware, todas liberadas
-const express = require('express');
-const HomeController = require('../controllers/homeController');
+const express = require("express");
+const HomeController = require("../controllers/homeController");
 
 const router = express.Router();
 let ctrl = new HomeController();
@@ -9,22 +9,19 @@ router.get("/QuemSomos", ctrl.QuemSomosView);
 router.get("/seja_um_voluntario", ctrl.sejaView);
 
 //Doacao
-router.get("/doacao",ctrl.DoacaoView);
-router.get("/doacao/cartao",ctrl.DoaCartaoView);
-router.get("/doacao/pix",ctrl.DoaPixView);
-router.get("/doacao/boleto",ctrl.DoaBoletoView);
+router.get("/doacao", ctrl.DoacaoView);
+router.get("/doacao/cartao", ctrl.DoaCartaoView);
+router.get("/doacao/pix", ctrl.DoaPixView);
+router.get("/doacao/boleto", ctrl.DoaBoletoView);
 
 //Evento
-router.get("/eventos",ctrl.listarEventos);
+router.get("/eventos", ctrl.listarEventos);
 //router.get("/eventos/espec/:id",ctrl.especEvento);
 
 //Noticia
-router.get('/noticias', ctrl.listarNoticias);
-router.get('/espec/:id', async (req,res) => {
-    ctrl.especNoticia(req,res);
-})
-
-
-
+router.get("/noticias", ctrl.listarNoticias);
+router.get("/espec/:id", async (req, res) => {
+  ctrl.especNoticia(req, res);
+});
 
 module.exports = router;

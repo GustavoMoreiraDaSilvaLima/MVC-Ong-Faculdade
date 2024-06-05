@@ -12,20 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
   let quantiaMin = document.getElementById("quantityMin");
   let quantiaMax = document.getElementById("quantityMax");
   quantiaMin.addEventListener("change", () => {
-    if(quantiaMin.value < 0){
+    if (quantiaMin.value < 0) {
       quantiaMin.value = 0;
-    }else if(quantiaMin.value > 999){
-      quantiaMin.value = 999
+    } else if (quantiaMin.value > 999) {
+      quantiaMin.value = 999;
     }
-  })
+  });
   quantiaMax.addEventListener("change", () => {
-    if(quantiaMax.value < 0){
+    if (quantiaMax.value < 0) {
       quantiaMax.value = 0;
-    }else if(quantiaMax.value > 999){
-      quantiaMax.value = 999
+    } else if (quantiaMax.value > 999) {
+      quantiaMax.value = 999;
     }
-  })
-  
+  });
 
   document.getElementById("btnFiltrar").addEventListener("click", buscar);
 
@@ -78,37 +77,37 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((r) => {
         if (r.lista.length > 0) {
-            console.log(r.lista[0])
+          console.log(r.lista[0]);
           let htmlCorpo = "";
           for (let i = 0; i <= r.lista.length; i++) {
-            console.log(r.lista[i])
-            htmlCorpo += `<tr><td>`
-            
-            if(r.lista[i].produtoImagem != ""){
-                htmlCorpo += `<img src="${ r.lista[i].produtoImagem }" width="80" />`
-            }else{
-                htmlCorpo += `<img src="/img/sem-foto.png" width="80">`
+            console.log(r.lista[i]);
+            htmlCorpo += `<tr><td>`;
+
+            if (r.lista[i].produtoImagem != "") {
+              htmlCorpo += `<img src="${r.lista[i].produtoImagem}" width="80" />`;
+            } else {
+              htmlCorpo += `<img src="/img/sem-foto.png" width="80">`;
             }
             htmlCorpo += `
                 </td>
-                <td>${ r.lista[i].produtoCodigo }</td>
-                <td>${ r.lista[i].produtoNome }</td>
-                <td>${ r.lista[i].produtoQuantidade }</td>
-                <td>${ r.lista[i].categoriaNome }</td>
-                <td>${ r.lista[i].produtoValor }</td>
-                <td>${ r.lista[i].marcaNome }</td>                   
+                <td>${r.lista[i].produtoCodigo}</td>
+                <td>${r.lista[i].produtoNome}</td>
+                <td>${r.lista[i].produtoQuantidade}</td>
+                <td>${r.lista[i].categoriaNome}</td>
+                <td>${r.lista[i].produtoValor}</td>
+                <td>${r.lista[i].marcaNome}</td>                   
                 <td>
                     <div class="btn-group" role="group" aria-label="Ações">
-                    <a href="produto/alterar/${ r.lista[i].produtoId }" class="btn btn-primary"> <i class="bi bi-pen"></i></a>
-                    <button data-codigo="${r.lista[i].produtoId }" class="btn btn-danger btnExcluir"><i class="bi bi-trash"></i></button>
+                    <a href="produto/alterar/${r.lista[i].produtoId}" class="btn btn-primary"> <i class="bi bi-pen"></i></a>
+                    <button data-codigo="${r.lista[i].produtoId}" class="btn btn-danger btnExcluir"><i class="bi bi-trash"></i></button>
                     </div>
                 </td>
                 </tr>
                             `;
             document.getElementById("venda").innerHTML = htmlCorpo;
           }
-        }else{
-          let htmlCorpo = "<h1>Produto nao encontrado</h1>"
+        } else {
+          let htmlCorpo = "<h1>Produto nao encontrado</h1>";
           document.getElementById("venda").innerHTML = htmlCorpo;
         }
       });

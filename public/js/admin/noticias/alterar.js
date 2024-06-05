@@ -1,80 +1,82 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+  var btnAlterar = document.getElementById("btnAlterar");
 
-
-    var btnAlterar = document.getElementById("btnAlterar");
-
-
-    btnAlterar.addEventListener("click", function() {
-        alterarNoticia();
-    })
-})
+  btnAlterar.addEventListener("click", function () {
+    alterarNoticia();
+  });
+});
 
 function alterarNoticia() {
+  //limparErros();
 
-    //limparErros();
-    
-    var noticiaTitulo = document.getElementById("novoTitulo").value;
-    var noticiaDescricao = document.getElementById("novaDescricao").value;
-    var noticiaConteudo = document.getElementById("novoConteudo").value;
-    var noticiaId = document.getElementById("idNoticia").value;
+  var noticiaTitulo = document.getElementById("novoTitulo").value;
+  var noticiaDescricao = document.getElementById("novaDescricao").value;
+  var noticiaConteudo = document.getElementById("novoConteudo").value;
+  var noticiaId = document.getElementById("idNoticia").value;
 
-    var listaErros = [];
+  var listaErros = [];
 
-    console.log(noticiaId)
-    if(noticiaTitulo == "" || noticiaTitulo == undefined || noticiaTitulo == null){
-        listaErros.push("novoTitulo");
-    }
-    
-    if(noticiaDescricao == "" || noticiaDescricao == undefined || noticiaDescricao == null){
-        listaErros.push("novaDescricao");
-    }
+  console.log(noticiaId);
+  if (
+    noticiaTitulo == "" ||
+    noticiaTitulo == undefined ||
+    noticiaTitulo == null
+  ) {
+    listaErros.push("novoTitulo");
+  }
 
-    if(noticiaConteudo == "" || noticiaConteudo == undefined || noticiaConteudo == null){
-        listaErros.push("novoConteudo");
-    }
-    if(noticiaId == "" || noticiaId == undefined || noticiaId == null){
-        listaErros.push("idNoticia");
-    }
+  if (
+    noticiaDescricao == "" ||
+    noticiaDescricao == undefined ||
+    noticiaDescricao == null
+  ) {
+    listaErros.push("novaDescricao");
+  }
 
-   
-    if(listaErros.length == 0){
+  if (
+    noticiaConteudo == "" ||
+    noticiaConteudo == undefined ||
+    noticiaConteudo == null
+  ) {
+    listaErros.push("novoConteudo");
+  }
+  if (noticiaId == "" || noticiaId == undefined || noticiaId == null) {
+    listaErros.push("idNoticia");
+  }
 
-        var data = {
-            titulo: noticiaTitulo,
-            descricao: noticiaDescricao,
-            conteudo: noticiaConteudo,
-            id: noticiaId,
-        };
+  if (listaErros.length == 0) {
+    var data = {
+      titulo: noticiaTitulo,
+      descricao: noticiaDescricao,
+      conteudo: noticiaConteudo,
+      id: noticiaId,
+    };
 
-        fetch('/admin/noticias/adminEditar', { 
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(r=> {
-            return r.json();
-            
-        })
-        .then(r=> {          
-            if(r.ok) {
-                alert("Produto alterado!");
-                window.location.href="/admin/noticias";
-            }
-            else{
-                alert("Erro ao alterar produto");
-            }
-        })
-        .catch(e=> {
-            console.log(e);
-        })
-
-    }
-
+    fetch("/admin/noticias/adminEditar", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((r) => {
+        if (r.ok) {
+          alert("Produto alterado!");
+          window.location.href = "/admin/noticias";
+        } else {
+          alert("Erro ao alterar produto");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 }
 
-    /*function mostrarErros(lista) {
+/*function mostrarErros(lista) {
         for(var i = 0; i<lista.length; i++){
             let id = lista[i];
 
@@ -95,4 +97,3 @@ function alterarNoticia() {
 
         document.getElementById("erros").style = "display:none";
         document.getElementById("alertaSucesso").style = "display:none";*/
-    

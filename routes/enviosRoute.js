@@ -1,6 +1,6 @@
 //Rota de envios de formulários da Home
-const express = require('express');
-const EnvioController = require('../controllers/envioController');
+const express = require("express");
+const EnvioController = require("../controllers/envioController");
 
 const EnvioRouter = express.Router();
 let ctrl = new EnvioController();
@@ -13,9 +13,7 @@ EnvioRouter.post("/doacao", ctrl.RecebaOutraDoa);
 
 //Post Voluntário
 EnvioRouter.post("/seja_um_voluntario", ctrl.sejaViewPost);
-EnvioRouter.post('/venda', ctrl.ReceberVenda);
-
-
+EnvioRouter.post("/venda", ctrl.ReceberVenda);
 
 //Envio de formulário
 

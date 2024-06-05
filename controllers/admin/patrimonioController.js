@@ -2,81 +2,119 @@ const patrimonioModel = require("../../models/patrimonioModel");
 const PatrimonioModel = require("../../models/patrimonioModel");
 
 class PatrimonioController {
+  async patrimonioView(req, res) {
+    let patrimonio = new PatrimonioModel();
+    let lista = await patrimonio.exibirPatrimonio();
+    res.render("admin/patrimonio/adminPatrimonio", {
+      lista: lista,
+      layout: "adminLayout",
+    });
+  }
 
-    
-    async patrimonioView(req, res) {
-        
-        let patrimonio= new PatrimonioModel();
-        let lista = await patrimonio.exibirPatrimonio();
-        res.render('admin/patrimonio/adminPatrimonio', { lista: lista, layout: 'adminLayout'});
+  cadastrarPatrimonioView(req, res) {
+    res.render("admin/patrimonio/adminCadastrar", { layout: "adminLayout" });
+  }
+
+  async cadastrarPatrimonioPost(req, res) {
+    if (
+      req.body.coditem != 0 &&
+      req.body.nome != "" &&
+      req.body.descricao != "" &&
+      req.body.quantidade > 0 &&
+      req.body.status != ""
+    ) {
+      let arquivo = req.file != null ? req.file.filename : null;
+      let patrimonio = new PatrimonioModel(
+        req.body.id,
+        req.body.coditem,
+        req.body.nome,
+        req.body.descricao,
+        req.body.quantidade,
+        req.body.status,
+        arquivo
+      );
+      let resultado = await patrimonio.atualizarPatrimonio();
+
+      res.send({ ok: resultado, msg: "Patrimonio cadastrado!" });
     }
+  }
 
-    cadastrarPatrimonioView(req, res) {
-        res.render('admin/patrimonio/adminCadastrar', {layout:'adminLayout'});
+  async EditarPatrimonioPost(req, res) {
+    if (
+      req.body.coditem != 0 &&
+      req.body.nome != "" &&
+      req.body.descricao != "" &&
+      req.body.quantidade > 0 &&
+      req.body.status != ""
+    ) {
+      let arquivo = req.file != null ? req.file.filename : null;
+      let patrimonio = new PatrimonioModel(
+        req.body.id,
+        req.body.coditem,
+        req.body.nome,
+        req.body.descricao,
+        req.body.quantidade,
+        req.body.status,
+        arquivo
+      );
+      let resultado = await patrimonio.atualizarPatrimonio();
+
+      res.send({ ok: resultado, msg: "Patrimonio cadastrado!" });
     }
+  }
 
-    async cadastrarPatrimonioPost(req, res) {
-        if(req.body.coditem !=  0 && req.body.nome !="" && req.body.descricao !="" && req.body.quantidade > 0 && req.body.status !=""){
-            let arquivo = req.file != null ? req.file.filename : null;
-            let patrimonio = new PatrimonioModel(req.body.id, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status, arquivo);
-            let resultado = await patrimonio.atualizarPatrimonio();
+  async editarPatrimonioView(req, res) {
+    let id = req.params.id;
+    let patrimonio = new PatrimonioModel();
+    let obj = await patrimonio.obterPatrimonio(id);
+    res.render("admin/patrimonio/adminEditar", {
+      obj: obj,
+      layout: "adminLayout",
+    });
+  }
 
+  async editarPatrimonioPost(req, res) {
+    // Implementar a lógica para editar um patrimônio
+  }
 
-            res.send ({ok: resultado, msg: 'Patrimonio cadastrado!'});
-        }
-    
+  async excluirPatrimonio(req, res) {
+    var ok = true;
+    if (req.body.patrimonioId != "") {
+      let patrimonio = new patrimonioModel();
+      ok = await patrimonio.excluirPatrimonio(req.body.patrimonioId);
+    } else {
+      ok = false;
     }
+    res.send({ ok: ok });
+  }
 
-    async EditarPatrimonioPost(req, res) {
-        if(req.body.coditem !=  0 && req.body.nome !="" && req.body.descricao !="" && req.body.quantidade > 0 && req.body.status !=""){
-            let arquivo = req.file != null ? req.file.filename : null;
-            let patrimonio = new PatrimonioModel(req.body.id, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status, arquivo);
-            let resultado = await patrimonio.atualizarPatrimonio();
-
-
-            res.send ({ok: resultado, msg: 'Patrimonio cadastrado!'});
-        }
-    
+  async exibirPatrimonioPost() {
+    var ok = true;
+    if (
+      (req.body.id != "",
+      req.body.coditem > 0,
+      req.body.nome != "",
+      req.body.descricao != "",
+      req.body.quantidade > 0,
+      req.body.status != "")
+    ) {
     }
+    let produto = new ProdutoModel(
+      req.body.id,
+      req.body.coditem,
+      req.body.nome,
+      req.body.descricao,
+      req.body.quantidade,
+      req.body.status
+    );
+    ok = await produto.cadastrarPatrimonioView();
+  }
+  async Listar(req, res) {
+    let Patrimonio = new PatrimonioModel();
+    Patrimonio = await Patrimonio.exibirPatrimonio();
 
-    async editarPatrimonioView(req, res) {
-        let id = req.params.id;
-        let patrimonio= new PatrimonioModel();
-        let obj = await patrimonio.obterPatrimonio(id);
-        res.render('admin/patrimonio/adminEditar', {obj: obj, layout: 'adminLayout'});
-    }
-
-    async editarPatrimonioPost(req, res) {
-        // Implementar a lógica para editar um patrimônio
-    }
-
-    async excluirPatrimonio(req, res) {
-        var ok = true;
-        if(req.body.patrimonioId != ""){
-            let patrimonio = new patrimonioModel();
-            ok = await patrimonio.excluirPatrimonio(req.body.patrimonioId);
-        }else{
-            ok = false;
-        }
-        res.send({ok: ok});
-
-    }
-
-    async exibirPatrimonioPost() {
-        var ok = true;
-        if(req.body.id !="", req.body.coditem > 0,  req.body.nome !="", req.body.descricao !="", req.body.quantidade > 0, req.body.status !=""){
-
-        }
-        let produto = new ProdutoModel(req.body.id, req.body.coditem, req.body.nome, req.body.descricao, req.body.quantidade, req.body.status);
-        ok = await produto.cadastrarPatrimonioView();
-        
-        }
-     async Listar(req,res){
-        let Patrimonio = new PatrimonioModel()
-        Patrimonio = await Patrimonio.exibirPatrimonio();
-
-        res.send({item: Patrimonio});
-    }
+    res.send({ item: Patrimonio });
+  }
 }
 
 module.exports = PatrimonioController;

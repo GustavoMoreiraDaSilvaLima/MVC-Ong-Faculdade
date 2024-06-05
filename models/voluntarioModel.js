@@ -3,129 +3,142 @@ const Database = require("../db/database");
 const banco = new Database();
 
 class Voluntario {
-    CPF;
-    nome;
-    email;
-    telefone;
-    desc;
+  CPF;
+  nome;
+  email;
+  telefone;
+  desc;
 
-    constructor(CPF, nome, email, telefone, desc) {
-        this.CPF = CPF;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.desc = desc;
+  constructor(CPF, nome, email, telefone, desc) {
+    this.CPF = CPF;
+    this.nome = nome;
+    this.email = email;
+    this.telefone = telefone;
+    this.desc = desc;
+  }
+
+  // Getters
+  getCPF() {
+    return this.CPF;
+  }
+
+  getNome() {
+    return this.nome;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  getTelefone() {
+    return this.telefone;
+  }
+
+  getDesc() {
+    return this.desc;
+  }
+
+  // Setters
+  setCPF(CPF) {
+    this.CPF = CPF;
+  }
+
+  setNome(nome) {
+    this.nome = nome;
+  }
+
+  setEmail(email) {
+    this.email = email;
+  }
+
+  setTelefone(telefone) {
+    this.telefone = telefone;
+  }
+
+  setDesc(desc) {
+    this.desc = desc;
+  }
+
+  async voluntario_exibir_epsc(cpf) {
+    let sql = "select * from ONG_VOLUNTARIO where ONG_VOLUNTARIO_CPF = ?";
+
+    let value = [cpf];
+
+    let rows = await banco.ExecutaComando(sql, value);
+
+    if (rows.length > 0) {
+      let row = rows[0];
+      return new Voluntario(
+        row["ONG_VOLUNTARIO_CPF"],
+        row["ONG_VOLUNTARIO_NOME"],
+        row["ONG_VOLUNTARIO_EMAIL"],
+        row["ONG_VOLUNTARIO_TELEFONE"],
+        row["ONG_VOLUNTARIO_DESC"]
+      );
     }
 
-    // Getters
-    getCPF() {
-        return this.CPF;
+    return null;
+  }
+
+  async listar() {
+    let sql = "select * from ONG_VOLUNTARIO ORDER BY ONG_VOLUNTARIO_NOME asc";
+
+    let rows = await banco.ExecutaComando(sql);
+    let lista = [];
+
+    for (let i = 0; i < rows.length; i++) {
+      lista.push(
+        new Voluntario(
+          rows[i]["ONG_VOLUNTARIO_CPF"],
+          rows[i]["ONG_VOLUNTARIO_NOME"],
+          rows[i]["ONG_VOLUNTARIO_EMAIL"],
+          rows[i]["ONG_VOLUNTARIO_TELEFONE"]
+        )
+      );
     }
 
-    getNome() {
-        return this.nome;
+    return lista;
+  }
+
+  async cadastrar_no_model() {
+    let sql =
+      "INSERT INTO ONG_VOLUNTARIO (ONG_VOLUNTARIO_EMAIL, ONG_VOLUNTARIO_NOME, ONG_VOLUNTARIO_TELEFONE, ONG_VOLUNTARIO_DESC, ONG_VOLUNTARIO_CPF) VALUES (?,?,?,?,?)";
+    let valores = [this.email, this.nome, this.telefone, this.desc, this.CPF];
+
+    try {
+      let result = await banco.ExecutaComandoNonQuery(sql, valores);
+      return result;
+    } catch (error) {
+      if (error.code === "ER_DUP_ENTRY") {
+        return "Erro: CPF já cadastrado";
+      } else {
+        // Outros erros
+        return "Erro:" + error.message;
+      }
     }
+  }
 
-    getEmail() {
-        return this.email;
-    }
+  async alterar_no_model() {
+    const sql =
+      "UPDATE ONG_VOLUNTARIO SET ONG_VOLUNTARIO_EMAIL = ?, ONG_VOLUNTARIO_NOME = ?, " +
+      "ONG_VOLUNTARIO_TELEFONE = ?, ONG_VOLUNTARIO_DESC = ? WHERE ONG_VOLUNTARIO_CPF = ?";
 
-    getTelefone() {
-        return this.telefone;
-    }
+    let valores = [this.email, this.nome, this.telefone, this.desc, this.CPF];
 
-    getDesc() {
-        return this.desc;
-    }
+    let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
-    // Setters
-    setCPF(CPF) {
-        this.CPF = CPF;
-    }
+    return result;
+  }
 
-    setNome(nome) {
-        this.nome = nome;
-    }
+  async deletar_no_model(cpf) {
+    const sql = `DELETE FROM ONG_VOLUNTARIO WHERE ONG_VOLUNTARIO_CPF = ?;`;
 
-    setEmail(email) {
-        this.email = email;
-    }
+    let valores = [cpf];
 
-    setTelefone(telefone) {
-        this.telefone = telefone;
-    }
+    let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
-    setDesc(desc) {
-        this.desc = desc;
-    }
-
-    async voluntario_exibir_epsc(cpf){
-        let sql = "select * from ONG_VOLUNTARIO where ONG_VOLUNTARIO_CPF = ?";
-
-        let value = [cpf]
-
-        let rows = await banco.ExecutaComando(sql, value);
-
-        if(rows.length > 0){
-            let row = rows[0];
-            return new Voluntario(row["ONG_VOLUNTARIO_CPF"], row["ONG_VOLUNTARIO_NOME"], row["ONG_VOLUNTARIO_EMAIL"], row["ONG_VOLUNTARIO_TELEFONE"], row["ONG_VOLUNTARIO_DESC"]);
-        }
-
-        return null;
-    }
-
-    async listar() {
-
-        let sql = "select * from ONG_VOLUNTARIO ORDER BY ONG_VOLUNTARIO_NOME asc";
-
-        let rows = await banco.ExecutaComando(sql);
-        let lista = [];
-
-        for(let i = 0; i < rows.length; i++) {
-            lista.push(new Voluntario(rows[i]["ONG_VOLUNTARIO_CPF"], rows[i]["ONG_VOLUNTARIO_NOME"], rows[i]["ONG_VOLUNTARIO_EMAIL"], rows[i]["ONG_VOLUNTARIO_TELEFONE"]));
-        } 
-        
-        return lista;
-    }
-
-    async cadastrar_no_model() {
-        let sql = "INSERT INTO ONG_VOLUNTARIO (ONG_VOLUNTARIO_EMAIL, ONG_VOLUNTARIO_NOME, ONG_VOLUNTARIO_TELEFONE, ONG_VOLUNTARIO_DESC, ONG_VOLUNTARIO_CPF) VALUES (?,?,?,?,?)";
-        let valores = [this.email, this.nome, this.telefone, this.desc, this.CPF];
-    
-        try {
-            let result = await banco.ExecutaComandoNonQuery(sql, valores);
-            return result;
-        } catch (error) {
-            if (error.code === 'ER_DUP_ENTRY') {
-                return "Erro: CPF já cadastrado";
-            } else {
-                // Outros erros
-                return "Erro:" + error.message;
-            }
-        }
-    }
-    
-
-    async alterar_no_model() {
-        const sql = "UPDATE ONG_VOLUNTARIO SET ONG_VOLUNTARIO_EMAIL = ?, ONG_VOLUNTARIO_NOME = ?, "+
-        "ONG_VOLUNTARIO_TELEFONE = ?, ONG_VOLUNTARIO_DESC = ? WHERE ONG_VOLUNTARIO_CPF = ?";
-
-        let valores = [this.email, this.nome, this.telefone, this.desc, this.CPF];
-
-        let result = await banco.ExecutaComandoNonQuery(sql, valores);
-
-        return result;
-    }
-
-    async deletar_no_model(cpf){
-        const sql = `DELETE FROM ONG_VOLUNTARIO WHERE ONG_VOLUNTARIO_CPF = ?;`
-
-        let valores = [cpf];
-
-        let result = await banco.ExecutaComandoNonQuery(sql, valores);
-
-        return result;
-    }
+    return result;
+  }
 }
 
 module.exports = Voluntario;

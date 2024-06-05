@@ -1,15 +1,14 @@
-console.log(`entrou noticia`)
+console.log(`entrou noticia`);
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
+  var btnGravar = document.getElementById("btnGravar");
 
-    var btnGravar = document.getElementById("btnGravar");
+  btnGravar.addEventListener("click", gravarNoticia);
 
-    btnGravar.addEventListener("click", gravarNoticia);
+  //var inputImagem = document.getElementById("inputImagem");
 
-    //var inputImagem = document.getElementById("inputImagem");
-
-    //inputImagem.addEventListener("change", exibirPreviaImagem);
-})
+  //inputImagem.addEventListener("change", exibirPreviaImagem);
+});
 
 /*function exibirPreviaImagem() {
 
@@ -28,52 +27,46 @@ document.addEventListener("DOMContentLoaded", function(){
 }*/
 
 function gravarNoticia() {
+  debugger;
+  var tituloNoticia = document.getElementById("titulo");
+  var noticiaDescricao = document.getElementById("descricao");
+  var noticiaConteudo = document.getElementById("conteudo");
 
-    debugger
-    var tituloNoticia = document.getElementById("titulo");
-    var noticiaDescricao = document.getElementById("descricao");
-    var noticiaConteudo = document.getElementById("conteudo");
-    
+  //if de validação básica
+  if (
+    tituloNoticia.value != "" &&
+    noticiaDescricao.value != "" &&
+    noticiaConteudo.value != ""
+  ) {
+    let obj = {
+      titulo: tituloNoticia.value,
+      descricao: noticiaDescricao.value,
+      conteudo: noticiaConteudo.value,
+    };
 
-    //if de validação básica
-    if(tituloNoticia.value != "" && 
-    noticiaDescricao.value != "" && 
-    noticiaConteudo.value != "" )
-    {
-
-        let obj = {
-
-        titulo : tituloNoticia.value,
-        descricao : noticiaDescricao.value,
-        conteudo : noticiaConteudo.value
-    }
-
-        fetch('/admin/noticias/adminCadastrar', {
-            method: "POST",
-            body: JSON.stringify(obj),
-            headers: {
-                "Content-Type": "application/json",
-            }
-        })
-        .then(r => {
-            return r.json();
-        })
-        .then(r=> {
-            if(r.ok) {
-                alert("Noticia cadastrada!");
-                window.location.href="/admin/noticias";
-            }
-            else{
-                alert("Erro ao criar noticia");
-            }
-        })
-        .catch(e => {
-            console.log(e);
-        })
-
-    }
-    else{
-        alert("Preencha todos os campos corretamente!");
-        return;
-    }
+    fetch("/admin/noticias/adminCadastrar", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((r) => {
+        if (r.ok) {
+          alert("Noticia cadastrada!");
+          window.location.href = "/admin/noticias";
+        } else {
+          alert("Erro ao criar noticia");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  } else {
+    alert("Preencha todos os campos corretamente!");
+    return;
+  }
 }

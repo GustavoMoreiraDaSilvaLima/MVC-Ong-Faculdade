@@ -1,26 +1,15 @@
 const CaixaModel = require("../../models/caixaModel");
 
-class CaixaController{
+class CaixaController {
+  CaixaView(req, res) {
+    res.render("admin/adminCaixa", { layout: "adminLayout" });
+  }
 
+  atualizarCaixa() {}
 
+  abrirCaixa() {}
 
-    CaixaView(req,res){
-        res.render("admin/adminCaixa",{layout: 'adminLayout'});
-    }
-
-    atualizarCaixa(){
-
-    }
-
-    abrirCaixa(){
-
-    }
-
-    fecharCaixa(){
-        
-    }
-
-
+  fecharCaixa() {}
 }
 
 module.exports = CaixaController;

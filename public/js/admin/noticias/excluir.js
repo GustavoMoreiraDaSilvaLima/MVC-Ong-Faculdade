@@ -1,47 +1,40 @@
+document.addEventListener("DOMContentLoaded", function () {
+  //carregarUsuarios();
 
-document.addEventListener("DOMContentLoaded", function() {
-    
-    //carregarUsuarios();
+  let btnExcluir = document.querySelectorAll(".btnExcluir");
 
-    let btnExcluir = document.querySelectorAll(".btnExcluir");
-
-    for(let i = 0; i< btnExcluir.length; i++){
-        btnExcluir[i].addEventListener("click", excluirNoticia);
-    }
-})
-
+  for (let i = 0; i < btnExcluir.length; i++) {
+    btnExcluir[i].addEventListener("click", excluirNoticia);
+  }
+});
 
 function excluirNoticia() {
-        if(window.confirm("Tem certeza que deseja excluir esta notícia?"))
-{
+  if (window.confirm("Tem certeza que deseja excluir esta notícia?")) {
+    //recuperar id pelo dataset
+    let id = this.dataset.codigo;
+    var data = {
+      NoticiaId: id,
+    };
 
-
-//recuperar id pelo dataset
-        let id = this.dataset.codigo;
-        var data = {
-            NoticiaId: id
+    fetch("/admin/noticias/excluir/" + id, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (r) {
+        if (r.ok) {
+          window.location.reload();
         }
-   
-
-        fetch("/admin/noticias/excluir/" + id, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        }).then(function(r) {
-
-            return r.json();
-        }).then(function(r) {
-            if(r.ok){
-                window.location.reload();
-            }
-        }).catch(function(e) {
-            console.log(e);
-        })
-
-
-}
+      })
+      .catch(function (e) {
+        console.log(e);
+      });
+  }
 }
 
 /*function carregarUsuarios() {
@@ -70,4 +63,4 @@ function excluirNoticia() {
         console.log(e);
     })
 */
-    console.log("Fim da função");
+console.log("Fim da função");
