@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=>{
 
+
    
 function getMoney(){
    var vStr = event.target.value;
