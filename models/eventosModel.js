@@ -120,7 +120,6 @@ class eventosModel {
 
     if (rows.length > 0) {
       let row = rows[0];
-      let imagem = "";
 
       evento = new eventosModel(
         row["evento_id"],

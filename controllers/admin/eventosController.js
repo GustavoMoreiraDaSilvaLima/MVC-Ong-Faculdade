@@ -126,10 +126,10 @@ class eventosController {
         ""
       );
       ok = await Evento.inclu_alterar_Evento();
-      msg = "Cadastro atualizado com sucesso";
+      msg = "Evento atualizado com sucesso";
     } else {
       ok = false;
-      msg = "Erro ao Atualizar o cadastro";
+      msg = "Erro ao Atualizar o Evento";
     }
     res.send({ ok: ok, msg: msg });
   }

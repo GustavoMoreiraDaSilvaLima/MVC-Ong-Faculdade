@@ -1,5 +1,6 @@
 const patrimonioModel = require("../../models/patrimonioModel");
 const PatrimonioModel = require("../../models/patrimonioModel");
+const fs = require("fs");
 
 class PatrimonioController {
   async patrimonioView(req, res) {
@@ -40,6 +41,8 @@ class PatrimonioController {
   }
 
   async EditarPatrimonioPost(req, res) {
+    let ok = true;
+    let msg = "";
     if (
       req.body.coditem != 0 &&
       req.body.nome != "" &&
@@ -47,7 +50,23 @@ class PatrimonioController {
       req.body.quantidade > 0 &&
       req.body.status != ""
     ) {
-      let arquivo = req.file != null ? req.file.filename : null;
+      let PatrimonioOld = new PatrimonioModel();
+      PatrimonioOld = await PatrimonioOld.obterPatrimonio(req.body.id);
+      let imagem = null;
+      
+      if (req.file != null) {
+        imagem = req.file.filename;
+        if (PatrimonioOld.posssuiImagem) {
+          let imagemAntigo = PatrimonioOld.ONG_PATRIMONIO_IMG;
+          fs.unlinkSync(global.RAIZ_PROJETO + "/public/img/produtos/" + imagemAntigo);
+        }
+      } 
+      else {
+        if (PatrimonioOld.posssuiImagem){
+          imagem = PatrimonioOld.ONG_PATRIMONIO_IMG.toString().split("/").pop();
+        }
+      }
+      
       let patrimonio = new PatrimonioModel(
         req.body.id,
         req.body.coditem,
@@ -55,12 +74,15 @@ class PatrimonioController {
         req.body.descricao,
         req.body.quantidade,
         req.body.status,
-        arquivo
+        imagem
       );
-      let resultado = await patrimonio.atualizarPatrimonio();
-
-      res.send({ ok: resultado, msg: "Patrimonio cadastrado!" });
+      ok = await patrimonio.atualizarPatrimonio();
+      msg = "Patrimonio Atualizado com sucesso";
+    } else {
+      ok = false;
+      msg = "Erro ao atualizar patrimonio";
     }
+    res.send({ ok: ok, msg: msg });
   }
 
   async editarPatrimonioView(req, res) {
@@ -87,7 +109,6 @@ class PatrimonioController {
     }
     res.send({ ok: ok });
   }
-
   async exibirPatrimonioPost() {
     var ok = true;
     if (
@@ -116,5 +137,7 @@ class PatrimonioController {
     res.send({ item: Patrimonio });
   }
 }
+
+
 
 module.exports = PatrimonioController;

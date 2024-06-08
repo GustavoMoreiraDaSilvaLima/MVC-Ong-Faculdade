@@ -10,8 +10,9 @@ class PatrimonioModel {
   #ONG_PATRIMONIO_QUANTIDADE;
   #ONG_PATRIMONIO_STATUS;
   #ONG_PATRIMONIO_IMG;
+  #posssuiImagem;
 
-  constructor(id, coditem, nome, descricao, quantidade, status, imagem) {
+  constructor(id, coditem, nome, descricao, quantidade, status, imagem, possui) {
     this.#ONG_PATRIMONIO_ID = id;
     this.#ONG_PATRIMONIO_CODITEM = coditem;
     this.#ONG_PATRIMONIO_NOME = nome;
@@ -19,8 +20,12 @@ class PatrimonioModel {
     this.#ONG_PATRIMONIO_QUANTIDADE = quantidade;
     this.#ONG_PATRIMONIO_STATUS = status;
     this.#ONG_PATRIMONIO_IMG = imagem;
+    this.#posssuiImagem = possui;
   }
   // Getters
+  get posssuiImagem() {
+    return this.#posssuiImagem;
+  }
   get ONG_PATRIMONIO_ID() {
     return this.#ONG_PATRIMONIO_ID;
   }
@@ -49,10 +54,6 @@ class PatrimonioModel {
     return this.#ONG_PATRIMONIO_IMG;
   }
 
-  get ONG_PATRIMONIO_IMG() {
-    return this.#ONG_PATRIMONIO_IMG;
-  }
-
   // Setters
   set ONG_PATRIMONIO_ID(id) {
     this.#ONG_PATRIMONIO_ID = id;
@@ -60,6 +61,10 @@ class PatrimonioModel {
 
   set ONG_PATRIMONIO_CODITEM(coditem) {
     this.#ONG_PATRIMONIO_CODITEM = coditem;
+  }
+
+  set posssuiImagem(opcao) {
+    this.#posssuiImagem = opcao;
   }
 
   set ONG_PATRIMONIO_NOME(nome) {
@@ -88,20 +93,29 @@ class PatrimonioModel {
     let valores = [id];
     let rows = await banco.ExecutaComando(sql, valores);
 
+    let patrimonio;
+
     if (rows.length > 0) {
-      return new PatrimonioModel(
-        rows[0].ONG_PATRIMONIO_ID,
-        rows[0].ONG_PATRIMONIO_CODITEM,
-        rows[0].ONG_PATRIMONIO_NOME,
-        rows[0].ONG_PATRIMONIO_DESCRICAO,
-        rows[0].ONG_PATRIMONIO_QUANTIDADE,
-        rows[0].ONG_PATRIMONIO_STATUS,
-        rows[0].ONG_PATRIMONIO_IMG
+      let row = rows[0];
+      patrimonio = new PatrimonioModel(
+        row["ONG_PATRIMONIO_ID"],
+        row["ONG_PATRIMONIO_CODITEM"],
+        row["ONG_PATRIMONIO_NOME"],
+        row["ONG_PATRIMONIO_DESCRICAO"],
+        row["ONG_PATRIMONIO_QUANTIDADE"],
+        row["ONG_PATRIMONIO_STATUS"],
       );
-    } else {
-      return null;
+      if (row["ONG_PATRIMONIO_IMG"] != null) {
+        patrimonio.ONG_PATRIMONIO_IMG = row["ONG_PATRIMONIO_IMG"];
+        patrimonio.posssuiImagem = true;
+      } else {
+        patrimonio.ONG_PATRIMONIO_IMG = global.CAMINHO_IMG_EVENTO + "sem-foto.png";
+        patrimonio.posssuiImagem = false;
+      }
     }
+    return patrimonio;
   }
+
 
   async exibirPatrimonio() {
     let sql = "SELECT * FROM ONG_PATRIMONIOS";
