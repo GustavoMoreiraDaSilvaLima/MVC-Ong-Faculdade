@@ -2,6 +2,7 @@ const EventosModel = require("../../models/eventosModel");
 const PatrimonioModel = require("../../models/patrimonioModel");
 const ProdutoModel = require("../../models/produtoModel");
 const UtilData = require("../../utils/data");
+const fs = require("fs");
 
 class eventosController {
   async EventosView(req, res) {
