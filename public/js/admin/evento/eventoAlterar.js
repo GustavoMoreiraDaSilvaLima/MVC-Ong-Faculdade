@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let arquivos = document.getElementById("eventImage").files;
     let idEvento = document.getElementById("inputId");
 
-    console.log(arquivos[0]);
     let hoje = FormatarDataAtual();
     let listaErros = [];
     if (idEvento.value == "" || idEvento.value <= 0) {
@@ -195,12 +194,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             </thead>
                             <tbody>
                             `;
-      console.log(ListaPatrimonio);
       //Comando de imagem quando tiver pois esta dando erro quando não vem ${ListaPatrimonio.item[i].patrimonioImg}
       for (let i = 0; i < ListaPatrimonio.item.length; i++) {
         htmlConteudo += `
                             <tr>
-                                <td><img src="/img/evento/sem-foto.png" width="80"></td>
+                                <td><img src="${ListaPatrimonio.item[i].patrimonioImg}" width="80"></td>
                                 <td>${ListaPatrimonio.item[i].patrimonioid}</td>
                                 <td>${ListaPatrimonio.item[i].patrimonioNome}</td>
                                 <td>${ListaPatrimonio.item[i].patrimonioQuantidade}</td>
@@ -266,7 +264,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </thead>
                     <tbody>
                     `;
-      console.log(ListaProdutos);
       for (let i = 0; i < ListaProdutos.item.length; i++) {
         htmlConteudo += `
                     <tr>
@@ -304,7 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
           return r.json();
         })
         .then((r) => {
-          console.log(r);
           return r;
         });
     }
@@ -412,7 +408,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function ExcluirPatrimonio() {
-      console.log(this.dataset.codigoposicao);
       let posicaoRemover = posicaoPatrimonio.indexOf(
         this.dataset.codigoposicao
       );
@@ -563,7 +558,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function ExcluirProduto() {
-      console.log(this.dataset.codigoposicao);
       let posicaoRemover = posicao.indexOf(this.dataset.codigoposicao);
       if (posicaoRemover > -1) {
         posicao.splice(posicaoRemover, 1);

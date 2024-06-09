@@ -251,7 +251,9 @@ class eventosController {
     res.send({ ok: ok, msg: msg });
   }
 
-  EventoExcluir(req, res) {}
+  EventoExcluir(req, res) {
+    
+   }
 }
 
 module.exports = eventosController;

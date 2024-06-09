@@ -62,7 +62,11 @@
                                     <input type="password" name="password" id="typePasswordX"
                                         class="form-control form-control-lg" />
                                 </div>
-
+                                <div style="margin-top:10px">
+                                    <% if (typeof msg != 'undefined') { %>
+                                        <span style="text-align: center;"><%= msg %></span>
+                                    <% } %>
+                                  </div>
                                 <br>
 
                                 <button class="btn btn-outline-light btn-lg px-5">Login</button>
