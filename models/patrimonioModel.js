@@ -161,6 +161,7 @@ class PatrimonioModel {
         this.#ONG_PATRIMONIO_QUANTIDADE,
         this.#ONG_PATRIMONIO_STATUS,
         this.#ONG_PATRIMONIO_IMG,
+        
       ];
       let resultado = await banco.ExecutaComandoNonQuery(sql, valores);
       return resultado;

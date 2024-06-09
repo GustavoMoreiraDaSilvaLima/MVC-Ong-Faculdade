@@ -18,7 +18,7 @@ class PatrimonioController {
 
   async cadastrarPatrimonioPost(req, res) {
     if (
-      req.body.coditem != 0 &&
+      req.kbody.coditem != 0 &&
       req.body.nome != "" &&
       req.body.descricao != "" &&
       req.body.quantidade > 0 &&
