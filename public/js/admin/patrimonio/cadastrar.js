@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function cadastrar() {
+    debugger
     limparValidacao();
     let coditem = document.getElementById("coditem");
     let nome = document.querySelector("#nome");
@@ -60,10 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       formData.append("id", 0);
       formData.append("coditem", coditem.value);
-      formData.append("nome", coditem.value);
-      formData.append("quantidade", coditem.value);
-      formData.append("descricao", coditem.value);
-      formData.append("status", coditem.value);
+      formData.append("nome", nome.value);
+      formData.append("quantidade", quantidade.value);
+      formData.append("descricao", descricao.value);
+      formData.append("status", status.value);
       formData.append("imagem", arquivos[0]);
 
       fetch("/admin/patrimonio/adminCadastrar", {
