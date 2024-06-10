@@ -10,7 +10,7 @@ const NoticiaRouter = express.Router();
 
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, "public/img/produtos");
+        cb(null, "public/img/noticias");
     },
     filename: function(req, file, cb) {
         let ext = file.originalname.split(".").pop();

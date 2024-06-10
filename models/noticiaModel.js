@@ -11,15 +11,15 @@ class noticiaModel {
   ONG_NOTICIA_ULTIMA_ALTERACAO;
   ONG_NOTICIA_ADMINISTRADOR_CPF;
   ONG_NOTICIA_IMG;
-  constructor(id, titulo, desc, conteudo, editado, alterado, noticia_adm_cpf, img) {
+  constructor(id, titulo, desc, conteudo, img, editado, alterado, noticia_adm_cpf) {
     this.ONG_NOTICIA_ID = id;
     this.ONG_NOTICIA_TITULO = titulo;
     this.ONG_NOTICIA_DESCRICAO = desc;
     this.ONG_NOTICIA_CONTEUDO = conteudo;
+    this.ONG_NOTICIA_IMG = img;
     this.ONG_NOTICIA_EDITADO = editado;
     this.ONG_NOTICIA_ULTIMA_ALTERACAO = alterado;
     this.ONG_NOTICIA_ADMINISTRADOR_CPF = noticia_adm_cpf;
-    this.ONG_NOTICIA_IMG = img;
   }
   async noticia_inserir_atualizar() {
     debugger;
@@ -66,22 +66,34 @@ class noticiaModel {
   }
 
   noticia_atualizar() {}
+
   async noticia_exibir() {
     let sql = "select * from ONG_NOTICIA";
 
     let rows = await banco.ExecutaComando(sql);
     let lista = [];
 
+
+
     for (let i = 0; i < rows.length; i++) {
+
+      let imagem = "";
+      if (rows["ONG_NOTICIA_IMG"] != null) {
+        imagem = rows["ONG_NOTICIA_IMG"];
+      } else {
+        imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+      }
+
       lista.push(
         new noticiaModel(
           rows[i]["ONG_NOTICIA_ID"],
           rows[i]["ONG_NOTICIA_TITULO"],
           rows[i]["ONG_NOTICIA_DESCRICAO"],
           rows[i]["ONG_NOTICIA_CONTEUDO"],
+          imagem,
           rows[i]["ONG_NOTICIA_EDITADO"],
           rows[i]["ONG_NOTICIA_ULTIMA_ALTERACAO"],
-          0
+          0,
         )
       );
     }
