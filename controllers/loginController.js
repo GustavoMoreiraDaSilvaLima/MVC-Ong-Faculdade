@@ -6,7 +6,6 @@ class loginController {
   }
 
   async login(req, res) {
-    console.log("to aqui");
     let msg = "";
     if (req.body.email != null && req.body.password != null) {
       let usuario = new UsuarioModel();

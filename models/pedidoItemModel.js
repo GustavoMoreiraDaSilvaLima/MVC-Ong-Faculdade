@@ -118,7 +118,6 @@ class PedidoItemModel {
 
     let rows = await banco.ExecutaComando(sql, valores);
 
-    console.log(rows);
 
     return rows;
   }

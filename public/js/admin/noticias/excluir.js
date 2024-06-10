@@ -63,4 +63,3 @@ function excluirNoticia() {
         console.log(e);
     })
 */
-console.log("Fim da função");
