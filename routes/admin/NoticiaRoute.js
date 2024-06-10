@@ -7,10 +7,10 @@ const autent = new AutenticacaoMiddleware();
 
 const NoticiaRouter = express.Router();
 
-let ctrl = new NoticiaController()
+
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, "public/img/noticias");
+        cb(null, "public/img/produtos");
     },
     filename: function(req, file, cb) {
         let ext = file.originalname.split(".").pop();
@@ -22,7 +22,7 @@ let storage = multer.diskStorage({
     }
 })
 let upload = multer({storage});
-
+let ctrl = new NoticiaController()
 
 NoticiaRouter.get("/", autent.NivelPermissaoAdm,ctrl.listarNoticias);
 NoticiaRouter.get("/adminCadastrar",autent.NivelPermissaoAdm,ctrl.adicionarNoticaView);
