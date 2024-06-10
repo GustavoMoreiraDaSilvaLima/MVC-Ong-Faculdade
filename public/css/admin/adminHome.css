@@ -26,20 +26,74 @@ main {
 #div1, #div2, #div3, #div4, #div5, #div6, #div7, #div8, #div9 {
     background-color: rgba(29, 149, 29, 0.644);
     background-image: url('/img/home/logo_ong.png');
-    background-size: 120px 100px; /* Ajuste as dimensões conforme necessário */
+    background-size: 70%; /* Ajuste as dimensões conforme necessário */
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* Hover para Cada Div */
-.div:hover {
+#div1:hover {
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    background-color: white;
+    background-size: none;
+    background-image: url(/img/admin/caixa.png);
+}
+#div2:hover {
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    background-color: white;
+    background-image: url(/img/admin/noticia.png);
+}
+#div3:hover {
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    background-color: white;
+    background-image: url(/img/admin/voluntario.jpg);
+}
+#div4:hover {
+    background-color: white;
+    background-image: url(/img/admin/projeto.png);    
     flex-grow: 2;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
-
-#div1:hover, #div2:hover, #div3:hover, #div4:hover, #div5:hover, #div6:hover, #div7:hover, #div8:hover, #div9:hover {
-    background-color: rgba(37, 126, 37, 0.9);
+#div5:hover {
+    background-color: white;
+    background-image: url(/img/admin/adotar.jpg);    
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+#div6:hover {
+    background-color: white;
+    background-image: url(/img/admin/produto.png);
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+#div7:hover {
+    background-color: white;
+    background-image: url(/img/admin/evento.jpg);
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+#div8:hover {
+    background-color: white;
+    background-image: url(/img/admin/patrimonio.webp);
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+#div9:hover {
+    background-color: white ;
+    background-image: url(/img/admin/parceiro.jpeg);
+    flex-grow: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
 
 /* Centro do Corpo */
