@@ -43,7 +43,7 @@ function gravarNoticia() {
     formData.append("titulo", tituloNoticia.value);
     formData.append("descricao", noticiaDescricao.value);
     formData.append("conteudo", noticiaConteudo.value);
-    formData.append("inputImagem", arquivos[0]);
+    formData.append("imagem", arquivos[0]);
     fetch("/admin/noticias/adminCadastrar", {
       method: "POST",
       body: formData,
