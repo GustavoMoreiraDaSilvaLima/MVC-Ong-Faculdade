@@ -117,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (numPag < 0) {
       numPag = 1;
     }
-    console.log(status);
     let desabilitaC =
       status == "comeco"
         ? "'btn btn btn-outline-danger btnAtualizador' disabled"
@@ -205,9 +204,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let linha = "";
     let html = document.getElementById(idAlterar);
 
-    console.log(informacao.usu);
-    console.log(informacao.lista);
-    console.log(informacao.stt);
     linha = `
             <td scope="row">
                 <select class="form-control" id="select-${informacao.lista.id}"style="width: 120px;">`;

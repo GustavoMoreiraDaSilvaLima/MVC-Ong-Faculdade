@@ -36,7 +36,6 @@ class ProdutoController {
         quantiaMax
       );
 
-      console.log("Antes de transformar:", lista);
 
       const transform = (produto) => {
         return {
@@ -55,7 +54,6 @@ class ProdutoController {
 
       let listaTransformada = lista.map(transform);
 
-      console.log("Depois de transformar:", listaTransformada);
 
       let marca = new MarcaModel();
       let listaMarca = await marca.listarMarcas();

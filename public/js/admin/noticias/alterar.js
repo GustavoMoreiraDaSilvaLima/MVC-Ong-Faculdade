@@ -16,7 +16,6 @@ function alterarNoticia() {
 
   var listaErros = [];
 
-  console.log(noticiaId);
   if (
     noticiaTitulo == "" ||
     noticiaTitulo == undefined ||

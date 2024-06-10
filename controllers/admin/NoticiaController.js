@@ -38,7 +38,6 @@ class noticiaController {
   }
 
   async adicionarNoticia(req, res) {
-    console.log(req.body);
     if (
       (req.body.titulo != "", req.body.descricao != "", req.body.conteudo != "")
     ) {

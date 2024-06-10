@@ -1,4 +1,3 @@
-console.log(`entrou noticia`);
 
 document.addEventListener("DOMContentLoaded", function () {
   var btnGravar = document.getElementById("btnGravar");
