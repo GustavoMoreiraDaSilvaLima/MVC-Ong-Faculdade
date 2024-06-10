@@ -1,4 +1,5 @@
 const Database = require("../db/database");
+const moment = require('moment');
 
 const banco = new Database();
 class noticiaModel {
@@ -22,12 +23,17 @@ class noticiaModel {
     debugger;
     if (this.ONG_NOTICIA_ID == 0) {
       let sql =
-        "insert into ONG_NOTICIA (ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO) values (?,?,?)";
+        "insert into ONG_NOTICIA (ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO, ONG_NOTICIA_EDITADO, ONG_NOTICIA_ULTIMA_ALTERACAO) values (?,?,?,?,?)";
+
+        let data = moment()
+        let dataFormatada = data.format('YYYY-MM-DD HH:mm:ss');
 
       let valores = [
         this.ONG_NOTICIA_TITULO,
         this.ONG_NOTICIA_DESCRICAO,
         this.ONG_NOTICIA_CONTEUDO,
+        0,
+        dataFormatada
       ];
 
       let result = await banco.ExecutaComandoNonQuery(sql, valores);
@@ -35,11 +41,17 @@ class noticiaModel {
       return result;
     } else {
       let sql =
-        "update ONG_NOTICIA SET ONG_NOTICIA_TITULO = ?, ONG_NOTICIA_DESCRICAO = ?,ONG_NOTICIA_CONTEUDO = ?  where ONG_NOTICIA_ID = ?";
-      let valores = [
+        "update ONG_NOTICIA SET ONG_NOTICIA_TITULO = ?, ONG_NOTICIA_DESCRICAO = ?,ONG_NOTICIA_CONTEUDO = ?,ONG_NOTICIA_EDITADO = ?, ONG_NOTICIA_ULTIMA_ALTERACAO = ?  where ONG_NOTICIA_ID = ?";
+      
+        let data = moment()
+        let dataFormatada = data.format('YYYY-MM-DD HH:mm:ss');
+
+        let valores = [
         this.ONG_NOTICIA_TITULO,
         this.ONG_NOTICIA_DESCRICAO,
         this.ONG_NOTICIA_CONTEUDO,
+        1,
+        dataFormatada,
         this.ONG_NOTICIA_ID,
       ];
 
