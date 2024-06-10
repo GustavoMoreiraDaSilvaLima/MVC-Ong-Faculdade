@@ -42,11 +42,13 @@ class noticiaController {
     if (
       (req.body.titulo != "", req.body.descricao != "", req.body.conteudo != "")
     ) {
+      let arquivo = req.file != null ? req.file.filename : null;
       let noticia = new noticiaModel(
         0,
         req.body.titulo,
         req.body.descricao,
-        req.body.conteudo
+        req.body.conteudo,
+        arquivo
       );
       let result = await noticia.noticia_inserir_atualizar();
 
@@ -65,7 +67,6 @@ class noticiaController {
   }
   //Essa ou a de abrir a notica já vir para editar
   async editarNoticia(req, res) {
-    console.log("controller");
     if (
       (req.body.id != "",
       req.body.titulo != "",

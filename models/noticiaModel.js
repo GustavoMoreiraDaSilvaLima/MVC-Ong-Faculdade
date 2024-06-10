@@ -9,7 +9,8 @@ class noticiaModel {
   ONG_NOTICIA_EDITADO;
   ONG_NOTICIA_ULTIMA_ALTERACAO;
   ONG_NOTICIA_ADMINISTRADOR_CPF;
-  constructor(id, titulo, desc, conteudo, editado, alterado, noticia_adm_cpf) {
+  ONG_NOTICIA_IMG;
+  constructor(id, titulo, desc, conteudo, editado, alterado, noticia_adm_cpf, img) {
     this.ONG_NOTICIA_ID = id;
     this.ONG_NOTICIA_TITULO = titulo;
     this.ONG_NOTICIA_DESCRICAO = desc;
@@ -17,17 +18,19 @@ class noticiaModel {
     this.ONG_NOTICIA_EDITADO = editado;
     this.ONG_NOTICIA_ULTIMA_ALTERACAO = alterado;
     this.ONG_NOTICIA_ADMINISTRADOR_CPF = noticia_adm_cpf;
+    this.ONG_NOTICIA_IMG = img;
   }
   async noticia_inserir_atualizar() {
     debugger;
     if (this.ONG_NOTICIA_ID == 0) {
       let sql =
-        "insert into ONG_NOTICIA (ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO) values (?,?,?)";
+        "insert into ONG_NOTICIA (ONG_NOTICIA_TITULO, ONG_NOTICIA_DESCRICAO,ONG_NOTICIA_CONTEUDO, ONG_NOTICIA_IMG) values (?,?,?,?)";
 
       let valores = [
         this.ONG_NOTICIA_TITULO,
         this.ONG_NOTICIA_DESCRICAO,
         this.ONG_NOTICIA_CONTEUDO,
+        this.ONG_NOTICIA_IMG,
       ];
 
       let result = await banco.ExecutaComandoNonQuery(sql, valores);

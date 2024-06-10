@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnGravar.addEventListener("click", gravarNoticia);
 
-  //var inputImagem = document.getElementById("inputImagem");
+  var inputImagem = document.getElementById("inputImagem");
 
-  //inputImagem.addEventListener("change", exibirPreviaImagem);
+  inputImagem.addEventListener("change", exibirPreviaImagem);
 });
 
-/*function exibirPreviaImagem() {
+function exibirPreviaImagem() {
 
     let file = document.getElementById("inputImagem").files[0];
 
@@ -24,13 +24,14 @@ document.addEventListener("DOMContentLoaded", function () {
     else{
         alert("Imagem inválida!!!");
     }
-}*/
+}
 
 function gravarNoticia() {
   debugger;
   var tituloNoticia = document.getElementById("titulo");
   var noticiaDescricao = document.getElementById("descricao");
   var noticiaConteudo = document.getElementById("conteudo");
+  var arquivos = document.getElementById("inputImagem").files
 
   //if de validação básica
   if (
@@ -38,18 +39,15 @@ function gravarNoticia() {
     noticiaDescricao.value != "" &&
     noticiaConteudo.value != ""
   ) {
-    let obj = {
-      titulo: tituloNoticia.value,
-      descricao: noticiaDescricao.value,
-      conteudo: noticiaConteudo.value,
-    };
+    let formData = new FormData();
 
+    formData.append("titulo", tituloNoticia.value);
+    formData.append("descricao", noticiaDescricao.value);
+    formData.append("conteudo", noticiaConteudo.value);
+    formData.append("inputImagem", arquivos[0]);
     fetch("/admin/noticias/adminCadastrar", {
       method: "POST",
-      body: JSON.stringify(obj),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: formData,
     })
       .then((r) => {
         return r.json();

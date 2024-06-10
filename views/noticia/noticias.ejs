@@ -1,21 +1,52 @@
+<style>
+    /* Estilos personalizados */
+    .news-item {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 16px;
+        color: #777;
+        margin-top: 10px;
+    }
+
+    /* Estilos para o link do item de notícia */
+    .news-link {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .news-link:hover {
+        color: #ff6f61;
+    }
+</style>
+
 <div class="container p-5">
-    <h1 class="p-5">Últimas Notícias</h1>
+    <h1 class="p-5 display-4">Últimas Notícias</h1>
     <div class="list-group">
         <% for (let i = 0; i < lista.length; i++)  { %>
-        <a href="espec/<%= lista[i].ONG_NOTICIA_ID %>" class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black">
-            <div class="row">
-                <div class="col-md-1 my-auto">
-                    <img src="./img/logo3.png" alt="Ícone Notícia 1" class="img-fluid"> <!-- Ajuste o caminho da imagem -->
-                </div>
-                <div class="col-md-11">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><%= lista[i].ONG_NOTICIA_TITULO %></h5>
+            <a href="espec/<%= lista[i].ONG_NOTICIA_ID %>" class="news-item">
+                <div class="row">
+                    <div class="col-md-1 my-auto">
+                        <img src="./img/logo3.png" alt="Ícone Notícia 1" class="img-fluid">
                     </div>
-                    <p class="mb-1"><%= lista[i].ONG_NOTICIA_DESCRICAO%></p>
+                    <div class="col-md-11">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="title mb-1"><%= lista[i].ONG_NOTICIA_TITULO %></h5>
+                        </div>
+                        <p class="description mb-1"><%= lista[i].ONG_NOTICIA_DESCRICAO %></p>
+                    </div>
                 </div>
-                
-            </div>
-        </a>
+            </a>
         <% } %>
     </div>
     <br><br><br><br><br>
