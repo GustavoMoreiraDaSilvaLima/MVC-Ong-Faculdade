@@ -1,14 +1,23 @@
+<style>
+  .conteudo {
+      text-align: justify;
+      text-justify: inter-word; /* Define a justificação do texto */
+  }
+</style>
 
-      <div class="container mt-5 p-5">
-        <div class="row">
-          <div class="col-md-8 offset-md-2">
-            <div class="noticia">
+<div class="container mt-5 p-5">
+  <div class="row">
+      <div class="col-md-8 offset-md-2">
+          <div class="noticia">
               <h2><b><%= not.ONG_NOTICIA_TITULO %></b></h2>
               <p class="desc mt-3"><%= not.ONG_NOTICIA_DESCRICAO %></p>
+              <% if (not.posssuiImagem) { %>
+                  <img src="<%= not.ONG_NOTICIA_IMG %>" alt="" class="img-thumbnail mx-auto d-block">
+              <% } %>
               <p class="conteudo mt-5">
-                <%= not.ONG_NOTICIA_CONTEUDO %>
+                  <%= not.ONG_NOTICIA_CONTEUDO %>
               </p>
-            </div>
           </div>
-        </div>
-      </div> 
+      </div>
+  </div>
+</div>

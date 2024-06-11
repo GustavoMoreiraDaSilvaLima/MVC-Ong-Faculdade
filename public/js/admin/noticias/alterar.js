@@ -84,10 +84,10 @@ function alterarNoticia() {
       })
       .then((r) => {
         if (r.ok) {
-          alert("Produto alterado!");
+          alert("Noticia alterada!");
           window.location.href = "/admin/noticias";
         } else {
-          alert("Erro ao alterar produto");
+          alert("Erro ao alterar Noticia");
         }
       })
       .catch((e) => {

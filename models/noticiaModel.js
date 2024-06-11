@@ -82,10 +82,13 @@ class noticiaModel {
     for (let i = 0; i < rows.length; i++) {
 
       let imagem = "";
+      let possui
       if (rows[i]["ONG_NOTICIA_IMG"] != null) {
         imagem = global.CAMINHO_IMG_NOTICIAS +  rows[i]["ONG_NOTICIA_IMG"];
+        possui = true
       } else {
         imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+        possui = false
       }
 
       lista.push(
@@ -98,6 +101,7 @@ class noticiaModel {
           rows[i]["ONG_NOTICIA_EDITADO"],
           rows[i]["ONG_NOTICIA_ULTIMA_ALTERACAO"],
           0,
+          possui
         )
       );
     }
@@ -119,7 +123,7 @@ class noticiaModel {
         imagem = global.CAMINHO_IMG_NOTICIAS +  row["ONG_NOTICIA_IMG"];
         possui = true
       } else {
-        imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+        imagem = global.CAMINHO_IMG_NOTICIAS + "sem-foto.png";
         possui = false
       }
 
