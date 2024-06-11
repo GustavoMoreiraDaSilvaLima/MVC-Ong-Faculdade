@@ -11,7 +11,8 @@ class noticiaModel {
   ONG_NOTICIA_ULTIMA_ALTERACAO;
   ONG_NOTICIA_ADMINISTRADOR_CPF;
   ONG_NOTICIA_IMG;
-  constructor(id, titulo, desc, conteudo, img, editado, alterado, noticia_adm_cpf) {
+  posssuiImagem;
+  constructor(id, titulo, desc, conteudo, img, editado, alterado, noticia_adm_cpf, possui) {
     this.ONG_NOTICIA_ID = id;
     this.ONG_NOTICIA_TITULO = titulo;
     this.ONG_NOTICIA_DESCRICAO = desc;
@@ -20,7 +21,10 @@ class noticiaModel {
     this.ONG_NOTICIA_EDITADO = editado;
     this.ONG_NOTICIA_ULTIMA_ALTERACAO = alterado;
     this.ONG_NOTICIA_ADMINISTRADOR_CPF = noticia_adm_cpf;
+    this.posssuiImagem = possui;
   }
+
+
   async noticia_inserir_atualizar() {
     debugger;
     if (this.ONG_NOTICIA_ID == 0) {
@@ -110,10 +114,13 @@ class noticiaModel {
     if (rows.length > 0) {
       let row = rows[0];
       let imagem = "";
+      let possui
       if (row["ONG_NOTICIA_IMG"] != null) {
         imagem = global.CAMINHO_IMG_NOTICIAS +  row["ONG_NOTICIA_IMG"];
+        possui = true
       } else {
         imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+        possui = false
       }
 
 
@@ -127,6 +134,7 @@ class noticiaModel {
         row["ONG_NOTICIA_EDITADO"],
         row["ONG_NOTICIA_ULTIMA_ALTERACAO"],
         0,
+        possui
       );
     }
 

@@ -4,7 +4,28 @@ document.addEventListener("DOMContentLoaded", function () {
   btnAlterar.addEventListener("click", function () {
     alterarNoticia();
   });
+
+  var inputImagem = document.getElementById("inputImagem");
+
+  inputImagem.addEventListener("change", exibirPreviaImagem);
 });
+
+
+function exibirPreviaImagem() {
+
+  let file = document.getElementById("inputImagem").files[0];
+
+  if(file.type.includes("png") || 
+  file.type.includes("jpg") || 
+  file.type.includes("jpeg")) {
+      let url = URL.createObjectURL(file);
+
+      document.getElementById("previaImagem").setAttribute("src", url);
+  }
+  else{
+      alert("Imagem inválida!!!");
+  }
+}
 
 function alterarNoticia() {
   //limparErros();
@@ -13,6 +34,8 @@ function alterarNoticia() {
   var noticiaDescricao = document.getElementById("novaDescricao").value;
   var noticiaConteudo = document.getElementById("novoConteudo").value;
   var noticiaId = document.getElementById("idNoticia").value;
+  var arquivos = document.getElementById("inputImagem").files
+
 
   var listaErros = [];
 
@@ -44,19 +67,17 @@ function alterarNoticia() {
   }
 
   if (listaErros.length == 0) {
-    var data = {
-      titulo: noticiaTitulo,
-      descricao: noticiaDescricao,
-      conteudo: noticiaConteudo,
-      id: noticiaId,
-    };
+    let formData = new FormData();
+
+    formData.append("titulo", noticiaTitulo);
+    formData.append("descricao", noticiaDescricao);
+    formData.append("conteudo", noticiaConteudo);
+    formData.append("id", noticiaId);
+    formData.append("imagem", arquivos[0]);
 
     fetch("/admin/noticias/adminEditar", {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData,
     })
       .then((r) => {
         return r.json();

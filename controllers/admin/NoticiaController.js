@@ -1,4 +1,5 @@
 const noticiaModel = require(`../../models/noticiaModel`);
+const fs = require("fs");
 
 class noticiaController {
   //Visualização especial para o ADM, layout de ADministrador lembrar de colocar
@@ -66,23 +67,42 @@ class noticiaController {
   }
   //Essa ou a de abrir a notica já vir para editar
   async editarNoticia(req, res) {
+    let ok = true;
+    let msg = '';
     if (
       (req.body.id != "",
       req.body.titulo != "",
       req.body.descricao != "",
       req.body.conteudo != "")
     ) {
+      let NoticiaOld = new noticiaModel();
+      NoticiaOld = await NoticiaOld.noticia_exibir_epsc(req.body.id);
+      let imagem = null;
+
+      if(req.file != null){
+        imagem = req.file.filename;
+        if(NoticiaOld.posssuiImagem){
+          let imagemAntigo = NoticiaOld.ONG_NOTICIA_IMG;
+          fs.unlinkSync(global.RAIZ_PROJETO + "/public/" + imagemAntigo);
+        }
+      }
+      else{
+        if(NoticiaOld.posssuiImagem){
+          imagem = NoticiaOld.ONG_NOTICIA_IMG.toString().split("/").pop();
+        }
+      }
       let noticia = new noticiaModel(
         req.body.id,
         req.body.titulo,
         req.body.descricao,
-        req.body.conteudo
+        req.body.conteudo,
+        imagem
       );
       let result = await noticia.noticia_inserir_atualizar();
 
       res.send({ ok: result });
     } else res.send({ ok: false });
-  }
+    }
 }
 
 module.exports = noticiaController;
