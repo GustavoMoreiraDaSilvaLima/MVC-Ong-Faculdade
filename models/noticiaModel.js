@@ -78,8 +78,8 @@ class noticiaModel {
     for (let i = 0; i < rows.length; i++) {
 
       let imagem = "";
-      if (rows["ONG_NOTICIA_IMG"] != null) {
-        imagem = rows["ONG_NOTICIA_IMG"];
+      if (rows[i]["ONG_NOTICIA_IMG"] != null) {
+        imagem = global.CAMINHO_IMG_NOTICIAS +  rows[i]["ONG_NOTICIA_IMG"];
       } else {
         imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
       }
@@ -109,14 +109,24 @@ class noticiaModel {
 
     if (rows.length > 0) {
       let row = rows[0];
+      let imagem = "";
+      if (row["ONG_NOTICIA_IMG"] != null) {
+        imagem = global.CAMINHO_IMG_NOTICIAS +  row["ONG_NOTICIA_IMG"];
+      } else {
+        imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+      }
+
+
+
       return new noticiaModel(
         row["ONG_NOTICIA_ID"],
         row["ONG_NOTICIA_TITULO"],
         row["ONG_NOTICIA_DESCRICAO"],
         row["ONG_NOTICIA_CONTEUDO"],
+        imagem,
         row["ONG_NOTICIA_EDITADO"],
         row["ONG_NOTICIA_ULTIMA_ALTERACAO"],
-        0
+        0,
       );
     }
 

@@ -68,6 +68,7 @@ app.use("/admin/caixa",CaixaRoute);
 
 global.CAMINHO_IMG_EVENTO = "/img/evento/"
 global.CAMINHO_IMG_BROWSER = "/img/produtos/"
+global.CAMINHO_IMG_NOTICIAS = "/img/noticias/"
 global.RAIZ_PROJETO = __dirname;
 
  
