@@ -87,7 +87,7 @@ class noticiaModel {
         imagem = global.CAMINHO_IMG_NOTICIAS +  rows[i]["ONG_NOTICIA_IMG"];
         possui = true
       } else {
-        imagem = global.CAMINHO_IMG_BROWSER + "sem-foto.png";
+        imagem = global.CAMINHO_IMG_NOTICIAS + "sem-foto.png";
         possui = false
       }
 
