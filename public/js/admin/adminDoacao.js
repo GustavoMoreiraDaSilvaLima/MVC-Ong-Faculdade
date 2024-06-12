@@ -96,9 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
-                    <button data-codigoexclusao="${
-                      dadosTabela.item[l].id
-                    }" class="btn btn-danger btnExcluir"
+                    <button data-codigoexclusao="${dadosTabela.item[l].id
+          }" class="btn btn-danger btnExcluir"
                     id=""><i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -117,23 +116,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (numPag < 0) {
       numPag = 1;
     }
-    console.log(status);
-    let desabilitaC =
-      status == "comeco"
-        ? "'btn btn btn-outline-danger btnAtualizador' disabled"
-        : status == "erro tabela"
-        ? "'btn btn btn-outline-danger btnAtualizador' disabled"
-        : "'btn btn-outline-primary btnAtualizador'";
-    let desabilitaF =
-      status == "fim"
-        ? "'btn btn btn-outline-danger btnAtualizador' disabled"
-        : "'btn btn-outline-primary btnAtualizador'";
-    let desabilitaFim =
-      status == "fim"
-        ? "'btn btn btn-outline-danger btnAtualizador' disabled"
-        : status == "erro tabela"
-        ? "'btn btn-outline-danger btnAtualizador' disabled"
-        : "'btn btn-outline-primary btnAtualizador'";
+
+    let desabilitaC = status == "comeco"? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" && numPag == 1? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+    let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+    let desabilitaFim = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
     Paginas.innerHTML = `
                 <button data-quant="-10" type="button" class=${desabilitaC}>&lt;&lt;</button>
                 <button  data-quant="-1" type="button" class=${desabilitaC}>&lt;</button>
@@ -149,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return r.json();
       })
       .then((r) => {
-        console.log(r);
         return r;
       });
   }
@@ -205,9 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let linha = "";
     let html = document.getElementById(idAlterar);
 
-    console.log(informacao.usu);
-    console.log(informacao.lista);
-    console.log(informacao.stt);
     linha = `
             <td scope="row">
                 <select class="form-control" id="select-${informacao.lista.id}"style="width: 120px;">`;
@@ -256,21 +238,19 @@ document.addEventListener("DOMContentLoaded", function () {
             </td>
             <td>
                 <input type="text" class="form-control" value="${new Date(
-                  informacao.lista.data
-                ).toLocaleDateString()}" disabled>
+      informacao.lista.data
+    ).toLocaleDateString()}" disabled>
             </td>
 
             <td class="retirar">
                 <div class="retirar">
-                <button data-id="${
-                  informacao.lista.id
-                }" class="btn btn-success btnSalvar">
+                <button data-id="${informacao.lista.id
+      }" class="btn btn-success btnSalvar">
                     <i id="1" class="fa fa-check"></i>
                 </button>
                 <button class="btn btn-danger btnCancelar"
-                    id="cancelar-${
-                      informacao.lista.id
-                    }" ><i class="fa fa-times" aria-hidden="true"></i>
+                    id="cancelar-${informacao.lista.id
+      }" ><i class="fa fa-times" aria-hidden="true"></i>
                 </button>
                 </div>
         </td>
@@ -400,9 +380,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="btn btn-primary btnEditar">
                     <i id="1" class="fas fa-pen"></i>
                     </button>
-                    <button data-codigoexclusao="${
-                      item.item[l].id
-                    }" class="btn btn-danger btnExcluir"
+                    <button data-codigoexclusao="${item.item[l].id
+          }" class="btn btn-danger btnExcluir"
                     id=""><i class="fas fa-trash"></i>
                     </button>
                 </div>

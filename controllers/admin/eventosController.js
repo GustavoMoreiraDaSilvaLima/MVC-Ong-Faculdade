@@ -1,6 +1,7 @@
 const EventosModel = require("../../models/eventosModel");
 const PatrimonioModel = require("../../models/patrimonioModel");
 const ProdutoModel = require("../../models/produtoModel");
+const SaidaEventoModel = require("../../models/SaidaEventoModel");
 const UtilData = require("../../utils/data");
 const fs = require("fs");
 
@@ -62,24 +63,36 @@ class eventosController {
   //Função a ser utilizada para Registar saida de evento
   async EventosAlterView(req, res) {
     let Evento = new EventosModel();
+    let SaidaItensPatrimonio = [];
+    let SaidaItensProdutos = []
+    let SaidaRegistrada = ''
 
     if (req.params.id != undefined && req.params.id != "") {
       Evento = await Evento.obterEvento(req.params.id);
-    }
-    let dataFormatada = new UtilData();
-    dataFormatada = dataFormatada.formatarData(Evento.evento_data);
-    Evento.evento_data = dataFormatada;
-    let SaidaRegistrada = await Evento.VerificarSaida(req.params.id);
-    if (SaidaRegistrada.length > 0) {
-      SaidaRegistrada = true;
-    } else {
-      SaidaRegistrada = false;
+
+      let dataFormatada = new UtilData();
+      dataFormatada = dataFormatada.formatarData(Evento.evento_data);
+      Evento.evento_data = dataFormatada;
+      SaidaRegistrada = await Evento.VerificarSaida(req.params.id);
+
+
+      if (SaidaRegistrada.length > 0) {
+        SaidaRegistrada = true;
+        let SaidaEvento = new SaidaEventoModel(0, 0, 0, 0, req.params.id);
+        SaidaItensPatrimonio = await SaidaEvento.ExibirSaidaPatrimonio();
+        SaidaItensProdutos = await SaidaEvento.ExibirSaidaProduto();
+        
+      } else {
+        SaidaRegistrada = false;
+      }
     }
 
     res.render("admin/evento/adminAlterarEvento", {
-      layout: "adminLayout",
       dados: Evento,
       saida: SaidaRegistrada,
+      ItensSaidaProduto: SaidaItensProdutos,
+      ItensSaidaPatrimonio: SaidaItensPatrimonio,
+      layout: "adminLayout"
     });
   }
 
@@ -252,8 +265,8 @@ class eventosController {
   }
 
   EventoExcluir(req, res) {
-    
-   }
+
+  }
 }
 
 module.exports = eventosController;

@@ -117,7 +117,7 @@ class doacaoController {
         msg = "Falha na transação de banco de dados!!!";
       }
     }
-    res.send({ ok, msg });
+    res.send({ ok: ok,msg: msg });
   }
 
   async DoacaoManualView(req, res) {
