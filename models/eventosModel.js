@@ -137,7 +137,7 @@ class eventosModel {
         evento.evento_imagem = global.CAMINHO_IMG_EVENTO + row["evento_imagem"];
         evento.possuiImagem = true;
       } else {
-        evento.evento_imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.png"; //conferir a foto sem foto
+        evento.evento_imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.jpeg"; //conferir a foto sem foto
         evento.possuiImagem = false;
       }
     }
@@ -160,7 +160,7 @@ class eventosModel {
         if (row["evento_imagem"] != null) {
           imagem = global.CAMINHO_IMG_EVENTO + row["evento_imagem"];
         } else {
-          imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.png"; //conferir a foto sem foto
+          imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.jpeg"; //conferir a foto sem foto
         }
 
         listaRetorno.push(
@@ -284,6 +284,62 @@ class eventosModel {
     let result = await banco.ExecutaComando(sql, valores);
     //Quando for maior que zero é porque achou, no caso true
     return result;
+  }
+
+  async Filtros(filtro) {
+    let sql = `select * from tb_evento`
+    let valores = [];
+
+    if (filtro.length > 1) {
+      sql += " where "
+      //Verifica para aplicar filtros
+      for (let i = 0; i < filtro.length; i += 2) {
+        if (i > 1) {
+          sql += " or "
+        }
+
+        if (filtro[i] == "Cancelado") {
+          sql += " evento_status = 'CANCELADO'"
+        } else if (filtro[i] == "Finalizado") {
+          sql += " evento_status = 'FINALIZADO'"
+        } else if (filtro[i] == "DataMaior") {
+          sql += " evento_data >= ?";
+          valores.push(filtro[i + 1]);
+        } else if (filtro[i] == "Proximos") {
+          sql += " evento_data >= ?";
+          valores.push(filtro[i + 1]);
+        } else {
+          //Quando não há selecionados
+        }
+      }
+    } else {
+      sql += " where evento_status != 'CANCELADO' and evento_status != 'FINALIZADO'"
+    }
+
+    sql += " order by evento_data asc"
+    //Else para que???
+
+
+    let rows = await banco.ExecutaComando(sql, valores);
+
+    let listaRetorno = [];
+
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        let row = rows[i];
+
+        let imagem = "";
+
+        if (row["evento_imagem"] != null) {
+          imagem = global.CAMINHO_IMG_EVENTO + row["evento_imagem"];
+        } else {
+          imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.jpeg"; //conferir a foto sem foto
+        }
+
+        listaRetorno.push(new eventosModel(row["evento_id"], row["evento_nome"], row["evento_descricao"], row["evento_inicio"], row["evento_data"], row["evento_duracao"], row["evento_local"], imagem, "", row["evento_status"]));
+      }
+    }
+    return listaRetorno;
   }
 
   toJSON() {

@@ -11,10 +11,7 @@ class eventosController {
     let evento = new EventosModel();
     let lista = await evento.exibirEvento();
 
-    res.render("admin/evento/adminEvento", {
-      layout: "adminLayout",
-      lista: lista,
-    });
+    res.render("admin/evento/adminEvento", { layout: "adminLayout", lista: lista, });
   }
 
   EventosCadastrarView(req, res) {
@@ -81,7 +78,7 @@ class eventosController {
         let SaidaEvento = new SaidaEventoModel(0, 0, 0, 0, req.params.id);
         SaidaItensPatrimonio = await SaidaEvento.ExibirSaidaPatrimonio();
         SaidaItensProdutos = await SaidaEvento.ExibirSaidaProduto();
-        
+
       } else {
         SaidaRegistrada = false;
       }
@@ -168,25 +165,14 @@ class eventosController {
         let Validacao = [];
         let Produto = new ProdutoModel();
         for (let i = 0; i < idProduto.length; i++) {
-          let Temp = await Produto.validarEstoque(
-            idProduto[i],
-            quantidadeProduto[i]
-          );
+          let Temp = await Produto.validarEstoque(idProduto[i], quantidadeProduto[i]);
           if (Temp) {
             Validacao.push(Temp[i]);
           }
         }
         if (Validacao.length == idProduto.length) {
-          Evento = await Evento.RegistrarSaidaEvento(
-            idEvento,
-            idProduto,
-            quantidadeProduto,
-            filtro
-          );
-          Produto = await Produto.RetirarEstoqueSaidaEvento(
-            idProduto,
-            quantidadeProduto
-          );
+          Evento = await Evento.RegistrarSaidaEvento(idEvento, idProduto, quantidadeProduto, filtro);
+          Produto = await Produto.RetirarEstoqueSaidaEvento(idProduto, quantidadeProduto);
           if (Evento && Produto) {
             ok = true;
             msg = "Saida de Produtos cadastrada com sucesso";
@@ -214,25 +200,14 @@ class eventosController {
         let Validacao = [];
         let Patrimonio = new PatrimonioModel();
         for (let i = 0; i < idPatrimonio.length; i++) {
-          let Temp = await Patrimonio.validarEstoque(
-            idPatrimonio[i],
-            quantidadePatrimonio[i]
-          );
+          let Temp = await Patrimonio.validarEstoque(idPatrimonio[i], quantidadePatrimonio[i]);
           if (Temp) {
             Validacao.push(Temp[i]);
           }
         }
         if (Validacao.length == idPatrimonio.length) {
-          Evento = await Evento.RegistrarSaidaEvento(
-            idEvento,
-            idPatrimonio,
-            quantidadePatrimonio,
-            filtro
-          );
-          Patrimonio = await Patrimonio.RetirarEstoqueSaidaEvento(
-            idPatrimonio,
-            quantidadePatrimonio
-          );
+          Evento = await Evento.RegistrarSaidaEvento(idEvento, idPatrimonio, quantidadePatrimonio, filtro);
+          Patrimonio = await Patrimonio.RetirarEstoqueSaidaEvento(idPatrimonio, quantidadePatrimonio);
           if (Evento && Patrimonio) {
             ok = true;
             msg = "Saida de Patrimonio cadastrada com sucesso";
@@ -266,6 +241,18 @@ class eventosController {
 
   EventoExcluir(req, res) {
 
+  }
+
+  async EventoFiltro(req, res) {
+    let Evento = new EventosModel();
+    let parametros = req.params.tipos
+    parametros = parametros.split(".");
+    parametros.pop();
+    
+
+    let lista = await Evento.Filtros(parametros);
+
+    res.send({lista: lista});
   }
 }
 

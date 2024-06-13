@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!duraEvento.value || duraEvento.value < 0 || duraEvento.value > 23) {
       listaErros.push("eventDuration");
     }
-    if (dataEvento.value <= hoje) {
+    if (dataEvento.value <= hoje && dataEvento.value != dataEvento.value) {
       listaErros.push("eventDate");
     }
 
@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <tr data-idpatrimonioEnviar=${
               ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioid
             }>
-                <td><img src="/img/evento/sem-foto.png" width="80"></td>
+                <td><img src="${ListaPatrimonio.item[i].patrimonioImg}" width="80"></td>
                 <td>${
                   ListaPatrimonio.item[posicaoPatrimonio[i]].patrimonioNome
                 }</td>
