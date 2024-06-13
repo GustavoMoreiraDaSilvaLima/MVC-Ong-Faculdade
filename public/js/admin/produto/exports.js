@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   function exportarExcel() {
+    debugger
     // Chama a biblioteca para gerar o excel
-    var wb = XLSX.utils.table_to_book(document.getElementById("Tabela"));
+    var wb = XLSX.utils.table_to_book(document.querySelector(".venda"));
     /* Export to file (start a download) */
     XLSX.writeFile(wb, "relatorio-doacao.xlsx");
   }
