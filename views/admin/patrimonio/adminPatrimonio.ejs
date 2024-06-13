@@ -17,31 +17,49 @@
         }
     </style>
 
-    <div class="list-group">
-        <% for (let i = 0; i < lista.length; i++) { %>
-            <div class="list-group-item list-group-item-action flex-column align-items-start mb-1 border-1 border-black p-2 bd-highlight">
-                <a href="alterar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="custom-link">
-                    <div>
-                        <div class="row">
-                            <div class="col-md-1 my-auto">
-                                <img src="/img/logo3.png" alt="Ícone Patrimônio" class="img-fluid">
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <% for (let i = 0; i < lista.length; i++) { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-1 border-black">
+                        <a href="alterar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="custom-link">
+                            <img src="<%= lista[i].ONG_PATRIMONIO_IMG %>" alt="Ícone Patrimônio" class="card-img-top img-fluid">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><%= lista[i].ONG_PATRIMONIO_NOME %></h5>
+                                <p class="card-text text-muted"><%= lista[i].ONG_PATRIMONIO_DESCRICAO %></p>
+                                <p class="card-text"><strong>Quantidade:</strong> <%= lista[i].ONG_PATRIMONIO_QUANTIDADE %></p>
+                                <p class="card-text">
+                                    <strong>Status:</strong>
+                                    <% if (lista[i].ONG_PATRIMONIO_STATUS === 'disponivel') { %>
+                                        <span class="badge bg-success">Disponível</span>
+                                    <% } else if (lista[i].ONG_PATRIMONIO_STATUS === 'inoperante') { %>
+                                        <span class="badge bg-secondary text-dark">Inoperante</span>
+                                    <% } else if (lista[i].ONG_PATRIMONIO_STATUS === 'indisponivel') { %>
+                                        <span class="badge bg-danger">Indisponível</span>
+                                    <% } %>
+                                </p>
+                                <% if (lista[i].ONG_PATRIMONIO_DATACADASTRO) { %>
+                                    <p class="card-text"><strong>Data de Cadastro:</strong> <%= new Date(lista[i].ONG_PATRIMONIO_DATACADASTRO).toLocaleDateString() %></p>
+                                <% } %>
                             </div>
-                            <div class="col-md-8">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><%= lista[i].ONG_PATRIMONIO_NOME %></h5>
-                                </div>
-                                <p class="mb-1"><%= lista[i].ONG_PATRIMONIO_DESCRICAO %></p>
-                            </div>
+                        </a>
+                        <div class="card-footer text-right">
+                            <a id="editar" href="patrimonio/alterar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="btn btn-primary" title="Editar"><i class="fas fa-pen"></i></a>
+                            <button data-codigo="<%= lista[i].ONG_PATRIMONIO_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir" title="Excluir"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                </a>
-                <div class="col-lg-12" style="text-align: right;">
-                    <a id="editar" href="noticias/adminEditar/<%= lista[i].ONG_PATRIMONIO_ID %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                    <button data-codigo="<%= lista[i].ONG_PATRIMONIO_ID %>" id="btnExcluir" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
                 </div>
+            <% } %>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="/admin/patrimonio/adminCadastrar" type="submit" class="btn btn-success">Registrar Patrimônio</a>
             </div>
-        <% } %>
-        <a href="/admin/patrimonio/adminCadastrar" type="submit" class="btn btn-success">Registrar Patrimônio</a>
+        </div>
     </div>
+    
+</div>
+
     <br><br><br><br><br>
 </div>

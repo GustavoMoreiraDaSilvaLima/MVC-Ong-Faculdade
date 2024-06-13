@@ -1,78 +1,95 @@
-/*document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("btnCadastrar").addEventListener("click", cadastrar);
 
+  function limparValidacao() {
+    document.getElementById("nome").style["border-color"] = "#ced4da";
+    document.getElementById("quantidade").style["border-color"] = "#ced4da";
+    document.getElementById("descricao").style["border-color"] = "#ced4da";
+    document.getElementById("status").style["border-color"] = "#ced4da";
+  }
 
-    var btnAlterar = document.getElementById("btnEditar");
+  var inputImagem = document.getElementById("inputImagem");
 
+  inputImagem.addEventListener("change", exibirPreviaImagem);
 
-    btnAlterar.addEventListener("click", function() {
-        editarPatrimonio();
-    })
-})
+  function exibirPreviaImagem() {
+    let file = document.getElementById("inputImagem").files[0];
 
-function editarPatrimonio() {
+    if (
+      file.type.includes("png") ||
+      file.type.includes("jpg") ||
+      file.type.includes("jpeg")
+    ) {
+      let url = URL.createObjectURL(file);
 
-    //limparErros();
-    
-    var patrimonioCodItem = document.getElementById("NovoCoditem").value;
-    var patrimonioNome = document.getElementById("NovoNome").value;
-    var patrimonioQuantidade = document.getElementById("NovaQuantidade").value;
-    var patrimonioDescricao = document.getElementById("NovaDescricao").value;
-    var patrimonioStatus = document.getElementById("NovoStatus").value;
-
-    var listaErros = [];
-
-    console.log(patrimonioDescricao)
-    if(patrimonioCodItem == "" || patrimonioCodItem == undefined || patrimonioCodItem == null){
-        listaErros.push("NovoCoditem");
+      document.getElementById("previaImagem").setAttribute("src", url);
+    } else {
+      alert("Imagem inválida!!!");
     }
-    
-    if(patrimonioNome == "" || patrimonioNome == undefined || patrimonioNome == null){
-        listaErros.push("NovoNome");
+  }
+
+  function cadastrar() {
+    limparValidacao();
+    debugger;
+    let id = document.getElementById("id");
+    let coditem = document.getElementById("coditem");
+    let nome = document.getElementById("nome");
+    let quantidade = document.getElementById("quantidade");
+    let descricao = document.getElementById("descricao");
+    let status = document.getElementById("status");
+    var arquivos = document.getElementById("inputImagem").files;
+
+    let listaErros = [];
+    if (coditem.value < 0) {
+      listaErros.push("coditem");
     }
-
-    if(patrimonioQuantidade == "" || patrimonioQuantidade == undefined || patrimonioQuantidade == null){
-        listaErros.push("NovaQuantidade");
+    if (nome.value == "") {
+      listaErros.push("nome");
     }
-    if(patrimonioDescricao == "" || patrimonioDescricao == undefined || patrimonioDescricao == null){
-        listaErros.push("NovaDescricao");
+    if (quantidade.value < 0) {
+      listaErros.push("quantidade");
     }
-    if(patrimonioStatus == "" || patrimonioStatus == undefined || patrimonioStatus == null){
-        listaErros.push("NovoStatus");
+    if (descricao.value == "") {
+      listaErros.push("descricao");
     }
+    if (status.value == "") {
+      listaErros.push("status");
+    }
+    if (listaErros.length == 0) {
+      //enviar ao backend com fetch
 
-   
-    if(listaErros.length == 0){
+      let formData = new FormData();
 
-        
-        let formData = new FormData();
+      formData.append("id", id.value);
+      formData.append("coditem", coditem.value);
+      formData.append("nome", nome.value);
+      formData.append("quantidade", quantidade.value);
+      formData.append("descricao", descricao.value);
+      formData.append("status", status.value);
+      formData.append("imagem", arquivos[0]);
 
-        formData.append("NovoCoditem", patrimonioCodItem);
-        formData.append("NovoNome", patrimonioNome);
-        formData.append("NovaQuantidade", patrimonioQuantidade);
-        formData.append("NovaDescricao", patrimonioDescricao);
-        formData.append("NovoStatus", patrimonioStatus);
-
-        fetch('/admin/patrimonio/adminEditar', { 
-            method: "POST",
-            body: formData
+      fetch("/admin/patrimonio/adminEditar", {
+        method: "POST",
+        body: formData,
+      })
+        .then((r) => {
+          return r.json();
         })
-        .then(r=> {
-            return r.json();
-            
-        })
-        .then(r=> {          
-            if(r.ok) {
-                alert("Patrimônio alterado!");
-                window.location.href="/admin/patrimonio";
-            }
-            else{
-                alert("Erro ao alterar patrimônio");
-            }
-        })
-        .catch(e=> {
-            console.log(e);
-        })
-
+        .then((r) => {
+          if (r.ok) {
+            alert(r.msg);
+            window.location.href = "/admin/patrimonio";
+          } else {
+            alert(r.msg);
+          }
+        });
+    } else {
+      //avisar sobre o preenchimento incorreto
+      for (let i = 0; i < listaErros.length; i++) {
+        let campos = document.getElementById(listaErros[i]);
+        campos.style["border-color"] = "red";
+      }
+      alert("Preencha corretamente os campos!");
     }
-
-} */
+  }
+});

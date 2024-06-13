@@ -3,55 +3,58 @@ const Database = require("../db/database");
 const banco = new Database();
 
 class PedidoModel {
+  #pedidoId;
+  #pedidoData;
 
-    #pedidoId;
-    #pedidoData;
+  get pedidoId() {
+    return this.#pedidoId;
+  }
+  set pedidoId(pedidoId) {
+    this.#pedidoId = pedidoId;
+  }
 
-    get pedidoId() {
-        return this.#pedidoId;
-    }
-    set pedidoId(pedidoId){
-        this.#pedidoId = pedidoId;
-    }
+  get pedidoData() {
+    return this.#pedidoData;
+  }
+  set pedidoData(pedidoData) {
+    this.#pedidoData = pedidoData;
+  }
 
-    get pedidoData() {
-        return this.#pedidoData;
-    }
-    set pedidoData(pedidoData){
-        this.#pedidoData = pedidoData;
-    }
+  constructor(pedidoId, pedidoData) {
+    this.#pedidoId = pedidoId;
+    this.#pedidoData = pedidoData;
+  }
 
-    constructor(pedidoId, pedidoData) {
-        this.#pedidoId = pedidoId;
-        this.#pedidoData = pedidoData;
-    }
+  async listar() {
+    let sql = "select * from tb_pedido";
 
-    async listar() {
-        let sql = "select * from tb_pedido";
+    let valores = [];
 
-        let valores = [];
+    let rows = await banco.ExecutaComando(sql, valores);
 
-        let rows = await banco.ExecutaComando(sql, valores);
+    let listaPedidos = [];
 
-        let listaPedidos = [];
-
-        for(let i =0; i< rows.length; i++) {
-            let row = rows[i];
-            listaPedidos.push(new PedidoModel(row["ped_id"], row["ped_data"]));
-        }
-
-        return listaPedidos;
+    for (let i = 0; i < rows.length; i++) {
+      let row = rows[i];
+      listaPedidos.push(new PedidoModel(row["ped_id"], row["ped_data"]));
     }
 
-    async gravar() {
-        let sql = "insert into tb_pedido (ped_data) values (now())";     
-        let valores = [];
-        
-        let result = await banco.ExecutaComandoLastInserted(sql, valores);
+    return listaPedidos;  
+  }
 
-        return result;
+  async gravar(nome, endereco, cpf, formaPagamento) {
+    try {
+      let sql = "INSERT INTO tb_pedido (ped_data, nome, endereco, cpf, pagamento_id) VALUES (NOW(), ?, ?, ?, ?)";
+      let valores = [nome, endereco, cpf, formaPagamento];
+
+      let result = await banco.ExecutaComandoLastInserted(sql, valores);
+
+      return result;
+    } catch (error) {
+      console.error("Erro ao gravar pedido:", error);
+      throw error;
     }
-
+  }
 }
 
 module.exports = PedidoModel;

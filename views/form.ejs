@@ -1,3 +1,6 @@
+
+<script type="module" src="/js/Mascaras.js"></script>
+<script type="module" src="/js/cadastrar.js"></script>
 <head>
     <style>
         
@@ -34,7 +37,7 @@
             margin-bottom: .5rem;
         }
         
-        .btn-success {
+        #butao_pedido {
             color: #fff;
             background-color: #28a745;
             border-color: #28a745;
@@ -74,7 +77,7 @@
         <div class="row justify-content-center opacity-100" >
             <div>
                 <div class="custom-form-box">
-                    <h1 class="text-center">Formulário de Contato</h1>
+                    <h1 class="text-center">Formulário      </h1>
                     <div class="form-group">
                         <label for="nome">Nome:</label>
                         <input type="text" class="form-control" id="nome" name="nome" >
@@ -99,7 +102,7 @@
 
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00)00000-0000" onkeypress="mascara(' +## (##) #####-####',this,event)" >
+                        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00)00000-0000" >
                         
                     </div>
 
@@ -115,4 +118,3 @@
         </div>
     </div>
 </div>
-<script src="/js/cadastrar.js"></script>

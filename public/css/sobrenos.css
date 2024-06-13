@@ -7,20 +7,6 @@ body {
   color: #ffffff;
   background-color: #f8f9fa;
 }
-
-.home {
-  position: relative;
-  max-height: 90vh; /* Define a altura máxima da seção home */
-  overflow: hidden;
-}
-
-.imginicial {
-  width: 100%;
-  height: auto;
-  max-height: 100vh; /* Define a altura máxima da imagem */
-  object-fit: cover; /* Faz a imagem cobrir a área do contêiner */
-}
-
 .sobrenos {
   padding: 50px;
   margin-top: 2em;
@@ -48,6 +34,22 @@ body {
   transition: all 0.3s ease;
   text-decoration: none;
 }
+
+.custom-container {
+  position: relative;
+  width: 100%;
+  height: 100rex; /* Define a altura da faixa */
+  overflow: hidden; /* Garante que nada fora dos limites será visível */
+}
+
+.custom-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 
 .botao:hover {
   background-color: #117948;

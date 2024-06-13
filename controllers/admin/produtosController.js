@@ -3,215 +3,230 @@ const MarcaModel = require("../../models/MarcaModel");
 const CategoriaModel = require("../../models/CategoriaModel");
 const fs = require("fs");
 
-let solucao = 0
+let solucao = 0;
 
 class ProdutoController {
 
-    async listarView(req, res) {
-        let prod = new ProdutoModel();
-        let lista = await prod.listarProdutos();
-        let marca = new MarcaModel();
-        let listaMarca = await marca.listarMarcas();
-        let categoria = new CategoriaModel();
-        let listaCate = await categoria.listarCategorias();
-        res.render('admin/produto/adminProduto', {lista: lista, listaCate : listaCate, listaMarca : listaMarca, layout:'adminLayout'});
+  
+  async listarView(req, res) {
+    let prod = new ProdutoModel();
+    let lista = await prod.listarProdutos();
+    let marca = new MarcaModel();
+    let listaMarca = await marca.listarMarcas();
+    let categoria = new CategoriaModel();
+    let listaCate = await categoria.listarCategorias();
+    res.render("admin/produto/adminProduto", {
+      lista: lista,
+      listaCate: listaCate,
+      listaMarca: listaMarca,
+      layout: "adminLayout",
+    });
+  }
+
+  async Filtracao(req, res) {
+    try {
+      const { nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax } =
+        req.body;
+
+      let prod = new ProdutoModel();
+      let lista = await prod.filtrarAvancado(
+        nome,
+        tipoPreco,
+        categorias,
+        marcas,
+        quantiaMin,
+        quantiaMax
+      );
+
+
+      const transform = (produto) => {
+        return {
+          produtoId: produto.produtoId,
+          produtoCodigo: produto.produtoCodigo,
+          produtoNome: produto.produtoNome,
+          produtoQuantidade: produto.produtoQuantidade,
+          categoriaId: produto.categoriaId,
+          categoriaNome: produto.categoriaNome,
+          produtoValor: produto.produtoValor,
+          produtoImagem: produto.imagem,
+          marcaId: produto.marcaId,
+          marcaNome: produto.marcaNome,
+        };
+      };
+
+      let listaTransformada = lista.map(transform);
+
+
+      let marca = new MarcaModel();
+      let listaMarca = await marca.listarMarcas();
+      let categoria = new CategoriaModel();
+      let listaCate = await categoria.listarCategorias();
+
+      res.json({
+        lista: listaTransformada,
+        listaMarca: listaMarca,
+        listaCate: listaCate,
+      });
+    } catch (error) {
+      console.error("Erro ao filtrar produtos:", error);
+      res.status(500).json({ error: "Erro ao filtrar produtos." });
+    }
+  }
+
+  async AtualizarLista(req,res){
+      let prod = new ProdutoModel();
+      let lista = await prod.listarProdutos();
+      res.send({lista : lista});
+  }
+
+  async excluirProduto(req, res) {
+    var ok = true;
+    if (req.body.codigo != "") {
+      let produto = new ProdutoModel();
+      ok = await produto.excluir(req.body.codigo);
+    } else {
+      ok = false;
     }
 
-    async Filtracao(req, res) {
-        try {
-            const { nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax } = req.body;
-    
-            let prod = new ProdutoModel();
-            let lista = await prod.filtrarAvancado(nome, tipoPreco, categorias, marcas, quantiaMin, quantiaMax);
-    
-            // Log para verificar a lista antes de enviar
-            console.log("Antes de transformar:", lista);
-    
-            // Função para transformar objetos removendo propriedades privadas
-            const transform = (produto) => {
-                return {
-                    produtoId: produto.produtoId,
-                    produtoCodigo: produto.produtoCodigo,
-                    produtoNome: produto.produtoNome,
-                    produtoQuantidade: produto.produtoQuantidade,
-                    categoriaId: produto.categoriaId,
-                    categoriaNome: produto.categoriaNome,
-                    produtoValor: produto.produtoValor,
-                    produtoImagem: produto.imagem,
-                    marcaId: produto.marcaId,
-                    marcaNome: produto.marcaNome
-                };
-            };
-    
-            // Aplicando a transformação em cada item da lista
-            let listaTransformada = lista.map(transform);
-    
-            // Log para verificar a lista transformada
-            console.log("Depois de transformar:", listaTransformada);
+    res.send({ ok: ok });
+  }
 
-            let marca = new MarcaModel();
-            let listaMarca = await marca.listarMarcas();
-            let categoria = new CategoriaModel();
-            let listaCate = await categoria.listarCategorias();
-    
-            res.json({ lista: listaTransformada , listaMarca : listaMarca, listaCate : listaCate});
-        } catch (error) {
-            console.error("Erro ao filtrar produtos:", error);
-            res.status(500).json({ error: "Erro ao filtrar produtos." });
-        }
-    }
-    
+  async cadastrarProduto(req, res) {
+    var ok = true;
+    if (
+      req.body.codigo != "" &&
+      req.body.nome != "" &&
+      req.body.quantidade != "" &&
+      req.body.quantidade != "0" &&
+      req.body.marca != "0" &&
+      req.body.categoria != "0" &&
+      req.body.valor > 0
+    ) {
+      let arquivo = req.file != null ? req.file.filename : null;
+      let produto = new ProdutoModel(
+        0,
+        req.body.codigo,
+        req.body.nome,
+        req.body.quantidade,
+        req.body.categoria,
+        req.body.marca,
+        "",
+        "",
+        arquivo,
+        req.body.valor
+      );
 
-    async AtualizarLista(req, res) {
-        let Doacao = new ProdutoModel();
-        let status = "disponivel";
-        let intervalo = req.params.intervalo;
-        let lista = ''
-        if (intervalo == -99) {
-            lista = await Doacao.doacao_listar(intervalo);
-        } else {
-            if (intervalo < 1) {
-                intervalo = 1;
-            }
-            if (intervalo == 1) {
-                status = "comeco";
-            }
-            lista = await Doacao.doacao_listar((intervalo - 1) * 10);
-        }
-
-        let listaCompleta = [];
-
-        //Inserir via JSON em uma lista para enviar ao Javascript no Front-End
-        for (let i = 0; i < lista.length; i++) {
-            listaCompleta[i] = lista[i].toJSON();
-        }
-
-        if (listaCompleta.length < 10) {
-            status = "fim";
-        }
-
-        if (listaCompleta.length == 0) {
-            status = "erro tabela";
-        }
-
-        let ok = false
-        if (listaCompleta.length > 0) {
-            ok = true
-        }
-
-        let Situacao = new StatusDoacaoModel();
-        let Formas = new FormasPagamentoModel();
-        Situacao = await Situacao.listar();
-        Formas = await Formas.listar();
-
-        
-
-        res.send({ ok: ok, item: listaCompleta, status: status, pgt: Formas, situacao: Situacao });
+      ok = await produto.gravar();
+    } else {
+      ok = false;
     }
 
-    async excluirProduto(req, res){
-        var ok = true;
-        if(req.body.codigo != "") {
-            let produto = new ProdutoModel();
-            ok = await produto.excluir(req.body.codigo);
-        }
-        else{
-            ok = false;
-        }
+    res.send({ ok: ok });
+  }
 
-        res.send({ok: ok});
+  async alterarView(req, res) {
+    if ((solucao == 0 || solucao != req.params.id) && req.params.id > 0) {
+      solucao = req.params.id;
     }
-    
-    async cadastrarProduto(req, res){
-        var ok = true;
-        if(req.body.codigo != "" && req.body.nome != "" && 
-        req.body.quantidade != "" && req.body.quantidade  != '0' && 
-        req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0) {
-            let arquivo = req.file != null ? req.file.filename : null;
-            let produto = new ProdutoModel(0, req.body.codigo, 
-                req.body.nome, req.body.quantidade, 
-                req.body.categoria, req.body.marca, "", "", arquivo, req.body.valor);
+    let produto = new ProdutoModel();
+    let marca = new MarcaModel();
 
-            ok = await produto.gravar();
-        }
-        else{
-            ok = false;
-        }
-
-        res.send({ ok: ok })
-    }
-   
-    async alterarView(req, res){ 
-        if((solucao == 0 || solucao != req.params.id) && req.params.id > 0){
-            solucao = req.params.id
-        }
-        let produto = new ProdutoModel();
-        let marca = new MarcaModel();
-        
-        let categoria = new CategoriaModel();
-        if(solucao != undefined && solucao != ""){
-            produto = await produto.buscarProduto(solucao);
-        }
-
-        let listaMarca = await marca.listarMarcas();
-        let listaCategoria = await categoria.listarCategorias();
-        res.render("admin/produto/alterar", {produtoAlter: produto, listaMarcas: listaMarca, listaCategorias: listaCategoria , layout:'adminlayout'});
+    let categoria = new CategoriaModel();
+    if (solucao != undefined && solucao != "") {
+      produto = await produto.buscarProduto(solucao);
     }
 
-    async alterarProduto(req, res) {
-        debugger
-        var ok = true;
-        if(req.body.codigo != "" && req.body.nome != "" && req.body.quantidade != "" && req.body.quantidade  != '0' && req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0) {
+    let listaMarca = await marca.listarMarcas();
+    let listaCategoria = await categoria.listarCategorias();
+    res.render("admin/produto/alterar", {
+      produtoAlter: produto,
+      listaMarcas: listaMarca,
+      listaCategorias: listaCategoria,
+      layout: "adminlayout",
+    });
+  }
 
-            let produtoOld = new ProdutoModel();
-            produtoOld = await produtoOld.buscarProduto(req.body.id);
-            //apagar a imagem do produto se tiver uma nova imagem na alteração e se o antigo tiver imagem
-            let imagem = null
-            //se o file tiver preenchido, significa que a imagem será alterada
-            if(req.file != null) {
-                imagem = req.file.filename;
-                //se o meu produto já tiver uma imagem cadastrada, faço a deleção com o fs
-                if(produtoOld.possuiImagem) {
-                    let imagemAntiga = produtoOld.imagem;
-                    fs.unlinkSync(global.RAIZ_PROJETO + "/public/" + imagemAntiga);
-                }
-            }
-            else{ //se não, a imagem antiga deve ser mantida, mas apenas se houver
-                if(produtoOld.possuiImagem)
-                    imagem = produtoOld.imagem.toString().split("/").pop();
-            }
-
-            let produto = new ProdutoModel(req.body.id, req.body.codigo, req.body.nome, req.body.quantidade, req.body.categoria, req.body.marca, "", "", imagem, req.body.valor);
-            ok = await produto.gravar();
+  async alterarProduto(req, res) {
+    debugger;
+    var ok = true;
+    if (
+      req.body.codigo != "" &&
+      req.body.nome != "" &&
+      req.body.quantidade != "" &&
+      req.body.quantidade != "0" &&
+      req.body.marca != "0" &&
+      req.body.categoria != "0" &&
+      req.body.valor > 0
+    ) {
+      let produtoOld = new ProdutoModel();
+      produtoOld = await produtoOld.buscarProduto(req.body.id);
+      //apagar a imagem do produto se tiver uma nova imagem na alteração e se o antigo tiver imagem
+      let imagem = null;
+      //se o file tiver preenchido, significa que a imagem será alterada
+      if (req.file != null) {
+        imagem = req.file.filename;
+        //se o meu produto já tiver uma imagem cadastrada, faço a deleção com o fs
+        if (produtoOld.possuiImagem) {
+          let imagemAntiga = produtoOld.imagem;
+          fs.unlinkSync(global.RAIZ_PROJETO + "/public/" + imagemAntiga);
         }
-        else{
-            ok = false;
-        }
+      } else {
+        //se não, a imagem antiga deve ser mantida, mas apenas se houver
+        if (produtoOld.possuiImagem)
+          imagem = produtoOld.imagem.toString().split("/").pop();
+      }
 
-        res.send({ ok: ok })
+      let produto = new ProdutoModel(
+        req.body.id,
+        req.body.codigo,
+        req.body.nome,
+        req.body.quantidade,
+        req.body.categoria,
+        req.body.marca,
+        "",
+        "",
+        imagem,
+        req.body.valor
+      );
+      ok = await produto.gravar();
+    } else {
+      ok = false;
     }
 
-    async cadastroView(req, res) {
+    res.send({ ok: ok });
+  }
 
-            let listaMarcas = [];
-            let listaCategorias = [];
+  async cadastroView(req, res) {
+    let listaMarcas = [];
+    let listaCategorias = [];
 
-            let marca = new MarcaModel();
-            listaMarcas = await marca.listarMarcas();
+    let marca = new MarcaModel();
+    listaMarcas = await marca.listarMarcas();
 
-            let categoria = new CategoriaModel();
-            listaCategorias = await categoria.listarCategorias();
+    let categoria = new CategoriaModel();
+    listaCategorias = await categoria.listarCategorias();
 
-        res.render('admin/produto/cadastrarProduto', { listaMarcas: listaMarcas, listaCategorias: listaCategorias , layout:'adminLayout'});
-    }
+    res.render("admin/produto/cadastrarProduto", {
+      listaMarcas: listaMarcas,
+      listaCategorias: listaCategorias,
+      layout: "adminLayout",
+    });
+  }
 
-    async obter(req, res) {
-        let id = req.params.produto;
-        let produto = new ProdutoModel();
-        produto = await produto.buscarProduto(id);
+  async obter(req, res) {
+    let id = req.params.produto;
+    let produto = new ProdutoModel();
+    produto = await produto.buscarProduto(id);
 
-        res.send({produtoEncontrado: produto});
-    }
+    res.send({ produtoEncontrado: produto });
+  }
+
+  async Listar(req, res) {
+    let produto = new ProdutoModel();
+    produto = await produto.listarProdutos();
+
+    res.send({ item: produto });
+  }
 }
 
 module.exports = ProdutoController;

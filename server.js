@@ -21,7 +21,7 @@ let VendaRoute = require("./routes/admin/VendaRoute");
 let DoacaoRoute = require("./routes/admin/DoacaoRoute");
 let AdminRoute = require("./routes/admin/adminRoute");
 let ProjetoRoute = require("./routes/admin/ProjetoRoute");
-let CaixaRoute = require("./routes/admin/CaixaRoute");
+let CaixaRoute = require("./routes/admin/caixaRoute");
 let LoginRouter = require('./routes/loginRoute');
 
 const app = express();
@@ -34,7 +34,8 @@ app.set("view engine", "ejs");
 app.set("layout", "./layout");
 app.use(cookieParser());
 
-app.use(express.static("public"));
+app.use(express.static('public'));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(expressEjsLayout);
@@ -65,8 +66,9 @@ app.use("/admin/doacao", DoacaoRoute);
 app.use("/admin/projeto",ProjetoRoute);
 app.use("/admin/caixa",CaixaRoute);
 
-
+global.CAMINHO_IMG_EVENTO = "/img/evento/"
 global.CAMINHO_IMG_BROWSER = "/img/produtos/"
+global.CAMINHO_IMG_NOTICIAS = "/img/noticias/"
 global.RAIZ_PROJETO = __dirname;
 
  
