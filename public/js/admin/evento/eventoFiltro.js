@@ -180,7 +180,7 @@ class Filtros {
                                 Duração:${Itens.lista[i].evento_duracao} Horas</small>
                             </p>
                             <div class="mt-auto d-flex justify-content-between">
-                                ${Itens.lista[i].evento_status == "FINALIZADO" ? `<button class="btnExcluir btn btn-success">Evento Finalizado</button>` : Itens.lista[i].evento_status == "CANCELADO" ? `<button href="#" class="btnExcluir btn btn-danger text-center">Evento Cancelado, Impossivel editar</button>` : `<button data-codigocancelamente="${Itens.lista[i].evento_id}" class=" btnExcluir btn btn-danger">Cancelar Evento</button>`}
+                                ${Itens.lista[i].evento_status == "FINALIZADO" ? `<button class="btn btn-success">Evento Finalizado</button>` : Itens.lista[i].evento_status == "CANCELADO" ? `<button  class="btn btn-danger text-center">Evento Cancelado, Impossivel editar</button>` : `<button data-codigocancelamente="${Itens.lista[i].evento_id}" class=" btnExcluir btn btn-danger">Cancelar Evento</button>`}
                                 ${Itens.lista[i].evento_status == "FINALIZADO" ? `<a href="/admin/eventos/alterar/${Itens.lista[i].evento_id}" class="btn btn-primary">Finalizar saida de evento</a>` : Itens.lista[i].evento_status == "CANCELADO" ? `` : `<a href="/admin/eventos/alterar/${Itens.lista[i].evento_id}" class="btn btn-primary">Editar/Registrar saída</a>`}
                             </div>
                         </div>
