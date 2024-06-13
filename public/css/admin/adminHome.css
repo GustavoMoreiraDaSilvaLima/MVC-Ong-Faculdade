@@ -90,7 +90,7 @@ main {
 }
 #div9:hover {
     background-color: white ;
-    background-image: url(/img/admin/parceiro.jpeg);
+    background-image: url(/img/admin/delivery.png);
     flex-grow: 2;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
@@ -159,7 +159,7 @@ main {
     #div6 { background-color: white; background-image: url(/img/admin/produto.png); }
     #div7 { background-color: white; background-image: url(/img/admin/evento.jpg); }
     #div8 { background-color: white; background-image: url(/img/admin/patrimonio.webp); }
-    #div9 { background-color: white; background-image: url(/img/admin/parceiro.jpeg); }
+    #div9 { background-color: white; background-image: url(/img/admin/delivery.png); }
 
     .centrobody {
         height: 750px;
