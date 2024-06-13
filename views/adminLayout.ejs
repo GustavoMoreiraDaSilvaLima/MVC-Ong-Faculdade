@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +15,27 @@
     <!-- Font Awesome -->
     <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+.botaoHome {
+  bottom: 12em;
+  right: 8em;
+  padding: 5px 20px;
+  background-color: #198754;
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.botaoHome:hover {
+  background-color: #117948;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+
 </head>
 
 <body>
@@ -65,7 +85,7 @@
             </div>
         </nav>
         <span class="navbar-text">
-            Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong>
+            Olá <strong><%= locals.usuarioLogado.usuario_nome %>!</strong> <a button class="botaoHome" href="/">Pagina inicial</button></a>
         </span>
     </header>
     <div style="margin-top:100px">
