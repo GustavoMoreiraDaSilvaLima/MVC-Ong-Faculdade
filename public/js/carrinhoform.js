@@ -29,6 +29,7 @@ debugger
     if (endereco == "") {
         listaErros.push("endereco");
     }
+    
     if (cpf == "") {
     listaErros.push("cpf");
     } else {
@@ -50,39 +51,49 @@ debugger
     }
 
     let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
-
-    let obj = {
-        nome : nome,
-        endereco : endereco,
-        cpf : cpf,
-        formaPagamento : formaPagamento,
-        cep : cep,
-        listaCarrinho : listaCarrinho
-    }
-
-    if (listaCarrinho.length > 0) {
-      fetch("/pedido/gravar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      })
-        .then((r) => {
-          return r.json();
+  
+    if(listaErros.length == 0){
+      let obj = {
+          nome : nome,
+          endereco : endereco,
+          cpf : cpf,
+          formaPagamento : formaPagamento,
+          cep : cep,
+          listaCarrinho : listaCarrinho
+      }
+  
+      if (listaCarrinho.length > 0) {
+        fetch("/pedido/gravar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
         })
-        .then((r) => {
-          if(r.ok){
-            alert(r.msg);
-            localStorage.clear()
-          }else{
-            alert(r.msg);
-          }
-          window.location.href = "/produtos";
-        });
-    } else {
-      alert("O carrinho está vazio!");
-    }
+          .then((r) => {
+            return r.json();
+          })
+          .then((r) => {
+            if(r.ok){
+              alert(r.msg);
+              localStorage.clear()
+            }else{
+              alert(r.msg);
+            }
+            window.location.href = "/produtos";
+          });
+      } else {
+        alert("O carrinho está vazio!");
+      }
+    }else{
+        //avisar sobre o preenchimento incorreto
+        for (let i = 0; i < listaErros.length; i++) {
+          let campos = document.getElementById(listaErros[i]);
+          campos.style["border-color"] = "red";
+        }
+        alert("Preencha corretamente os campos!");
+      }
+
   }
 
   let cpfIn = document.getElementById("cpf");

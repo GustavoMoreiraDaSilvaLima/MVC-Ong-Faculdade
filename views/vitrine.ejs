@@ -137,7 +137,6 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                         <button data-bs-toggle="modal" data-bs-target="#modalCarrinho2" class="btn" type="button">
                             Finalizar Carrinho
-                            <span id="contadorCarrinho" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </div>
                     </div>
@@ -167,12 +166,7 @@
                                     <label for="endereco">endereco:</label>
                                     <input type="text" name="endereco" id="endereco" class="form-control"/>
                                 </div>
-                    
-                    
-                                <div class="form-group">
-                                    <label for="numero">Número:</label>
-                                    <input type="text" id="numero" name="numero" class="form-control">
-                                </div>
+                
                                 
                                 <div class="form-group">
                                     <label for="cpf">CPF:</label>
@@ -182,7 +176,7 @@
                                 <div class="form-group">
                                     <label for="formaPagamento">Forma de pagamento:</label>
                                     <select id="formaPagamento" name="formaPagamento" class="form-select">
-                                        <option value="">Selecione a forma de pagamento</option>
+                                        <option value="" disabled>Selecione a forma de pagamento</option>
                                         <option value="2">Cartão de crédito</option>
                                         <option value="3">Cartão de débito</option>
                                         <option value="4">Boleto bancário</option>
