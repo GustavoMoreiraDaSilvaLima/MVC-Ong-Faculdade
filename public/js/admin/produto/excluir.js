@@ -8,21 +8,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let quantiaMin = document.getElementById("quantityMin");
   let quantiaMax = document.getElementById("quantityMax");
+  
   quantiaMin.addEventListener("change", () => {
+    // Garante que o valor de quantiaMin está entre 0 e 999
     if (quantiaMin.value < 0) {
       quantiaMin.value = 0;
     } else if (quantiaMin.value > 999) {
       quantiaMin.value = 999;
     }
+  
+    // Verifica se quantiaMin é maior que quantiaMax e ajusta se necessário
+    if (parseInt(quantiaMin.value) > parseInt(quantiaMax.value)) {
+      quantiaMin.value = quantiaMax.value
+    }
   });
+  
   quantiaMax.addEventListener("change", () => {
+    // Garante que o valor de quantiaMax está entre 0 e 999
     if (quantiaMax.value < 0) {
       quantiaMax.value = 0;
     } else if (quantiaMax.value > 999) {
       quantiaMax.value = 999;
     }
+  
+    // Verifica se quantiaMax é menor que quantiaMin e ajusta se necessário
+    if (parseInt(quantiaMax.value) < parseInt(quantiaMin.value)) {
+      quantiaMin.value = quantiaMax.value;
+    }
   });
-
+  
   async function buscar() {
     let nome = document.getElementById("productName").value;
     let tipoPreco =
