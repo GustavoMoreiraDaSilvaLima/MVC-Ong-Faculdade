@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   
     // Verifica se quantiaMin é maior que quantiaMax e ajusta se necessário
-    if (parseInt(quantiaMin.value) > parseInt(quantiaMax.value)) {
+    if (parseInt(quantiaMin.value) > parseInt(quantiaMax.value)|| parseInt(quantiaMax.value) == parseInt(quantiaMin.value)) {
       quantiaMin.value = quantiaMax.value  -  1
     }
   });
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   
     // Verifica se quantiaMax é menor que quantiaMin e ajusta se necessário
-    if (parseInt(quantiaMax.value) < parseInt(quantiaMin.value)) {
+    if (parseInt(quantiaMax.value) < parseInt(quantiaMin.value) || parseInt(quantiaMax.value) == parseInt(quantiaMin.value)) {
       quantiaMin.value = quantiaMax.value - 1;
     }
   });
