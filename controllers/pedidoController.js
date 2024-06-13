@@ -24,7 +24,7 @@ class PedidoController {
         let produto = new ProdutoModel();
         //gerar os itens do pedido
         for (let i = 0; i < req.body.length; i++) {
-          let pedidoItem = new PedidoItemModel();
+          let pedidoItem =  new PedidoItemModel();
 
           pedidoItem.pedidoItemQuantidade = req.body[i].quantidade;
 

@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function gravarPedido() {
+    debugger
     let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
     if (listaCarrinho.length > 0) {
       fetch("/pedido/gravar", {
@@ -35,7 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
           return r.json();
         })
         .then((r) => {
-          console.log(r);
+          if(r.ok){
+            alert(r.msg);
+            localStorage.clear()
+          }else{
+            alert(r.msg);
+          }
+          window.location.href = "/produtos";
         });
     } else {
       alert("O carrinho está vazio!");
