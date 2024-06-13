@@ -26,16 +26,31 @@ class PedidoModel {
   }
 
   async listar() {
-    let sql = "select * from tb_pedido";
+    try {
+      let sql = `
+        SELECT 
+          p.ped_id, 
+          p.ped_data, 
+          p.nome, 
+          p.endereco, 
+          p.cpf, 
+          p.cep,
+          fp.pagamento_id AS forma_pagamento_id,
+          fp.pagamento_nome AS forma_pagamento_nome
+        FROM 
+          tb_pedido p
+          INNER JOIN tb_formas_pagamento fp ON p.pagamento_id = fp.pagamento_id
+      `;
 
-    let valores = [];
+      let valores = [];
 
-    let rows = await banco.ExecutaComando(sql, valores);
+      let rows = await banco.ExecutaComando(sql, valores);
 
-    let listaPedidos = [];
-
-
-    return rows;  
+      return rows;
+    } catch (error) {
+      console.error("Erro ao listar pedidos:", error);
+      throw error;
+    }
   }
 
   async gravar(nome, endereco, cpf, formaPagamento, cep) {
