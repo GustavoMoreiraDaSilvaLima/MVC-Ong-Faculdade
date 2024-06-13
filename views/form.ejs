@@ -1,11 +1,18 @@
-
-<script type="module" src="/js/Mascaras.js"></script>
-<script type="module" src="/js/cadastrar.js"></script>
 <head>
+    <title>Cadastro para Voluntariado</title>
+    <script type="module" src="/js/Mascaras.js"></script>
+    <script type="module" src="/js/cadastrar.js"></script>
     <style>
+        body {
+            background-image: url('/img/imghome/home5.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
         
         .custom-form-box {
-            background-color: #dcd5d5;
+            background-color: rgba(220, 213, 213, 0.9);
             padding: 20px;
             border: 1px solid #000000;
             border-radius: 8px;
@@ -63,58 +70,50 @@
         }
     </style>
 </head>
+<body>
+    <div id="j" class="p-3">
+        <br><br><br>
 
-<div id="j" class="p-3">
-    <br><br><br>
-    <div class=" pb-md-4 mx-auto text-center mb-0">
-        <h1 class="display-4 fw-normal text-body-emphasis text-black">Cadastro para voluntariado</h1>
-        <p class="fs-5 text-black"> 
-        </p>
-    </div>
+        <div class="container mt-5" id="asdf">
+            <div class="row justify-content-center opacity-100">
+                <div>
+                    <div class="custom-form-box">
+                        <h1 class="text-center">Formulário</h1>
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome">
+                        </div>
 
-    <div class="container mt-5" id="asdf">
-        
-        <div class="row justify-content-center opacity-100" >
-            <div>
-                <div class="custom-form-box">
-                    <h1 class="text-center">Formulário      </h1>
-                    <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" >
+                        <div class="form-group">
+                            <label for="numero">CPF</label>
+                            <input type="text" class="form-control" id="cpf" name="cpf">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="esc" name="esc" value="false" hidden>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00)00000-0000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sobre_voce">Conte mais sobre você:</label>
+                            <textarea class="form-control" id="sobre_voce" name="sobre_voce" rows="4"></textarea>
+                        </div>
+                        <br><br>
+
+                        <button class="btn btn-success" type="button" id="butao_pedido">Enviar</button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="numero">CPF</label>
-              
-                        <input type="text" class="form-control" id="cpf" name="cpf" >
-                      
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="esc" name="esc" value="false" hidden>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="email">Email:</label>
-                      <input type="email" class="form-control" id="email" name="email"  placeholder="Digite seu e-mail">
-                  </div>
-                  
-
-                    <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00)00000-0000" >
-                        
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sobre_voce">Conte mais sobre você:</label>
-                        <textarea class="form-control" id="sobre_voce" name="sobre_voce" rows="4"></textarea>
-                    </div>
-                    <br><br>
-
-                    <button class="btn btn-success" type="button" id="butao_pedido">Enviar</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+</html>
