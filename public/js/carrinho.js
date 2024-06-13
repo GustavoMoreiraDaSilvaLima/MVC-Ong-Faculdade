@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var btnAddCarrinho = document.querySelectorAll(".btnAddCarrinho");
 
-  var btnConfirmar = document.querySelector("#btnConfirmarPedido");
 
-  btnConfirmar.addEventListener("click", gravarPedido);
 
   let carrinho = [];
 
@@ -21,33 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     carregarCarrinho();
   });
 
-  function gravarPedido() {
-    debugger
-    let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
-    if (listaCarrinho.length > 0) {
-      fetch("/pedido/gravar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(listaCarrinho),
-      })
-        .then((r) => {
-          return r.json();
-        })
-        .then((r) => {
-          if(r.ok){
-            alert(r.msg);
-            localStorage.clear()
-          }else{
-            alert(r.msg);
-          }
-          window.location.href = "/produtos";
-        });
-    } else {
-      alert("O carrinho está vazio!");
-    }
-  }
 
   function carregarCarrinho() {
     let html = "";

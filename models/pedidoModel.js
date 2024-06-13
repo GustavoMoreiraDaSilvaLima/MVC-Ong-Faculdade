@@ -39,16 +39,21 @@ class PedidoModel {
       listaPedidos.push(new PedidoModel(row["ped_id"], row["ped_data"]));
     }
 
-    return listaPedidos;
+    return listaPedidos;  
   }
 
-  async gravar() {
-    let sql = "insert into tb_pedido (ped_data) values (now())";
-    let valores = [];
+  async gravar(nome, endereco, cpf, formaPagamento) {
+    try {
+      let sql = "INSERT INTO tb_pedido (ped_data, nome, endereco, cpf, pagamento_id) VALUES (NOW(), ?, ?, ?, ?)";
+      let valores = [nome, endereco, cpf, formaPagamento];
 
-    let result = await banco.ExecutaComandoLastInserted(sql, valores);
+      let result = await banco.ExecutaComandoLastInserted(sql, valores);
 
-    return result;
+      return result;
+    } catch (error) {
+      console.error("Erro ao gravar pedido:", error);
+      throw error;
+    }
   }
 }
 
