@@ -120,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let desabilitaC = status == "comeco"? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" && numPag == 1? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
     let desabilitaF = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
     let desabilitaFim = status == "fim" ? "'btn btn btn-outline-danger btnAtualizador' disabled" : status == "erro tabela" ? "'btn btn-outline-danger btnAtualizador' disabled" : "'btn btn-outline-primary btnAtualizador'";
+
     Paginas.innerHTML = `
                 <button data-quant="-10" type="button" class=${desabilitaC}>&lt;&lt;</button>
                 <button  data-quant="-1" type="button" class=${desabilitaC}>&lt;</button>

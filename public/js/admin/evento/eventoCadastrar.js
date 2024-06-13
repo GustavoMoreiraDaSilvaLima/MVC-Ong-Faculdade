@@ -34,7 +34,6 @@ function Cadastrar() {
   let dataEvento = document.getElementById("eventDate");
   let arquivos = document.getElementById("eventImage").files;
 
-  console.log(arquivos[0]);
   let hoje = FormatarDataAtual();
   let listaErros = [];
 

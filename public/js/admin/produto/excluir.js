@@ -41,20 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let quantMin = document.getElementById("quantityMin").value;
     let quantMax = document.getElementById("quantityMax").value;
 
-    console.log(
-      "Nome:" +
-        nome +
-        "  ordem :" +
-        tipoPreco +
-        "  cate :" +
-        categorias +
-        "  marca :" +
-        marcas +
-        "  minima :" +
-        quantMin +
-        "  maxima :" +
-        quantMax
-    );
 
     let obj = {
       nome: nome,
@@ -77,10 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((r) => {
         if (r.lista.length > 0) {
-          console.log(r.lista[0]);
           let htmlCorpo = "";
           for (let i = 0; i <= r.lista.length; i++) {
-            console.log(r.lista[i]);
             htmlCorpo += `<tr><td>`;
 
             if (r.lista[i].produtoImagem != "") {

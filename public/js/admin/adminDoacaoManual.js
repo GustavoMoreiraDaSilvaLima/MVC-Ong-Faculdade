@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var btnCadastrar = document.getElementById("btnCadastrar");
 
   btnCadastrar.addEventListener("click", Enviar);
-  console.log("CARREGUEI");
 });
 
 function Enviar() {

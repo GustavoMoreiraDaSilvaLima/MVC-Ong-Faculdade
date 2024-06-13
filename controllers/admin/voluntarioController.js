@@ -47,7 +47,6 @@ class voluntarioController {
 
   async voluntariosDel(req, res) {
     let cj = req.body.cpf;
-    console.log(cj);
     const voluntario = new Voluntario();
 
     let result = await voluntario.deletar_no_model(cj);

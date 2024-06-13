@@ -21,7 +21,7 @@ let VendaRoute = require("./routes/admin/VendaRoute");
 let DoacaoRoute = require("./routes/admin/DoacaoRoute");
 let AdminRoute = require("./routes/admin/adminRoute");
 let ProjetoRoute = require("./routes/admin/ProjetoRoute");
-let CaixaRoute = require("./routes/admin/CaixaRoute");
+let CaixaRoute = require("./routes/admin/caixaRoute");
 let LoginRouter = require('./routes/loginRoute');
 
 const app = express();
@@ -68,6 +68,7 @@ app.use("/admin/caixa",CaixaRoute);
 
 global.CAMINHO_IMG_EVENTO = "/img/evento/"
 global.CAMINHO_IMG_BROWSER = "/img/produtos/"
+global.CAMINHO_IMG_NOTICIAS = "/img/noticias/"
 global.RAIZ_PROJETO = __dirname;
 
  
