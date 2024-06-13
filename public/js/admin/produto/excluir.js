@@ -83,11 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
                 </tr>
                             `;
-            document.getElementById("venda").innerHTML = htmlCorpo;
+            document.querySelector(".venda").innerHTML = htmlCorpo;
           }
         } else {
           let htmlCorpo = "<h1>Produto nao encontrado</h1>";
-          document.getElementById("venda").innerHTML = htmlCorpo;
+          document.querySelector(".venda").innerHTML = htmlCorpo;
         }
       });
   }
