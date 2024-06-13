@@ -14,18 +14,20 @@
             padding: 10px;
         }
 </style>
-<div class="separar retirar">
-    <div class="left" >
+<link rel="stylesheet" type="text/css"  media="print" href="/css/admin/AdminPrintEvento.css">
+<div class="separar">
+    <div class="left retirar" >
         <h2>Filtros</h2>
         <hr>
-        <input class="pt-1"  type="checkbox"><label>Mostrar Cancelados</label><!--Filtrar todos-->
-        <input  class="pt-1" type="checkbox"><label>Proximos</label><!--Filtrar pegando a data atual-->
+        <input class="pt-1" id="Cancelados" type="checkbox"><label>Mostrar Cancelados</label><br><!--Filtrar todos-->
+        <input  class="pt-1" id="Proximos" type="checkbox"><label>Proximos</label><br><!--Filtrar pegando a data atual-->
+        <input  class="pt-1" id="Finalizado" type="checkbox"><label>Finalizados</label><!--Filtrar mostrando Eventos que já ocorreram-->
         <label>Data maior que</label>
         <input class="form-control" type="date" id="DataMaior"><!--Filtrar por data maior que esta-->
         <button id="aplicarFiltros" class="btn btn-outline-info btn-sm mt-2">Aplicar Filtros</button>
-        <button class="btn btn-outline-danger btn-sm mt-2">Exportar Pagina em PDF</button>
+        <button class="btn btn-outline-danger btn-sm mt-2" onclick="window.print();">Exportar Pagina em PDF</button>
     </div>
-<div class="container right" style="padding: 2%;">
+<div class="container right"  style="padding: 2%;">
    
     <div class="row">
         <div class="col-12 text-center">
@@ -34,15 +36,15 @@
             <a class="btn btn-outline-success" href="/admin/eventos/cadastrar">Cadastrar Novo evento</a>
         </div>
     </div>
-    <div>
+    <div id="Eventos">
         <% if(lista != undefined ) { %>
             <div class="row mt-4">
                 <% for(let i = 0; i < lista.length; i++) { %>
                 <!-- Event -->
                 <% if(lista[i]!= undefined){ %>
                 <div class="col-md-4 d-flex align-items-stretch">
-                    <div class="card mb-4">
-                        <img src="<%= lista[i].evento_imagem %>" class="card-img-top" alt="Evento <%= i+1 %>">
+                    <div class="card border-primary mb-4">
+                        <img src="<%= lista[i].evento_imagem %>" class="card-img-top" alt="Evento <%= i+1 %>" height="250px" >
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><%= lista[i].evento_nome %></h5>
                             <p class="card-text flex-grow-1"><%= lista[i].evento_descricao %></p>
@@ -52,7 +54,7 @@
                                 Duração: <%= lista[i].evento_duracao %> Horas</small>
                             </p>
                             <div class="mt-auto d-flex justify-content-between">
-                                <a data-codigocancelamente="<%= lista[i].evento_id %>" href="#" class="btn btn-danger">Cancelar Evento</a>
+                                <button data-codigocancelamente="<%= lista[i].evento_id %>" class=" btnExcluir btn btn-danger">Cancelar Evento</button>
                                 <a href="/admin/eventos/alterar/<%= lista[i].evento_id %>" class="btn btn-primary">Editar/Registrar saída</a>
                             </div>
                         </div>
@@ -69,3 +71,4 @@
 
 
 </div>
+<script src="/js/admin/evento/eventoFiltro.js"></script>

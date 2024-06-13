@@ -16,7 +16,7 @@ class Validador {
 
             return false;
 
-        } else if (this.#cpf_cnpj.lenght == 11) {
+        } else if (this.#cpf_cnpj.length == 11) {
             let soma = 0;
             for (let i = 0; i < 9; i++) {
                 soma += parseInt(this.#cpf_cnpj.charAt(i)) * (10 - i);
@@ -48,7 +48,7 @@ class Validador {
             return true;
 
         }
-        else if (this.#cpf_cnpj.lenght == 14) {
+        else if (this.#cpf_cnpj.length == 14) {
             // Calcula o primeiro dígito verificador
             let soma = 0;
             let peso = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
