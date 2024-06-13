@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   exportarTabela.addEventListener("click", ExporTabela);
 
   function LiberarBotao() {
+    debugger
     if (ExportPdf.checked || ExportExcel.checked) {
       //Alguma habilitada
       exportarTabela.disabled = false;
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   async function ExporTabela() {
+    debugger
     let Dados = await BuscarTabela(-99);
     let paginaAtual = document.getElementById("btn_atual").dataset.pagina;
     paginaAtual = parseInt(paginaAtual);
@@ -40,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function exportarExcel() {
+    debugger
     //chama a biblioteca para gerar o excel
     var wb = XLSX.utils.table_to_book(document.getElementById("Tabela"));
     /* Export to file (start a download) */
@@ -47,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function CarregarTabela() {
+    debugger
     let dadosTabela = await BuscarTabela();
 
     if (dadosTabela.ok) {
@@ -131,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function BuscarTabela(intervalo = 1) {
+    debugger
     return fetch("/admin/doacao/tabela/" + intervalo)
       .then((r) => {
         return r.json();
@@ -141,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function CarregarNovosConteudos() {
+    debugger
     // var Paginas = document.querySelector("#paginas");
     let BotaoEditar = document.querySelectorAll(".btnEditar");
     let BotaoExcluir = document.querySelectorAll(".btnExcluir");

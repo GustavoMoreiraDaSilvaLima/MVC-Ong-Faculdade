@@ -1,6 +1,8 @@
 <script src="/js/admin/produto/excluir.js"></script>
+<script src="/js/admin/produto/exports.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/admin/adminDoacao.css">
-
+<link rel="stylesheet" type="text/css"  media="print" href="/css/admin/AdminDoacaoPrint.css">
 
 <div class="container">
     <div class="row">
@@ -81,21 +83,21 @@
           </div>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive" id="titulo">
           <table class="table table-striped table-hover">
-            <thead class="thead-dark">
+            <thead class="thead-dark titulo">
               <tr>
                 <th>Imagem</th>
                 <th>Código</th>
                 <th>Nome</th>
-                <th>Quantidade</th>
+                <th class="left">Quantidade</th>
                 <th>Categoria</th>
                 <th>Preco</th>
                 <th>Marca</th>
-                <th>Ações</th>
+                <th class="acoes">Ações</th>
               </tr>
             </thead>
-            <tbody id="venda">
+            <tbody class="venda">
               <% lista.map(function(value, index) { %>
               <tr>
                 <td>
@@ -112,7 +114,7 @@
                 <td><%= value.produtoValor %></td>
                 <td><%= value.marcaNome %></td>                   
                 <td>
-                  <div class="btn-group" role="group" aria-label="Ações">
+                  <div class="btn-group acoes" role="group" aria-label="Ações">
                     <a href="produto/alterar/<%= value.produtoId %>" class="btn btn-primary"> <i class="bi bi-pen"></i></a>
                     <button data-codigo="<%=value.produtoId %>" class="btn btn-danger btnExcluir"><i class="bi bi-trash"></i></button>
                   </div>
@@ -129,9 +131,6 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exportModalLabel">Exportar Tabela</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div class="modal-body">
                 <div class="form-check">
@@ -150,6 +149,7 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   </div>

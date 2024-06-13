@@ -1,7 +1,63 @@
-
 @media print {
-    header,footer, .retirar, #ExportExcel, #ExportPdf {
+    header, footer, .retirar, #ExportExcel, #ExportPdf {
         display: none !important;
-        margin: 0px 0px 0px 0px !important;
+        margin: 0 !important;
     }
-} 
+    body {
+        visibility: hidden;
+    }
+    .titulo, .titulo * {
+        visibility: visible;
+    }
+    .titulo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between; /* Alinha os itens com espaçamento entre eles */
+        padding: 10px; /* Adiciona um espaçamento interno */
+    }
+
+    .venda, .venda * {
+        visibility: visible;
+    }
+    .venda {
+        position: absolute;
+        left: 0;
+        top: 4%;
+    }
+    .acoes {
+        display: none; /* Remover a coluna de ações */
+    }
+    .modal {
+        display: none !important;
+    }
+    
+    .modal-backdrop {
+        display: none !important;
+    }
+    
+    body.modal-open {
+        overflow: auto !important;
+    }
+    
+    /* Estilos adicionais para impressão */
+    table {
+        page-break-inside: avoid;
+        page-break-before: auto;
+        margin: 20px 0;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+    
+    .table-responsive {
+        overflow: auto !important;
+    }
+    
+    .btn-group {
+        display: none;
+    }
+}
