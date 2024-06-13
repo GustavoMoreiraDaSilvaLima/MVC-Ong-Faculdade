@@ -239,8 +239,18 @@ class eventosController {
     res.send({ ok: ok, msg: msg });
   }
 
-  EventoExcluir(req, res) {
-
+  async EventoExcluir(req, res) {
+    let ok = false;
+    let msg = "Erro ao excluir";
+    if (req.body.id != null) {
+      let Evento = new EventosModel();
+      let verifica = await Evento.CancelarEvento(req.body.id);
+      if (verifica == true) {
+        ok = true;
+        msg = "Evento Cancelado";
+      }
+    }
+    res.send({ ok: ok, msg: msg });
   }
 
   async EventoFiltro(req, res) {
@@ -248,7 +258,7 @@ class eventosController {
     let parametros = req.params.tipos
     parametros = parametros.split(".");
     parametros.pop();
-    
+
 
     let lista = await Evento.Filtros(parametros);
 

@@ -291,22 +291,35 @@ class eventosModel {
     let valores = [];
 
     if (filtro.length > 1) {
-      sql += " where "
       //Verifica para aplicar filtros
       for (let i = 0; i < filtro.length; i += 2) {
-        if (i > 1) {
-          sql += " or "
-        }
 
         if (filtro[i] == "Cancelado") {
-          sql += " evento_status = 'CANCELADO'"
+          if (i == 0) {
+            sql += " where evento_status = 'CANCELADO'";
+          } else {
+            sql += " or evento_status = 'CANCELADO'";
+          }
         } else if (filtro[i] == "Finalizado") {
-          sql += " evento_status = 'FINALIZADO'"
+          if (i == 0) {
+            sql += " where evento_status = 'FINALIZADO'";
+          } else {
+            sql += " or evento_status = 'FINALIZADO'";
+          }
+
         } else if (filtro[i] == "DataMaior") {
-          sql += " evento_data >= ?";
+          if (i == 0) {
+            sql += " where evento_data >= ?";
+          } else {
+            sql += " and evento_data >= ?";
+          }     
           valores.push(filtro[i + 1]);
         } else if (filtro[i] == "Proximos") {
-          sql += " evento_data >= ?";
+          if (i == 0) {
+            sql += " where evento_data >= ?";
+          } else {
+            sql += " and evento_data >= ?";
+          }
           valores.push(filtro[i + 1]);
         } else {
           //Quando não há selecionados
@@ -340,6 +353,15 @@ class eventosModel {
       }
     }
     return listaRetorno;
+  }
+
+  async CancelarEvento(id) {
+    let sql = "update tb_evento set evento_status = 'CANCELADO' where evento_id = ?;";
+    let valores = [id];
+
+    let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+    return result;
   }
 
   toJSON() {

@@ -2,8 +2,55 @@ document.addEventListener("DOMContentLoaded", function () {
     let filtro = new Filtros();
     document.getElementById("aplicarFiltros").addEventListener("click", async function () { await filtro.Controle() })
 
+
+    CarregarBotao();
+
 });
 
+function CarregarBotao() {
+    let excluir = new Excluir();
+    let BotaoExcluir = document.querySelectorAll(".btnExcluir");
+
+    for (let i = 0; i < BotaoExcluir.length; i++) {
+        BotaoExcluir[i].addEventListener("click", excluir.Cancelar);
+    }
+}
+
+
+
+
+
+class Excluir {
+
+    Cancelar() {
+        let id = this.dataset.codigocancelamente;
+        if (confirm("Tem certeza que deseja cancelar este evento? (Está ação é irreversivel!)")) {
+            if (id != "") {
+                let obj = {
+                    id: id,
+                };
+                fetch("/admin/eventos/excluir", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(obj),
+                })
+                    .then((r) => {
+                        return r.json();
+                    })
+                    .then((r) => {
+                        if (r.ok) {
+                            alert(r.msg);
+                            window.location.href = "/admin/eventos"
+                        } else {
+                            alert(r.msg);
+                        }
+                    });
+            }
+        }
+    }
+}
 
 class Filtros {
     #data
@@ -37,10 +84,6 @@ class Filtros {
             dados.push("DataMaior");
             dados.push(this.#data.value);
         }
-        if (this.#Cancelado.checked) {
-            dados.push("Cancelado");
-            dados.push("Cancelado");
-        }
         if (this.#Proximos.checked) {
             let dataAtual = new Date();
 
@@ -54,6 +97,10 @@ class Filtros {
 
             dados.push("Proximos");
             dados.push(dataFormatada);
+        }
+        if (this.#Cancelado.checked) {
+            dados.push("Cancelado");
+            dados.push("Cancelado");
         }
         if (this.#Finalizado.checked) {
             dados.push("Finalizado");
@@ -133,7 +180,7 @@ class Filtros {
                                 Duração:${Itens.lista[i].evento_duracao} Horas</small>
                             </p>
                             <div class="mt-auto d-flex justify-content-between">
-                                ${Itens.lista[i].evento_status == "FINALIZADO" ? `<a href="#" class="btn btn-success">Evento Finalizado</a>` : Itens.lista[i].evento_status == "CANCELADO" ? `<a href="#" class="btn btn-danger text-center">Evento Cancelado, Impossivel editar</a>` : `<a data-codigocancelamente="${Itens.lista[i].evento_id}" href="#" class="btn btn-danger">Cancelar Evento</a>`}
+                                ${Itens.lista[i].evento_status == "FINALIZADO" ? `<button class="btnExcluir btn btn-success">Evento Finalizado</button>` : Itens.lista[i].evento_status == "CANCELADO" ? `<button href="#" class="btnExcluir btn btn-danger text-center">Evento Cancelado, Impossivel editar</button>` : `<button data-codigocancelamente="${Itens.lista[i].evento_id}" class=" btnExcluir btn btn-danger">Cancelar Evento</button>`}
                                 ${Itens.lista[i].evento_status == "FINALIZADO" ? `<a href="/admin/eventos/alterar/${Itens.lista[i].evento_id}" class="btn btn-primary">Finalizar saida de evento</a>` : Itens.lista[i].evento_status == "CANCELADO" ? `` : `<a href="/admin/eventos/alterar/${Itens.lista[i].evento_id}" class="btn btn-primary">Editar/Registrar saída</a>`}
                             </div>
                         </div>
@@ -147,6 +194,7 @@ class Filtros {
         }
         html += `</div>`;
         OndeEnviar.innerHTML = html;
+        CarregarBotao();
     }
 
 
