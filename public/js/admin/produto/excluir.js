@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Verifica se quantiaMin é maior que quantiaMax e ajusta se necessário
     if (parseInt(quantiaMin.value) > parseInt(quantiaMax.value)) {
-      quantiaMin.value = quantiaMax.value
+      quantiaMin.value = quantiaMax.value  -  1
     }
   });
   
