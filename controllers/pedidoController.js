@@ -8,7 +8,7 @@ class PedidoController {
 
   async gravar(req, res) {
     if (req.body != null) {
-      let { nome, endereco, cpf, formaPagamento, listaCarrinho } = req.body;
+      let { nome, endereco, cpf, cep, formaPagamento, listaCarrinho } = req.body;
 
       if (!listaCarrinho || listaCarrinho.length === 0) {
         res.send({ ok: false, msg: "carrinho vazio!" });
@@ -36,7 +36,8 @@ class PedidoController {
           nome,
           endereco,
           cpf,
-          formaPagamento
+          formaPagamento,
+          cep
         );
 
         let produto = new ProdutoModel();

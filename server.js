@@ -9,6 +9,7 @@ let produtoRoute = require("./routes/produtoRoute")
 let pedidoRoute = require("./routes/pedidoRoute")
 //Rotas de admin
 let VoluntarioRoute = require("./routes/admin/VoluntarioRoute");
+let pedidoRouter = require("./routes/admin/pedidoRoute")
 let AdocaoRoute = require("./routes/admin/AdocaoRoute")
 let EventosRoute = require("./routes/admin/EventosRoute");
 let NoticiaRoute = require("./routes/admin/NoticiaRoute");
@@ -52,6 +53,7 @@ app.use("/pedido", pedidoRoute)
 
 //Rotas especifacas para admin
 app.use("/admin",AdminRoute);
+app.use("/admin/pedidos", pedidoRouter)
 app.use("/admin/voluntario", VoluntarioRoute);
 app.use("/admin/adocao", AdocaoRoute);
 app.use("/admin/eventos",EventosRoute);

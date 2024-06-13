@@ -20,6 +20,7 @@ debugger
     let endereco = document.getElementById("endereco").value;
     let cpf = document.getElementById("cpf").value;
     let formaPagamento = document.getElementById("formaPagamento").value;
+    let cep =  document.getElementById("cep").value;
 
     let listaErros = [];
     if (nome == "") {
@@ -40,6 +41,13 @@ debugger
     if (formaPagamento == "") {
         listaErros.push("endereco");
     }
+    if(cep == ""){
+      listaErros.push('cep');
+    }else{
+      if (!validarCEP(cep)) {
+        listaErros.push("cep");
+    }
+    }
 
     let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
 
@@ -48,6 +56,7 @@ debugger
         endereco : endereco,
         cpf : cpf,
         formaPagamento : formaPagamento,
+        cep : cep,
         listaCarrinho : listaCarrinho
     }
 

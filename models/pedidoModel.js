@@ -34,18 +34,14 @@ class PedidoModel {
 
     let listaPedidos = [];
 
-    for (let i = 0; i < rows.length; i++) {
-      let row = rows[i];
-      listaPedidos.push(new PedidoModel(row["ped_id"], row["ped_data"]));
-    }
 
-    return listaPedidos;  
+    return rows;  
   }
 
-  async gravar(nome, endereco, cpf, formaPagamento) {
+  async gravar(nome, endereco, cpf, formaPagamento, cep) {
     try {
-      let sql = "INSERT INTO tb_pedido (ped_data, nome, endereco, cpf, pagamento_id) VALUES (NOW(), ?, ?, ?, ?)";
-      let valores = [nome, endereco, cpf, formaPagamento];
+      let sql = "INSERT INTO tb_pedido (ped_data, nome, endereco, cpf, pagamento_id, cep) VALUES (NOW(), ?, ?, ?, ?, ?)";
+      let valores = [nome, endereco, cpf, formaPagamento, cep];
 
       let result = await banco.ExecutaComandoLastInserted(sql, valores);
 
