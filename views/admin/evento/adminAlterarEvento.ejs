@@ -17,77 +17,155 @@
     .form-title {
         margin-bottom: 20px;
     }
+    .table-container {
+    white-space: nowrap; /* Evita quebras de linha entre as tabelas */
+}
+
+.table1, .table2 {
+    display: inline-block; /* Coloca as tabelas em linha */
+    vertical-align: top; /* Alinha as tabelas ao topo */
+    width: 50%; /* Distribui igualmente o espaço entre as tabelas */
+}
 </style>
 
 
 <!-- Main Content -->
-<div class="container mt-5 pb-5 pt-3">
+<main class="container mt-5 pb-5 pt-3">
     <div id="AlterarComeco">
         <div class="row">
             <div class="col-12 text-center">
                 <h1 class="display-4">Registro de Saida de evento</h1>
                 <% if(saida){ %>
                     <a class="btn btn-outline-primary btn-lg">Saida Registrada</a>
-                <% } else{ %>
-                    <button id="btnAlterarView" class="btn btn-outline-primary btn-lg">Clique aqui para iniciar</button>
-                    <% } %>
+                    <div class="table-container">
+                        <% if (typeof ItensSaidaPatrimonio !='undefined' && ItensSaidaPatrimonio != null && ItensSaidaPatrimonio.length
+                            != 0) { %>
+                                <div class="table1">
+                                <div>
+                                <h3 class="text-center">Patrimonios</h3>
+                                <div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagem</th>
+                                                <th>Nome</th>
+                                                <th>Quantidade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(let i=0; i< ItensSaidaPatrimonio.length;i++) { %>
+                    
+                                                <tr>
+                                                    <td><img src="<%= ItensSaidaPatrimonio[i].SaidaImgPatri %>" width="80"></td>
+                                                    <td>
+                                                        <%= ItensSaidaPatrimonio[i].SaidaPatrimonioId %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ItensSaidaPatrimonio[i].SaidaQuantidade %>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% if (typeof ItensSaidaProduto !='undefined' && ItensSaidaProduto != null && ItensSaidaProduto.length
+                            != 0) { %>
+                                <div class="table2">
+                                <div class="">
+                                <h3 class="text-center">Produtos</h3>
+                                <div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagem</th>
+                                                <th>Nome</th>
+                                                <th>Quantidade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(let i=0; i< ItensSaidaProduto.length;i++) { %>
+                    
+                                                <tr>
+                                                    <td><img src="<%= ItensSaidaProduto[i].SaidaImgProd %>" width="80"></td>
+                                                    <td>
+                                                        <%= ItensSaidaProduto[i].SaidaProdutoId %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ItensSaidaProduto[i].SaidaQuantidade %>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                    <% } else{ %>
+                        <button id="btnAlterarView" class="btn btn-outline-primary btn-lg">Clique aqui para
+                            iniciar</button>
+                        <% } %>
             </div>
         </div>
     </div>
 
-        <!-- Event Registration Form -->
-        <input type="hidden" id="inputId" value="<%= dados.evento_id %>">
-        <div id="alterarConteudo">
-            <div class="row mt-4">
-                <div class="col-12">
-                    <div class="form-container">
-                        <h2 class="text-center form-title">Cadastrar Novo Evento</h2>
-                        <div>
-                            <div class="form-group">
-                                <label for="eventName">Nome do Evento</label>
-                                <input type="text" class="form-control" id="eventName"
-                                    placeholder="Digite o nome do evento" value="<%= dados.evento_nome %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventDescription">Descrição do Evento</label>
-                                <textarea class="form-control" id="eventDescription" rows="3"
-                                    placeholder="Descreva o evento"><%= dados.evento_descricao %></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventLocation">Local do Evento</label>
-                                <input type="text" class="form-control" id="eventLocation"
-                                    placeholder="Digite o local do evento" value="<%= dados.evento_local %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventStartTime">Horário de Início</label>
-                                <input type="time" class="form-control" id="eventStartTime"
-                                    value="<%= dados.evento_inicio %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventDuration">Duração (horas)</label>
-                                <input type="number" class="form-control" id="eventDuration"
-                                    placeholder="Digite a duração em horas" value="<%= dados.evento_duracao %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventDate">Data do Evento</label>
-                                <input type="date" class="form-control" id="eventDate" value="<%= dados.evento_data %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventImage">Imagem do Evento</label>
-                                <input type="file" class="form-control-file" id="eventImage">
-                            </div>
-                            <div>
-                                <img src="<%= dados.evento_imagem %>" id="previaImagem" width="200" />
-                            </div>
-                            <a href="/admin/eventos" class="btn btn-danger">Voltar</a>
-                            <button id="btnAlterar" class="btn btn-primary btn-block">Cadastrar Evento</button>
+    <!-- Event Registration Form -->
+    <input type="hidden" id="inputId" value="<%= dados.evento_id %>">
+    <div id="alterarConteudo">
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="form-container">
+                    <h2 class="text-center form-title">Alterar Evento</h2>
+                    <div>
+                        <div class="form-group">
+                            <label for="eventName">Nome do Evento</label>
+                            <input type="text" class="form-control" id="eventName" placeholder="Digite o nome do evento"
+                                value="<%= dados.evento_nome %>">
                         </div>
+                        <div class="form-group">
+                            <label for="eventDescription">Descrição do Evento</label>
+                            <textarea class="form-control" id="eventDescription" rows="3"
+                                placeholder="Descreva o evento"><%= dados.evento_descricao %></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventLocation">Local do Evento</label>
+                            <input type="text" class="form-control" id="eventLocation"
+                                placeholder="Digite o local do evento" value="<%= dados.evento_local %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventStartTime">Horário de Início</label>
+                            <input type="time" class="form-control" id="eventStartTime"
+                                value="<%= dados.evento_inicio %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDuration">Duração (horas)</label>
+                            <input type="number" class="form-control" id="eventDuration"
+                                placeholder="Digite a duração em horas" value="<%= dados.evento_duracao %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDate">Data do Evento</label>
+                            <input type="date" class="form-control" id="eventDate" value="<%= dados.evento_data %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventImage">Imagem do Evento</label>
+                            <input type="file" class="form-control-file" id="eventImage">
+                        </div>
+                        <div>
+                            <img src="<%= dados.evento_imagem %>" id="previaImagem" width="200" />
+                        </div>
+                        <a href="/admin/eventos" class="btn btn-danger">Voltar</a>
+                        <button id="btnAlterar" class="btn btn-primary btn-block">Cadastrar Evento</button>
                     </div>
                 </div>
             </div>
         </div>
-    
-</div>
+    </div>
+ 
+    </main>
 
 
 <!-- Bootstrap JS -->

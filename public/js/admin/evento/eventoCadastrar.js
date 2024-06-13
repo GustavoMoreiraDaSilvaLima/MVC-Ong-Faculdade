@@ -52,7 +52,7 @@ function Cadastrar() {
   if (!duraEvento.value || duraEvento.value < 0 || duraEvento.value > 23) {
     listaErros.push("eventDuration");
   }
-  if (dataEvento.value <= hoje) {
+  if (dataEvento.value < hoje) {
     listaErros.push("eventDate");
   }
 
@@ -77,8 +77,9 @@ function Cadastrar() {
       .then((r) => {
         if (r.ok) {
           alert(r.msg);
+          window.location.href = `/admin/eventos`;
         } else {
-          alert(r.msg);
+          alert(r.msg); 
         }
       })
       .catch((e) => {

@@ -55,7 +55,7 @@ class Validador {
       }
 
       return true;
-    } else if (this.#numberLocale.lenght == 14) {
+    } else if (this.#numberLocale.length == 14) {
       // Calcula o primeiro dígito verificador
       let soma = 0;
       let peso = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
