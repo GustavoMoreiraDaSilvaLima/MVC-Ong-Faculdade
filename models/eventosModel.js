@@ -160,7 +160,7 @@ class eventosModel {
         if (row["evento_imagem"] != null) {
           imagem = global.CAMINHO_IMG_EVENTO + row["evento_imagem"];
         } else {
-          imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.jpeg"; //conferir a foto sem foto
+          imagem = global.CAMINHO_IMG_EVENTO + "sem-foto.jpeg"; 
         }
 
         listaRetorno.push(

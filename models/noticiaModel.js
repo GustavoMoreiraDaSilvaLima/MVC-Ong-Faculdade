@@ -77,8 +77,6 @@ class noticiaModel {
     let rows = await banco.ExecutaComando(sql);
     let lista = [];
 
-
-
     for (let i = 0; i < rows.length; i++) {
 
       let imagem = "";
@@ -144,6 +142,7 @@ class noticiaModel {
 
     return null;
   }
+  
   async excluir(ONG_NOTICIA_ID) {
     let sql = "delete from ONG_NOTICIA where ONG_NOTICIA_ID = ?";
     let valores = [ONG_NOTICIA_ID];

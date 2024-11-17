@@ -1,3 +1,5 @@
+/*DESTAQUE*/
+
 //Objetivo de ser uma maneira mais facil de fazer post publicos
 
 const Voluntario = require("../models/voluntarioModel");
