@@ -1,5 +1,4 @@
-const usuarioModel = require("../models/usuarioModel");
-const UsuarioModel = require("../models/usuarioModel");
+const UsuarioModel = require("../models/usuarioModel.js");
 
 //Verificação se o usuário é ADM ou voluntário, visitante Cadastrado
 class AutenticacaoMiddleware {

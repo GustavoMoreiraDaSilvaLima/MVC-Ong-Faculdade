@@ -8,6 +8,7 @@ const adminRouter = express.Router();
 
 let ctrl = new AdminController();
 
-adminRouter.get("/", autent.NivelPermissaoAdm, ctrl.adminView);
+adminRouter.get("/",  ctrl.adminView);
+adminRouter.get("/cadastrarVoluntario",  ctrl.adminView2);
 
 module.exports = adminRouter;
